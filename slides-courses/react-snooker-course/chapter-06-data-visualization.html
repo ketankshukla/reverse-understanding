@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Chapter 06 Data Visualization</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {  background-color: #f8f8f8; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ef2929; } /* Alert */
+    code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #204a87; } /* Attribute */
+    code span.bn { color: #0000cf; } /* BaseN */
+    code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4e9a06; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #8f5902; font-style: italic; } /* Comment */
+    code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+    code span.dt { color: #204a87; } /* DataType */
+    code span.dv { color: #0000cf; } /* DecVal */
+    code span.er { color: #a40000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #0000cf; } /* Float */
+    code span.fu { color: #204a87; font-weight: bold; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+    code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+    code span.ot { color: #8f5902; } /* Other */
+    code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+    code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+    code span.ss { color: #4e9a06; } /* SpecialString */
+    code span.st { color: #4e9a06; } /* String */
+    code span.va { color: #000000; } /* Variable */
+    code span.vs { color: #4e9a06; } /* VerbatimString */
+    code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/theme/white.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Chapter 06 Data Visualization</h1>
+</section>
+
+<section>
+<section id="chapter-6-data-visualization"
+class="title-slide slide level1">
+<h1>Chapter 6 — Data Visualization</h1>
+<blockquote>
+<p><strong>Charts in React are about data shape, not chart
+libraries.</strong> This chapter teaches you Recharts — but more
+importantly, it teaches you the <em>transform-then-render</em> pattern
+that applies to every charting library you’ll ever touch.</p>
+</blockquote>
+</section>
+<section id="what-youll-learn" class="slide level2">
+<h2>What you’ll learn</h2>
+<ul>
+<li>The mental model that makes Recharts feel easy: <strong>the chart is
+a function of the data shape</strong>.</li>
+<li>How to <strong>reshape <code>teams</code> into chart-ready
+arrays</strong> with <code>.map()</code>, <code>.filter()</code>,
+<code>.reduce()</code>.</li>
+<li><strong>Stacked vs grouped bars</strong> — how a single prop
+(<code>stackId</code>) flips between them.</li>
+<li><strong><code>&lt;Cell&gt;</code></strong> — per-bar color overrides
+for highlighting one row.</li>
+<li><strong>Pivot transforms</strong> — going from “team → picks” to
+“match → backers” without losing your mind.</li>
+<li>When <strong>internal state</strong> (component-local
+<code>useState</code>) is correct vs lifting it.</li>
+<li>The <strong>chart card pattern</strong> — wrap every chart in a
+consistent container.</li>
+</ul>
+</section>
+<section id="lessons-in-this-chapter" class="slide level2">
+<h2>Lessons in this chapter</h2>
+<ol type="1">
+<li><strong><a
+href="./01-recharts-fundamentals.md">01-recharts-fundamentals.md</a></strong>
+— What Recharts gives you, the components you actually use, the
+responsive container pattern, and the chart card wrapper.</li>
+<li><strong><a
+href="./02-reshaping-data.md">02-reshaping-data.md</a></strong> — Three
+concrete transforms: stacked-bar totals, accuracy %, finalist pick
+distribution. Plus per-bar <code>&lt;Cell&gt;</code> colors.</li>
+<li><strong><a
+href="./03-pivots-and-internal-state.md">03-pivots-and-internal-state.md</a></strong>
+— The <code>&lt;LeagueAgreementChart&gt;</code> case study. Pivoting
+from team-data to match-data. Why the chart’s tab state is local, not
+global.</li>
+</ol>
+</section>
+<section id="files-youll-create-or-update" class="slide level2">
+<h2>Files you’ll create or update</h2>
+<pre><code>components/
+├── analytics/
+│   ├── ChartCard.tsx                ← container wrapper for every chart
+│   ├── InsightCard.tsx              ← summary tiles below the charts
+│   └── LeagueAgreementChart.tsx     ← the pivot chart with internal state
+└── tabs/
+    └── AnalyticsTab.tsx             ← UPDATED: real implementation</code></pre>
+</section>
+<section id="new-reactnext.js-concepts-introduced" class="slide level2">
+<h2>New React/Next.js concepts introduced</h2>
+<ul>
+<li><strong>Render-prop / children-as-elements</strong> with
+Recharts.</li>
+<li><strong><code>&lt;ResponsiveContainer&gt;</code></strong> — the only
+way to size a chart in a flexible layout.</li>
+<li><strong>Component-local state</strong> for UI-only toggles inside a
+chart.</li>
+<li><strong>Tree-shakable Recharts imports</strong> (only the bits you
+use).</li>
+<li><strong>Conditional <code>&lt;Bar&gt;</code> rendering</strong>
+based on data state.</li>
+</ul>
+</section>
+<section id="how-long-it-should-take" class="slide level2">
+<h2>How long it should take</h2>
+<ul>
+<li>30–45 min reading per lesson</li>
+<li>1.5–2 hours typing the code</li>
+<li>~4 hours total</li>
+</ul>
+</section>
+<section id="why-charting-deserves-its-own-chapter"
+class="slide level2">
+<h2>Why charting deserves its own chapter</h2>
+<p>Three reasons:</p>
+<ol type="1">
+<li><strong>Every senior interview eventually asks “build me a
+dashboard.”</strong> Knowing how to wire a charting library to live data
+without copy-paste-driven panic is a core senior skill.</li>
+<li><strong>Most beginners learn one chart library by rote and then
+crumble when they switch.</strong> The mental model in this chapter
+(“data shape, not library”) transfers directly to D3, Victory, Visx,
+Plotly, anything.</li>
+<li><strong>Charts force you to confront <em>transforms</em></strong> —
+<code>.map()</code>, <code>.reduce()</code>, <code>.filter()</code> — at
+scale. The data-shaping muscles built here are useful far beyond
+charting.</li>
+</ol>
+</section>
+<section id="before-you-start" class="slide level2">
+<h2>Before you start</h2>
+<p>You should have:</p>
+<ul>
+<li>Chapter 5 complete: Players tab and PlayerDetail working.</li>
+<li>All tabs except Analytics rendering real content.</li>
+<li><code>recharts</code> already in <code>package.json</code> (Chapter
+2 set it up).</li>
+</ul>
+<p>Open <strong><a
+href="./01-recharts-fundamentals.md">01-recharts-fundamentals.md</a></strong>.</p>
+</section></section>
+<section>
+<section id="chapter-6-lesson-1-recharts-fundamentals"
+class="title-slide slide level1">
+<h1>Chapter 6 · Lesson 1 — Recharts Fundamentals</h1>
+<blockquote>
+<p><em>Goal: understand the <strong>mental model</strong> behind
+Recharts so the actual API feels predictable. By the end of this lesson,
+you can read any Recharts code in the wild and describe what it draws
+without running it.</em></p>
+</blockquote>
+</section>
+<section id="the-single-insight-that-makes-recharts-click"
+class="slide level2">
+<h2>The single insight that makes Recharts click</h2>
+<p>Recharts is a <strong>declarative</strong> chart library. Declarative
+means: you describe the <em>result you want</em>, not the steps to draw
+it. You hand Recharts an array of objects and a couple of
+<code>&lt;Bar&gt;</code>/<code>&lt;Line&gt;</code>/<code>&lt;Pie&gt;</code>
+declarations, and it figures out pixels, axes, scales, animations.</p>
+<p>The key insight: <strong>a chart is a function of the data array’s
+shape.</strong></p>
+<p>Specifically:</p>
+<ul>
+<li>The <strong>rows</strong> of the array become the X-axis categories
+(one bar per row, one slice per row, etc.).</li>
+<li>The <strong>fields</strong> of each row become the data series. Want
+one bar per row? Use one field. Want stacked bars? Use multiple
+fields.</li>
+</ul>
+<p>Get the data shape right, and the chart writes itself. Get it wrong,
+and no amount of <code>&lt;Bar&gt;</code> props will save you.
+<strong>90% of charting work is reshaping data.</strong> This lesson
+sets up that mindset; Lessons 2 and 3 do it for real.</p>
+</section>
+<section id="the-shape-of-a-recharts-chart" class="slide level2">
+<h2>The shape of a Recharts chart</h2>
+<p>Open <code>components/tabs/AnalyticsTab.tsx</code>. The simplest
+chart in there:</p>
+<pre class="tsx"><code>import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from &#39;recharts&#39;;
+
+&lt;ResponsiveContainer width=&quot;100%&quot; height={360}&gt;
+  &lt;BarChart data={r1Data}&gt;
+    &lt;CartesianGrid strokeDasharray=&quot;3 3&quot; stroke=&quot;#FDE68A&quot; /&gt;
+    &lt;XAxis dataKey=&quot;team&quot; /&gt;
+    &lt;YAxis /&gt;
+    &lt;Tooltip /&gt;
+    &lt;Legend /&gt;
+    &lt;Bar dataKey=&quot;R1&quot; stackId=&quot;a&quot; fill=&quot;#0F5132&quot; name=&quot;Round 1&quot; /&gt;
+    &lt;Bar dataKey=&quot;R2&quot; stackId=&quot;a&quot; fill=&quot;#DC2626&quot; name=&quot;Round 2&quot; /&gt;
+    &lt;Bar dataKey=&quot;QF&quot; stackId=&quot;a&quot; fill=&quot;#FBBF24&quot; name=&quot;Quarter-Finals&quot; /&gt;
+    &lt;Bar dataKey=&quot;SF&quot; stackId=&quot;a&quot; fill=&quot;#7C3AED&quot; name=&quot;Semi-Finals&quot; /&gt;
+    &lt;Bar dataKey=&quot;Final&quot; stackId=&quot;a&quot; fill=&quot;#9F1239&quot; name=&quot;Final&quot; /&gt;
+  &lt;/BarChart&gt;
+&lt;/ResponsiveContainer&gt;</code></pre>
+<p>Read it like a sentence: <em>“Inside a responsive container, draw a
+bar chart of <code>r1Data</code>. Use <code>team</code> as the X-axis.
+Five <code>&lt;Bar&gt;</code> series, all stacked together, each reading
+a different field of the data.”</em></p>
+<p>That’s the API. <strong>The data is <code>r1Data</code>. The X-axis
+label is <code>team</code>. The Y values are R1, R2, QF, SF,
+Final.</strong> Recharts handles the rest.</p>
+</section>
+<section id="the-data-prop-is-a-flat-array-of-objects"
+class="slide level2">
+<h2>The <code>data</code> prop is a flat array of objects</h2>
+<p><code>r1Data</code> looks like this (one row per team):</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>[</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  { team<span class="op">:</span> <span class="st">&#39;Invincibles&#39;</span><span class="op">,</span> R1<span class="op">:</span> <span class="dv">35</span><span class="op">,</span> R2<span class="op">:</span> <span class="dv">19</span><span class="op">,</span> QF<span class="op">:</span> <span class="dv">9</span><span class="op">,</span> SF<span class="op">:</span> <span class="dv">5</span><span class="op">,</span> Final<span class="op">:</span> <span class="dv">3</span><span class="op">,</span> Total<span class="op">:</span> <span class="dv">71</span> }<span class="op">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  { team<span class="op">:</span> <span class="st">&#39;Uncredibles&#39;</span><span class="op">,</span> R1<span class="op">:</span> <span class="dv">29</span><span class="op">,</span> R2<span class="op">:</span> <span class="dv">15</span><span class="op">,</span> QF<span class="op">:</span> <span class="dv">6</span><span class="op">,</span> SF<span class="op">:</span> <span class="dv">3</span><span class="op">,</span> Final<span class="op">:</span> <span class="dv">1</span><span class="op">,</span> Total<span class="op">:</span> <span class="dv">54</span> }<span class="op">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div>
+<p>Six fields per row. <code>team</code> is the categorical (X-axis).
+The rest are numeric (Y-values).</p>
+<p>When <code>&lt;Bar dataKey="R1"&gt;</code> evaluates, Recharts walks
+every row and pulls <code>row.R1</code> to draw a bar. Then
+<code>&lt;Bar dataKey="R2"&gt;</code> does the same for <code>R2</code>
+— but because they share <code>stackId="a"</code>, the R2 bar is stacked
+on top of the R1 bar. Same for QF, SF, Final.</p>
+<p><strong>One pass through the data per
+<code>&lt;Bar&gt;</code>.</strong> That’s the whole pattern.</p>
+</section>
+<section id="the-responsivecontainer-is-non-negotiable"
+class="slide level2">
+<h2>The <code>&lt;ResponsiveContainer&gt;</code> is non-negotiable</h2>
+<pre class="tsx"><code>&lt;ResponsiveContainer width=&quot;100%&quot; height={360}&gt;
+  &lt;BarChart&gt;...&lt;/BarChart&gt;
+&lt;/ResponsiveContainer&gt;</code></pre>
+<p>Without <code>&lt;ResponsiveContainer&gt;</code>, Recharts charts
+have <strong>no size</strong>. They render as zero-pixel-wide invisible
+elements and you spend an hour wondering why your screen is blank.</p>
+<p><code>&lt;ResponsiveContainer&gt;</code> is React’s “fill my parent”
+wrapper for SVG-based charts. It listens for resize events and tells the
+chart what dimensions to draw at. Always wrap your charts in it.</p>
+<p>The two props:</p>
+<ul>
+<li><code>width="100%"</code> — fills the parent’s width.</li>
+<li><code>height={360}</code> — fixed height (Recharts charts can’t
+auto-size their own height; you have to specify).</li>
+</ul>
+<p>You can also use <code>aspect={2}</code> instead of height, for a 2:1
+width:height ratio. Either works.</p>
+</section>
+<section id="the-four-decoration-components" class="slide level2">
+<h2>The four “decoration” components</h2>
+<pre class="tsx"><code>&lt;CartesianGrid strokeDasharray=&quot;3 3&quot; stroke=&quot;#FDE68A&quot; /&gt;
+&lt;XAxis dataKey=&quot;team&quot; /&gt;
+&lt;YAxis /&gt;
+&lt;Tooltip /&gt;
+&lt;Legend /&gt;</code></pre>
+<p>These show up on almost every Recharts chart. Walk through them.</p>
+<h3
+id="cartesiangrid-the-dotteddashed-grid"><code>&lt;CartesianGrid&gt;</code>
+— the dotted/dashed grid</h3>
+<p>Draws faint lines across the chart for visual reference. The
+<code>strokeDasharray="3 3"</code> says “3px line, 3px gap” —
+i.e. dotted/dashed.</p>
+<p>You can omit it on simple charts. Most production charts have one
+because it makes values easier to read.</p>
+<h3 id="xaxis-the-x-axis"><code>&lt;XAxis&gt;</code> — the X-axis</h3>
+<p>The <code>dataKey="team"</code> is the <strong>categorical
+key</strong> — Recharts looks at each row’s <code>team</code> field to
+label the axis. If you forget <code>dataKey</code>, Recharts uses array
+indices (0, 1, 2, …), which is rarely what you want.</p>
+<p>You can also style ticks:
+<code>&lt;XAxis tick={{ fontSize: 12, fill: '#1F2937' }}&gt;</code> for
+smaller, darker labels.</p>
+<h3 id="yaxis-the-y-axis"><code>&lt;YAxis&gt;</code> — the Y-axis</h3>
+<p>Recharts auto-computes the domain (min/max) from your data. If you
+want to force it: <code>domain={[0, 100]}</code>. Useful for percentages
+where 100 is the natural max.</p>
+<h3 id="tooltip-the-hover-tooltip"><code>&lt;Tooltip&gt;</code> — the
+hover tooltip</h3>
+<p>When the user hovers a bar, this floating box shows the values.
+Customizable via <code>&lt;Tooltip contentStyle={{...}}&gt;</code> or,
+for full control, a custom <code>content={MyCustomTooltip}</code> render
+prop.</p>
+<p>The defaults are usually fine for a dashboard. Don’t over-engineer
+the tooltip on day one.</p>
+<h3 id="legend-the-color-key-below"><code>&lt;Legend&gt;</code> — the
+color key below</h3>
+<p>Shows which color = which series. Generated automatically from
+<code>&lt;Bar name="Round 1"&gt;</code> props.</p>
+<p>You can position it: <code>&lt;Legend verticalAlign="top"&gt;</code>.
+Default is bottom.</p>
+</section>
+<section id="tree-shakable-imports" class="slide level2">
+<h2>Tree-shakable imports</h2>
+<pre class="tsx"><code>import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from &#39;recharts&#39;;</code></pre>
+<p>You import <strong>only the components you use.</strong> The Recharts
+library has dozens of components — <code>LineChart</code>,
+<code>PieChart</code>, <code>AreaChart</code>, <code>RadarChart</code>,
+<code>ScatterChart</code>, etc. — but if you don’t import them, they
+don’t end up in your bundle.</p>
+<p>This is why Recharts can have a “huge” surface area without producing
+a huge bundle. <strong>Tree-shaking + named imports = small
+bundle.</strong> Modern bundlers (the one Next.js uses, SWC) shake
+aggressively.</p>
+</section>
+<section id="the-chart-card-pattern" class="slide level2">
+<h2>The chart card pattern</h2>
+<p>In our codebase, every chart is wrapped in a
+<code>&lt;ChartCard&gt;</code>:</p>
+<pre class="tsx"><code>// components/analytics/ChartCard.tsx
+interface ChartCardProps {
+  title: string;
+  subtitle: string;
+  children: React.ReactNode;
+}
+
+export default function ChartCard({ title, subtitle, children }: ChartCardProps) {
+  return (
+    &lt;div style={{
+      background: &#39;#FFFFFF&#39;,
+      borderRadius: 16,
+      padding: 28,
+      boxShadow: &#39;0 4px 20px rgba(0,0,0,0.06)&#39;,
+      border: &#39;2px solid #FEF3C7&#39;,
+    }}&gt;
+      &lt;h3 style={{ fontFamily: &quot;&#39;Roboto Slab&#39;, serif&quot;, fontSize: 22, color: &#39;#0F5132&#39;, margin: &#39;0 0 4px 0&#39; }}&gt;
+        {title}
+      &lt;/h3&gt;
+      &lt;div style={{ color: &#39;#6B7280&#39;, fontSize: 14, marginBottom: 20 }}&gt;{subtitle}&lt;/div&gt;
+      {children}
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Three props (<code>title</code>, <code>subtitle</code>,
+<code>children</code>). The chart goes inside via the
+<code>children</code> prop:</p>
+<pre class="tsx"><code>&lt;ChartCard title=&quot;Points Breakdown by Round&quot; subtitle=&quot;How each team has scored across all 5 rounds&quot;&gt;
+  &lt;ResponsiveContainer width=&quot;100%&quot; height={360}&gt;
+    &lt;BarChart data={r1Data}&gt;
+      &lt;CartesianGrid /&gt;
+      &lt;XAxis dataKey=&quot;team&quot; /&gt;
+      &lt;YAxis /&gt;
+      &lt;Tooltip /&gt;
+      &lt;Legend /&gt;
+      &lt;Bar dataKey=&quot;R1&quot; fill=&quot;#0F5132&quot; /&gt;
+    &lt;/BarChart&gt;
+  &lt;/ResponsiveContainer&gt;
+&lt;/ChartCard&gt;</code></pre>
+<p>This is the <strong>layout-vs-content separation</strong> from
+Chapter 5 in action. The card knows about title, subtitle, padding,
+shadow. The chart knows about bars and axes. <strong>Separated concerns;
+reusable card.</strong></p>
+</section>
+<section id="custom-tooltip-styling" class="slide level2">
+<h2>Custom tooltip styling</h2>
+<pre class="tsx"><code>&lt;Tooltip
+  contentStyle={{
+    background: &#39;#FFFBEB&#39;,
+    border: &#39;2px solid #FBBF24&#39;,
+    borderRadius: 8,
+    fontSize: 14,
+  }}
+/&gt;</code></pre>
+<p>You can pass a <code>contentStyle</code> object to style the default
+tooltip box. Works for most needs.</p>
+<p>For more elaborate tooltips (custom layout, conditional content),
+pass a <code>content</code> render prop:</p>
+<pre class="tsx"><code>&lt;Tooltip content={({ active, payload, label }) =&gt; {
+  if (!active || !payload || !payload.length) return null;
+  return (
+    &lt;div style={{ background: &#39;#FFF&#39;, padding: 8, border: &#39;1px solid #ccc&#39; }}&gt;
+      &lt;strong&gt;{label}&lt;/strong&gt;
+      {payload.map(p =&gt; (
+        &lt;div key={p.name} style={{ color: p.color }}&gt;{p.name}: {p.value}&lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}} /&gt;</code></pre>
+<p>We don’t bother in our codebase — defaults are fine.</p>
+</section>
+<section id="bar-chart-vs-line-chart-vs-area-chart"
+class="slide level2">
+<h2>Bar chart vs line chart vs area chart</h2>
+<p>Same data shape, different component:</p>
+<pre class="tsx"><code>&lt;LineChart data={r1Data}&gt;
+  &lt;Line dataKey=&quot;R1&quot; stroke=&quot;#0F5132&quot; /&gt;
+  &lt;Line dataKey=&quot;R2&quot; stroke=&quot;#DC2626&quot; /&gt;
+&lt;/LineChart&gt;
+
+&lt;AreaChart data={r1Data}&gt;
+  &lt;Area dataKey=&quot;R1&quot; stroke=&quot;#0F5132&quot; fill=&quot;#0F5132&quot; fillOpacity={0.3} /&gt;
+  &lt;Area dataKey=&quot;R2&quot; stroke=&quot;#DC2626&quot; fill=&quot;#DC2626&quot; fillOpacity={0.3} /&gt;
+&lt;/AreaChart&gt;</code></pre>
+<p>The data array is identical. The chart wrapper changes. <strong>Chart
+type is a thin layer over the same data.</strong> Once you’ve reshaped
+your data correctly, switching chart types is a one-line edit.</p>
+</section>
+<section id="when-not-to-use-recharts" class="slide level2">
+<h2>When NOT to use Recharts</h2>
+<p>Recharts is great for the bread-and-butter dashboards — bars, lines,
+pies, radar charts. It struggles with:</p>
+<ul>
+<li><strong>Highly custom interactions</strong> (drag a region,
+lasso-select points, etc.). Use D3 directly or Visx.</li>
+<li><strong>Tens of thousands of data points</strong> at once. Recharts
+isn’t a perf monster; for canvas-rendered high-data charts, use <a
+href="https://github.com/leeoniya/uPlot">uPlot</a> or pull from D3
+directly.</li>
+<li><strong>Animations beyond Recharts’ built-ins</strong>. The
+animation API is limited.</li>
+<li><strong>Geographic / map visualizations</strong>. Use <a
+href="https://react-leaflet.js.org">react-leaflet</a> or <a
+href="https://visgl.github.io/react-map-gl">react-map-gl</a>.</li>
+</ul>
+<p>For our snooker app, Recharts is the right tool. We’re drawing 8
+bars, not 80,000.</p>
+</section>
+<section id="a-worked-example-simplest-possible-chart"
+class="slide level2">
+<h2>A worked example: simplest possible chart</h2>
+<p>Suppose you want to render a single bar chart of total points per
+team. The reshape:</p>
+<pre class="tsx"><code>const data = teams.map(t =&gt; ({ name: t.name, total: t.scores.total }));</code></pre>
+<p>The chart:</p>
+<pre class="tsx"><code>&lt;ChartCard title=&quot;Total Points&quot; subtitle=&quot;&quot;&gt;
+  &lt;ResponsiveContainer width=&quot;100%&quot; height={360}&gt;
+    &lt;BarChart data={data}&gt;
+      &lt;CartesianGrid strokeDasharray=&quot;3 3&quot; /&gt;
+      &lt;XAxis dataKey=&quot;name&quot; /&gt;
+      &lt;YAxis /&gt;
+      &lt;Tooltip /&gt;
+      &lt;Bar dataKey=&quot;total&quot; fill=&quot;#0F5132&quot; /&gt;
+    &lt;/BarChart&gt;
+  &lt;/ResponsiveContainer&gt;
+&lt;/ChartCard&gt;</code></pre>
+<p>Eight rows, each with <code>{ name, total }</code>. One
+<code>&lt;Bar&gt;</code> reading <code>total</code>. Done. <strong>Eight
+lines of JSX, ~3 lines of data shaping.</strong></p>
+<p>That’s the baseline. Lessons 2 and 3 build on this with stacks, cell
+colors, and pivots.</p>
+</section>
+<section id="a-note-on-rechartscommonprops" class="slide level2">
+<h2>A note on <code>&lt;RechartsCommonProps&gt;</code></h2>
+<p>A small TypeScript wrinkle: most Recharts components accept dozens of
+props. The TS types reflect this — autocomplete shows you 40+ options.
+<strong>Most are optional.</strong> Stick to the ones you’ve seen in
+this lesson; the rest are advanced.</p>
+</section>
+<section id="vibe-prompt-you-would-have-used-for-the-simplest-chart"
+class="slide level2">
+<h2>Vibe prompt you would have used (for the simplest chart)</h2>
+<blockquote>
+<p><em>“Create an Analytics tab at
+<code>components/tabs/AnalyticsTab.tsx</code>. First chart: a bar chart
+of total points per team using Recharts. Reshape
+<code>teams.map(t =&gt; ({ name: t.name, total: t.scores.total }))</code>.
+Wrap in a <code>&lt;ChartCard&gt;</code> (which I’ll write next) with
+title ‘Total Points’. Use <code>ResponsiveContainer</code> (100% width,
+360 height), CartesianGrid (3 3 dasharray, light yellow), XAxis
+dataKey=‘name’, YAxis defaults, Tooltip with contentStyle (cream bg,
+gold border), one
+<code>&lt;Bar dataKey='total' fill='#0F5132'&gt;</code>. Tree-shake
+imports from ‘recharts’. Don’t add any other charts yet.”</em></p>
+</blockquote>
+<p>Specific, scoped, names every visual decision. <strong>You’ll get
+exactly this chart and nothing else.</strong></p>
+</section>
+<section id="check-yourself" class="slide level2">
+<h2>CHECK YOURSELF</h2>
+<ol type="1">
+<li><strong>Recharts charts render at 0 pixels without
+<code>&lt;ResponsiveContainer&gt;</code>. Why?</strong> What is the
+container actually doing?</li>
+<li><strong>Two <code>&lt;Bar&gt;</code> elements with the same
+<code>stackId</code> produce a stacked bar. With different
+<code>stackId</code>s, what do they produce?</strong></li>
+<li><strong><code>&lt;XAxis dataKey="team"&gt;</code> — what happens if
+your data array has a typo and the field is actually called
+<code>teamName</code>?</strong> Walk through what shows on the
+X-axis.</li>
+<li><strong>Why is <code>&lt;Tooltip&gt;</code> a separate component
+instead of a prop on <code>&lt;BarChart&gt;</code>?</strong> What
+architectural pattern does this reflect?</li>
+<li><strong>You decide to switch from a stacked bar chart to a line
+chart with the same data. What’s the minimum change?</strong></li>
+</ol>
+<p>When you’ve answered these, head to <strong><a
+href="./02-reshaping-data.md">02-reshaping-data.md</a></strong>.</p>
+</section></section>
+<section>
+<section id="chapter-6-lesson-2-reshaping-data-for-charts"
+class="title-slide slide level1">
+<h1>Chapter 6 · Lesson 2 — Reshaping Data for Charts</h1>
+<blockquote>
+<p><em>Goal: master the three transforms that produce 90% of the charts
+you’ll ever build — <code>.map()</code>, <code>.filter()</code>,
+<code>.reduce()</code> — applied to real data. Plus per-bar color
+overrides with <code>&lt;Cell&gt;</code>.</em></p>
+</blockquote>
+</section>
+<section id="the-transform-pattern" class="slide level2">
+<h2>The transform pattern</h2>
+<p>Every chart in <code>&lt;AnalyticsTab&gt;</code> follows the same
+recipe:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> chartData <span class="op">=</span> teams<span class="op">.</span><span class="fu">map</span>(t <span class="kw">=&gt;</span> ({ <span class="co">/* fields the chart needs */</span> }))<span class="op">;</span></span></code></pre></div>
+<ol type="1">
+<li>Start with the raw data (<code>teams: TeamWithScores[]</code>).</li>
+<li><code>.map()</code> it into the shape Recharts expects — one row per
+chart entry, fields named to match <code>dataKey</code> props.</li>
+<li>Optionally <code>.sort()</code>, <code>.filter()</code>, or further
+transform.</li>
+<li>Pass to <code>&lt;BarChart data={chartData}&gt;</code>.</li>
+</ol>
+<p>This recipe is <strong>the entire mental model</strong>. Internalize
+it and every chart you build is a 5-minute job.</p>
+</section>
+<section id="reshape-1-stacked-bar-of-points-by-round"
+class="slide level2">
+<h2>Reshape #1 — Stacked bar of points by round</h2>
+<p>The first chart in <code>&lt;AnalyticsTab&gt;</code>:</p>
+<pre class="tsx"><code>const r1Data = teams.map(t =&gt; ({
+  team: t.name.length &gt; 12 ? t.name.split(&#39; &#39;).map(w =&gt; w[0]).join(&#39;&#39;) : t.name,
+  fullName: t.name,
+  R1: t.scores.r1,
+  R2: t.scores.r2,
+  QF: t.scores.qf,
+  SF: t.scores.sf,
+  Final: t.scores.f,
+  Total: t.scores.total,
+}));</code></pre>
+<p>Let’s break this <code>.map()</code> callback down.</p>
+<h3 id="abbreviating-long-team-names">Abbreviating long team names</h3>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>team<span class="op">:</span> t<span class="op">.</span><span class="at">name</span><span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">12</span> <span class="op">?</span> t<span class="op">.</span><span class="at">name</span><span class="op">.</span><span class="fu">split</span>(<span class="st">&#39; &#39;</span>)<span class="op">.</span><span class="fu">map</span>(w <span class="kw">=&gt;</span> w[<span class="dv">0</span>])<span class="op">.</span><span class="fu">join</span>(<span class="st">&#39;&#39;</span>) <span class="op">:</span> t<span class="op">.</span><span class="at">name</span><span class="op">,</span></span></code></pre></div>
+<p>Read it in three pieces:</p>
+<ul>
+<li><strong><code>t.name.length &gt; 12</code></strong> — is the name
+long?</li>
+<li><strong><code>t.name.split(' ').map(w =&gt; w[0]).join('')</code></strong>
+— if so, split on spaces, take the first letter of each word, and
+concatenate. <em>“Break Builders United”</em> → <em>“BBU”</em>.</li>
+<li><strong><code>: t.name</code></strong> — otherwise, use the name
+as-is.</li>
+</ul>
+<p>Why? Because the X-axis on a chart with 8 bars has limited space.
+Long names wrap, overlap, or get truncated by Recharts. Abbreviating
+long names is the smallest fix.</p>
+<p>A more general version would render long names angled
+(<code>&lt;XAxis angle={-45} /&gt;</code>), but that has its own
+problems (cramped labels, harder to read). Abbreviation is simpler and
+cleaner.</p>
+<p><strong><code>fullName: t.name</code></strong> is also stored — used
+by the tooltip’s custom rendering if needed.</p>
+<h3 id="the-numeric-fields-are-the-bar-heights">The numeric fields are
+the bar heights</h3>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>R1<span class="op">:</span> t<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">r1</span><span class="op">,</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>R2<span class="op">:</span> t<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">r2</span><span class="op">,</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>QF<span class="op">:</span> t<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">qf</span><span class="op">,</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>SF<span class="op">:</span> t<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">sf</span><span class="op">,</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>Final<span class="op">:</span> t<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">f</span><span class="op">,</span></span></code></pre></div>
+<p>Five numeric fields, one per round. Each becomes a stacked
+<code>&lt;Bar&gt;</code>. <code>Total</code> is also stored even though
+we don’t currently use it — handy for tooltip totals or future
+features.</p>
+<h3 id="the-chart-that-consumes-it">The chart that consumes it</h3>
+<pre class="tsx"><code>&lt;BarChart data={r1Data}&gt;
+  &lt;Bar dataKey=&quot;R1&quot; stackId=&quot;a&quot; fill=&quot;#0F5132&quot; name=&quot;Round 1&quot; /&gt;
+  &lt;Bar dataKey=&quot;R2&quot; stackId=&quot;a&quot; fill=&quot;#DC2626&quot; name=&quot;Round 2&quot; /&gt;
+  &lt;Bar dataKey=&quot;QF&quot; stackId=&quot;a&quot; fill=&quot;#FBBF24&quot; name=&quot;Quarter-Finals&quot; /&gt;
+  &lt;Bar dataKey=&quot;SF&quot; stackId=&quot;a&quot; fill=&quot;#7C3AED&quot; name=&quot;Semi-Finals&quot; /&gt;
+  &lt;Bar dataKey=&quot;Final&quot; stackId=&quot;a&quot; fill=&quot;#9F1239&quot; name=&quot;Final&quot; radius={[4, 4, 0, 0]} /&gt;
+&lt;/BarChart&gt;</code></pre>
+<p>Five <code>&lt;Bar&gt;</code>s, each stacked on top of the previous
+(<code>stackId="a"</code>). The <code>radius={[4, 4, 0, 0]}</code> on
+the Final bar rounds <strong>only the top corners</strong> — making the
+entire stack look like a single rounded-top bar.</p>
+<p>Notice <strong>the visual is encoded in the JSX, not in the
+data</strong>. The data is just numbers. The chart turns numbers into
+colored rectangles. <strong>Always keep the visual decisions in the
+chart, not in the data shaping.</strong></p>
+</section>
+<section id="reshape-2-pick-accuracy" class="slide level2">
+<h2>Reshape #2 — Pick accuracy %</h2>
+<p>Next chart: a horizontal bar chart of “what percentage of picks each
+team got right per round.”</p>
+<pre class="tsx"><code>const accuracyData = teams.map(t =&gt; {
+  const r1Hits = t.scores.r1Details.filter(d =&gt; d.correct).length;
+  const r2Hits = t.scores.r2Details.filter(d =&gt; d.correct).length;
+  const qfHits = t.scores.qfDetails.filter(d =&gt; d.correct).length;
+  const sfHits = t.scores.sfDetails.filter(d =&gt; d.correct).length;
+  const fHits = t.scores.fDetails.filter(d =&gt; d.correct).length;
+  return {
+    team: t.name.length &gt; 12 ? t.name.split(&#39; &#39;).map(w =&gt; w[0]).join(&#39;&#39;) : t.name,
+    R1: Math.round((r1Hits / 16) * 100),
+    R2: Math.round((r2Hits / 8) * 100),
+    QF: Math.round((qfHits / 4) * 100),
+    SF: Math.round((sfHits / 2) * 100),
+    F: Math.round((fHits / 1) * 100),
+  };
+});</code></pre>
+<p>Two new tools.</p>
+<h3 id="filter-to-count-hits"><code>.filter()</code> to count hits</h3>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> r1Hits <span class="op">=</span> t<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">r1Details</span><span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">correct</span>)<span class="op">.</span><span class="at">length</span><span class="op">;</span></span></code></pre></div>
+<p><code>.filter()</code> takes a predicate function and returns a new
+array of items where the predicate is <code>true</code>. We then take
+<code>.length</code> to count them.</p>
+<p><code>d.correct</code> is <code>true | false | null</code> (Lesson
+1.2’s tri-state). <code>.filter(d =&gt; d.correct)</code> keeps only the
+<code>true</code> items. <code>null</code> and <code>false</code> are
+both falsy, so they’re excluded.</p>
+<p>This is a <strong>much cleaner way to count</strong> than:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> r1Hits <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (<span class="kw">const</span> d <span class="kw">of</span> t<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">r1Details</span>) {</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (d<span class="op">.</span><span class="at">correct</span> <span class="op">===</span> <span class="kw">true</span>) r1Hits<span class="op">++;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Same logic, more verbose. <strong>Prefer functional methods
+(<code>.filter</code>, <code>.map</code>, <code>.reduce</code>) over
+<code>for</code> loops</strong> when you’re transforming data. They read
+closer to the intent.</p>
+<h3
+id="math.roundhits-max-100"><code>Math.round((hits / max) * 100)</code></h3>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>R1<span class="op">:</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>((r1Hits <span class="op">/</span> <span class="dv">16</span>) <span class="op">*</span> <span class="dv">100</span>)<span class="op">,</span></span></code></pre></div>
+<p>Convert <code>(hits, max)</code> to a percentage integer. The
+<code>Math.round</code> keeps the number tidy for display (75 instead of
+74.81818…). For chart axes, integer percentages just look better.</p>
+<p>The max values (16, 8, 4, 2, 1) are the number of picks in each round
+— hard-coded because they’re tournament constants. A more flexible
+version would use <code>ROUND1_MATCHES.length</code>, but for a
+fixed-bracket app, the literals are fine.</p>
+<h3 id="the-horizontal-bar-chart-that-consumes-it">The horizontal-bar
+chart that consumes it</h3>
+<pre class="tsx"><code>&lt;BarChart data={accuracyData} layout=&quot;vertical&quot;&gt;
+  &lt;XAxis type=&quot;number&quot; domain={[0, 100]} unit=&quot;%&quot; /&gt;
+  &lt;YAxis dataKey=&quot;team&quot; type=&quot;category&quot; /&gt;
+  &lt;Bar dataKey=&quot;R1&quot; fill=&quot;#16A34A&quot; /&gt;
+  &lt;Bar dataKey=&quot;R2&quot; fill=&quot;#F59E0B&quot; /&gt;
+  &lt;Bar dataKey=&quot;QF&quot; fill=&quot;#0EA5E9&quot; /&gt;
+  &lt;Bar dataKey=&quot;SF&quot; fill=&quot;#7C3AED&quot; /&gt;
+  &lt;Bar dataKey=&quot;F&quot; fill=&quot;#9F1239&quot; /&gt;
+&lt;/BarChart&gt;</code></pre>
+<p>Two changes from the previous chart:</p>
+<ul>
+<li><strong><code>layout="vertical"</code></strong> — flips the chart on
+its side. Bars run horizontally now.</li>
+<li><strong><code>&lt;XAxis type="number" domain={[0, 100]} unit="%"&gt;</code></strong>
+— explicit numeric axis with a fixed 0-100 range and <code>%</code>
+suffix on tick labels.</li>
+<li><strong><code>&lt;YAxis dataKey="team" type="category"&gt;</code></strong>
+— categorical Y-axis.</li>
+</ul>
+<p>Notice we <strong>removed</strong> <code>stackId="a"</code> — these
+bars are NOT stacked. Each round shows as a separate bar per team,
+grouped together. <strong>One prop change, completely different chart
+layout.</strong> That’s the magic of declarative chart APIs.</p>
+</section>
+<section id="reshape-3-the-final-pick-distribution"
+class="slide level2">
+<h2>Reshape #3 — The Final pick distribution</h2>
+<pre class="tsx"><code>const finalPickCount: Record&lt;string, number&gt; = {};
+teams.forEach(t =&gt; {
+  if (t.final) finalPickCount[t.final] = (finalPickCount[t.final] || 0) + 1;
+});
+const finalPickData = Object.entries(finalPickCount)
+  .map(([name, count]) =&gt; ({ name, count }))
+  .sort((a, b) =&gt; b.count - a.count);</code></pre>
+<p>Three new tools.</p>
+<h3 id="counting-with-.foreach-and-a-dictionary">Counting with
+<code>.forEach()</code> and a dictionary</h3>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> finalPickCount<span class="op">:</span> <span class="bu">Record</span><span class="op">&lt;</span><span class="dt">string</span><span class="op">,</span> <span class="dt">number</span><span class="op">&gt;</span> <span class="op">=</span> {}<span class="op">;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>teams<span class="op">.</span><span class="fu">forEach</span>(t <span class="kw">=&gt;</span> {</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (t<span class="op">.</span><span class="at">final</span>) finalPickCount[t<span class="op">.</span><span class="at">final</span>] <span class="op">=</span> (finalPickCount[t<span class="op">.</span><span class="at">final</span>] <span class="op">||</span> <span class="dv">0</span>) <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<p>We’re tallying: how many teams picked each player as Final winner?
+Output is a dict: <code>{ 'Wu Yize': 6, 'Shaun Murphy': 2 }</code>.</p>
+<p>The loop:</p>
+<ul>
+<li>For each team <code>t</code>, look at <code>t.final</code> (their
+pick).</li>
+<li><code>finalPickCount[t.final] || 0</code> — start at 0 if not seen,
+else use the existing count.</li>
+<li><code>+ 1</code> — increment.</li>
+<li>Assign back.</li>
+</ul>
+<p>This is JavaScript’s idiomatic “increment a counter in a dict”
+pattern. <strong>Memorize it; it comes up constantly.</strong></p>
+<h3
+id="object.entries-to-convert-dict-array"><code>Object.entries()</code>
+to convert dict → array</h3>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span><span class="fu">map</span>(([name<span class="op">,</span> count]) <span class="kw">=&gt;</span> ({ name<span class="op">,</span> count }))</span></code></pre></div>
+<p><code>Object.entries({ a: 1, b: 2 })</code> returns
+<code>[['a', 1], ['b', 2]]</code> — an array of
+<code>[key, value]</code> pairs.</p>
+<p>We then <code>.map</code> each pair (destructured as
+<code>[name, count]</code>) into an object <code>{ name, count }</code>.
+Now we have:</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>[{ name<span class="op">:</span> <span class="st">&#39;Wu Yize&#39;</span><span class="op">,</span> count<span class="op">:</span> <span class="dv">6</span> }<span class="op">,</span> { name<span class="op">:</span> <span class="st">&#39;Shaun Murphy&#39;</span><span class="op">,</span> count<span class="op">:</span> <span class="dv">2</span> }]</span></code></pre></div>
+<p>Recharts wants this exact shape: array of objects,
+X-axis-categorical-key on <code>name</code>, value on
+<code>count</code>.</p>
+<h3 id="sort-for-descending-count"><code>.sort()</code> for descending
+count</h3>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> b<span class="op">.</span><span class="at">count</span> <span class="op">-</span> a<span class="op">.</span><span class="at">count</span>)<span class="op">;</span></span></code></pre></div>
+<p>Sort by count descending. Wu Yize (6) comes first. <strong>The chart
+order matches the array order</strong>, so sorting the data sorts the
+chart.</p>
+<p>If you wanted ascending: <code>(a, b) =&gt; a.count - b.count</code>.
+Memorize both.</p>
+</section>
+<section id="reshape-4-per-bar-colors-with-cell" class="slide level2">
+<h2>Reshape #4 — Per-bar colors with <code>&lt;Cell&gt;</code></h2>
+<p>Now the magic. The Final pick distribution chart needs to highlight
+the actual champion’s bar in green; everyone else in gray.</p>
+<pre class="tsx"><code>&lt;Bar dataKey=&quot;count&quot; radius={[6, 6, 0, 0]} name=&quot;Teams who picked&quot;
+     label={{ position: &#39;top&#39;, fontSize: 16, fontWeight: 800, fill: &#39;#1F2937&#39; }}&gt;
+  {finalPickData.map((d, i) =&gt; (
+    &lt;Cell key={i} fill={d.name === &#39;Wu Yize&#39; ? &#39;#16A34A&#39; : &#39;#9CA3AF&#39;} /&gt;
+  ))}
+&lt;/Bar&gt;</code></pre>
+<p>The <code>&lt;Bar&gt;</code> has <strong>children</strong>: one
+<code>&lt;Cell&gt;</code> per row.</p>
+<h3 id="what-a-cell-does">What a <code>&lt;Cell&gt;</code> does</h3>
+<p>A <code>&lt;Cell&gt;</code> overrides the <code>&lt;Bar&gt;</code>’s
+default <code>fill</code> for <strong>one specific row</strong>. The map
+produces one <code>&lt;Cell&gt;</code> per data row, in order. Recharts
+uses cell N for the N-th bar.</p>
+<pre class="tsx"><code>&lt;Cell key={i} fill={d.name === &#39;Wu Yize&#39; ? &#39;#16A34A&#39; : &#39;#9CA3AF&#39;} /&gt;</code></pre>
+<p>Green if Wu Yize, gray otherwise. <strong>Per-row conditional
+coloring</strong>.</p>
+<h3 id="why-this-exists">Why this exists</h3>
+<p>Without <code>&lt;Cell&gt;</code>, every bar in a
+<code>&lt;Bar&gt;</code> gets the same <code>fill</code>. You’d have to
+render multiple <code>&lt;Bar&gt;</code>s with different
+<code>dataKey</code>s to get different colors — but that’s a different
+chart structurally.</p>
+<p><code>&lt;Cell&gt;</code> is the bridge. <strong>One series, but one
+of its bars is special.</strong> Pattern: highlight a champion, mark a
+current period, flag an outlier.</p>
+<p>The same pattern works for <code>&lt;Pie&gt;</code> (per-slice
+colors) and <code>&lt;Line&gt;</code> doesn’t really need it because
+lines have one color per series.</p>
+<h3 id="the-label-prop-on-bar">The <code>label</code> prop on
+<code>&lt;Bar&gt;</code></h3>
+<pre class="tsx"><code>label={{ position: &#39;top&#39;, fontSize: 16, fontWeight: 800, fill: &#39;#1F2937&#39; }}</code></pre>
+<p>Adds a value label on top of every bar — the count rendered above
+each bar. Without this prop, you’d hover to see values; with it, they’re
+permanent.</p>
+<p>For dashboards where the chart is the primary view, <strong>always
+show labels</strong>. Tooltips are for “more detail on hover”; labels
+are for “see the value at a glance.”</p>
+</section>
+<section id="the-insightcard-separating-data-from-presentation"
+class="slide level2">
+<h2>The InsightCard — separating data from presentation</h2>
+<p>Below the charts, three colored summary cards:</p>
+<pre class="tsx"><code>&lt;InsightCard
+  icon={Trophy}
+  title=&quot;The Final Pick Was Right&quot;
+  body={`Wu Yize won 18-17 in a final-frame thriller. The 6 teams who backed him got +3.`}
+  bg=&quot;#9F1239&quot;
+/&gt;</code></pre>
+<p><code>&lt;InsightCard&gt;</code> is a tiny component:</p>
+<pre class="tsx"><code>interface InsightCardProps {
+  icon: LucideIcon;
+  title: string;
+  body: string;
+  bg: string;
+}
+
+export default function InsightCard({ icon: Icon, title, body, bg }: InsightCardProps) {
+  return (
+    &lt;div style={{ background: `linear-gradient(135deg, ${bg} 0%, ${bg}DD 100%)`, /* ... */ }}&gt;
+      &lt;Icon size={28} strokeWidth={2.5} /&gt;
+      &lt;div&gt;{title}&lt;/div&gt;
+      &lt;div&gt;{body}&lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Same <code>linear-gradient(... ${bg} 0%, ${bg}DD 100%)</code> recipe
+we’ve used everywhere. <strong>Consistent visual language, applied via
+component.</strong></p>
+<p>The body text is constructed inline:</p>
+<pre class="tsx"><code>body={`Wu Yize won 18-17 in a final-frame thriller. The ${wuYizeCount} teams who backed him got +3.`}</code></pre>
+<p>Where <code>wuYizeCount</code> is computed from
+<code>finalPickData</code> higher in the component:</p>
+<pre class="tsx"><code>const wuYizeCount = finalPickData[0]?.name === &#39;Wu Yize&#39; ? finalPickData[0].count : ...;</code></pre>
+<p>This is <strong>derived display data</strong> — not state, not prop.
+Just a value computed in the parent, passed to a presentation component.
+Same as <code>teamsWithScores</code> from Chapter 4 but at a smaller
+scale.</p>
+</section>
+<section id="the-grid-layout" class="slide level2">
+<h2>The grid layout</h2>
+<p>Three insight cards in a row:</p>
+<pre class="tsx"><code>&lt;div style={{
+  display: &#39;grid&#39;,
+  gridTemplateColumns: &#39;repeat(auto-fit, minmax(320px, 1fr))&#39;,
+  gap: 20,
+}}&gt;
+  &lt;InsightCard ... /&gt;
+  &lt;InsightCard ... /&gt;
+  &lt;InsightCard ... /&gt;
+&lt;/div&gt;</code></pre>
+<p>The <code>auto-fit, minmax(320px, 1fr)</code> recipe again — three
+columns on wide screens, two on medium, one on narrow. <strong>Same
+pattern from Chapter 3’s stat cards.</strong> Once you know it, you use
+it everywhere.</p>
+</section>
+<section id="recap-the-transforms-youve-learned" class="slide level2">
+<h2>Recap: the transforms you’ve learned</h2>
+<p>You can now do all four of these in your sleep:</p>
+<ol type="1">
+<li><strong><code>.map()</code> to reshape</strong> — change one shape
+to another row-by-row.</li>
+<li><strong><code>.filter()</code> to subset</strong> — keep only items
+matching a predicate.</li>
+<li><strong><code>.reduce()</code>/<code>.forEach()</code> to
+aggregate</strong> — sum, count, group.</li>
+<li><strong><code>Object.entries()</code> + <code>.map()</code> to
+convert dict to array</strong> — for chart-friendly shapes.</li>
+</ol>
+<p>These four are <strong>the fundamental data-shaping toolkit</strong>
+of all React (and JavaScript) data work. Master them and dashboards
+become trivial.</p>
+</section>
+<section id="vibe-prompt-you-would-have-used" class="slide level2">
+<h2>Vibe prompt you would have used</h2>
+<blockquote>
+<p><em>“Build the second chart in <code>&lt;AnalyticsTab&gt;</code>:
+pick accuracy by round per team. Reshape:
+<code>teams.map(t =&gt; ({ team, R1: round((r1Hits/16)*100), R2: ..., QF: ..., SF: ..., F: ... }))</code>
+where <code>r1Hits</code> etc. come from
+<code>t.scores.r1Details.filter(d =&gt; d.correct).length</code>. Render
+a horizontal bar chart (<code>layout='vertical'</code>), XAxis numeric
+0-100 with <code>%</code> unit, YAxis categorical team names, 5 separate
+<code>&lt;Bar&gt;</code>s for R1/R2/QF/SF/F (no stacking), each in a
+distinct color. Wrap in <code>&lt;ChartCard&gt;</code> titled ‘Pick
+Accuracy %’ subtitled ‘What share of picks each team got right per
+round’.”</em></p>
+</blockquote>
+<p>The recipe pattern: name the reshape explicitly, name the chart
+layout explicitly, name the colors explicitly. <strong>Specificity =
+predictability.</strong></p>
+</section>
+<section id="check-yourself-1" class="slide level2">
+<h2>CHECK YOURSELF</h2>
+<ol type="1">
+<li><strong><code>teams.map(t =&gt; ({ ... }))</code> produces a new
+array. What’s the size of the new array? What’s the type of each
+item?</strong></li>
+<li><strong><code>&lt;Bar dataKey="R1" stackId="a"&gt;</code> and
+<code>&lt;Bar dataKey="R2" stackId="a"&gt;</code> — same
+<code>stackId</code>. What if you give them different
+<code>stackId</code>s instead?</strong></li>
+<li><strong><code>&lt;Cell&gt;</code> overrides the
+<code>&lt;Bar&gt;</code>’s default fill for one row. What other Recharts
+components accept <code>&lt;Cell&gt;</code> children?</strong> (Hint:
+think about charts where each rendered piece has identity.)</li>
+<li><strong>Walk through the data flow for the Final pick distribution
+chart.</strong> Start from <code>TEAMS</code>, end with the bars on
+screen. Name every transform.</li>
+<li><strong>You want to add a 6th chart: matches won per nationality
+(e.g. England has 4 of 32 players, won 12 of 31 matches). Sketch the
+reshape function.</strong> What does the data array look like?</li>
+</ol>
+<p>When you’ve answered these, head to <strong><a
+href="./03-pivots-and-internal-state.md">03-pivots-and-internal-state.md</a></strong>
+for the toughest chart in the codebase.</p>
+</section></section>
+<section>
+<section id="lesson-6.3-pivots-and-internal-state"
+class="title-slide slide level1">
+<h1>Lesson 6.3 — Pivots and Internal State</h1>
+<blockquote>
+<p><strong>Some state belongs to a single component.</strong> This
+lesson is about a chart that owns its own UI state — and about pivoting
+data so the <em>match</em> (not the <em>team</em>) becomes the unit of
+analysis.</p>
+</blockquote>
+<p>By the end of this lesson you will:</p>
+<ul>
+<li>Understand the difference between <strong>pivoting</strong> and
+<strong>summarizing</strong> data.</li>
+<li>Build <code>&lt;LeagueAgreementChart&gt;</code> — a chart with
+<strong>internal tab state</strong> (<code>useState</code> inside the
+chart, not lifted up).</li>
+<li>Know precisely when to lift state vs keep it local.</li>
+<li>Render <strong>conditional <code>&lt;Bar&gt;</code>
+elements</strong> based on whether matches are finished.</li>
+<li>Convert the long, ugly transform inside <code>AnalyticsTab</code>
+into a clean, named helper function.</li>
+</ul>
+<p>This is the case study that ties the entire chapter together. It also
+happens to be one of the most asked-about patterns in senior React
+interviews: <em>“When do you lift state?”</em></p>
+</section>
+<section id="what-is-a-pivot" class="slide level2">
+<h2>1. What is a pivot?</h2>
+<p>A <strong>pivot</strong> is a transform where you change <em>what
+each row represents</em>.</p>
+<ul>
+<li>Before: <code>team -&gt; picks</code> (each row is one team).</li>
+<li>After: <code>match -&gt; backers</code> (each row is one match, plus
+how the league split on it).</li>
+</ul>
+<p>The same underlying data, viewed through a different lens.</p>
+<p>If you’ve ever used Excel pivot tables, you’ve already done this. In
+React, we do it with <code>.map()</code>, <code>.filter()</code>, and
+sometimes <code>.reduce()</code>.</p>
+<h3 id="why-pivot">Why pivot?</h3>
+<p>Because <strong>the chart’s x-axis dictates the data
+shape</strong>.</p>
+<ul>
+<li>Want a chart with one bar per <em>team</em>? You need an array where
+each element is a team. That’s the shape we used in Lesson 2.</li>
+<li>Want a chart with one bar per <em>match</em>? You need an array
+where each element is a match. That’s a pivot.</li>
+</ul>
+<p>The chart can’t pivot for you. The data has to arrive in the shape
+the chart expects.</p>
+</section>
+<section id="the-question-this-chart-answers" class="slide level2">
+<h2>2. The question this chart answers</h2>
+<p>Look back at your standings. You can see who’s winning. But you can’t
+see <strong>where the league agreed and where it disagreed</strong>.</p>
+<p>For each match in Round 1, ask:</p>
+<ul>
+<li><em>How many of the 8 teams picked the actual winner?</em></li>
+<li><em>How many got it wrong?</em></li>
+</ul>
+<p>That tells you which matches were <strong>upsets</strong> (most teams
+got it wrong) and which were <strong>chalk</strong> (everyone agreed and
+was correct).</p>
+<p>For unfinished matches, ask a different question:</p>
+<ul>
+<li><em>Of the 8 teams, how many backed player 1? How many backed player
+2?</em></li>
+</ul>
+<p>That tells you where consensus lies <em>before</em> the match has
+been played.</p>
+<p>This is the chart we’re building.</p>
+</section>
+<section id="plan-the-data-shape-first" class="slide level2">
+<h2>3. Plan the data shape first</h2>
+<p>Always plan the data shape before touching the chart code.</p>
+<p>For each match, we need an object like this:</p>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  match<span class="op">:</span> <span class="st">&#39;Williams v Wakelin&#39;</span><span class="op">,</span>  <span class="co">// x-axis label</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  finished<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  correct<span class="op">:</span> <span class="dv">5</span><span class="op">,</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  wrong<span class="op">:</span> <span class="dv">3</span><span class="op">,</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  pending<span class="op">:</span> <span class="dv">0</span><span class="op">,</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Or, for an unfinished match:</p>
+<div class="sourceCode" id="cb38"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  match<span class="op">:</span> <span class="st">&#39;Murphy v Wu&#39;</span><span class="op">,</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  finished<span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  p1Name<span class="op">:</span> <span class="st">&#39;Murphy&#39;</span><span class="op">,</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  p2Name<span class="op">:</span> <span class="st">&#39;Wu&#39;</span><span class="op">,</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  p1Backers<span class="op">:</span> <span class="dv">2</span><span class="op">,</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  p2Backers<span class="op">:</span> <span class="dv">6</span><span class="op">,</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  pending<span class="op">:</span> <span class="dv">8</span><span class="op">,</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Two shapes — one for finished, one for pending — but with
+<strong>enough overlap that the same chart can render both</strong> (we
+just toggle which <code>&lt;Bar&gt;</code> components mount based on
+<code>finished</code>).</p>
+<p>This is a pattern you’ll see often: design <em>one</em> row shape
+that satisfies <em>all</em> render branches.</p>
+</section>
+<section id="define-the-type-contract" class="slide level2">
+<h2>4. Define the type contract</h2>
+<p>Open <code>components/analytics/LeagueAgreementChart.tsx</code>. Top
+of the file:</p>
+<pre class="tsx"><code>&#39;use client&#39;;
+
+import { useState } from &#39;react&#39;;
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Legend,
+} from &#39;recharts&#39;;
+
+export interface AgreementDatum {
+  match: string;
+  finished: boolean;
+  correct?: number;
+  wrong?: number;
+  pending: number;
+  p1Name?: string;
+  p2Name?: string;
+  p1Backers?: number;
+  p2Backers?: number;
+}
+
+export interface AgreementRound {
+  id: string;
+  label: string;
+  subtitle: string;
+  data: AgreementDatum[];
+}</code></pre>
+<h3 id="why-these-types">Why these types?</h3>
+<ul>
+<li><strong><code>AgreementDatum</code></strong> describes <em>one
+bar</em> on the chart.</li>
+<li><strong><code>AgreementRound</code></strong> describes <em>one
+tab</em> — Round 1, Round 2, etc. — bundling the round’s name, subtitle,
+and the array of bars.</li>
+</ul>
+<h3
+id="why-are-correct-wrong-p1name-p1backers-p2name-p2backers-all-optional">Why
+are <code>correct</code>, <code>wrong</code>, <code>p1Name</code>,
+<code>p1Backers</code>, <code>p2Name</code>, <code>p2Backers</code> all
+optional?</h3>
+<p>Because each row uses <em>one set or the other</em>, never both:</p>
+<ul>
+<li>A finished row uses <code>correct</code> and
+<code>wrong</code>.</li>
+<li>A pending row uses <code>p1Backers</code> and
+<code>p2Backers</code>.</li>
+</ul>
+<p>TypeScript would let us model this as a <strong>discriminated
+union</strong> (a stricter type), and that’s what a senior engineer
+might do. We’re using optional fields here because it keeps the data
+builder simple. <strong>Both are valid — pick the one that fits your
+team’s style.</strong></p>
+<blockquote>
+<p><strong>Interview answer:</strong> “I’d use a discriminated union if
+the consumer of the type does a lot of branching on
+<code>finished</code>. I went with optional fields here because the
+chart is the only consumer, and the branching happens once.”</p>
+</blockquote>
+<h3 id="why-export-interface">Why <code>export interface</code>?</h3>
+<p>So that <strong>other files can import
+<code>AgreementDatum</code></strong> and use it as the return type of
+helper functions. Concretely, <code>AnalyticsTab.tsx</code> will do:</p>
+<pre class="tsx"><code>import LeagueAgreementChart, { type AgreementDatum } from &#39;../analytics/LeagueAgreementChart&#39;;</code></pre>
+<p>The <code>type</code> keyword in the import is a TypeScript signal:
+<em>“This is a type-only import — it disappears at compile time.”</em>
+That keeps your runtime bundle clean.</p>
+</section>
+<section id="the-component-shell" class="slide level2">
+<h2>5. The component shell</h2>
+<p>Add the props interface and the component skeleton:</p>
+<pre class="tsx"><code>interface LeagueAgreementChartProps {
+  rounds: AgreementRound[];
+}
+
+export default function LeagueAgreementChart({ rounds }: LeagueAgreementChartProps) {
+  const [active, setActive] = useState&lt;string&gt;(&#39;r1&#39;);
+  const round = rounds.find((r) =&gt; r.id === active) || rounds[0];
+  const isPendingRound = round.data.every((d) =&gt; !d.finished);
+
+  return (
+    &lt;div /* ... container styles ... */&gt;
+      {/* tab buttons */}
+      {/* chart */}
+    &lt;/div&gt;
+  );
+}</code></pre>
+<h3 id="read-this-carefully-there-are-three-big-ideas-here.">Read this
+carefully — there are three big ideas here.</h3>
+<h4 id="usestate-is-local.">5.1. <strong><code>useState</code> is
+local.</strong></h4>
+<p>The <code>active</code> state — <em>which round tab is selected</em>
+— lives inside this component. The orchestrator at the top of the app
+<strong>does not know it exists</strong>.</p>
+<p>That’s deliberate.</p>
+<blockquote>
+<p><strong>Lifting state up</strong> is a real React principle, but the
+rule is: <strong>lift state only when something else needs it.</strong>
+Nothing outside this chart cares which tab is open. So it stays
+here.</p>
+</blockquote>
+<p>If, three months from now, the URL needs to reflect the active tab
+(so a user can share a link to “League Agreement → Final”), we’d lift
+this into a route param. Until then: local.</p>
+<h4 id="the-find-fallback.">5.2. <strong>The <code>find()</code>
+fallback.</strong></h4>
+<pre class="tsx"><code>const round = rounds.find((r) =&gt; r.id === active) || rounds[0];</code></pre>
+<p>If <code>active</code> somehow points to a round that doesn’t exist
+(typo, removed round), we fall back to the first round.
+<strong>Defensive programming.</strong> The user sees something instead
+of a crash.</p>
+<h4 id="derived-booleans-live-above-the-jsx.">5.3. <strong>Derived
+booleans live above the JSX.</strong></h4>
+<pre class="tsx"><code>const isPendingRound = round.data.every((d) =&gt; !d.finished);</code></pre>
+<p>Compute once at the top of the render. Use the boolean inside JSX.
+Don’t write <code>round.data.every((d) =&gt; !d.finished)</code> twice —
+that’s a smell.</p>
+</section>
+<section id="build-the-tab-buttons" class="slide level2">
+<h2>6. Build the tab buttons</h2>
+<p>Inside the container <code>&lt;div&gt;</code>:</p>
+<pre class="tsx"><code>&lt;div style={{ display: &#39;flex&#39;, gap: 8, flexWrap: &#39;wrap&#39;, marginBottom: 20 }}&gt;
+  {rounds.map((r) =&gt; {
+    const isActive = r.id === active;
+    return (
+      &lt;button
+        key={r.id}
+        onClick={() =&gt; setActive(r.id)}
+        style={{
+          padding: &#39;8px 16px&#39;,
+          borderRadius: 8,
+          border: isActive ? &#39;2px solid #0F5132&#39; : &#39;2px solid #E5E7EB&#39;,
+          background: isActive ? &#39;#0F5132&#39; : &#39;#FFFFFF&#39;,
+          color: isActive ? &#39;#FBBF24&#39; : &#39;#374151&#39;,
+          fontWeight: 700,
+          fontSize: 13,
+          cursor: &#39;pointer&#39;,
+          fontFamily: &#39;inherit&#39;,
+          letterSpacing: &#39;0.5px&#39;,
+          transition: &#39;all 0.15s&#39;,
+        }}
+      &gt;
+        {r.label}
+      &lt;/button&gt;
+    );
+  })}
+&lt;/div&gt;</code></pre>
+<h3 id="why-a-simple-button-row-instead-of-a-select-or-radio">Why a
+simple button row instead of a <code>&lt;select&gt;</code> or
+radio?</h3>
+<p>Because we have a small, fixed set of options (5 rounds) and we want
+each option to be a <strong>prominent target</strong>. Buttons in a row
+are touch-friendly, glanceable, and don’t hide options behind a
+click.</p>
+<h3 id="why-one-onclick-setactiver.id-per-button">Why one
+<code>onClick={() =&gt; setActive(r.id)}</code> per button?</h3>
+<p>Each button needs its own handler that knows its <code>id</code>. The
+arrow function creates a closure that captures <code>r.id</code>. This
+is standard React.</p>
+<p>You may have read that creating arrow functions in render is
+“expensive” or “bad for performance.” For a list of 5 buttons that
+re-renders only when <code>active</code> changes? <strong>Don’t worry
+about it.</strong> Optimize when measurements say to, not before.</p>
+</section>
+<section id="build-the-chart" class="slide level2">
+<h2>7. Build the chart</h2>
+<p>After the tab row, add:</p>
+<pre class="tsx"><code>&lt;ResponsiveContainer width=&quot;100%&quot; height={Math.max(280, round.data.length * 30 + 120)}&gt;
+  &lt;BarChart data={round.data} margin={{ top: 10, right: 20, bottom: 80, left: 0 }}&gt;
+    &lt;CartesianGrid strokeDasharray=&quot;3 3&quot; stroke=&quot;#FDE68A&quot; /&gt;
+    &lt;XAxis
+      dataKey=&quot;match&quot;
+      tick={{ fontSize: 11, fontWeight: 600, fill: &#39;#1F2937&#39; }}
+      angle={-45}
+      textAnchor=&quot;end&quot;
+      interval={0}
+      height={90}
+    /&gt;
+    &lt;YAxis tick={{ fontSize: 12, fill: &#39;#1F2937&#39; }} domain={[0, 8]} /&gt;
+    &lt;Tooltip contentStyle={{ background: &#39;#FFFBEB&#39;, border: &#39;2px solid #FBBF24&#39;, borderRadius: 8 }} /&gt;
+    &lt;Legend wrapperStyle={{ fontSize: 13, fontWeight: 600 }} /&gt;
+
+    {isPendingRound &amp;&amp; (
+      &lt;Bar dataKey=&quot;p1Backers&quot; stackId=&quot;a&quot; fill=&quot;#0F5132&quot; name=&quot;Backed first player&quot; /&gt;
+    )}
+    {isPendingRound &amp;&amp; (
+      &lt;Bar dataKey=&quot;p2Backers&quot; stackId=&quot;a&quot; fill=&quot;#B45309&quot; name=&quot;Backed second player&quot; /&gt;
+    )}
+    {!isPendingRound &amp;&amp; (
+      &lt;Bar dataKey=&quot;correct&quot; stackId=&quot;a&quot; fill=&quot;#16A34A&quot; name=&quot;Correct picks&quot; /&gt;
+    )}
+    {!isPendingRound &amp;&amp; (
+      &lt;Bar dataKey=&quot;wrong&quot; stackId=&quot;a&quot; fill=&quot;#DC2626&quot; name=&quot;Wrong picks&quot; /&gt;
+    )}
+  &lt;/BarChart&gt;
+&lt;/ResponsiveContainer&gt;</code></pre>
+<h3 id="three-details-worth-circling.">Three details worth
+circling.</h3>
+<h4 id="dynamic-height.">7.1. <strong>Dynamic height.</strong></h4>
+<pre class="tsx"><code>height={Math.max(280, round.data.length * 30 + 120)}</code></pre>
+<p>Some rounds have 16 matches (R1), some have 1 (Final). A fixed height
+of 280px would crush 16 bars together. We compute the height from the
+data length: 30px per row plus padding, with a floor of 280.</p>
+<p>This is a tiny detail that <strong>separates beginner React from
+production React.</strong> Layouts that adapt to data, not the other way
+around.</p>
+<h4 id="conditional-bar-rendering.">7.2. <strong>Conditional
+<code>&lt;Bar&gt;</code> rendering.</strong></h4>
+<pre class="tsx"><code>{isPendingRound &amp;&amp; &lt;Bar dataKey=&quot;p1Backers&quot; ... /&gt;}
+{!isPendingRound &amp;&amp; &lt;Bar dataKey=&quot;correct&quot; ... /&gt;}</code></pre>
+<p>Recharts traverses its children to figure out which series to draw.
+If a <code>&lt;Bar&gt;</code> is not rendered, that series doesn’t
+appear. So our toggle between <em>finished</em> and <em>pending</em>
+visualizations is just <strong>conditional JSX</strong>.</p>
+<p>This is React composition at its best: you don’t reach for an
+imperative API to “add a bar” or “remove a bar.” You just describe which
+<code>&lt;Bar&gt;</code>s should exist for the current state.</p>
+<h4 id="stackida.">7.3. <strong><code>stackId="a"</code>.</strong></h4>
+<p>All bars in the same stack share an <code>id</code>. Recharts treats
+them as one stacked column. For a finished match, <code>correct</code>
+(green) is stacked on top of <code>wrong</code> (red), and the column
+total is always 8. For a pending match, <code>p1Backers</code> (green)
+is stacked on <code>p2Backers</code> (orange), and again the total is 8.
+<strong>Visually consistent.</strong></p>
+</section>
+<section id="build-the-pivot-helper-in-analyticstab.tsx"
+class="slide level2">
+<h2>8. Build the pivot helper in <code>AnalyticsTab.tsx</code></h2>
+<p>Open <code>components/tabs/AnalyticsTab.tsx</code>. We need a helper
+that turns a list of matches into the chart-ready array.</p>
+<pre class="tsx"><code>const buildAgreementData = (
+  matches: Match[],
+  pickKey: &#39;r1&#39; | &#39;r2&#39; | &#39;qf&#39; | &#39;sf&#39; | &#39;final&#39;
+): AgreementDatum[] =&gt;
+  matches.map((m, i) =&gt; {
+    const matchLabel = `${m.p1.split(&#39; &#39;).slice(-1)[0]} v ${m.p2.split(&#39; &#39;).slice(-1)[0]}`;
+    if (m.winner) {
+      const correct = teams.filter((t) =&gt; {
+        const pick =
+          pickKey === &#39;final&#39; ? t.final : t[pickKey] ? t[pickKey][i] : null;
+        return pick === m.winner;
+      }).length;
+      return {
+        match: matchLabel,
+        correct,
+        wrong: 8 - correct,
+        pending: 0,
+        finished: true,
+      };
+    } else {
+      const p1Backers = teams.filter((t) =&gt; {
+        const pick =
+          pickKey === &#39;final&#39; ? t.final : t[pickKey] ? t[pickKey][i] : null;
+        return pick === m.p1;
+      }).length;
+      const p2Backers = teams.filter((t) =&gt; {
+        const pick =
+          pickKey === &#39;final&#39; ? t.final : t[pickKey] ? t[pickKey][i] : null;
+        return pick === m.p2;
+      }).length;
+      return {
+        match: matchLabel,
+        p1Name: m.p1.split(&#39; &#39;).slice(-1)[0],
+        p2Name: m.p2.split(&#39; &#39;).slice(-1)[0],
+        p1Backers,
+        p2Backers,
+        pending: 8,
+        finished: false,
+      };
+    }
+  });</code></pre>
+<p>This is the messiest function in the entire project. Let’s break it
+down piece by piece.</p>
+<h3
+id="why-is-this-a-function-inside-the-component-not-a-lib-helper">8.1.
+Why is this a function inside the component, not a <code>lib/</code>
+helper?</h3>
+<p>Two reasons:</p>
+<ol type="1">
+<li><strong>It needs <code>teams</code> from the props.</strong> Putting
+it in <code>lib/</code> would force us to pass <code>teams</code> in
+every call and would gain us nothing because <code>teams</code> is
+already in scope here.</li>
+<li><strong>It’s only used here.</strong> No other component will ever
+build agreement data. Premature extraction is a real cost.</li>
+</ol>
+<blockquote>
+<p><strong>Interview answer:</strong> “I extract to <code>lib/</code>
+when (a) the function is pure and (b) more than one component needs it.
+This one fails (b) for now, so I keep it local.”</p>
+</blockquote>
+<h3 id="what-is-pickkey-doing">8.2. What is <code>pickKey</code>
+doing?</h3>
+<p><code>pickKey</code> is a <strong>string parameter</strong> that
+tells the function <em>which array on the team to read</em>:
+<code>t.r1</code>, <code>t.r2</code>, <code>t.qf</code>,
+<code>t.sf</code>, or — special-cased — <code>t.final</code>.</p>
+<p>This is how we avoid copy-pasting the function five times (one per
+round). One function, parametrized by which slot on the team we
+read.</p>
+<p>The TypeScript type <code>'r1' | 'r2' | 'qf' | 'sf' | 'final'</code>
+is a <strong>string literal union</strong>. It restricts the caller to
+exactly those five strings. If you pass <code>'foo'</code>, TypeScript
+errors.</p>
+<h3 id="why-the-special-case-for-final">8.3. Why the special case for
+<code>'final'</code>?</h3>
+<p>Because the team type has <code>t.final: string</code> (a single
+player name), not <code>t.final: string[]</code> (an array of picks).
+So:</p>
+<ul>
+<li>For rounds, the team’s pick for match <code>i</code> is
+<code>t[pickKey][i]</code>.</li>
+<li>For the final, the pick is just <code>t.final</code> (no array
+index).</li>
+</ul>
+<p>Hence the ternary:</p>
+<div class="sourceCode" id="cb49"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>pickKey <span class="op">===</span> <span class="st">&#39;final&#39;</span> <span class="op">?</span> t<span class="op">.</span><span class="at">final</span> <span class="op">:</span> t[pickKey] <span class="op">?</span> t[pickKey][i] <span class="op">:</span> <span class="dt">null</span></span></code></pre></div>
+<p>Read this top to bottom:</p>
+<ol type="1">
+<li>Is <code>pickKey</code> literally <code>'final'</code>? Yes → use
+<code>t.final</code>.</li>
+<li>Otherwise, does <code>t[pickKey]</code> exist? Yes → grab the
+<code>i</code>th element.</li>
+<li>Otherwise → <code>null</code> (the team didn’t pick anything for
+this round).</li>
+</ol>
+<p>The middle check (<code>t[pickKey] ?</code>) is defensive — early in
+the season, some teams might not have R2 picks yet.</p>
+<h3 id="the-label-trick.">8.4. The label trick.</h3>
+<div class="sourceCode" id="cb50"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> matchLabel <span class="op">=</span> <span class="vs">`</span><span class="sc">${</span>m<span class="op">.</span><span class="at">p1</span><span class="op">.</span><span class="fu">split</span>(<span class="st">&#39; &#39;</span>)<span class="op">.</span><span class="fu">slice</span>(<span class="op">-</span><span class="dv">1</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="vs"> v </span><span class="sc">${</span>m<span class="op">.</span><span class="at">p2</span><span class="op">.</span><span class="fu">split</span>(<span class="st">&#39; &#39;</span>)<span class="op">.</span><span class="fu">slice</span>(<span class="op">-</span><span class="dv">1</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span></code></pre></div>
+<p><code>'Mark Williams'.split(' ')</code> →
+<code>['Mark', 'Williams']</code>. <code>.slice(-1)</code> →
+<code>['Williams']</code>. <code>[0]</code> →
+<code>'Williams'</code>.</p>
+<p>Net effect: keep the <strong>last word</strong> (the surname) of each
+player’s full name.</p>
+<p>Why? Because chart x-axes have very little horizontal space.
+<code>'Mark Williams v Lei Peifan'</code> is a label that gets crushed
+into nothing. <code>'Williams v Peifan'</code> actually reads.</p>
+<h3 id="the-vote-count.">8.5. The vote count.</h3>
+<div class="sourceCode" id="cb51"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> correct <span class="op">=</span> teams<span class="op">.</span><span class="fu">filter</span>((t) <span class="kw">=&gt;</span> <span class="co">/* pick equals winner */</span>)<span class="op">.</span><span class="at">length</span><span class="op">;</span></span></code></pre></div>
+<p>This is the <strong>counting-by-filtering</strong> idiom. Count how
+many array elements satisfy a predicate.</p>
+<p>Could you use
+<code>.reduce((acc, t) =&gt; pick === winner ? acc + 1 : acc, 0)</code>?
+Yes. But <code>.filter().length</code> reads better here.</p>
+<blockquote>
+<p><strong>Interview answer:</strong> “I use
+<code>.filter().length</code> when readability beats one extra pass over
+the array. For arrays of millions of elements, <code>.reduce()</code> is
+faster because it avoids the intermediate array. For 8 teams? It doesn’t
+matter.”</p>
+</blockquote>
+<h3 id="the-implicit-invariant.">8.6. The implicit invariant.</h3>
+<p>We have <strong>8 fantasy teams</strong>. Every team picks for every
+match. So <code>correct + wrong = 8</code>. Always.</p>
+<p>That’s why we can write:</p>
+<div class="sourceCode" id="cb52"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> { correct<span class="op">,</span> wrong<span class="op">:</span> <span class="dv">8</span> <span class="op">-</span> correct<span class="op">,</span> <span class="op">...</span> }<span class="op">;</span></span></code></pre></div>
+<p>When the <strong>invariant is structural</strong> (it can’t change
+without changing the whole app), it’s safe to hardcode the 8. If you
+wanted to be extra-defensive, you could write
+<code>wrong: teams.length - correct</code> — both are fine. The
+hardcoded 8 is a tradeoff for clarity in a UI label that says <em>“out
+of 8 teams”</em>.</p>
+</section>
+<section id="wire-it-up" class="slide level2">
+<h2>9. Wire it up</h2>
+<p>Below the helper definition (still inside <code>AnalyticsTab</code>),
+build one array per round:</p>
+<pre class="tsx"><code>const r1Universal = buildAgreementData(ROUND1_MATCHES, &#39;r1&#39;);
+const r2Universal = buildAgreementData(ROUND2_MATCHES, &#39;r2&#39;);
+const qfUniversal = buildAgreementData(QF_MATCHES, &#39;qf&#39;);
+const sfUniversal = buildAgreementData(SF_MATCHES, &#39;sf&#39;);
+const finalUniversal = buildAgreementData(FINAL_MATCH, &#39;final&#39;);</code></pre>
+<p>Then render the chart, passing all five rounds at once:</p>
+<pre class="tsx"><code>&lt;LeagueAgreementChart
+  rounds={[
+    { id: &#39;r1&#39;, label: &#39;Round 1&#39;, subtitle: &#39;Last 32 — Best of 19&#39;, data: r1Universal },
+    { id: &#39;r2&#39;, label: &#39;Round 2&#39;, subtitle: &#39;Last 16 — Best of 25&#39;, data: r2Universal },
+    { id: &#39;qf&#39;, label: &#39;Quarter-Finals&#39;, subtitle: &#39;Last 8 — Best of 25&#39;, data: qfUniversal },
+    { id: &#39;sf&#39;, label: &#39;Semi-Finals&#39;, subtitle: &#39;Last 4 — Best of 33&#39;, data: sfUniversal },
+    { id: &#39;final&#39;, label: &#39;Final&#39;, subtitle: &#39;Murphy v Wu — Best of 35&#39;, data: finalUniversal },
+  ]}
+/&gt;</code></pre>
+<p>Click around the tabs. The chart’s internal <code>useState</code>
+flips <code>active</code>, and the right round renders.</p>
+</section>
+<section id="the-big-question-lift-state-or-keep-it-local"
+class="slide level2">
+<h2>10. The big question: lift state, or keep it local?</h2>
+<p>This is the question senior interviewers love.</p>
+<h3 id="when-to-keep-state-local">When to keep state local</h3>
+<ul>
+<li>Only this component reads it.</li>
+<li>Only this component writes it.</li>
+<li>The state doesn’t need to survive remounting.</li>
+<li>The state doesn’t need to be shared with the URL or
+persistence.</li>
+</ul>
+<p>The chart’s <code>active</code> tab passes all four tests.
+<strong>Local.</strong></p>
+<h3 id="when-to-lift-state-up">When to lift state up</h3>
+<ul>
+<li>A <em>sibling</em> component needs to read it.</li>
+<li>A <em>parent</em> component needs to react to it.</li>
+<li>The state should persist (e.g., URL param, localStorage).</li>
+<li>Two pieces of state must stay in sync.</li>
+</ul>
+<p>For example, <code>selectedTeam</code> in our orchestrator — that one
+<em>had</em> to be lifted, because both the standings tab (which sets it
+via clicking) and the predictions tab (which reads it via the team
+selector) need to share the same value.</p>
+<h3 id="the-diff-is-roughly">The diff is roughly:</h3>
+<table>
+<thead>
+<tr>
+<th>Concern</th>
+<th>Local state</th>
+<th>Lifted state</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Component count needing it</td>
+<td>1</td>
+<td>2+</td>
+</tr>
+<tr>
+<td>Persistence required</td>
+<td>No</td>
+<td>Sometimes</td>
+</tr>
+<tr>
+<td>URL reflects it</td>
+<td>No</td>
+<td>Sometimes</td>
+</tr>
+<tr>
+<td>Resets on remount</td>
+<td>OK</td>
+<td>Often not OK</td>
+</tr>
+<tr>
+<td>Test isolation</td>
+<td>Easier</td>
+<td>Harder</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Interview-grade answer:</strong> “I default to local. I only
+lift state when the absence of lifting causes a bug — typically when two
+components need to be in sync, or when state needs to survive a route
+change. Lifting state too eagerly turns every parent into a state
+monolith, and that’s the start of every ‘too much prop drilling’
+complaint I’ve ever heard.”</p>
+</blockquote>
+</section>
+<section id="common-mistakes-i-want-you-to-avoid" class="slide level2">
+<h2>11. Common mistakes I want you to avoid</h2>
+<h3 id="building-the-data-inside-the-chart">11.1. Building the data
+inside the chart</h3>
+<p>This is wrong:</p>
+<pre class="tsx"><code>function LeagueAgreementChart({ teams, matches }: Props) {
+  const data = matches.map(m =&gt; /* pivot logic */);
+  // ...
+}</code></pre>
+<p>The chart now knows <em>too much</em>. It knows what a
+<code>Team</code> is, what a <code>Match</code> is, how scoring works.
+Reuse just died.</p>
+<p>The right shape: the chart accepts <strong>already-pivoted
+data</strong>. The orchestrator does the pivot. Loose coupling.</p>
+<h3 id="storing-the-pivoted-data-in-usestate">11.2. Storing the pivoted
+data in <code>useState</code></h3>
+<p>This is also wrong:</p>
+<pre class="tsx"><code>const [data, setData] = useState(buildAgreementData(...));</code></pre>
+<p>Why? Because <code>buildAgreementData</code> is
+<strong>derived</strong> from <code>teams</code>. If <code>teams</code>
+changes, <code>data</code> is stale. <code>useState</code> is for state
+that the <em>user</em> mutates. <strong>Derived data does not belong in
+state.</strong></p>
+<p>The right approach: just compute it on every render. (Or wrap in
+<code>useMemo</code> if profiling shows it’s slow.)</p>
+<h3 id="lifting-active-into-the-orchestrator-just-in-case">11.3. Lifting
+<code>active</code> into the orchestrator “just in case”</h3>
+<p>A team I worked with did this once. Every chart’s “active tab” lived
+in a top-level reducer. Why? <em>“In case we want to share active tabs
+across charts.”</em></p>
+<p>We never did. The reducer ballooned. Every chart re-rendered when
+<em>any</em> tab changed. We eventually pulled it all back down to the
+chart level.</p>
+<p><strong>Don’t optimize for hypothetical future requirements.</strong>
+Optimize for now. Refactor when “now” actually demands it.</p>
+</section>
+<section id="vibe-prompt-you-would-have-used-1" class="slide level2">
+<h2>12. Vibe prompt you would have used</h2>
+<blockquote>
+<p>“I have an array of fantasy teams, each with picks for 5 rounds, and
+I have arrays of matches per round. I want a Recharts bar chart where
+each bar is one match, stacked: green = how many teams picked the
+winner, red = how many got it wrong. For unfinished matches, swap to
+green = backed player 1, orange = backed player 2. Use a button row to
+switch rounds, and put the active-round state inside the chart component
+(don’t lift it). Type everything strictly. Show me how to pivot the
+team-data into match-data with a single helper.”</p>
+</blockquote>
+<p>Notice the structure:</p>
+<ol type="1">
+<li><strong>Inputs</strong> described precisely (teams shape, matches
+shape).</li>
+<li><strong>Output</strong> described visually (stacked bar, color
+rules).</li>
+<li><strong>State location specified</strong> (inside the chart, don’t
+lift).</li>
+<li><strong>Type discipline asserted</strong> (strict typing).</li>
+<li><strong>One specific request</strong> (pivot helper).</li>
+</ol>
+<p>This is the kind of prompt that produces high-quality code. The
+<em>vague</em> version — <em>“make a chart of who agreed with each
+match”</em> — produces a mess.</p>
+</section>
+<section id="check-yourself-2" class="slide level2">
+<h2>13. CHECK YOURSELF</h2>
+<p>Don’t proceed until you can explain each of these:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />What does <strong>pivot</strong>
+mean? Give an example.</label></li>
+<li><label><input type="checkbox" />Why is <code>useState</code> for the
+active tab kept inside the chart and not in the
+orchestrator?</label></li>
+<li><label><input type="checkbox" />What is a <strong>string literal
+union</strong> type? Why use it for <code>pickKey</code>?</label></li>
+<li><label><input type="checkbox" />What’s the difference between
+<strong>derived data</strong> and <strong>state</strong>? Where does
+each belong?</label></li>
+<li><label><input type="checkbox" />Why are <code>correct</code>,
+<code>wrong</code>, <code>p1Backers</code>, <code>p2Backers</code>
+optional fields on <code>AgreementDatum</code>?</label></li>
+<li><label><input type="checkbox" />What would change if you used a
+<strong>discriminated union</strong> instead?</label></li>
+<li><label><input type="checkbox" />Why use <strong>conditional
+<code>&lt;Bar&gt;</code> rendering</strong> instead of one
+<code>&lt;Bar&gt;</code> whose <code>dataKey</code> is
+computed?</label></li>
+<li><label><input type="checkbox" />Why is the chart’s height computed
+from <code>round.data.length</code>?</label></li>
+<li><label><input type="checkbox" />What’s the rule for <em>when to lift
+state up</em>?</label></li>
+<li><label><input type="checkbox" />Why don’t we put
+<code>buildAgreementData</code> in <code>lib/</code>?</label></li>
+</ul>
+<p>If any of these is fuzzy, scroll back. The next chapter (Mastery +
+Interview Prep) assumes all of them are solid.</p>
+</section>
+<section id="where-you-are-now" class="slide level2">
+<h2>14. Where you are now</h2>
+<p>You’ve finished Chapter 6. Take stock:</p>
+<ul>
+<li><strong>Chapter 1</strong> taught you the problem and the data
+model.</li>
+<li><strong>Chapter 2</strong> scaffolded the project and typed the
+data.</li>
+<li><strong>Chapter 3</strong> built your first component.</li>
+<li><strong>Chapter 4</strong> taught you state, hooks, and the
+orchestrator pattern.</li>
+<li><strong>Chapter 5</strong> taught you composition and component
+extraction.</li>
+<li><strong>Chapter 6</strong> taught you data visualization,
+transforms, and where state lives.</li>
+</ul>
+<p>You can now <em>build</em> the app. Chapter 7 will teach you how to
+<em>talk about it</em> — testing, deployment, and what to say in an
+interview when someone asks “walk me through your project.”</p>
+</section>
+<section id="whats-next" class="slide level2">
+<h2>What’s next</h2>
+<p><strong>Open
+<code>chapter-07-mastery-and-interviews/README.md</code>.</strong></p>
+<p>It’s the closing chapter. We tighten everything, add the safety nets
+you haven’t built yet (loading states, accessibility, error handling),
+and rehearse the interview narrative.</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^5/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

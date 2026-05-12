@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Chapter 05 Composition</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {  background-color: #f8f8f8; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ef2929; } /* Alert */
+    code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #204a87; } /* Attribute */
+    code span.bn { color: #0000cf; } /* BaseN */
+    code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4e9a06; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #8f5902; font-style: italic; } /* Comment */
+    code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+    code span.dt { color: #204a87; } /* DataType */
+    code span.dv { color: #0000cf; } /* DecVal */
+    code span.er { color: #a40000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #0000cf; } /* Float */
+    code span.fu { color: #204a87; font-weight: bold; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+    code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+    code span.ot { color: #8f5902; } /* Other */
+    code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+    code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+    code span.ss { color: #4e9a06; } /* SpecialString */
+    code span.st { color: #4e9a06; } /* String */
+    code span.va { color: #000000; } /* Variable */
+    code span.vs { color: #4e9a06; } /* VerbatimString */
+    code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/theme/white.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Chapter 05 Composition</h1>
+</section>
+
+<section>
+<section id="chapter-5-composition" class="title-slide slide level1">
+<h1>Chapter 5 — Composition</h1>
+<blockquote>
+<p><strong>A 200-line component is a smell. So is splitting too
+early.</strong> This chapter teaches you the senior judgement of when to
+extract a component, when to leave one alone, and how to build deeply
+nested feature views without losing the plot.</p>
+</blockquote>
+</section>
+<section id="what-youll-learn" class="slide level2">
+<h2>What you’ll learn</h2>
+<ul>
+<li>The <strong>copy-paste rule</strong> — when a chunk of JSX deserves
+its own component.</li>
+<li><strong>Tiny components for readability</strong>
+(<code>&lt;PathArrow&gt;</code>, <code>&lt;PathStep&gt;</code>) — when
+zero-prop components are <em>good</em> code.</li>
+<li><strong>Prop drilling</strong> — how deep is too deep, and how to
+know.</li>
+<li><strong>Context</strong> — when to reach for it, when not to.</li>
+<li>How to build a <strong>deeply nested feature</strong> — the Players
+tab — by composition, not by giant monolithic files.</li>
+<li>The two-way <strong>back/forward navigation</strong> pattern between
+sibling views.</li>
+</ul>
+</section>
+<section id="lessons-in-this-chapter" class="slide level2">
+<h2>Lessons in this chapter</h2>
+<ol type="1">
+<li><strong><a
+href="./01-when-to-split-components.md">01-when-to-split-components.md</a></strong>
+— The judgement call: when a chunk of JSX deserves a name. The
+copy-paste rule. The “what vs how” rule. Tiny components and the case
+for them.</li>
+<li><strong><a
+href="./02-prop-drilling-vs-context.md">02-prop-drilling-vs-context.md</a></strong>
+— When to keep drilling, when to introduce Context, why most React
+advice on this topic is wrong, and what senior engineers actually
+do.</li>
+<li><strong><a
+href="./03-building-player-detail.md">03-building-player-detail.md</a></strong>
+— A real case study: the 270-line <code>&lt;PlayerDetail&gt;</code>
+component, the four sub-components it composes, and the design decisions
+behind each split.</li>
+</ol>
+</section>
+<section id="files-youll-create-or-update" class="slide level2">
+<h2>Files you’ll create or update</h2>
+<pre><code>components/
+├── matches/                              ← MatchesTab fully built out
+│   ├── MatchesList.tsx
+│   ├── PlayerLine.tsx
+│   ├── RoundButton.tsx
+│   └── UpcomingMatchList.tsx
+├── predictions/                          ← PredictionsTab fully built out
+│   ├── PredictionMatrix.tsx
+│   ├── TeamCardView.tsx
+│   ├── PicksList.tsx
+│   ├── RoundStat.tsx
+│   └── Legend.tsx
+├── players/                              ← PlayersTab + PlayerDetail
+│   ├── PlayerCard.tsx
+│   ├── PlayerDetail.tsx                  ← the big one
+│   ├── MatchPickAnalysis.tsx
+│   ├── PathStep.tsx
+│   ├── PathArrow.tsx
+│   ├── StatTile.tsx
+│   └── TeamChip.tsx
+└── tabs/
+    ├── MatchesTab.tsx                    ← UPDATED: real implementation
+    ├── PredictionsTab.tsx                ← UPDATED
+    └── PlayersTab.tsx                    ← UPDATED</code></pre>
+<p>That’s a lot of files. Most are 30–60 lines each. The point of the
+chapter is <strong>making lots of small files instead of a few big
+ones</strong> — and learning to defend that choice.</p>
+</section>
+<section id="new-reactnext.js-concepts-introduced" class="slide level2">
+<h2>New React/Next.js concepts introduced</h2>
+<ul>
+<li><strong>Component extraction</strong> — moving JSX into a sibling
+component file.</li>
+<li><strong>Composition</strong> — building complex views by nesting
+simple components.</li>
+<li><strong><code>children</code> prop</strong> — passing JSX as a
+prop.</li>
+<li><strong>Optional callbacks for navigation</strong>
+(<code>onSelectPlayer</code>, <code>onBack</code>).</li>
+<li><strong>Local state in tab components</strong>
+(<code>useState</code> for the round filter, the player
+drill-down).</li>
+<li><strong>Conditional rendering of detail views</strong>
+(<code>if selectedPlayer return &lt;PlayerDetail /&gt;</code>).</li>
+<li><strong>Reusable pure-presentation components</strong> with no
+business logic.</li>
+</ul>
+</section>
+<section id="how-long-it-should-take" class="slide level2">
+<h2>How long it should take</h2>
+<ul>
+<li>30–45 min reading per lesson</li>
+<li>2–3 hours typing the code (lots of files, but each is short)</li>
+<li>~5 hours total</li>
+</ul>
+</section>
+<section id="what-youll-see-at-the-end" class="slide level2">
+<h2>What you’ll see at the end</h2>
+<p>After this chapter:</p>
+<ul>
+<li><strong>Matches tab</strong> with a round filter and cards for every
+match.</li>
+<li><strong>Predictions tab</strong> with a comparison matrix and a
+single-team card view.</li>
+<li><strong>Players tab</strong> with a 32-player grid and click-through
+to a deep detail view.</li>
+</ul>
+<p>Three of the five tabs fully working. Only Analytics (Chapter 6) and
+final polish remain.</p>
+</section>
+<section id="before-you-start" class="slide level2">
+<h2>Before you start</h2>
+<p>You should have:</p>
+<ul>
+<li>Chapter 4 complete: orchestrator + state + tab nav.</li>
+<li>All five tabs at least stubbed.</li>
+<li>The Standings tab fully working.</li>
+</ul>
+<p>Open <strong><a
+href="./01-when-to-split-components.md">01-when-to-split-components.md</a></strong>.</p>
+</section></section>
+<section>
+<section id="chapter-5-lesson-1-when-to-split-a-component"
+class="title-slide slide level1">
+<h1>Chapter 5 · Lesson 1 — When to Split a Component</h1>
+<blockquote>
+<p><em>Goal: develop the senior judgement of when JSX deserves its own
+component file. Two extremes are wrong; the middle is craft.</em></p>
+</blockquote>
+</section>
+<section id="the-two-failure-modes" class="slide level2">
+<h2>The two failure modes</h2>
+<p>Beginners fail in opposite ways:</p>
+<p><strong>Failure mode 1 — the giant component.</strong> Everything in
+one file. 800 lines. One <code>return</code> statement that wraps a
+hero, a nav, three tabs, a footer, all inline. Hard to read, hard to
+test, hard to find anything.</p>
+<p><strong>Failure mode 2 — over-extraction.</strong> Every
+<code>&lt;div&gt;</code> is its own component.
+<code>&lt;TeamNameLabel&gt;</code>,
+<code>&lt;TeamNameLabelInner&gt;</code>,
+<code>&lt;TeamNameLabelInnerSpan&gt;</code>. Hard to read for the
+opposite reason — every variable name is a click-through to another
+file.</p>
+<p>Senior engineers live in the middle. <strong>Split when splitting
+buys you something.</strong> Don’t split for splitting’s sake.</p>
+</section>
+<section id="the-three-real-reasons-to-split" class="slide level2">
+<h2>The three real reasons to split</h2>
+<p>Every legitimate component extraction passes one of these tests:</p>
+<h3 id="test-1-the-copy-paste-test">Test 1: The copy-paste test</h3>
+<p>If you’re about to copy a chunk of JSX with minor variations,
+<strong>extract first</strong>.</p>
+<p>Example from our codebase, inside
+<code>&lt;MatchPickAnalysis&gt;</code>:</p>
+<pre class="tsx"><code>&lt;div&gt;
+  &lt;div&gt;BACKED {playerName.toUpperCase()}&lt;/div&gt;
+  {teamsBackedThis.map(t =&gt; &lt;TeamChip team={t} ptsEarned={ptsForPicker} /&gt;)}
+&lt;/div&gt;
+&lt;div&gt;
+  &lt;div&gt;BACKED {opponent.toUpperCase()}&lt;/div&gt;
+  {teamsBackedOpponent.map(t =&gt; &lt;TeamChip team={t} ptsEarned={ptsForOpponentPicker} /&gt;)}
+&lt;/div&gt;</code></pre>
+<p>The two <code>&lt;TeamChip&gt;</code> map calls are <strong>identical
+structure</strong>, only the input list and the points value differ. If
+<code>&lt;TeamChip&gt;</code> were inlined as 20 lines of JSX,
+copy-pasting it twice would smell. Extracted, both call sites are one
+line.</p>
+<p>The rule: <strong>if you’re about to copy-paste 10+ lines of JSX,
+extract first.</strong></p>
+<h3 id="test-2-the-what-vs-how-test">Test 2: The “what vs how” test</h3>
+<p>If a chunk of JSX is conceptually about <em>one specific thing</em>
+and the rest of the component is about <em>something else</em>, the
+chunk should be its own component.</p>
+<p>The parent says <strong>what</strong>
+(<code>&lt;PathStep label="QF" status="won" /&gt;</code>). The child
+knows <strong>how</strong> (which colors, which icon, which sizes for
+each status).</p>
+<p>Example: the tournament path indicator at the top of
+<code>&lt;PlayerDetail&gt;</code>:</p>
+<pre class="tsx"><code>&lt;PathStep label=&quot;R1&quot; status={r1Won ? &#39;won&#39; : &#39;lost&#39;} /&gt;
+&lt;PathArrow /&gt;
+&lt;PathStep label=&quot;R2&quot; status={r2Won ? &#39;won&#39; : &#39;lost&#39;} /&gt;
+&lt;PathArrow /&gt;
+&lt;PathStep label=&quot;QF&quot; status={qfFinished ? (qfWon ? &#39;won&#39; : &#39;lost&#39;) : &#39;live&#39;} /&gt;
+&lt;PathArrow /&gt;
+&lt;PathStep label=&quot;SF&quot; status={...} /&gt;
+&lt;PathArrow /&gt;
+&lt;PathStep label=&quot;F&quot;  status={...} /&gt;</code></pre>
+<p>Imagine inlining this. Each <code>&lt;PathStep&gt;</code> is ~20
+lines of JSX (status colors, icon, padding, border). Multiplied by 5 =
+100 lines. Plus 4 inline <code>&lt;PathArrow&gt;</code> spans. The
+parent component would lose all sense of its <strong>own</strong>
+structure under the weight of the path-rendering code.</p>
+<p>Extracted, the parent reads like a sentence: <em>“step, arrow, step,
+arrow, step.”</em> That clarity is the win. <strong>The component name
+is documentation.</strong></p>
+<h3 id="test-3-the-reusability-test">Test 3: The reusability test</h3>
+<p>If a chunk of JSX will be used in 2+ places (now or soon), it
+deserves its own component.</p>
+<p><code>&lt;StatCard&gt;</code> from Chapter 3 is used 3 times in the
+standings (Leader, Matches, Avg Score). It’s used again in
+<code>&lt;PlayerDetail&gt;</code> for per-player stats. <strong>Four
+uses. Obvious extraction.</strong></p>
+<p>But: don’t pre-extract for <em>hypothetical</em> reuse. Wait until
+you have the second use case. Premature extraction often picks the wrong
+abstraction; you end up retro-fitting the component to the second use
+case and making it worse for both.</p>
+<blockquote>
+<p><strong>Rule of three.</strong> Some authors say: extract on the
+third use. The first time you write something, write it. The second
+time, copy-paste and feel a small pang of guilt. The third time,
+extract. By then you understand the abstraction well enough to design it
+right.</p>
+</blockquote>
+<p>For our codebase, we extract on the <strong>second</strong> use
+because the codebase is small and TypeScript catches misuse. For larger
+projects, three is fine.</p>
+</section>
+<section id="the-case-for-tiny-components" class="slide level2">
+<h2>The case for tiny components</h2>
+<p><code>&lt;PathArrow&gt;</code> is <strong>one character</strong>:</p>
+<pre class="tsx"><code>export default function PathArrow() {
+  return (
+    &lt;span style={{ color: &#39;rgba(255,255,255,0.45)&#39;, fontSize: 18, fontWeight: 700 }}&gt;→&lt;/span&gt;
+  );
+}</code></pre>
+<p>It has no props. It does no logic. It’s just a styled <code>→</code>.
+Why is it a component?</p>
+<p>Because <strong>the parent’s JSX reads like a sentence with
+it</strong>:</p>
+<pre class="tsx"><code>&lt;PathStep label=&quot;R1&quot; status=&quot;won&quot; /&gt;
+&lt;PathArrow /&gt;
+&lt;PathStep label=&quot;R2&quot; status=&quot;won&quot; /&gt;
+&lt;PathArrow /&gt;
+&lt;PathStep label=&quot;QF&quot; status=&quot;lost&quot; /&gt;</code></pre>
+<p>Inlined, the same code:</p>
+<pre class="tsx"><code>&lt;PathStep label=&quot;R1&quot; status=&quot;won&quot; /&gt;
+&lt;span style={{ color: &#39;rgba(255,255,255,0.45)&#39;, fontSize: 18, fontWeight: 700 }}&gt;→&lt;/span&gt;
+&lt;PathStep label=&quot;R2&quot; status=&quot;won&quot; /&gt;
+&lt;span style={{ color: &#39;rgba(255,255,255,0.45)&#39;, fontSize: 18, fontWeight: 700 }}&gt;→&lt;/span&gt;
+&lt;PathStep label=&quot;QF&quot; status=&quot;lost&quot; /&gt;</code></pre>
+<p>The reader’s eye loses the structure under the styled spans. The
+component <strong>names the visual unit</strong> and lets the structure
+breathe.</p>
+<p>Tiny components like this aren’t about reuse or DRY — they’re about
+<strong>readability of the parent</strong>. The parent component is the
+customer; the tiny component serves it.</p>
+</section>
+<section id="when-not-to-split" class="slide level2">
+<h2>When NOT to split</h2>
+<p>Three signals that an extraction is wrong:</p>
+<h3 id="signal-1-the-component-takes-too-many-props.">Signal 1: The
+component takes too many props.</h3>
+<pre class="tsx"><code>// Smell — 8 props is too many
+&lt;TeamRow
+  rank={i + 1}
+  name={team.name}
+  icon={team.icon}
+  total={team.scores.total}
+  r1={team.scores.r1}
+  r2={team.scores.r2}
+  finalPick={team.final}
+  isLeader={i === 0}
+/&gt;</code></pre>
+<p>Eight props mean the abstraction isn’t right. Either:</p>
+<ul>
+<li>The component should just accept the whole <code>team</code> object:
+<code>&lt;TeamRow team={team} rank={i+1} /&gt;</code>. That hides the
+data shape behind one prop.</li>
+<li>The component is doing too many jobs and should be split into
+smaller ones.</li>
+</ul>
+<p>In our codebase, components rarely have more than 4–5 props.
+<strong>5 props is the warning line.</strong> 8+ is “rethink this.”</p>
+<h3
+id="signal-2-the-component-has-logic-that-depends-on-its-parents-context.">Signal
+2: The component has logic that depends on its parent’s context.</h3>
+<pre class="tsx"><code>function TeamRow({ team, parentTabState, parentSelectedTeam, parentSetters }) {
+  // ...
+}</code></pre>
+<p>If a child component accepts a bag of “parent state” as a prop, it’s
+leaking the parent’s internals into the child. Either lift the
+<strong>logic</strong> to the parent (and pass primitives down), or
+restructure so the child genuinely only needs primitives.</p>
+<h3 id="signal-3-extraction-makes-the-parent-harder-to-read.">Signal 3:
+Extraction makes the parent harder to read.</h3>
+<pre class="tsx"><code>&lt;TeamSection&gt;
+  &lt;TeamSectionHeader&gt;
+    &lt;TeamSectionHeaderTitle&gt;{title}&lt;/TeamSectionHeaderTitle&gt;
+  &lt;/TeamSectionHeader&gt;
+  &lt;TeamSectionBody&gt;...&lt;/TeamSectionBody&gt;
+&lt;/TeamSection&gt;</code></pre>
+<p>Five layers of components for what could be a single
+<code>&lt;section&gt;</code> with two <code>&lt;div&gt;</code>s.
+<strong>Don’t introduce abstractions you can’t justify.</strong></p>
+<p>If extraction makes the parent component longer and the new file
+barely justifies its own existence, undo the extraction.</p>
+</section>
+<section id="the-composition-pattern-parent-says-what-child-knows-how"
+class="slide level2">
+<h2>The composition pattern: parent says what, child knows how</h2>
+<p>This is the central pattern of React composition:</p>
+<ul>
+<li><strong>Parent components</strong> are about <strong>layout and
+orchestration</strong>. They render lists, switch between views, decide
+which children show up. Their JSX is structural.</li>
+<li><strong>Child components</strong> are about <strong>rendering one
+thing well</strong>. They take props, return JSX, don’t know about the
+parent.</li>
+</ul>
+<p>The classic test: can you delete the child component file and copy
+its JSX back inline, without touching the parent’s logic? If yes, the
+split is clean. If you have to drag parent state down with you, the
+split was leaky.</p>
+</section>
+<section id="walkthrough-extracting-teamchip" class="slide level2">
+<h2>Walkthrough: extracting <code>&lt;TeamChip&gt;</code></h2>
+<p>Let’s see this in action. Inside
+<code>&lt;MatchPickAnalysis&gt;</code> you have 8 team chips per match —
+16 if you count both sides. The chip looks like:</p>
+<pre class="tsx"><code>&lt;div style={{
+  background: &#39;#FFFFFF&#39;,
+  borderRadius: 8,
+  padding: &#39;8px 12px&#39;,
+  display: &#39;flex&#39;,
+  alignItems: &#39;center&#39;,
+  gap: 10,
+  border: `2px solid ${team.accent}66`,
+  boxShadow: `0 2px 6px ${team.accent}20`,
+}}&gt;
+  &lt;div style={{ fontSize: 22 }}&gt;{team.icon}&lt;/div&gt;
+  &lt;div style={{ flex: 1, fontWeight: 700, color: &#39;#1F2937&#39;, fontSize: 14 }}&gt;{team.name}&lt;/div&gt;
+  {ptsEarned !== null &amp;&amp; (
+    &lt;div style={{
+      background: ptsEarned === 3 ? &#39;#16A34A&#39; : &#39;#92400E&#39;,
+      color: &#39;#FFFFFF&#39;,
+      padding: &#39;3px 10px&#39;,
+      borderRadius: 6,
+      fontSize: 12,
+      fontWeight: 800,
+    }}&gt;
+      +{ptsEarned}
+    &lt;/div&gt;
+  )}
+&lt;/div&gt;</code></pre>
+<p>15 lines. Used 16+ times per match. Extract:</p>
+<pre class="tsx"><code>// components/players/TeamChip.tsx
+import type { Team } from &#39;@/lib/types&#39;;
+
+interface TeamChipProps {
+  team: Team;
+  ptsEarned: number | null;
+}
+
+export default function TeamChip({ team, ptsEarned }: TeamChipProps) {
+  return (
+    &lt;div style={{ /* 5 styles */ }}&gt;
+      &lt;div&gt;{team.icon}&lt;/div&gt;
+      &lt;div&gt;{team.name}&lt;/div&gt;
+      {ptsEarned !== null &amp;&amp; (
+        &lt;div style={{ background: ptsEarned === 3 ? &#39;#16A34A&#39; : &#39;#92400E&#39;, /* ... */ }}&gt;
+          +{ptsEarned}
+        &lt;/div&gt;
+      )}
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>The parent’s call site is now one line:</p>
+<pre class="tsx"><code>{teamsBackedThis.map(t =&gt; &lt;TeamChip key={t.name} team={t} ptsEarned={ptsForPicker} /&gt;)}</code></pre>
+<p>Cleaner. Reusable. The parent is shorter. The chip has a name.
+<strong>All three benefits at once — that’s a good
+extraction.</strong></p>
+</section>
+<section id="walkthrough-when-not-to-extract-twocolumnlayout"
+class="slide level2">
+<h2>Walkthrough: when NOT to extract
+<code>&lt;TwoColumnLayout&gt;</code></h2>
+<p>Inside <code>&lt;MatchPickAnalysis&gt;</code>, the layout is:</p>
+<pre class="tsx"><code>&lt;div style={{ display: &#39;grid&#39;, gridTemplateColumns: &#39;1fr 1fr&#39;, gap: 16 }}&gt;
+  &lt;div&gt;...left column with chips...&lt;/div&gt;
+  &lt;div&gt;...right column with chips...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<p>Could we extract <code>&lt;TwoColumnLayout&gt;</code>?</p>
+<pre class="tsx"><code>&lt;TwoColumnLayout&gt;
+  &lt;div&gt;...left column...&lt;/div&gt;
+  &lt;div&gt;...right column...&lt;/div&gt;
+&lt;/TwoColumnLayout&gt;</code></pre>
+<p>Maybe. But:</p>
+<ul>
+<li>It’s used <strong>once</strong> in this codebase. <strong>Rule of
+three</strong> says wait.</li>
+<li>The grid template is 4 lines of CSS. Saving 4 lines isn’t worth a
+new file.</li>
+<li>The name is generic — <code>TwoColumnLayout</code> is at the wrong
+level of abstraction (CSS), not domain (snooker fantasy).</li>
+</ul>
+<p>So we <strong>don’t</strong> extract. The CSS stays inline.
+<strong>Discipline of saying no.</strong></p>
+</section>
+<section id="the-children-prop-the-most-underused-react-feature"
+class="slide level2">
+<h2>The <code>children</code> prop — the most underused React
+feature</h2>
+<p>When you DO extract a layout component, you use the
+<code>children</code> prop:</p>
+<pre class="tsx"><code>function Card({ children, accent }: { children: React.ReactNode; accent: string }) {
+  return (
+    &lt;div style={{ borderLeft: `4px solid ${accent}`, padding: 16, background: &#39;#FFF&#39; }}&gt;
+      {children}
+    &lt;/div&gt;
+  );
+}
+
+// Usage:
+&lt;Card accent=&quot;#0F5132&quot;&gt;
+  &lt;h3&gt;Round 1 Picks&lt;/h3&gt;
+  &lt;PicksList details={...} /&gt;
+&lt;/Card&gt;</code></pre>
+<p>The <code>children</code> prop receives whatever JSX is between the
+opening and closing tags. Type it as <code>React.ReactNode</code> (the
+most permissive React type — accepts elements, strings, numbers, arrays,
+null, undefined, fragments).</p>
+<p><strong>Why this matters:</strong> <code>children</code> lets you
+build <strong>layout components</strong> that don’t care what’s inside
+them. The parent describes the contents; the layout component just wraps
+them.</p>
+<p>In our codebase, <code>&lt;ChartCard&gt;</code> (which we’ll see in
+Chapter 6) uses <code>children</code> exactly this way:</p>
+<pre class="tsx"><code>&lt;ChartCard title=&quot;Points Breakdown&quot; subtitle=&quot;...&quot;&gt;
+  &lt;ResponsiveContainer width=&quot;100%&quot; height={360}&gt;
+    &lt;BarChart&gt;...&lt;/BarChart&gt;
+  &lt;/ResponsiveContainer&gt;
+&lt;/ChartCard&gt;</code></pre>
+<p>The card knows about title and subtitle. The chart inside is whatever
+the parent passes. <strong>Layout-vs-content separation in five
+lines.</strong></p>
+</section>
+<section id="a-note-on-file-structure" class="slide level2">
+<h2>A note on file structure</h2>
+<p>In this codebase we organize by <strong>feature folder</strong>:</p>
+<pre><code>components/
+├── standings/   ← things only used in standings
+├── matches/     ← things only used in matches
+├── predictions/ ← things only used in predictions
+├── players/     ← things only used in players
+├── analytics/   ← things only used in analytics
+└── tabs/        ← the top-level tab containers</code></pre>
+<p>Alternative would be by <strong>type</strong>
+(<code>/components/charts</code>, <code>/components/cards</code>,
+<code>/components/buttons</code>). For small apps, by-type works. For
+anything with more than ~20 components, <strong>by-feature</strong>
+scales better — you can find everything related to “the standings page”
+by opening one folder.</p>
+<p>The <code>tabs/</code> folder is the exception; it’s where the
+top-level tab containers live, since they don’t fit cleanly into one
+feature folder. They’re more like “feature entry points.”</p>
+<p>This is interview gold too: <em>“How do you organize React
+components?”</em> Answer: <em>“By feature, not by type. Each folder owns
+the leaf components for that feature, plus a top-level tab/page
+container.”</em></p>
+</section>
+<section id="vibe-prompt-you-would-have-used" class="slide level2">
+<h2>Vibe prompt you would have used</h2>
+<blockquote>
+<p><em>“This <code>&lt;MatchPickAnalysis&gt;</code> component is getting
+long. Extract two pieces. (1) The colored pill showing a team’s icon +
+name + points-earned chip — call it <code>&lt;TeamChip&gt;</code>, props
+<code>{ team: Team, ptsEarned: number | null }</code>. (2) The small
+status step in the tournament-path bar — call it
+<code>&lt;PathStep&gt;</code>, props
+<code>{ label: string, status: 'won' | 'lost' | 'live' | 'na' }</code>,
+each mapping to colors and icon (✓ ✗ ● —). Also extract the literal
+<code>→</code> arrow into a one-line <code>&lt;PathArrow&gt;</code> so
+the path JSX reads like ‘step arrow step arrow step’. <strong>Don’t
+change any visuals — just move the JSX into the new files and import
+them back.</strong>”</em></p>
+</blockquote>
+<p>That last sentence is the magic. Without it, the LLM “improves” the
+styling while moving the JSX, and the visual diff between before and
+after is bigger than expected. <strong>“Don’t change visuals — just move
+JSX”</strong> is what turns a refactor back into a refactor.</p>
+</section>
+<section id="check-yourself" class="slide level2">
+<h2>CHECK YOURSELF</h2>
+<ol type="1">
+<li><strong><code>&lt;PathArrow&gt;</code> is a single styled span.
+What’s the argument FOR keeping it as a component instead of
+inlining?</strong></li>
+<li><strong>Why doesn’t <code>&lt;MatchPickAnalysis&gt;</code> extract
+the two-column layout into its own component?</strong> What three things
+would have to be true to justify it?</li>
+<li><strong>A teammate proposes <code>&lt;TeamSection&gt;</code>
+containing <code>&lt;TeamSectionHeader&gt;</code> containing
+<code>&lt;TeamSectionTitle&gt;</code>. What questions do you
+ask?</strong> What would the smell be?</li>
+<li><strong>You see a 5-prop component:
+<code>&lt;Foo a b c d e /&gt;</code>. Is that automatically too
+many?</strong> When is it fine?</li>
+<li><strong>Open <code>components/players/PlayerDetail.tsx</code>. List
+every component it imports.</strong> For each, classify: copy-paste
+rule, what-vs-how rule, reusability rule, or readability rule.</li>
+</ol>
+<p>When you’ve answered these, head to <strong><a
+href="./02-prop-drilling-vs-context.md">02-prop-drilling-vs-context.md</a></strong>.</p>
+</section></section>
+<section>
+<section id="chapter-5-lesson-2-prop-drilling-vs-context"
+class="title-slide slide level1">
+<h1>Chapter 5 · Lesson 2 — Prop Drilling vs Context</h1>
+<blockquote>
+<p><em>Goal: stop being scared of prop drilling. By the end of this
+lesson you can defend prop drilling in interviews, recognize when
+Context is genuinely the right tool, and know why most internet advice
+on this topic is overcooked.</em></p>
+</blockquote>
+</section>
+<section id="what-is-prop-drilling" class="slide level2">
+<h2>What is “prop drilling”?</h2>
+<p>When the orchestrator at the top of the tree has data that a
+component three levels deep needs, you “drill” the data through every
+level in between:</p>
+<pre><code>&lt;SnookerFantasyLeague&gt;
+  └── &lt;PlayersTab teams={teams}&gt;           ← receives teams (level 1)
+        └── &lt;PlayerDetail teams={teams}&gt;   ← receives teams (level 2)
+              └── &lt;MatchPickAnalysis teams={teams}&gt;   ← receives teams (level 3, finally uses)</code></pre>
+<p>The middle components don’t <em>use</em> <code>teams</code>
+themselves — they just pass it through. That feels wasteful. It feels
+like ceremony. Beginners hate it.</p>
+<p><strong>It’s also fine.</strong> Three levels of explicit prop
+passing is one of the most readable patterns in React.</p>
+</section>
+<section id="the-internets-bad-advice" class="slide level2">
+<h2>The internet’s bad advice</h2>
+<p>Search “prop drilling” and you’ll find articles screaming <em>“avoid
+prop drilling at all costs! Use Context!”</em> This is wrong for most
+apps.</p>
+<p>The reason it’s wrong: <strong>the alternative — Context — has costs
+the articles never mention</strong>. Specifically:</p>
+<ol type="1">
+<li><strong>Context hides data flow.</strong> With drilling you can
+<code>Cmd+F "teams"</code> and see exactly where it goes. With Context,
+you can’t — <code>useContext(TeamsContext)</code> could be called from
+anywhere.</li>
+<li><strong>Context’s default behavior is to re-render every consumer
+when the value changes.</strong> Even if a particular consumer doesn’t
+care about the part that changed.</li>
+<li><strong>Context requires a Provider somewhere up the tree.</strong>
+That’s a setup tax, plus a “what if the Provider is missing?” test
+surface.</li>
+<li><strong>Context is contagious.</strong> Once you start using it for
+one piece of data, it’s tempting to put everything in Context and end up
+with a global mess.</li>
+</ol>
+<p>For 3-level drilling, <strong>the costs of Context exceed the costs
+of drilling</strong>. For 8-level drilling, maybe Context wins. Always
+ask: “what specifically am I trying to avoid?”</p>
+</section>
+<section id="when-prop-drilling-is-fine-most-of-the-time"
+class="slide level2">
+<h2>When prop drilling is fine (most of the time)</h2>
+<p>The honest answer: <strong>prop drilling is fine until it’s
+painful</strong>, and “painful” usually means more than 4–5 levels.</p>
+<p>Symptoms of “actually too much drilling”:</p>
+<ul>
+<li>A component takes a prop and passes it unchanged to literally one
+child, and that’s its only purpose.</li>
+<li>You’re passing the same prop through 6+ component levels.</li>
+<li>Adding a new piece of data requires editing 7 files just to thread
+it through.</li>
+<li>You’re naming intermediate props things like
+<code>passThroughTeams</code> because “teams” already means something
+else at the intermediate level.</li>
+</ul>
+<p>Until you hit those symptoms, <strong>drill happily</strong>. It’s
+explicit, debuggable, type-checked, and refactor-friendly.</p>
+</section>
+<section id="in-our-codebase" class="slide level2">
+<h2>In our codebase</h2>
+<p>Maximum drilling depth in this codebase is <strong>3
+levels</strong>:</p>
+<pre><code>&lt;SnookerFantasyLeague&gt;            (level 0)
+  └── &lt;PlayersTab teams={...}&gt;    (level 1)
+        └── &lt;PlayerDetail&gt;         (level 2)
+              └── &lt;MatchPickAnalysis teams={...}&gt;   (level 3, uses)</code></pre>
+<p>Three levels of <code>teams</code>. Each component in between either
+uses it or passes it. Total cognitive cost: nearly zero. We do not need
+Context.</p>
+</section>
+<section id="why-we-dont-use-context-for-teams" class="slide level2">
+<h2>Why we DON’T use Context for <code>teams</code></h2>
+<p>Let’s pretend we did. Context-based version:</p>
+<pre class="tsx"><code>// Set up Context at the orchestrator
+const TeamsContext = createContext&lt;TeamWithScores[]&gt;([]);
+
+function SnookerFantasyLeague() {
+  const teamsWithScores = useMemo(...);
+  return (
+    &lt;TeamsContext.Provider value={teamsWithScores}&gt;
+      &lt;PlayersTab /&gt;
+    &lt;/TeamsContext.Provider&gt;
+  );
+}
+
+// Consume in MatchPickAnalysis
+function MatchPickAnalysis() {
+  const teams = useContext(TeamsContext);
+  // ...
+}</code></pre>
+<p>Pros: <code>&lt;PlayersTab&gt;</code> and
+<code>&lt;PlayerDetail&gt;</code> don’t have a <code>teams</code> prop
+in their signatures.</p>
+<p>Cons:</p>
+<ul>
+<li>A new file (<code>contexts/TeamsContext.tsx</code>) with a Provider
+definition and a hook.</li>
+<li>The Provider somewhere in the tree.</li>
+<li>Slightly more cognitive load — readers have to know that
+<code>&lt;MatchPickAnalysis&gt;</code> is not self-contained; it depends
+on a Provider being present.</li>
+<li>Testing <code>&lt;MatchPickAnalysis&gt;</code> in isolation requires
+wrapping it in a Provider.</li>
+<li>If we accidentally render <code>&lt;MatchPickAnalysis&gt;</code>
+outside the Provider, we get the default value (<code>[]</code>) and
+silent rendering bugs.</li>
+</ul>
+<p>For 3 levels and one piece of data, <strong>the drilled version is
+just better</strong>. Three levels of <code>teams</code> props is more
+readable than the Context version.</p>
+</section>
+<section id="when-context-is-the-right-answer" class="slide level2">
+<h2>When Context IS the right answer</h2>
+<p>Context excels at <strong>cross-cutting concerns</strong> — data
+that’s needed by many components at unrelated parts of the tree. Three
+real cases:</p>
+<h3 id="theme">1. Theme</h3>
+<pre class="tsx"><code>const ThemeContext = createContext&lt;&#39;light&#39; | &#39;dark&#39;&gt;(&#39;light&#39;);</code></pre>
+<p>Theme is consumed by <strong>every</strong> component (or close to
+it). Drilling theme through 50 components would be misery. Context is
+the right call.</p>
+<h3 id="authenticated-user">2. Authenticated user</h3>
+<pre class="tsx"><code>const UserContext = createContext&lt;User | null&gt;(null);</code></pre>
+<p>Many components need to know who’s logged in: header (show name), nav
+(show admin links), forms (pre-fill email), etc. The set of consumers is
+broad and unrelated. <strong>Drilling user through everything is misery;
+Context wins.</strong></p>
+<h3 id="locale-i18n">3. Locale / i18n</h3>
+<pre class="tsx"><code>const LocaleContext = createContext&lt;Locale&gt;(&#39;en&#39;);</code></pre>
+<p>Same logic. Every translated string needs the locale; drilling it
+would be ridiculous.</p>
+<h3 id="what-these-have-in-common">What these have in common</h3>
+<ul>
+<li>Used by <strong>many</strong> components scattered across the
+tree.</li>
+<li>The data is <strong>stable</strong> (it doesn’t change every
+interaction).</li>
+<li>The consumers are <strong>disparate</strong> — they don’t share a
+parent above the orchestrator.</li>
+</ul>
+<p>Compare to <code>teams</code> in our app:</p>
+<ul>
+<li>Used by <strong>3</strong> components in a single sub-tree
+(Players).</li>
+<li>Computed once and stable.</li>
+<li>All consumers are in one feature folder.</li>
+</ul>
+<p><code>teams</code> doesn’t qualify. <code>theme</code>,
+<code>user</code>, <code>locale</code> do.</p>
+</section>
+<section id="contexts-performance-footgun" class="slide level2">
+<h2>Context’s performance footgun</h2>
+<p>Even when Context is the right architectural choice, it has a
+<strong>performance</strong> trap.</p>
+<pre class="tsx"><code>const TeamsContext = createContext({ teams: [], filter: &#39;&#39;, setFilter: () =&gt; {} });</code></pre>
+<p>When you put multiple unrelated values in one Context, <strong>every
+consumer re-renders when ANY of them changes</strong>. If
+<code>setFilter</code> is called, components that only read
+<code>teams</code> re-render too.</p>
+<p>The fix is <strong>splitting Context</strong> into smaller,
+single-purpose contexts:</p>
+<pre class="tsx"><code>const TeamsContext = createContext&lt;TeamWithScores[]&gt;([]);
+const FilterContext = createContext&lt;{ filter: string; setFilter: (s: string) =&gt; void }&gt;(...);</code></pre>
+<p>Or using <strong>separate read and write contexts</strong>:</p>
+<pre class="tsx"><code>const TeamsContext = createContext&lt;TeamWithScores[]&gt;([]);
+const TeamsActionsContext = createContext&lt;{ setSelectedTeam: (...) =&gt; void }&gt;(...);</code></pre>
+<p>These are real production patterns. <strong>If you reach for Context,
+plan for splitting it.</strong></p>
+</section>
+<section id="what-about-zustand-jotai-and-friends" class="slide level2">
+<h2>What about Zustand, Jotai, and friends?</h2>
+<p>If Context is “too much” but drilling is “too painful,” there’s a
+middle layer: <strong>lightweight state libraries</strong>. The two
+leading options in 2026:</p>
+<h3 id="zustand">Zustand</h3>
+<pre class="tsx"><code>import { create } from &#39;zustand&#39;;
+
+const useStore = create&lt;{ teams: TeamWithScores[]; setTeams: (t: TeamWithScores[]) =&gt; void }&gt;(set =&gt; ({
+  teams: [],
+  setTeams: (teams) =&gt; set({ teams }),
+}));
+
+// Anywhere in the app:
+function MatchPickAnalysis() {
+  const teams = useStore(s =&gt; s.teams);
+  // ...
+}</code></pre>
+<p>About 1 KB of code. No Provider required. Components subscribe to
+slices of state. Re-renders are tracked per-slice. <strong>The selector
+pattern (<code>s =&gt; s.teams</code>) is the killer feature</strong> —
+it ensures only components that read changed data re-render.</p>
+<p>When to use: more shared state than <code>useState</code> can
+comfortably handle, less than would justify Redux. <strong>Most
+production apps these days.</strong></p>
+<h3 id="jotai">Jotai</h3>
+<pre class="tsx"><code>import { atom, useAtom } from &#39;jotai&#39;;
+
+const teamsAtom = atom&lt;TeamWithScores[]&gt;([]);
+
+function MatchPickAnalysis() {
+  const [teams] = useAtom(teamsAtom);
+  // ...
+}</code></pre>
+<p>Similar scope, different mental model. State is decomposed into
+“atoms”; components subscribe to specific atoms. Computed atoms can
+derive from others. <strong>Smaller, more compositional, slightly more
+learning curve.</strong></p>
+<h3 id="redux">Redux</h3>
+<p>The classic. <strong>Boilerplate-heavy.</strong> Modern Redux Toolkit
+(RTK) makes it bearable, but for new projects in 2026, you reach for it
+only when you genuinely need:</p>
+<ul>
+<li>Time-travel debugging.</li>
+<li>Action logging / replay.</li>
+<li>Middleware (e.g. observability hooks).</li>
+<li>Strict, auditable state transitions.</li>
+</ul>
+<p>For 95% of apps, Zustand or Jotai is enough.</p>
+<blockquote>
+<p><strong>Interview answer:</strong> <em>“For small apps, useState in
+the parent. Past that, Zustand for most cases — small, no Provider,
+selector pattern. Context for cross-cutting concerns only (theme, auth,
+locale). Redux only when you need its specific features (time-travel,
+middleware, action replay).”</em></p>
+</blockquote>
+</section>
+<section id="the-senior-decision-tree" class="slide level2">
+<h2>The senior decision tree</h2>
+<p>When considering “where should this state live?”:</p>
+<pre><code>Is this state used by ONE component?
+├── Yes → useState inside that component.
+└── No → continue.
+
+Is it used by 2-3 nearby components (sibling-ish)?
+├── Yes → Lift to common ancestor; prop drill.
+└── No → continue.
+
+Is it cross-cutting (theme, auth, locale)?
+├── Yes → Context.
+└── No → continue.
+
+Is it medium-shared and changes often?
+├── Yes → Zustand or Jotai.
+└── No → continue.
+
+Do you need time-travel debugging or middleware?
+├── Yes → Redux.
+└── No → reconsider — you may have over-thought it.</code></pre>
+<p>That tree gets you the right answer 95% of the time. Memorize it.</p>
+</section>
+<section id="a-real-world-context-the-dark-mode-example"
+class="slide level2">
+<h2>A real-world Context: the dark mode example</h2>
+<p>Pretend our app had dark mode. The implementation would look
+like:</p>
+<pre class="tsx"><code>// contexts/ThemeContext.tsx
+&#39;use client&#39;;
+import { createContext, useContext, useState } from &#39;react&#39;;
+
+type Theme = &#39;light&#39; | &#39;dark&#39;;
+
+interface ThemeContextValue {
+  theme: Theme;
+  toggle: () =&gt; void;
+}
+
+const ThemeContext = createContext&lt;ThemeContextValue | null&gt;(null);
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState&lt;Theme&gt;(&#39;light&#39;);
+  const toggle = () =&gt; setTheme(t =&gt; t === &#39;light&#39; ? &#39;dark&#39; : &#39;light&#39;);
+  return (
+    &lt;ThemeContext.Provider value={{ theme, toggle }}&gt;
+      {children}
+    &lt;/ThemeContext.Provider&gt;
+  );
+}
+
+export function useTheme() {
+  const ctx = useContext(ThemeContext);
+  if (!ctx) throw new Error(&#39;useTheme must be used inside ThemeProvider&#39;);
+  return ctx;
+}</code></pre>
+<p>Three things to call out:</p>
+<h3 id="the-create-provider-custom-hook-trio">The “create + Provider +
+custom hook” trio</h3>
+<p>Every Context in production code follows this pattern:</p>
+<ol type="1">
+<li><code>createContext</code> — defines the shape.</li>
+<li>A <code>Provider</code> component that owns the state.</li>
+<li>A custom hook (<code>useTheme</code>) that calls
+<code>useContext</code> AND throws if no Provider is present.</li>
+</ol>
+<p>The custom hook is the small but huge insight. Without it, every
+consumer writes <code>useContext(ThemeContext)</code> directly and
+silently gets the default value if no Provider wraps them. With the
+hook, missing Provider throws a clear error.</p>
+<h3 id="default-value-null-assertion-in-the-hook">Default value
+<code>null</code> + assertion in the hook</h3>
+<pre class="tsx"><code>const ThemeContext = createContext&lt;ThemeContextValue | null&gt;(null);
+
+export function useTheme() {
+  const ctx = useContext(ThemeContext);
+  if (!ctx) throw new Error(...);
+  return ctx;
+}</code></pre>
+<p>The default value is <code>null</code>, which is invalid. The custom
+hook narrows the return type to <code>ThemeContextValue</code>
+(non-null) by throwing if it’s null. <strong>This means consumers don’t
+have to handle null themselves</strong> — the hook guarantees a real
+value or fails loudly.</p>
+<h3 id="the-provider-pattern">The Provider pattern</h3>
+<pre class="tsx"><code>&lt;ThemeProvider&gt;
+  &lt;App /&gt;
+&lt;/ThemeProvider&gt;</code></pre>
+<p>The Provider wraps the app (or a sub-tree). Its <code>value</code>
+prop is what consumers receive. <strong>Wherever the Provider is in the
+tree, that’s the boundary</strong> — only descendants of the Provider
+can use the Context.</p>
+<p>Most apps put global Providers in <code>app/layout.tsx</code> or
+right after.</p>
+</section>
+<section id="what-we-do-use-thats-globalish" class="slide level2">
+<h2>What we DO use that’s “globalish”</h2>
+<p>Even though we don’t use Context, there are two pieces of “shared,
+app-wide” data in our codebase:</p>
+<h3 id="module-level-constants">Module-level constants</h3>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">// lib/teams.ts</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> TEAMS<span class="op">:</span> Team[] <span class="op">=</span> [<span class="op">...</span>]<span class="op">;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co">// lib/matches.ts</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> ROUND1_MATCHES<span class="op">:</span> Match[] <span class="op">=</span> [<span class="op">...</span>]<span class="op">;</span></span></code></pre></div>
+<p>These are just exported constants. Any file can import them. No React
+state, no Context. <strong>They’re “global” in the sense that they’re
+available everywhere, but they don’t change.</strong> That’s fine — it’s
+just imported data.</p>
+<p>For data that doesn’t change at runtime, <strong>module-level
+constants are the simplest possible “global state.”</strong> No hooks,
+no Providers, no library. Just
+<code>import { TEAMS } from '@/lib/teams'</code> and use it.</p>
+<h3 id="style-helper-functions">Style helper functions</h3>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">// lib/constants.ts</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">tabStyle</span>(active<span class="op">:</span> <span class="dt">boolean</span>)<span class="op">:</span> React<span class="op">.</span><span class="at">CSSProperties</span> { <span class="op">...</span> }</span></code></pre></div>
+<p>Same idea — a global helper, but it’s a pure function, not state.</p>
+<p>The senior takeaway: <strong>a lot of what beginners think needs to
+be “state” is actually just “imported data” or “imported
+helpers.”</strong> Don’t put data in state if it doesn’t change. Don’t
+put helpers in Context if they’re stateless.</p>
+</section>
+<section id="the-seven-level-drilling-test" class="slide level2">
+<h2>The seven-level drilling test</h2>
+<p>Here’s a thought experiment to know if you’ve drilled too far:</p>
+<blockquote>
+<p>Imagine you’re inserting a new component between an ancestor and a
+descendant. Do you have to add a <code>prop</code> to your new component
+just to thread something through that it doesn’t use?</p>
+</blockquote>
+<p>If the answer is “yes” and it’s the third time you’ve done it, you’re
+drilling too far. If the answer is “no” or “rarely,” drilling is
+fine.</p>
+<p>For our codebase, the answer is rarely. Inserting
+<code>&lt;MatchPickAnalysisCard&gt;</code> between
+<code>&lt;PlayerDetail&gt;</code> and
+<code>&lt;MatchPickAnalysis&gt;</code> would require passing
+<code>teams</code> through it. That’s once. Not enough to refactor.</p>
+</section>
+<section id="vibe-prompt-you-would-have-used-1" class="slide level2">
+<h2>Vibe prompt you would have used</h2>
+<blockquote>
+<p><em>“My app’s <code>teams</code> array is being prop-drilled three
+levels deep: orchestrator → tab → detail → match-analysis. A teammate
+suggests using Context to avoid drilling. Should I? Lay out the
+trade-offs honestly. Default to NOT using Context unless drilling is
+causing real pain.”</em></p>
+</blockquote>
+<p>The “default to NOT using Context” line is the trick. Without it the
+LLM will help you implement Context “for cleanliness” — and you’ll
+regret it.</p>
+</section>
+<section id="check-yourself-1" class="slide level2">
+<h2>CHECK YOURSELF</h2>
+<ol type="1">
+<li><strong>A friend says “you should use Context for <code>teams</code>
+to avoid prop drilling.” What questions do you ask before
+agreeing?</strong></li>
+<li><strong>What’s the difference between </strong>prop drilling** and
+<strong>passing a prop</strong>? When does the latter become the
+former?**</li>
+<li><strong>Why is the “create + Provider + custom hook” trio the
+standard pattern for Context?</strong> What does the custom hook protect
+against?</li>
+<li><strong>You’re building a settings page that needs the user’s theme,
+locale, and authenticated identity. Three Contexts or one?</strong>
+Justify.</li>
+<li><strong><code>TEAMS</code> is a module-level
+<code>export const</code>. It’s available everywhere in the app. So is
+it “global state”?</strong> Why or why not?</li>
+</ol>
+<p>When you’ve answered these, head to <strong><a
+href="./03-building-player-detail.md">03-building-player-detail.md</a></strong>
+— the case study.</p>
+</section></section>
+<section>
+<section id="chapter-5-lesson-3-building-playerdetail-case-study"
+class="title-slide slide level1">
+<h1>Chapter 5 · Lesson 3 — Building PlayerDetail (Case Study)</h1>
+<blockquote>
+<p><em>Goal: study a real, deeply nested feature view — the Players tab
+and its <code>&lt;PlayerDetail&gt;</code> drill-down — to see
+composition, prop drilling, conditional rendering, and back-and-forth
+navigation in action.</em></p>
+</blockquote>
+</section>
+<section id="the-problem" class="slide level2">
+<h2>The problem</h2>
+<p>The user clicks a player card from a 32-player grid. They land on a
+deep “player detail” view: the player’s tournament path (R1 → R2 → QF →
+SF → F won/lost/live), four stat tiles, and a per-match breakdown
+showing which fantasy teams backed them and earned what points. The
+opponent’s name in each match analysis is <strong>clickable</strong> —
+clicking it navigates to <em>that</em> player’s detail view.</p>
+<p>Now hit “Back” and you’re returned to the grid.</p>
+</section>
+<section id="the-component-tree" class="slide level2">
+<h2>The component tree</h2>
+<pre><code>&lt;PlayersTab teams&gt;
+├── if no player selected:
+│   └── grid of &lt;PlayerCard /&gt; (32 of them)
+└── if a player IS selected:
+    └── &lt;PlayerDetail playerName teams onBack onSelectPlayer&gt;
+        ├── header (gradient, name, status, path bar)
+        ├── grid of &lt;StatTile /&gt; (4 of them)
+        └── for each match the player appeared in:
+              &lt;MatchPickAnalysis analysis playerName onSelectPlayer&gt;
+              ├── header (round, players, outcome)
+              ├── BACKED &lt;playerName&gt; column
+              │   └── list of &lt;TeamChip team ptsEarned /&gt;
+              └── BACKED &lt;opponent&gt; column
+                  └── list of &lt;TeamChip team ptsEarned /&gt;</code></pre>
+<p>Six components, four levels of nesting. <strong>None of it more than
+~70 lines.</strong> Each component has one job.</p>
+</section>
+<section id="step-1-playerstab-and-the-conditional-render"
+class="slide level2">
+<h2>Step 1: PlayersTab and the conditional render</h2>
+<pre class="tsx"><code>&#39;use client&#39;;
+
+import { useState, useMemo } from &#39;react&#39;;
+import type { TeamWithScores } from &#39;@/lib/types&#39;;
+import { PLAYER_INFO } from &#39;@/lib/players&#39;;
+import { QF_MATCHES, SF_MATCHES, FINAL_MATCH } from &#39;@/lib/matches&#39;;
+import PlayerCard from &#39;../players/PlayerCard&#39;;
+import PlayerDetail from &#39;../players/PlayerDetail&#39;;
+
+interface PlayersTabProps {
+  teams: TeamWithScores[];
+}
+
+export default function PlayersTab({ teams }: PlayersTabProps) {
+  const [selectedPlayer, setSelectedPlayer] = useState&lt;string | null&gt;(null);
+
+  // ... (build allPlayers list, compute who&#39;s still in)
+
+  if (selectedPlayer) {
+    return (
+      &lt;PlayerDetail
+        playerName={selectedPlayer}
+        teams={teams}
+        onBack={() =&gt; setSelectedPlayer(null)}
+        onSelectPlayer={setSelectedPlayer}
+      /&gt;
+    );
+  }
+
+  // ... else render the grid
+  return (
+    &lt;div&gt;
+      {filtered.map(p =&gt; (
+        &lt;PlayerCard key={p.name} player={p} onClick={() =&gt; setSelectedPlayer(p.name)} /&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Two key ideas here.</p>
+<h3 id="local-state-for-the-detail-view">Local state for the detail
+view</h3>
+<pre class="tsx"><code>const [selectedPlayer, setSelectedPlayer] = useState&lt;string | null&gt;(null);</code></pre>
+<p><code>selectedPlayer</code> is local to
+<code>&lt;PlayersTab&gt;</code>. <strong>No other tab cares which player
+is open.</strong> So it doesn’t need to live at the orchestrator
+level.</p>
+<p>This is the <strong>lowest common ancestor</strong> rule from Chapter
+4 in action: the readers (PlayersTab, PlayerDetail, MatchPickAnalysis)
+and writers (PlayerCard click, opponent name click) all live inside the
+PlayersTab subtree. So state lives there.</p>
+<p>Compare with <code>selectedTeam</code> from Chapter 4 — that lives at
+the orchestrator because writers (Standings click) and readers
+(Predictions tab) span different sub-trees.</p>
+<h3 id="selected-by-name-not-by-object">Selected by name, not by
+object</h3>
+<pre class="tsx"><code>useState&lt;string | null&gt;(null);
+// ...
+onSelectPlayer={setSelectedPlayer}
+// passes a `string` (player name)</code></pre>
+<p>We store <strong>the player’s name</strong> (a string), not the full
+player object. Why?</p>
+<ul>
+<li><strong>Stability across re-renders.</strong> A string is primitive;
+React can compare it cheaply. An object reference would change if we
+ever re-derived the players list.</li>
+<li><strong>Simplicity.</strong> The detail view can look up its own
+player metadata from <code>PLAYER_INFO[playerName]</code> and the
+matches the player appeared in via <code>.find()</code> calls. No need
+to pass the whole object around.</li>
+<li><strong>Matches the data shape.</strong> <code>PLAYER_INFO</code> is
+keyed by name, so name-as-id is natural.</li>
+</ul>
+<p>The trade-off: the detail view does a few <code>.find()</code> calls
+to resolve the name into rich data. Microseconds. Worth the
+simplicity.</p>
+<h3 id="the-conditional-return">The conditional return</h3>
+<pre class="tsx"><code>if (selectedPlayer) {
+  return &lt;PlayerDetail ... /&gt;;
+}
+return &lt;div&gt;{/* grid */}&lt;/div&gt;;</code></pre>
+<p>Two completely different views, gated on whether
+<code>selectedPlayer</code> is set. <strong>Early return</strong> is a
+clean way to handle “two-mode” components.</p>
+<p>The alternative is a single JSX with
+<code>{selectedPlayer ? &lt;PlayerDetail /&gt; : &lt;div&gt;{grid}&lt;/div&gt;}</code>.
+Both work; early return is more readable when the two branches are very
+different. Use early return when the difference is structural (different
+layout entirely); use ternary when the difference is a single
+element.</p>
+</section>
+<section id="step-2-playercard-the-leaf" class="slide level2">
+<h2>Step 2: PlayerCard — the leaf</h2>
+<p><code>&lt;PlayerCard&gt;</code> is a 30-line button. The whole job:
+render one player’s name, seed, country, eliminated/alive status. Click
+handler.</p>
+<pre class="tsx"><code>interface PlayerCardProps {
+  player: { name: string; seed?: number; status: string; flag: string; stillIn: boolean; isChampion: boolean };
+  onClick: () =&gt; void;
+  finalPicksCount?: number;
+}
+
+export default function PlayerCard({ player, onClick, finalPicksCount }: PlayerCardProps) {
+  return (
+    &lt;button onClick={onClick} style={{ /* ... */ }}&gt;
+      {/* seed badge */}
+      {/* champion / runner-up / out badge */}
+      {/* name */}
+      {/* country flag */}
+      {/* hint chip with finalPicksCount if set */}
+    &lt;/button&gt;
+  );
+}</code></pre>
+<p>Three things to note:</p>
+<h3 id="a-button-not-a-div">A button, not a div</h3>
+<p>The card is a <code>&lt;button&gt;</code>. Why?
+<strong>Accessibility.</strong> Screen readers announce buttons
+differently from divs; keyboard users can Tab to a button and Enter on
+it. A <code>&lt;div onClick&gt;</code> traps both.</p>
+<p>This is one of those small senior moves that interviewers love to
+spot. <em>“This div should be a button.”</em> — if you can articulate
+that distinction, you’ve leveled up.</p>
+<h3 id="optional-finalpickscount-prop">Optional
+<code>finalPicksCount</code> prop</h3>
+<pre class="tsx"><code>finalPicksCount?: number;</code></pre>
+<p>When set, the card shows a small chip like <em>“+3 each from 6
+teams”</em>. When undefined, no chip. The component handles both cases
+with
+<code>{finalPicksCount !== undefined &amp;&amp; &lt;chip /&gt;}</code>.</p>
+<p>This is the <strong>optional-feature-via-optional-prop</strong>
+pattern. The card stays simple in the no-chip case; callers can opt in
+by passing the prop.</p>
+<h3 id="hover-effects-via-inline-onmouseover-onmouseout">Hover effects
+via inline <code>onMouseOver</code> / <code>onMouseOut</code></h3>
+<pre class="tsx"><code>onMouseOver={(e) =&gt; { e.currentTarget.style.transform = &#39;translateY(-3px)&#39;; }}
+onMouseOut={(e) =&gt; { e.currentTarget.style.transform = &#39;none&#39;; }}</code></pre>
+<p>This is the inline-styles equivalent of a CSS <code>:hover</code>.
+Works fine; slightly verbose. If you had 100 cards needing the same
+hover, you’d extract it into CSS. For 32 cards on one screen, inline is
+acceptable.</p>
+<p>A more “CSS-purist” version would use CSS Modules or Tailwind’s
+<code>hover:</code> modifier. The codebase chose inline because every
+card already has dynamic colors that don’t fit CSS classes.
+<strong>Consistency within a component matters more than
+purity.</strong></p>
+</section>
+<section id="step-3-playerdetail-the-big-one" class="slide level2">
+<h2>Step 3: PlayerDetail — the big one</h2>
+<p><code>&lt;PlayerDetail&gt;</code> is ~270 lines. Let’s not paste it
+all — open <code>components/players/PlayerDetail.tsx</code> to follow
+along. Instead, let’s see its <strong>structure</strong>:</p>
+<pre class="tsx"><code>export default function PlayerDetail({ playerName, teams, onBack, onSelectPlayer }: PlayerDetailProps) {
+  // 1. Look up player metadata
+  const info = PLAYER_INFO[playerName] || {};
+
+  // 2. Find which matches the player appeared in (across all 5 rounds)
+  const r1Idx = ROUND1_MATCHES.findIndex(m =&gt; m.p1 === playerName || m.p2 === playerName);
+  const r2Idx = ROUND2_MATCHES.findIndex(m =&gt; m.p1 === playerName || m.p2 === playerName);
+  // ...
+
+  // 3. Build a `pickAnalyses` array — one entry per match-the-player-was-in
+  const pickAnalyses: PickAnalysis[] = matches.map(mp =&gt; {
+    const opponent = mp.match.p1 === playerName ? mp.match.p2 : mp.match.p1;
+    const teamsBackedThis: TeamWithScores[] = [];
+    const teamsBackedOpponent: TeamWithScores[] = [];
+    teams.forEach(t =&gt; {
+      const pick = mp.pickKey === &#39;final&#39; ? t.final : t[mp.pickKey]?.[mp.matchIndex];
+      if (pick === playerName) teamsBackedThis.push(t);
+      else if (pick === opponent) teamsBackedOpponent.push(t);
+    });
+    return { ...mp, opponent, teamsBackedThis, teamsBackedOpponent };
+  });
+
+  // 4. Compute aggregate stats
+  const totalPicks = pickAnalyses.reduce((s, m) =&gt; s + m.teamsBackedThis.length, 0);
+  // ...
+
+  // 5. Render header, stats, match-by-match analyses
+  return (
+    &lt;div&gt;
+      &lt;button onClick={onBack}&gt;← Back to All Players&lt;/button&gt;
+      &lt;Header playerName={playerName} info={info} stillIn={...} /&gt;
+      &lt;StatTilesRow stats={...} /&gt;
+      {pickAnalyses.map((pa, i) =&gt; (
+        &lt;MatchPickAnalysis key={i} analysis={pa} playerName={playerName} onSelectPlayer={onSelectPlayer} /&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p><strong>Five phases</strong>: lookup, find matches, build analyses,
+compute aggregates, render. Each phase is a few lines. The whole thing
+is large because there are many phases, not because any single phase is
+complex.</p>
+<h3 id="why-doesnt-this-need-usememo">Why doesn’t this need
+<code>useMemo</code>?</h3>
+<p>You might think <em>“this component is computing a lot — should it be
+memoized?”</em></p>
+<p>The answer: <strong>no</strong>, because the computation runs once
+per render of <code>&lt;PlayerDetail&gt;</code>, and
+<code>&lt;PlayerDetail&gt;</code> only re-renders when its parent
+(<code>&lt;PlayersTab&gt;</code>) re-renders, which only happens when
+<code>selectedPlayer</code> changes. Each new player triggers a new
+computation; that’s correct. There’s no waste.</p>
+<p>If <code>&lt;PlayersTab&gt;</code> re-rendered for unrelated reasons
+(e.g. a parent state change), then <code>&lt;PlayerDetail&gt;</code>
+would recompute too — wasteful. We could <code>React.memo</code> it
+then. For this app’s size, that’s premature.</p>
+<h3 id="the-pickanalyses.map-is-the-most-important-transform">The
+<code>pickAnalyses.map</code> is the most important transform</h3>
+<p>This is the data shape the inner component
+(<code>&lt;MatchPickAnalysis&gt;</code>) needs:</p>
+<div class="sourceCode" id="cb44"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> PickAnalysis {</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  round<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  roundFull<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  bestOf<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  matchIndex<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  match<span class="op">:</span> Match<span class="op">;</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  finished<span class="op">:</span> <span class="dt">boolean</span><span class="op">;</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  pickKey<span class="op">:</span> <span class="st">&#39;r1&#39;</span> <span class="op">|</span> <span class="st">&#39;r2&#39;</span> <span class="op">|</span> <span class="st">&#39;qf&#39;</span> <span class="op">|</span> <span class="st">&#39;sf&#39;</span> <span class="op">|</span> <span class="st">&#39;final&#39;</span><span class="op">;</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>  opponent<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  won<span class="op">:</span> <span class="dt">boolean</span> <span class="op">|</span> <span class="dt">null</span><span class="op">;</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  teamsBackedThis<span class="op">:</span> TeamWithScores[]<span class="op">;</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  teamsBackedOpponent<span class="op">:</span> TeamWithScores[]<span class="op">;</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Each entry is one match the player was in, decorated with everything
+the inner component will display. <strong>All the heavy lifting happens
+in the parent</strong>; the inner component is pure presentation.</p>
+<p>This is a key composition pattern: <strong>the parent does the data
+shaping; the child renders the shape</strong>. Don’t make children do
+their own data lookups — pass them the ready-to-render data.</p>
+</section>
+<section id="step-4-matchpickanalysis-the-per-match-section"
+class="slide level2">
+<h2>Step 4: MatchPickAnalysis — the per-match section</h2>
+<p>About 150 lines. Receives one <code>PickAnalysis</code> and
+renders:</p>
+<pre class="tsx"><code>&lt;div&gt;
+  {/* round badge + matchup title + outcome chip */}
+  &lt;Header /&gt;
+
+  {/* &quot;X of 8 teams backed Wu Yize · Y of 8 backed Murphy&quot; */}
+  &lt;Summary /&gt;
+
+  {/* two columns of TeamChips */}
+  &lt;div style={{ display: &#39;grid&#39;, gridTemplateColumns: &#39;repeat(auto-fit, minmax(280px, 1fr))&#39;, gap: 16 }}&gt;
+    &lt;BackedColumn label={`BACKED ${playerName}`} teams={analysis.teamsBackedThis} pts={ptsForPicker} /&gt;
+    &lt;BackedColumn label={`BACKED ${analysis.opponent}`} teams={analysis.teamsBackedOpponent} pts={ptsForOpponentPicker} /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<p>(Note <code>&lt;BackedColumn&gt;</code> is <strong>inlined</strong>
+here, not extracted — covered in Lesson 1’s “when not to extract”
+section.)</p>
+<h3 id="the-clickable-opponent-name">The clickable opponent name</h3>
+<p>The most interesting piece:</p>
+<pre class="tsx"><code>&lt;button
+  onClick={() =&gt; onSelectPlayer(analysis.opponent)}
+  style={{ background: &#39;none&#39;, border: &#39;none&#39;, textDecoration: &#39;underline&#39;, cursor: &#39;pointer&#39;, /* ... */ }}
+&gt;
+  {analysis.opponent}
+&lt;/button&gt;</code></pre>
+<p>Clicking the opponent name calls
+<code>onSelectPlayer(opponentName)</code> — the <strong>same
+setter</strong> that originally got us into
+<code>&lt;PlayerDetail&gt;</code>. This effectively:</p>
+<ol type="1">
+<li>Sets <code>selectedPlayer</code> in <code>&lt;PlayersTab&gt;</code>
+to the opponent’s name.</li>
+<li>Triggers a re-render of <code>&lt;PlayersTab&gt;</code>.</li>
+<li><code>&lt;PlayerDetail&gt;</code> re-renders with the new
+<code>playerName</code> prop.</li>
+<li>The whole detail view recomputes for the new player.</li>
+</ol>
+<p>That’s <strong>navigation by state change</strong>, not by URL or
+routing. We jump from one detail view to another by changing one piece
+of state. The user sees a smooth transition; under the hood it’s React
+reconciling the new tree.</p>
+<h3 id="the-callback-chain">The callback chain</h3>
+<p><code>onSelectPlayer</code> was passed:</p>
+<ul>
+<li>From <code>&lt;PlayersTab&gt;</code> to
+<code>&lt;PlayerDetail&gt;</code>.</li>
+<li>From <code>&lt;PlayerDetail&gt;</code> to
+<code>&lt;MatchPickAnalysis&gt;</code>.</li>
+</ul>
+<p>Two levels of drilling. Lesson 2’s pain threshold is 4–5 levels. Two
+is fine.</p>
+<p>If we ever moved player navigation to a global URL-based system
+(e.g. <code>/players/wu-yize</code>), this drilling would disappear and
+the navigation would become a <code>&lt;Link&gt;</code> from
+<code>next/link</code>. <strong>The drilling exists because the
+navigation is in-memory state.</strong> Different design, different prop
+flow.</p>
+</section>
+<section id="step-5-teamchip-and-stattile-the-leaves"
+class="slide level2">
+<h2>Step 5: TeamChip and StatTile — the leaves</h2>
+<p>We’ve already seen <code>&lt;TeamChip&gt;</code> from Lesson 1.
+<code>&lt;StatTile&gt;</code> is similar:</p>
+<pre class="tsx"><code>interface StatTileProps {
+  label: string;
+  value: string | number;
+  sub?: string;
+  icon: string;   // emoji
+}
+
+export default function StatTile({ label, value, sub, icon }: StatTileProps) {
+  return (
+    &lt;div style={{ /* card background */ }}&gt;
+      &lt;div style={{ fontSize: 28 }}&gt;{icon}&lt;/div&gt;
+      &lt;div style={{ /* small label */ }}&gt;{label}&lt;/div&gt;
+      &lt;div style={{ /* big value */ }}&gt;{value}&lt;/div&gt;
+      {sub &amp;&amp; &lt;div style={{ /* small sub */ }}&gt;{sub}&lt;/div&gt;}
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Four props, ~20 lines, no logic. Pure presentation. Used 4 times in
+<code>&lt;PlayerDetail&gt;</code>.</p>
+<p>These tiny presentation components are <strong>the bedrock of a
+reusable codebase</strong>. Each one is testable in isolation,
+swappable, and easy to refactor. The complexity lives at the
+orchestrator level; the leaves stay simple.</p>
+</section>
+<section id="step-6-pathstep-and-patharrow-the-readability-components"
+class="slide level2">
+<h2>Step 6: PathStep and PathArrow — the readability components</h2>
+<p>We talked about these in Lesson 1. They exist purely to make the
+parent’s path JSX read like a sentence:</p>
+<pre class="tsx"><code>&lt;PathStep label=&quot;R1&quot; status=&quot;won&quot; /&gt;
+&lt;PathArrow /&gt;
+&lt;PathStep label=&quot;R2&quot; status=&quot;won&quot; /&gt;
+&lt;PathArrow /&gt;
+&lt;PathStep label=&quot;QF&quot; status=&quot;lost&quot; /&gt;</code></pre>
+<p><code>&lt;PathStep&gt;</code> maps a 4-state union
+(<code>'won' | 'lost' | 'live' | 'na'</code>) to four different visual
+treatments. The map lives inside <code>&lt;PathStep&gt;</code>:</p>
+<pre class="tsx"><code>const styles: Record&lt;PathStatus, { bg, color, border, icon }&gt; = {
+  won:  { bg: &#39;rgba(255,255,255,0.95)&#39;, color: &#39;#0F5132&#39;, icon: &#39;✓&#39; },
+  lost: { bg: &#39;rgba(220, 38, 38, 0.85)&#39;, color: &#39;#FFF&#39;, icon: &#39;✗&#39; },
+  live: { bg: &#39;#FBBF24&#39;, color: &#39;#0F5132&#39;, icon: &#39;●&#39; },
+  na:   { bg: &#39;rgba(0,0,0,0.18)&#39;, color: &#39;rgba(255,255,255,0.55)&#39;, icon: &#39;—&#39; },
+};</code></pre>
+<p>A <strong>lookup object</strong> of styles, indexed by the status
+string. Cleaner than a chain of ternaries. <strong>Use lookup objects
+whenever you have 3+ branches mapping a value to a
+style/config.</strong></p>
+</section>
+<section id="what-we-just-learned-about-composition"
+class="slide level2">
+<h2>What we just learned about composition</h2>
+<p>Read back through what <code>&lt;PlayerDetail&gt;</code> and its
+descendants accomplish:</p>
+<ul>
+<li><strong>270 lines of orchestration</strong>
+(<code>&lt;PlayerDetail&gt;</code>).</li>
+<li><strong>Six leaf components</strong>, each 15–60 lines
+(<code>&lt;PlayerCard&gt;</code>,
+<code>&lt;MatchPickAnalysis&gt;</code>, <code>&lt;TeamChip&gt;</code>,
+<code>&lt;StatTile&gt;</code>, <code>&lt;PathStep&gt;</code>,
+<code>&lt;PathArrow&gt;</code>).</li>
+<li><strong>No <code>useMemo</code>, no Context, no global
+state</strong>. Just <code>useState</code> at the right level + prop
+drilling for two pieces of data (<code>teams</code>,
+<code>onSelectPlayer</code>).</li>
+<li><strong>Self-referential navigation</strong> — clicking the opponent
+name in a detail view loads <em>their</em> detail view via the same
+state setter.</li>
+</ul>
+<p>That’s a fully-functional 32-player drill-down feature, built with
+<strong>only the techniques in Chapters 3 and 4</strong>. No new React
+concepts in this chapter — just <strong>the discipline to apply them
+well.</strong></p>
+</section>
+<section id="vibe-prompts-for-the-players-tab" class="slide level2">
+<h2>Vibe prompts for the Players tab</h2>
+<p>Building it from scratch would have been three or four prompts:</p>
+<ol type="1">
+<li class="fragment"><p><em>“Create <code>&lt;PlayersTab&gt;</code> at
+<code>components/tabs/PlayersTab.tsx</code>. Top-level filter buttons:
+Still In, Eliminated, All. Render a grid of
+<code>&lt;PlayerCard&gt;</code> for each player from
+<code>PLAYER_INFO</code>. Compute <code>stillIn</code> from QF_MATCHES +
+SF_MATCHES + FINAL_MATCH (a player is still in if they appear in QF and
+haven’t lost since). Mark whoever won the Final as champion. State:
+<code>selectedPlayer: string | null</code>. Conditional render
+<code>&lt;PlayerDetail&gt;</code> if set.”</em></p></li>
+<li class="fragment"><p><em>“Create <code>&lt;PlayerCard&gt;</code> at
+<code>components/players/PlayerCard.tsx</code>. Button. Props:
+<code>player: PlayerCardData, onClick: () =&gt; void, finalPicksCount?: number</code>.
+Visuals: seed badge, status badge (champion/runner-up/out), name,
+country flag, optional chip showing how many teams picked them in the
+Final.”</em></p></li>
+<li class="fragment"><p><em>“Create <code>&lt;PlayerDetail&gt;</code> at
+<code>components/players/PlayerDetail.tsx</code>. Props:
+<code>playerName, teams, onBack, onSelectPlayer</code>. Look up info
+from <code>PLAYER_INFO</code>, find every match the player appeared in,
+build a <code>pickAnalyses</code> array decorating each match with which
+teams backed the player vs the opponent. Render header (gradient, name,
+status, tournament-path bar), 4 stat tiles, then map pickAnalyses
+through <code>&lt;MatchPickAnalysis&gt;</code>.”</em></p></li>
+<li class="fragment"><p><em>“Create
+<code>&lt;MatchPickAnalysis&gt;</code> at
+<code>components/players/MatchPickAnalysis.tsx</code>. Props:
+<code>analysis: PickAnalysis, playerName, onSelectPlayer</code>. Render
+the matchup header (round, players, outcome with score). Make the
+opponent’s name a button calling <code>onSelectPlayer(opponent)</code>.
+Below: two columns of <code>&lt;TeamChip&gt;</code>s, one for each side.
+Color the points chip green for +3, brown for +1.”</em></p></li>
+</ol>
+<p>Each prompt is <strong>one component, one paragraph, names every
+prop</strong>. That’s the right grain. <strong>Compose by prompts the
+same way you compose by components.</strong></p>
+</section>
+<section id="check-yourself-2" class="slide level2">
+<h2>CHECK YOURSELF</h2>
+<ol type="1">
+<li><strong><code>selectedPlayer</code> lives in
+<code>&lt;PlayersTab&gt;</code>. Why not in
+<code>&lt;SnookerFantasyLeague&gt;</code>?</strong></li>
+<li><strong>The opponent’s name in
+<code>&lt;MatchPickAnalysis&gt;</code> is a <code>&lt;button&gt;</code>
+calling <code>onSelectPlayer(opponent)</code>. What state changes? In
+which component? How many re-renders happen?</strong></li>
+<li><strong><code>&lt;PlayerDetail&gt;</code> does 5 phases of
+computation in its function body before returning JSX. Why isn’t it
+wrapped in <code>useMemo</code>?</strong> What would have to be true to
+memoize it?</li>
+<li><strong><code>&lt;PathStep&gt;</code> uses a lookup object
+<code>{ won: ..., lost: ..., live: ..., na: ... }</code> instead of
+<code>if</code>/<code>else if</code> chains. Why is this
+better?</strong></li>
+<li><strong>Open <code>components/players/PlayerDetail.tsx</code>. Find
+the <code>pickAnalyses.map(...)</code> block. Walk through what it
+produces.</strong> Specifically: for each match the player appeared in,
+what does each <code>PickAnalysis</code> entry look like, and where does
+it get used downstream?</li>
+</ol>
+<p>When you’ve answered these, you’ve finished Chapter 5. Onward to
+<strong><a href="../chapter-06-data-visualization/README.md">Chapter 6 —
+Data Visualization</a></strong> — the analytics tab and Recharts.</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^5/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

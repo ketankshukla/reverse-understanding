@@ -1,0 +1,2011 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Chapter 07 Mastery And Interviews</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {  background-color: #f8f8f8; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ef2929; } /* Alert */
+    code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #204a87; } /* Attribute */
+    code span.bn { color: #0000cf; } /* BaseN */
+    code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4e9a06; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #8f5902; font-style: italic; } /* Comment */
+    code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+    code span.dt { color: #204a87; } /* DataType */
+    code span.dv { color: #0000cf; } /* DecVal */
+    code span.er { color: #a40000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #0000cf; } /* Float */
+    code span.fu { color: #204a87; font-weight: bold; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+    code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+    code span.ot { color: #8f5902; } /* Other */
+    code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+    code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+    code span.ss { color: #4e9a06; } /* SpecialString */
+    code span.st { color: #4e9a06; } /* String */
+    code span.va { color: #000000; } /* Variable */
+    code span.vs { color: #4e9a06; } /* VerbatimString */
+    code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/theme/white.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Chapter 07 Mastery And Interviews</h1>
+</section>
+
+<section>
+<section id="chapter-7-mastery-interview-prep"
+class="title-slide slide level1">
+<h1>Chapter 7 — Mastery + Interview Prep</h1>
+<blockquote>
+<p><strong>You can build it. Now learn to ship it and talk about
+it.</strong> This chapter is the difference between a junior developer
+who <em>finished a tutorial</em> and an engineer who can stand behind
+their work in an interview.</p>
+</blockquote>
+</section>
+<section id="what-youll-learn" class="slide level2">
+<h2>What you’ll learn</h2>
+<ul>
+<li>The <strong>production polish</strong> every senior engineer adds:
+loading states, error boundaries, accessibility, performance.</li>
+<li>A <strong>realistic testing strategy</strong> for a project this
+size — what to test, what <em>not</em> to test, and which tools to reach
+for.</li>
+<li>How to <strong>deploy to Vercel</strong> through GitHub, set up
+previews, and reason about build-time vs. run-time.</li>
+<li>The <strong>interview narrative</strong>: a 90-second walkthrough of
+the project that hits architecture, decisions, and trade-offs.</li>
+<li>The <strong>vibe-coding prompt library</strong>: the prompt
+templates that <em>demonstrably produced this codebase</em>.</li>
+</ul>
+<p>By the end of this chapter you’ll be able to:</p>
+<ol type="1">
+<li>Open this repo on a hiring manager’s screen and explain <em>why</em>
+every directory exists.</li>
+<li>Answer “what would you do differently?” with confidence (because
+you’ve already thought about it).</li>
+<li>Reach for the right testing tool when someone says “add a test for
+that.”</li>
+<li>Reproduce this style of work on a new project at maybe a third of
+the prompt count.</li>
+</ol>
+</section>
+<section id="lessons-in-this-chapter" class="slide level2">
+<h2>Lessons in this chapter</h2>
+<ol type="1">
+<li><strong><a
+href="./01-production-polish.md">01-production-polish.md</a></strong> —
+Accessibility, loading states, error boundaries, and the performance
+audits that show you care.</li>
+<li><strong><a
+href="./02-deployment-and-testing.md">02-deployment-and-testing.md</a></strong>
+— Vercel deployment via GitHub, environment variables, the testing
+pyramid, and what the first three tests should cover.</li>
+<li><strong><a
+href="./03-interview-narrative.md">03-interview-narrative.md</a></strong>
+— The 90-second walkthrough, the common interview questions answered
+with this app, and the vibe-coding prompt library distilled.</li>
+</ol>
+</section>
+<section id="new-concepts-introduced" class="slide level2">
+<h2>New concepts introduced</h2>
+<ul>
+<li><strong>Error boundaries</strong> in React (class components — yes,
+still!).</li>
+<li><strong><code>&lt;Suspense&gt;</code> and loading UI</strong> in
+Next.js App Router.</li>
+<li><strong>Lighthouse / Web Vitals</strong> as a quality bar.</li>
+<li><strong>Semantic HTML</strong> and <strong>ARIA</strong> essentials
+(no more <code>&lt;div&gt;</code> soup).</li>
+<li><strong>Vitest + React Testing Library</strong> for unit tests.</li>
+<li><strong>Playwright</strong> for end-to-end smoke tests.</li>
+<li><strong>Vercel preview deployments</strong> triggered by every
+PR.</li>
+<li><strong>STAR-format interview answers</strong> (Situation, Task,
+Action, Result).</li>
+</ul>
+</section>
+<section id="how-long-it-should-take" class="slide level2">
+<h2>How long it should take</h2>
+<ul>
+<li>30–45 min reading per lesson</li>
+<li>2–3 hours typing the polish code (a11y + tests)</li>
+<li>30 min setting up Vercel (mostly waiting)</li>
+<li>~6 hours total</li>
+</ul>
+</section>
+<section id="why-this-chapter-exists-separately" class="slide level2">
+<h2>Why this chapter exists separately</h2>
+<p>Most React courses end at “you built the feature.” That’s the moment
+a senior engineer’s job <em>starts</em>. The polish, the tests, the
+deployment, and the ability to talk about your trade-offs are the things
+that get you hired. We isolated them here so you can binge them as a
+single concentrated unit before your next interview.</p>
+</section>
+<section id="before-you-start" class="slide level2">
+<h2>Before you start</h2>
+<p>You should have:</p>
+<ul>
+<li>All previous chapters complete.</li>
+<li>The app running locally (<code>npm run dev</code>).</li>
+<li>A GitHub account with the repo pushed.</li>
+<li>A Vercel account (free tier is fine — you’ll use it in Lesson
+2).</li>
+</ul>
+</section>
+<section id="what-this-chapter-is-not" class="slide level2">
+<h2>What this chapter is <em>not</em></h2>
+<ul>
+<li>It is <strong>not</strong> a complete testing course. That’s a book.
+We’re teaching you what an 8-team fantasy app actually needs.</li>
+<li>It is <strong>not</strong> a complete a11y course. We’re teaching
+the 80% that catches 95% of issues.</li>
+<li>It is <strong>not</strong> a Vercel sales pitch. We picked Vercel
+because it’s the path of least resistance for Next.js. Cloudflare Pages,
+Netlify, Render, AWS Amplify all work — the principles transfer.</li>
+</ul>
+<p>Open <strong><a
+href="./01-production-polish.md">01-production-polish.md</a></strong>
+when you’re ready.</p>
+</section></section>
+<section>
+<section id="lesson-7.1-production-polish"
+class="title-slide slide level1">
+<h1>Lesson 7.1 — Production Polish</h1>
+<blockquote>
+<p><strong>The features work. Now make the app robust.</strong> This
+lesson is the bag of small, high-leverage improvements that separate
+“demo-quality” from “ship-quality.”</p>
+</blockquote>
+<p>By the end of this lesson you will:</p>
+<ul>
+<li>Add <strong>accessibility</strong> to the standings table, tab bar,
+and player navigation — the parts that block screen-reader users
+today.</li>
+<li>Implement a <strong>React error boundary</strong> so one broken
+component doesn’t kill the whole page.</li>
+<li>Use Next.js <strong><code>loading.tsx</code></strong> for instant
+skeleton UIs.</li>
+<li>Audit your bundle size with <strong><code>next build</code></strong>
+and read the output critically.</li>
+<li>Run <strong>Lighthouse</strong> and act on its three
+highest-leverage suggestions.</li>
+</ul>
+<p>You’ll write maybe 60 lines of code in this lesson. The conceptual
+change is bigger: you start <em>seeing</em> the rough edges that
+beginners blow past.</p>
+</section>
+<section id="the-mindset-shift" class="slide level2">
+<h2>1. The mindset shift</h2>
+<p>Up to now you’ve been building features. Each lesson asked: <em>“What
+does the user need next?”</em> and you answered with components.</p>
+<p>Production polish is a different mindset. The questions are:</p>
+<ul>
+<li><em>What happens when this fails?</em></li>
+<li><em>Who can’t use this right now?</em></li>
+<li><em>How long does this take to load?</em></li>
+<li><em>What does the URL bar do when something crashes?</em></li>
+</ul>
+<p>These questions don’t add new features. They harden the features you
+already shipped. <strong>Junior engineers ship features. Senior
+engineers ship resilient features.</strong></p>
+<p>If you do nothing else from this lesson, internalize that mindset
+shift. The rest is mechanics.</p>
+</section>
+<section id="accessibility-a11y-the-part-that-gets-you-hired"
+class="slide level2">
+<h2>2. Accessibility (a11y) — the part that gets you hired</h2>
+<p>If you Google “React accessibility,” you’ll drown in 90-page
+documents. Most teams don’t need 90 pages. They need <strong>five
+rules</strong> applied consistently. Those rules:</p>
+<h3 id="use-semantic-html-not-div-soup.">2.1. Use semantic HTML, not
+<code>&lt;div&gt;</code> soup.</h3>
+<p>A <code>&lt;button&gt;</code> is not a
+<code>&lt;div onClick={...}&gt;</code>. The browser gives you keyboard
+support, focus rings, and screen-reader announcements <em>for free</em>
+when you use the right element.</p>
+<p>In our app, we already use <code>&lt;button&gt;</code> for the tab
+bar. Good. But the <strong>round selectors in
+<code>MatchesTab</code></strong> were styled <code>&lt;div&gt;</code>s
+in some early drafts. If you find any, swap them to
+<code>&lt;button type="button"&gt;</code>.</p>
+<h3 id="every-image-must-have-alt-text.">2.2. Every image must have alt
+text.</h3>
+<p>We don’t use <code>&lt;img&gt;</code> heavily — most icons come from
+<code>lucide-react</code> (which renders SVG with
+<code>aria-hidden</code> by default). But if you ever add
+<code>&lt;img src="/snooker-trophy.png" /&gt;</code>, write
+<code>alt="Trophy"</code> next to it. Decorative images get
+<code>alt=""</code> (empty string, not missing).</p>
+<h3 id="tab-interfaces-need-roletablist-roletab-roletabpanel.">2.3. Tab
+interfaces need <code>role="tablist"</code>, <code>role="tab"</code>,
+<code>role="tabpanel"</code>.</h3>
+<p>Open <code>components/SnookerFantasyLeague.tsx</code>. Find the tab
+nav. Right now it looks like:</p>
+<pre class="tsx"><code>&lt;nav style={{ ... }}&gt;
+  {tabs.map((tab) =&gt; (
+    &lt;button key={tab.id} onClick={() =&gt; setActiveTab(tab.id)}&gt;
+      {tab.label}
+    &lt;/button&gt;
+  ))}
+&lt;/nav&gt;</code></pre>
+<p>Upgrade to:</p>
+<pre class="tsx"><code>&lt;nav role=&quot;tablist&quot; aria-label=&quot;App sections&quot; style={{ ... }}&gt;
+  {tabs.map((tab) =&gt; (
+    &lt;button
+      key={tab.id}
+      role=&quot;tab&quot;
+      aria-selected={activeTab === tab.id}
+      aria-controls={`panel-${tab.id}`}
+      id={`tab-${tab.id}`}
+      onClick={() =&gt; setActiveTab(tab.id)}
+    &gt;
+      {tab.label}
+    &lt;/button&gt;
+  ))}
+&lt;/nav&gt;</code></pre>
+<p>And wrap the tab body:</p>
+<pre class="tsx"><code>&lt;main role=&quot;tabpanel&quot; id={`panel-${activeTab}`} aria-labelledby={`tab-${activeTab}`}&gt;
+  {/* tab content */}
+&lt;/main&gt;</code></pre>
+<h4 id="why-bother">Why bother?</h4>
+<p>A screen reader user lands on your page. Without these attributes,
+they hear: <em>“button, button, button, button.”</em> They have no idea
+those buttons are tabs.</p>
+<p>With these attributes, they hear: <em>“App sections tab list,
+Standings tab, selected, 1 of 5.”</em> That’s the entire app surfacing
+in audio.</p>
+<h4 id="why-isnt-this-automatic">Why isn’t this automatic?</h4>
+<p>Because HTML can’t read your design. The browser doesn’t know that
+those four buttons are <em>related</em> and <em>mutually exclusive</em>.
+ARIA is how you tell it.</p>
+<h3 id="every-interactive-element-must-be-keyboard-reachable.">2.4.
+Every interactive element must be keyboard-reachable.</h3>
+<p>Try this: open your app in a browser and press <code>Tab</code>
+repeatedly. Can you get to every button? Every link? Every team row in
+the standings?</p>
+<p>If not, you’ve got a problem. Common culprits:</p>
+<ul>
+<li>A <code>&lt;div onClick={...}&gt;</code> (not focusable). Fix: use
+<code>&lt;button&gt;</code> or add <code>tabIndex={0}</code> and an
+<code>onKeyDown</code> handler.</li>
+<li>A custom dropdown that traps focus. Fix: handle <code>Escape</code>
+to close, <code>Tab</code> to move out.</li>
+</ul>
+<p>In our app, the <strong>player cards in
+<code>PlayersTab</code></strong> are buttons (good). The <strong>team
+selector in <code>PredictionsTab</code></strong> is a button (good). The
+<strong>standings rows</strong> — currently — are not clickable. If we
+ever made them clickable, they’d need to be <code>&lt;button&gt;</code>
+elements, not <code>&lt;tr onClick={...}&gt;</code>.</p>
+<h3 id="color-contrast-text-must-be-readable.">2.5. Color contrast: text
+must be readable.</h3>
+<p>Open Chrome DevTools → Lighthouse → Accessibility audit. It will flag
+any text whose contrast ratio drops below <strong>4.5:1</strong> (3:1
+for large text).</p>
+<p>The dark green <code>#0F5132</code> on white passes. The yellow
+<code>#FBBF24</code> on dark green passes. The light gray
+<code>#9CA3AF</code> on white <em>barely</em> passes for medium text. If
+you ever have to lighten text further for design reasons, push it to a
+heavier weight or a larger size to compensate.</p>
+<h3 id="the-five-rule-checklist">2.6. The five-rule checklist</h3>
+<p>Run through this before shipping:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" /><strong>Semantic elements</strong>:
+every interactive thing is a <code>&lt;button&gt;</code>,
+<code>&lt;a&gt;</code>, <code>&lt;input&gt;</code>, etc.</label></li>
+<li><label><input type="checkbox" /><strong>Alt text</strong>: every
+<code>&lt;img&gt;</code> has one.</label></li>
+<li><label><input type="checkbox" /><strong>ARIA roles</strong>: tab
+interfaces, dialogs, alerts, and lists are correctly
+labeled.</label></li>
+<li><label><input type="checkbox" /><strong>Keyboard reachable</strong>:
+<code>Tab</code> walks through every interactive element.</label></li>
+<li><label><input type="checkbox" /><strong>Color contrast</strong>:
+Lighthouse a11y audit passes.</label></li>
+</ul>
+<p>This checklist is the answer to <em>“How do you handle accessibility
+on your team?”</em> in an interview. Memorize it.</p>
+</section>
+<section id="error-boundaries-when-one-component-crashes"
+class="slide level2">
+<h2>3. Error boundaries — when one component crashes</h2>
+<p>By default, <strong>a single thrown error inside a React component
+takes down the entire tree</strong>. The whole page goes white. Users
+see nothing.</p>
+<p>That’s a terrible UX. Worse, it’s a <em>silent</em> failure in
+production — your error tracker (Sentry, Datadog, etc.) might catch it,
+but the user just sees a broken page with no explanation.</p>
+<p><strong>Error boundaries</strong> fix this.</p>
+<h3 id="the-class-component-reality">3.1. The class-component
+reality</h3>
+<p>Error boundaries are one of the <strong>two places React still
+requires a class component</strong> (the other is the
+<code>componentDidCatch</code> lifecycle that error boundaries
+themselves use). There is no hook for this. Yet.</p>
+<p>Create <code>components/ErrorBoundary.tsx</code>:</p>
+<pre class="tsx"><code>&#39;use client&#39;;
+
+import { Component, type ReactNode } from &#39;react&#39;;
+
+interface Props {
+  children: ReactNode;
+  fallback?: ReactNode;
+}
+
+interface State {
+  hasError: boolean;
+  error?: Error;
+}
+
+export default class ErrorBoundary extends Component&lt;Props, State&gt; {
+  constructor(props: Props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error: Error): State {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, info: { componentStack: string }) {
+    console.error(&#39;Error boundary caught:&#39;, error, info.componentStack);
+    // In production, send to Sentry / Datadog / etc.
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        this.props.fallback ?? (
+          &lt;div
+            role=&quot;alert&quot;
+            style={{
+              padding: 24,
+              background: &#39;#FEE2E2&#39;,
+              border: &#39;2px solid #DC2626&#39;,
+              borderRadius: 12,
+              color: &#39;#7F1D1D&#39;,
+            }}
+          &gt;
+            &lt;strong&gt;Something went wrong.&lt;/strong&gt;
+            &lt;div style={{ marginTop: 8, fontSize: 13 }}&gt;
+              {this.state.error?.message ?? &#39;Unknown error&#39;}
+            &lt;/div&gt;
+            &lt;button
+              onClick={() =&gt; this.setState({ hasError: false, error: undefined })}
+              style={{ marginTop: 12, padding: &#39;6px 14px&#39;, borderRadius: 6 }}
+            &gt;
+              Try again
+            &lt;/button&gt;
+          &lt;/div&gt;
+        )
+      );
+    }
+    return this.props.children;
+  }
+}</code></pre>
+<h3 id="wrap-things-that-might-break">3.2. Wrap things that might
+break</h3>
+<p>In <code>app/page.tsx</code>:</p>
+<pre class="tsx"><code>import ErrorBoundary from &#39;@/components/ErrorBoundary&#39;;
+import SnookerFantasyLeague from &#39;@/components/SnookerFantasyLeague&#39;;
+
+export default function Page() {
+  return (
+    &lt;ErrorBoundary&gt;
+      &lt;SnookerFantasyLeague /&gt;
+    &lt;/ErrorBoundary&gt;
+  );
+}</code></pre>
+<p>For finer-grained control, wrap individual tabs:</p>
+<pre class="tsx"><code>&lt;ErrorBoundary fallback={&lt;div&gt;Analytics failed to load.&lt;/div&gt;}&gt;
+  &lt;AnalyticsTab teams={teamsWithScores} /&gt;
+&lt;/ErrorBoundary&gt;</code></pre>
+<h3 id="the-interview-question-this-answers">3.3. The interview question
+this answers</h3>
+<blockquote>
+<p><strong>Q:</strong> “How do you handle errors in a React app?”</p>
+<p><strong>A:</strong> “Three layers. (1) Error boundaries around any
+component subtree that could crash, with a friendly fallback UI and a
+logger that ships the error to Sentry. (2) Try/catch around any async
+work that could reject — fetch failures, JSON parse errors. (3)
+Defensive null checks in the render path for any data that might be
+missing. Error boundaries don’t catch errors in event handlers or async
+code, so the three layers complement each other.”</p>
+</blockquote>
+<p>That’s a senior-grade answer. It hits the <strong>what</strong>
+(boundaries, try/catch, null checks), the <strong>why</strong>
+(boundaries don’t catch async), and the <strong>so what</strong>
+(Sentry).</p>
+</section>
+<section id="loading-states-with-loading.tsx" class="slide level2">
+<h2>4. Loading states with <code>loading.tsx</code></h2>
+<p>Next.js App Router has a built-in primitive for “show this while a
+route segment is loading.”</p>
+<p>Create <code>app/loading.tsx</code>:</p>
+<pre class="tsx"><code>export default function Loading() {
+  return (
+    &lt;div
+      role=&quot;status&quot;
+      aria-live=&quot;polite&quot;
+      style={{
+        minHeight: &#39;60vh&#39;,
+        display: &#39;grid&#39;,
+        placeItems: &#39;center&#39;,
+        fontFamily: &quot;&#39;Roboto&#39;, sans-serif&quot;,
+      }}
+    &gt;
+      &lt;div&gt;
+        &lt;div
+          style={{
+            width: 60,
+            height: 60,
+            border: &#39;4px solid #FEF3C7&#39;,
+            borderTopColor: &#39;#0F5132&#39;,
+            borderRadius: &#39;50%&#39;,
+            animation: &#39;spin 0.8s linear infinite&#39;,
+            margin: &#39;0 auto 16px&#39;,
+          }}
+        /&gt;
+        &lt;div style={{ color: &#39;#6B7280&#39;, fontWeight: 600 }}&gt;Loading league data…&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;style&gt;{`
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+      `}&lt;/style&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<h3 id="when-does-this-fire">4.1. When does this fire?</h3>
+<p>Whenever a route’s server component is doing async work
+(<code>await</code>, dynamic imports). Right now our app is fully static
+— all data is in <code>lib/</code>. So <code>loading.tsx</code> will
+rarely fire in this app.</p>
+<p><strong>That’s still worth setting up.</strong> The day you migrate
+to a real backend (fetching tournament data from Sportradar’s API, say),
+the loading state is already in place. Future-you will thank
+present-you.</p>
+<h3 id="why-aria-livepolite">4.2. Why
+<code>aria-live="polite"</code>?</h3>
+<p>Screen readers announce the loading state to the user, but in a
+non-disruptive way. <code>aria-live="assertive"</code> interrupts
+whatever the user is hearing — too aggressive for a spinner.</p>
+</section>
+<section id="bundle-audit-with-next-build" class="slide level2">
+<h2>5. Bundle audit with <code>next build</code></h2>
+<p>Run:</p>
+<pre class="pwsh"><code>npm run build</code></pre>
+<p>You’ll see output like:</p>
+<pre><code>Route (app)                                Size     First Load JS
+┌ ○ /                                     312 kB        407 kB
+└ ○ /_not-found                            872 B          88 kB
++ First Load JS shared by all              87.4 kB</code></pre>
+<h3 id="what-to-look-at">5.1. What to look at</h3>
+<ul>
+<li><strong>Size</strong> — the JS for <em>just this route’s</em>
+code.</li>
+<li><strong>First Load JS</strong> — the JS the browser downloads when
+it first hits this route, including shared chunks.</li>
+<li><strong>Shared chunks</strong> — code split out so that navigating
+between routes doesn’t re-download it.</li>
+</ul>
+<h3 id="the-numbers-to-worry-about">5.2. The numbers to worry about</h3>
+<p>For a public-facing app, <strong>First Load JS under 200 KB</strong>
+is excellent. <strong>Under 500 KB</strong> is fine. <strong>Over 1
+MB</strong> is a red flag.</p>
+<p>Our app is heavy because <strong>Recharts is heavy</strong> (~150 KB
+minified, gzipped). That’s a known trade-off — we picked Recharts for
+ease of use, knowing it costs us bundle size. If we ever needed to slim
+this down:</p>
+<ol type="1">
+<li><strong>Dynamic-import the Analytics tab</strong> so its bundle only
+loads when the user clicks it.</li>
+<li><strong>Switch to a lighter charting library</strong> (Visx, custom
+SVG).</li>
+<li><strong>Server-render the charts</strong> (Recharts has experimental
+SSR; not always worth it for fantasy leagues).</li>
+</ol>
+<p>You don’t have to do this today. You <em>do</em> have to <strong>know
+to do it</strong> when an interviewer asks.</p>
+<h3 id="dynamic-import-in-30-seconds">5.3. Dynamic import in 30
+seconds</h3>
+<p>In <code>components/SnookerFantasyLeague.tsx</code>:</p>
+<pre class="tsx"><code>import dynamic from &#39;next/dynamic&#39;;
+
+const AnalyticsTab = dynamic(() =&gt; import(&#39;./tabs/AnalyticsTab&#39;), {
+  loading: () =&gt; &lt;div&gt;Loading charts…&lt;/div&gt;,
+  ssr: false,
+});</code></pre>
+<p>The component is loaded <em>only when it first renders</em>. The
+Recharts JS is no longer in your initial bundle.</p>
+<p>This is a one-line optimization. Use it sparingly — it adds a network
+round-trip when the user finally clicks the tab. The trade-off is worth
+it for heavy components used by a minority of visitors.</p>
+</section>
+<section id="lighthouse-the-report-card" class="slide level2">
+<h2>6. Lighthouse — the report card</h2>
+<p>Open Chrome DevTools → Lighthouse → click <em>Analyze page load</em>.
+You’ll get four scores:</p>
+<ul>
+<li><strong>Performance</strong> — how fast does the page render?</li>
+<li><strong>Accessibility</strong> — did you follow the rules?</li>
+<li><strong>Best Practices</strong> — HTTPS, no console errors,
+etc.</li>
+<li><strong>SEO</strong> — meta tags, mobile-friendly, etc.</li>
+</ul>
+<h3 id="the-three-highest-leverage-fixes">6.1. The three
+highest-leverage fixes</h3>
+<p>Almost every React app has the same three issues on the first
+Lighthouse run:</p>
+<ol type="1">
+<li><p><strong>Missing meta description.</strong> Add one in
+<code>app/layout.tsx</code>:</p>
+<pre class="tsx"><code>export const metadata: Metadata = {
+  title: &#39;Snooker Fantasy League&#39;,
+  description: &#39;Live standings, picks, and analytics for our 8-team fantasy snooker league.&#39;,
+};</code></pre></li>
+<li><p><strong>Color contrast on a button.</strong> Pick a darker text
+color on light backgrounds.</p></li>
+<li><p><strong>Missing <code>lang</code> attribute.</strong> Already in
+<code>app/layout.tsx</code> if you used the boilerplate
+(<code>&lt;html lang="en"&gt;</code>). Verify it.</p></li>
+</ol>
+<p>A 100/100 Lighthouse score is rare and not the goal. <strong>A 90+
+across the board</strong> is the realistic target. Anything you can fix
+in 5 minutes and gain a point on, you should.</p>
+</section>
+<section id="performance-the-react-specific-wins" class="slide level2">
+<h2>7. Performance: the React-specific wins</h2>
+<p>Lighthouse measures <em>page-load</em> performance. There’s another
+category: <em>interaction</em> performance — how snappy the app feels
+after it’s loaded.</p>
+<h3 id="the-usememo-you-already-wrote">7.1. The <code>useMemo</code> you
+already wrote</h3>
+<p>Remember <code>useMemo</code> from Chapter 4? You used it for
+<code>teamsWithScores</code>. That’s the kind of thing that helps
+interaction performance. Without it, every re-render recomputes scores
+for every team. With it, that work is done once.</p>
+<h3 id="react.memo-for-expensive-children">7.2. <code>React.memo</code>
+for expensive children</h3>
+<p>If you ever have a chart that re-renders on every parent state
+change, wrap its export:</p>
+<pre class="tsx"><code>export default React.memo(LeagueAgreementChart);</code></pre>
+<p>Now React only re-renders the chart when its <strong>props</strong>
+change. Don’t reach for this until profiling shows you need it.</p>
+<h3 id="the-react-devtools-profiler">7.3. The React DevTools
+Profiler</h3>
+<p>Install React DevTools (browser extension). Open the Profiler tab.
+Click record. Click around the app. Stop recording. You’ll see a flame
+graph of what re-rendered and how long it took.</p>
+<p>This is the tool that turns “the app feels slow” into “the standings
+table re-renders 12 times when I switch tabs.”</p>
+<p>You don’t have a perf problem in this app. You should still know how
+to use the profiler — it’s an interview-grade skill.</p>
+</section>
+<section id="defensive-rendering" class="slide level2">
+<h2>8. Defensive rendering</h2>
+<p>Two patterns to internalize:</p>
+<h3 id="guard-against-missing-data">8.1. Guard against missing data</h3>
+<pre class="tsx"><code>{team.scores ? &lt;TeamCard team={team} /&gt; : &lt;div&gt;No scores yet.&lt;/div&gt;}</code></pre>
+<p>The <code>&amp;&amp;</code> shortcut also works:</p>
+<pre class="tsx"><code>{team.scores &amp;&amp; &lt;TeamCard team={team} /&gt;}</code></pre>
+<p>But beware: <code>0 &amp;&amp; &lt;Foo /&gt;</code> renders
+<code>0</code>, not nothing. Use
+<code>team.scores != null &amp;&amp; &lt;TeamCard /&gt;</code> if you
+might have a numeric-zero value.</p>
+<h3 id="empty-states">8.2. Empty states</h3>
+<p>When an array is empty, <strong>render an empty state, not a blank
+gap</strong>:</p>
+<pre class="tsx"><code>{matches.length === 0 ? (
+  &lt;div role=&quot;status&quot;&gt;No matches yet for this round.&lt;/div&gt;
+) : (
+  matches.map(/* ... */)
+)}</code></pre>
+<p>Empty states are the difference between a broken-looking app and a
+polished one. Apply this everywhere a list might be empty.</p>
+</section>
+<section id="vibe-prompt-you-would-have-used" class="slide level2">
+<h2>9. Vibe prompt you would have used</h2>
+<blockquote>
+<p>“Audit my Next.js 14 app for production polish. Specifically: (1) add
+<code>role="tablist"</code>, <code>role="tab"</code>,
+<code>role="tabpanel"</code>, and <code>aria-selected</code> to my tab
+bar. (2) Generate a class-based <code>ErrorBoundary</code> component
+with a friendly fallback UI and a <code>componentDidCatch</code> that
+logs to console. Wrap the root component in it. (3) Add
+<code>app/loading.tsx</code> with a polite <code>aria-live</code>
+spinner. (4) Add a <code>metadata</code> export with title and
+description. Don’t change my existing styling — just layer the a11y and
+resilience on top.”</p>
+</blockquote>
+<p>That prompt is <strong>specific</strong>. It calls out exactly which
+ARIA attributes, which React feature, which file paths. The LLM produces
+clean code instead of generic boilerplate.</p>
+</section>
+<section id="check-yourself" class="slide level2">
+<h2>10. CHECK YOURSELF</h2>
+<p>Don’t proceed until you can explain each of these:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Why does a tab bar need
+<code>role="tablist"</code> <em>and</em> <code>role="tab"</code>
+<em>and</em> <code>role="tabpanel"</code>?</label></li>
+<li><label><input type="checkbox" />What’s the difference between
+<code>aria-live="polite"</code> and
+<code>aria-live="assertive"</code>?</label></li>
+<li><label><input type="checkbox" />Why is an error boundary still a
+class component in 2024?</label></li>
+<li><label><input type="checkbox" />What does
+<code>getDerivedStateFromError</code> do that
+<code>componentDidCatch</code> doesn’t?</label></li>
+<li><label><input type="checkbox" />Why doesn’t an error boundary catch
+errors thrown in event handlers?</label></li>
+<li><label><input type="checkbox" />What’s the practical effect of
+wrapping a tab in
+<code>dynamic(() =&gt; import(...), { ssr: false })</code>?</label></li>
+<li><label><input type="checkbox" />What contrast ratio does Lighthouse
+demand for body text?</label></li>
+<li><label><input type="checkbox" />When would you use
+<code>React.memo</code>?</label></li>
+<li><label><input type="checkbox" />What’s the danger of
+<code>something &amp;&amp; &lt;Foo /&gt;</code> when
+<code>something</code> could be 0?</label></li>
+<li><label><input type="checkbox" />Why does the “five-rule a11y
+checklist” matter more than memorizing all of WCAG?</label></li>
+</ul>
+<p>If any answer is fuzzy, scroll back. The next lesson covers
+deployment and testing — both of which assume your app is shippable.</p>
+</section>
+<section id="where-you-are-now" class="slide level2">
+<h2>11. Where you are now</h2>
+<p>Your app is now <strong>resilient</strong>:</p>
+<ul>
+<li>Screen-reader users can navigate it.</li>
+<li>A crash in one tab doesn’t kill the page.</li>
+<li>Loading states are in place for the day you fetch live data.</li>
+<li>The bundle is reasonable; the heavy pieces are flagged for future
+optimization.</li>
+<li>Lighthouse won’t embarrass you.</li>
+</ul>
+<p>Move on to <strong><a
+href="./02-deployment-and-testing.md">02-deployment-and-testing.md</a></strong>.</p>
+</section></section>
+<section>
+<section id="lesson-7.2-deployment-and-testing"
+class="title-slide slide level1">
+<h1>Lesson 7.2 — Deployment and Testing</h1>
+<blockquote>
+<p><strong>Code that isn’t deployed isn’t real, and code that isn’t
+tested isn’t trusted.</strong> This lesson teaches you to ship the app
+to the public internet and to write the small set of tests that catch
+the bugs that actually happen.</p>
+</blockquote>
+<p>By the end of this lesson you will:</p>
+<ul>
+<li>Deploy this Next.js app to <strong>Vercel</strong> through GitHub,
+with preview deployments on every PR.</li>
+<li>Understand the difference between <strong>build-time</strong> and
+<strong>run-time</strong> in Next.js.</li>
+<li>Configure <strong>environment variables</strong> safely (you don’t
+have any <em>yet</em>, but you will).</li>
+<li>Set up <strong>Vitest + React Testing Library</strong> for unit
+tests.</li>
+<li>Write the three tests that actually matter for this app.</li>
+<li>Set up <strong>Playwright</strong> for one end-to-end smoke
+test.</li>
+<li>Add a <strong>GitHub Actions CI</strong> workflow that runs tests on
+every push.</li>
+</ul>
+<p>This is a long lesson because it covers two big topics. Both are
+tightly tied together — <em>you can’t deploy with confidence without
+tests, and there’s no point writing tests if you can’t ship.</em></p>
+</section>
+<section id="part-a-deployment" class="slide level2">
+<h2>Part A — Deployment</h2>
+</section>
+<section id="the-deployment-story-for-next.js" class="slide level2">
+<h2>1. The deployment story for Next.js</h2>
+<p>Next.js was built by Vercel. They host the framework, they host the
+docs, they host the deployment platform. <strong>The path of least
+resistance is Vercel.</strong> Use it for personal projects. Use it for
+the interview-portfolio version of this app.</p>
+<p>For a corporate gig, you might end up on AWS, GCP, Cloudflare, or
+self-hosted Kubernetes. Those all work — Next.js exports a Node.js
+server (<code>next start</code>) or static files
+(<code>next export</code>). The principles transfer. We’re going to use
+Vercel because it’s:</p>
+<ul>
+<li><strong>Free for hobby projects.</strong></li>
+<li><strong>Zero-config</strong> — point it at a GitHub repo and you’re
+done.</li>
+<li><strong>Preview deployments</strong> — every PR gets its own
+URL.</li>
+<li><strong>Built-in CDN</strong> — your global users see fast
+loads.</li>
+</ul>
+<blockquote>
+<p><strong>Per the project rules</strong>, deployment goes through
+<strong>GitHub → Vercel automatically</strong>. We are <em>not</em>
+using <code>vercel deploy</code> from the CLI. We are <em>not</em> using
+Netlify. We push to GitHub; Vercel pulls from GitHub.</p>
+</blockquote>
+</section>
+<section id="connect-the-repo-to-vercel" class="slide level2">
+<h2>2. Connect the repo to Vercel</h2>
+<p>You only do this once. Walkthrough:</p>
+<ol type="1">
+<li>Go to <a href="https://vercel.com">vercel.com</a> and sign in with
+your GitHub account.</li>
+<li>Click <strong>Add New → Project</strong>.</li>
+<li>Vercel will list your GitHub repos. Pick
+<code>reverse-understanding</code>.</li>
+<li>Vercel auto-detects Next.js. Leave the build command
+(<code>next build</code>) and output directory (<code>.next</code>) at
+defaults.</li>
+<li>Click <strong>Deploy</strong>.</li>
+</ol>
+<p>Two minutes later you’ll have a live URL like
+<code>https://reverse-understanding.vercel.app</code>. Open it. Click
+around. Confirm the standings render, the analytics charts appear,
+etc.</p>
+<p>If anything is broken on the live site but works locally,
+<strong>read the build logs first</strong>. Vercel surfaces them in the
+deployment detail page. The most common causes:</p>
+<ul>
+<li>A <code>lib/</code> constant that imports from a Node-only module
+(e.g., <code>fs</code>).</li>
+<li>A component using <code>'use client'</code> incorrectly (or
+<em>not</em> using it when it should).</li>
+<li>A TypeScript error that <code>npm run dev</code> ignored but
+<code>next build</code> rejected.</li>
+</ul>
+</section>
+<section id="preview-deployments" class="slide level2">
+<h2>3. Preview deployments</h2>
+<p>Once connected, <strong>every push to a non-<code>main</code>
+branch</strong> triggers a preview deployment. Vercel comments on the PR
+with a link.</p>
+<p>Try it:</p>
+<pre class="pwsh"><code>git checkout -b polish/error-boundary
+# make changes
+git add .
+git commit -m &quot;Add error boundary&quot;
+git push -u origin polish/error-boundary
+gh pr create --title &quot;Add error boundary&quot; --body &quot;Wraps the root component.&quot;</code></pre>
+<p>Within ~90 seconds, the PR will have a comment from Vercel:
+<em>“Deployed to <a
+href="https://reverse-understanding-git-polish-error-boundary-yourname.vercel.app"
+class="uri">https://reverse-understanding-git-polish-error-boundary-yourname.vercel.app</a>”</em>.</p>
+<p>You and your reviewers can now click through that URL and verify the
+change <em>visually</em> — without anyone running it locally. This is
+the workflow that makes design review possible at scale.</p>
+</section>
+<section id="environment-variables" class="slide level2">
+<h2>4. Environment variables</h2>
+<p>Right now, this app has no secrets. All data is hardcoded in
+<code>lib/</code>. The day you add a real backend (e.g., fetching
+tournament data from a Sportradar API), you’ll need to handle:</p>
+<ul>
+<li>An API key.</li>
+<li>An API base URL.</li>
+<li>Maybe a feature-flag value.</li>
+</ul>
+<p>In Next.js, env vars come in two flavors:</p>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 60%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr>
+<th>Prefix</th>
+<th>Where it’s available</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NEXT_PUBLIC_*</code></td>
+<td>Client <em>and</em> server. <strong>Bundled into the JS sent to
+browsers.</strong> Use only for <em>non-secret</em> values.</td>
+<td><code>NEXT_PUBLIC_API_BASE</code></td>
+</tr>
+<tr>
+<td>(no prefix)</td>
+<td>Server only. Available in server components, API routes, and
+<code>getServerSideProps</code>-equivalents.</td>
+<td><code>SPORTRADAR_API_KEY</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rule of thumb:</strong> any value the browser must not see
+goes without the prefix. Anything the browser <em>does</em> see — e.g.,
+a public CDN URL — gets the prefix.</p>
+<h3 id="local-.env.local">4.1. Local <code>.env.local</code></h3>
+<p>Create <code>.env.local</code> in the project root (it’s already
+gitignored):</p>
+<pre><code>NEXT_PUBLIC_API_BASE=https://api.example.com
+SPORTRADAR_API_KEY=sk_test_abc123</code></pre>
+<p>Reference these in code:</p>
+<pre class="tsx"><code>const apiBase = process.env.NEXT_PUBLIC_API_BASE;
+const apiKey = process.env.SPORTRADAR_API_KEY; // server only</code></pre>
+<h3 id="vercel-environment-variables">4.2. Vercel environment
+variables</h3>
+<p>In the Vercel dashboard: <strong>Project → Settings → Environment
+Variables</strong>. Add the same keys, but with the production values.
+Choose which environments they apply to: Production, Preview,
+Development.</p>
+<p>The day you onboard another developer, they don’t need your
+<code>.env.local</code>. They run <code>vercel env pull</code> and
+Vercel fills it in. (We’re not using the CLI for deployment. We
+<em>are</em> allowed to use it for env-var convenience.)</p>
+</section>
+<section id="build-time-vs.-run-time" class="slide level2">
+<h2>5. Build-time vs. run-time</h2>
+<p>This trips up most React developers moving to Next.js. Internalize it
+now.</p>
+<ul>
+<li><strong>Build time</strong> — when <code>next build</code> runs,
+either locally or on Vercel. The output is a <code>.next/</code>
+directory with prerendered HTML, JS bundles, and a manifest.</li>
+<li><strong>Run time</strong> — when a user hits the deployed app.
+Vercel serves the prebuilt assets and runs the Node server for any
+dynamic pages.</li>
+</ul>
+<p>Pages in App Router come in three flavors:</p>
+<ol type="1">
+<li><strong>Static</strong> (the default for our app) — rendered at
+build time, served as static HTML. Fastest possible load.</li>
+<li><strong>Dynamic SSR</strong> — rendered on every request from a
+server component. Slower but always fresh.</li>
+<li><strong>Client-only</strong> — <code>'use client'</code> at the top
+means the component runs in the browser only.</li>
+</ol>
+<p>Our app is fully static. The <code>lib/</code> data is baked into the
+bundle at build time. To make it <em>dynamic</em> — e.g., to fetch the
+latest match results from an API — we’d convert
+<code>app/page.tsx</code> to be <code>async</code> and
+<code>await</code> a <code>fetch</code>. That moves it from category 1
+to category 2.</p>
+<p>Why does this matter for an interview? Because someone <em>will</em>
+ask: <em>“Where does this app get its data?”</em> and <em>“What would
+you change to support live data?”</em> — and you need to be able to
+answer with the build-time / run-time vocabulary.</p>
+</section>
+<section id="part-b-testing" class="slide level2">
+<h2>Part B — Testing</h2>
+</section>
+<section id="the-testing-pyramid-trophy" class="slide level2">
+<h2>6. The testing pyramid (Trophy)</h2>
+<p>The classical <em>test pyramid</em> says: many unit tests, some
+integration tests, few E2E tests.</p>
+<p>The modern <em>testing trophy</em> (Kent C. Dodds) says: many
+integration tests, some unit tests, a small E2E layer, and static
+checking (TypeScript) underneath everything. We’re using the trophy
+mental model:</p>
+<ul>
+<li><strong>Static</strong> — TypeScript already catches a huge category
+of bugs. <strong>Free testing.</strong> This is why we paid the upfront
+type-discipline tax in Chapter 1.</li>
+<li><strong>Unit</strong> — pure functions in
+<code>lib/scoring.ts</code>. Cheap, fast, lots of cases.</li>
+<li><strong>Integration</strong> — render a component, simulate user
+clicks, assert what changed. The <strong>highest-value</strong>
+tier.</li>
+<li><strong>E2E</strong> — open a real browser, navigate the deployed
+app, click through. Slow, brittle, but irreplaceable for
+confidence.</li>
+</ul>
+<p>For this app, we’re going to write:</p>
+<ul>
+<li><strong>3 unit tests</strong> for <code>scorePick</code> and
+<code>calculateTeamScores</code>.</li>
+<li><strong>1 integration test</strong> for the standings tab
+rendering.</li>
+<li><strong>1 E2E test</strong> that confirms tab switching works.</li>
+</ul>
+<p>That’s five tests total. <strong>It’s enough.</strong> Senior
+engineers know the value curve drops off fast — your time is better
+spent writing more <em>features</em> than more <em>tests of
+features</em>.</p>
+</section>
+<section id="install-vitest-react-testing-library" class="slide level2">
+<h2>7. Install Vitest + React Testing Library</h2>
+<p>Vitest is the modern Jest. It’s fast, ESM-native, and integrates with
+Vite/Next out of the box.</p>
+<pre class="pwsh"><code>npm install -D vitest @vitejs/plugin-react @testing-library/react @testing-library/jest-dom @testing-library/user-event jsdom</code></pre>
+<p>Add a <code>vitest.config.ts</code> at the root:</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { defineConfig } <span class="im">from</span> <span class="st">&#39;vitest/config&#39;</span><span class="op">;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> react <span class="im">from</span> <span class="st">&#39;@vitejs/plugin-react&#39;</span><span class="op">;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> path <span class="im">from</span> <span class="st">&#39;path&#39;</span><span class="op">;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="fu">defineConfig</span>({</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  plugins<span class="op">:</span> [<span class="fu">react</span>()]<span class="op">,</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  test<span class="op">:</span> {</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    environment<span class="op">:</span> <span class="st">&#39;jsdom&#39;</span><span class="op">,</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    globals<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    setupFiles<span class="op">:</span> [<span class="st">&#39;./vitest.setup.ts&#39;</span>]<span class="op">,</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  resolve<span class="op">:</span> {</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    alias<span class="op">:</span> {</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>      <span class="st">&#39;@&#39;</span><span class="op">:</span> path<span class="op">.</span><span class="fu">resolve</span>(<span class="bu">__dirname</span><span class="op">,</span> <span class="st">&#39;.&#39;</span>)<span class="op">,</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<p>And a <code>vitest.setup.ts</code>:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="st">&#39;@testing-library/jest-dom/vitest&#39;</span><span class="op">;</span></span></code></pre></div>
+<p>Add to <code>package.json</code> scripts:</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;test&quot;</span><span class="er">:</span> <span class="st">&quot;vitest run&quot;</span><span class="er">,</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;test:watch&quot;</span><span class="er">:</span> <span class="st">&quot;vitest&quot;</span></span></code></pre></div>
+<p>Run <code>npm test</code>. You should see <em>“No test files found,
+exiting with code 1.”</em> Good — the framework is wired up.</p>
+</section>
+<section id="unit-tests-for-scorepick-and-calculateteamscores"
+class="slide level2">
+<h2>8. Unit tests for <code>scorePick</code> and
+<code>calculateTeamScores</code></h2>
+<p>Create <code>lib/scoring.test.ts</code>:</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { describe<span class="op">,</span> it<span class="op">,</span> expect } <span class="im">from</span> <span class="st">&#39;vitest&#39;</span><span class="op">;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { scorePick<span class="op">,</span> calculateTeamScores } <span class="im">from</span> <span class="st">&#39;./scoring&#39;</span><span class="op">;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="im">type</span> { Match<span class="op">,</span> Team } <span class="im">from</span> <span class="st">&#39;./types&#39;</span><span class="op">;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(<span class="st">&#39;scorePick&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">it</span>(<span class="st">&#39;returns 3 when the pick matches the winner&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> match<span class="op">:</span> Match <span class="op">=</span> { p1<span class="op">:</span> <span class="st">&#39;A&#39;</span><span class="op">,</span> p2<span class="op">:</span> <span class="st">&#39;B&#39;</span><span class="op">,</span> winner<span class="op">:</span> <span class="st">&#39;A&#39;</span><span class="op">,</span> score<span class="op">:</span> <span class="st">&#39;10-5&#39;</span> }<span class="op">;</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect</span>(<span class="fu">scorePick</span>(<span class="st">&#39;A&#39;</span><span class="op">,</span> match))<span class="op">.</span><span class="fu">toBe</span>(<span class="dv">3</span>)<span class="op">;</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">it</span>(<span class="st">&#39;returns 1 when the pick is wrong&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> match<span class="op">:</span> Match <span class="op">=</span> { p1<span class="op">:</span> <span class="st">&#39;A&#39;</span><span class="op">,</span> p2<span class="op">:</span> <span class="st">&#39;B&#39;</span><span class="op">,</span> winner<span class="op">:</span> <span class="st">&#39;A&#39;</span><span class="op">,</span> score<span class="op">:</span> <span class="st">&#39;10-5&#39;</span> }<span class="op">;</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect</span>(<span class="fu">scorePick</span>(<span class="st">&#39;B&#39;</span><span class="op">,</span> match))<span class="op">.</span><span class="fu">toBe</span>(<span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">it</span>(<span class="st">&#39;returns null when the match has no winner yet&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> match<span class="op">:</span> Match <span class="op">=</span> { p1<span class="op">:</span> <span class="st">&#39;A&#39;</span><span class="op">,</span> p2<span class="op">:</span> <span class="st">&#39;B&#39;</span> }<span class="op">;</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect</span>(<span class="fu">scorePick</span>(<span class="st">&#39;A&#39;</span><span class="op">,</span> match))<span class="op">.</span><span class="fu">toBeNull</span>()<span class="op">;</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(<span class="st">&#39;calculateTeamScores&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">it</span>(<span class="st">&#39;returns a total of zero for a team with no completed picks&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> team<span class="op">:</span> Team <span class="op">=</span> {</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>      name<span class="op">:</span> <span class="st">&#39;Test Team&#39;</span><span class="op">,</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>      color<span class="op">:</span> <span class="st">&#39;#000&#39;</span><span class="op">,</span></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>      icon<span class="op">:</span> <span class="st">&#39;🎱&#39;</span><span class="op">,</span></span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>      r1<span class="op">:</span> []<span class="op">,</span></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>      r2<span class="op">:</span> []<span class="op">,</span></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>      qf<span class="op">:</span> []<span class="op">,</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>      sf<span class="op">:</span> []<span class="op">,</span></span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>      final<span class="op">:</span> <span class="st">&#39;&#39;</span><span class="op">,</span></span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> scores <span class="op">=</span> <span class="fu">calculateTeamScores</span>(team)<span class="op">;</span></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect</span>(scores<span class="op">.</span><span class="at">total</span>)<span class="op">.</span><span class="fu">toBe</span>(<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">it</span>(<span class="st">&#39;contains a details array for every round&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> team<span class="op">:</span> Team <span class="op">=</span> {</span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>      name<span class="op">:</span> <span class="st">&#39;Test Team&#39;</span><span class="op">,</span></span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>      color<span class="op">:</span> <span class="st">&#39;#000&#39;</span><span class="op">,</span></span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>      icon<span class="op">:</span> <span class="st">&#39;🎱&#39;</span><span class="op">,</span></span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>      r1<span class="op">:</span> []<span class="op">,</span></span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>      r2<span class="op">:</span> []<span class="op">,</span></span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>      qf<span class="op">:</span> []<span class="op">,</span></span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>      sf<span class="op">:</span> []<span class="op">,</span></span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a>      final<span class="op">:</span> <span class="st">&#39;&#39;</span><span class="op">,</span></span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span>
+<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> scores <span class="op">=</span> <span class="fu">calculateTeamScores</span>(team)<span class="op">;</span></span>
+<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect</span>(scores)<span class="op">.</span><span class="fu">toHaveProperty</span>(<span class="st">&#39;r1Details&#39;</span>)<span class="op">;</span></span>
+<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect</span>(scores)<span class="op">.</span><span class="fu">toHaveProperty</span>(<span class="st">&#39;r2Details&#39;</span>)<span class="op">;</span></span>
+<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect</span>(scores)<span class="op">.</span><span class="fu">toHaveProperty</span>(<span class="st">&#39;qfDetails&#39;</span>)<span class="op">;</span></span>
+<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect</span>(scores)<span class="op">.</span><span class="fu">toHaveProperty</span>(<span class="st">&#39;sfDetails&#39;</span>)<span class="op">;</span></span>
+<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">expect</span>(scores)<span class="op">.</span><span class="fu">toHaveProperty</span>(<span class="st">&#39;fDetails&#39;</span>)<span class="op">;</span></span>
+<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb23-56"><a href="#cb23-56" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<h3 id="whats-worth-noting">What’s worth noting</h3>
+<ul>
+<li>We test the <strong>pure functions</strong> because they’re cheap
+and high-confidence. Pure-function tests are the highest ROI tests in
+any codebase.</li>
+<li>We test the <strong>shape of the return value</strong>, not specific
+scores from real data. Tying tests to real-world results is brittle —
+when the tournament resets next year, your tests break for the wrong
+reason.</li>
+<li>We test <strong>boundary conditions</strong>: empty arrays,
+undefined winners. Bugs hide in the boundaries.</li>
+</ul>
+<p>Run <code>npm test</code>. All three should pass. (Adjust the type
+imports if your <code>Team</code> interface uses slightly different
+field names.)</p>
+</section>
+<section id="integration-test-for-the-standings-tab"
+class="slide level2">
+<h2>9. Integration test for the standings tab</h2>
+<p>Create <code>components/tabs/StandingsTab.test.tsx</code>:</p>
+<pre class="tsx"><code>import { describe, it, expect } from &#39;vitest&#39;;
+import { render, screen } from &#39;@testing-library/react&#39;;
+import StandingsTab from &#39;./StandingsTab&#39;;
+import { TEAMS } from &#39;@/lib/teams&#39;;
+import { calculateTeamScores } from &#39;@/lib/scoring&#39;;
+
+describe(&#39;StandingsTab&#39;, () =&gt; {
+  it(&#39;renders every team name&#39;, () =&gt; {
+    const teams = TEAMS.map((t) =&gt; ({ ...t, scores: calculateTeamScores(t) }))
+      .sort((a, b) =&gt; b.scores.total - a.scores.total);
+
+    render(&lt;StandingsTab teams={teams} onTeamClick={() =&gt; {}} /&gt;);
+
+    for (const t of TEAMS) {
+      expect(screen.getByText(t.name)).toBeInTheDocument();
+    }
+  });
+});</code></pre>
+<p>This test does what a real user does:</p>
+<ol type="1">
+<li><strong>Renders the component</strong> with realistic props.</li>
+<li><strong>Asks the DOM</strong>: “Is the team name on screen?”</li>
+</ol>
+<p>If you change the styling, this test still passes. If you
+accidentally <code>.filter()</code> out half the teams, this test fails.
+<strong>It’s testing behavior, not implementation.</strong></p>
+<p>This is the React Testing Library philosophy in two sentences:</p>
+<blockquote>
+<p>The more your tests resemble the way your software is used, the more
+confidence they can give you.</p>
+<p>— Kent C. Dodds</p>
+</blockquote>
+<p>Memorize that. It’s also a great interview answer to <em>“How do you
+decide what to test?”</em></p>
+</section>
+<section id="end-to-end-test-with-playwright" class="slide level2">
+<h2>10. End-to-end test with Playwright</h2>
+<p>Install:</p>
+<pre class="pwsh"><code>npm install -D @playwright/test
+npx playwright install --with-deps</code></pre>
+<p>Create <code>e2e/smoke.spec.ts</code>:</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { test<span class="op">,</span> expect } <span class="im">from</span> <span class="st">&#39;@playwright/test&#39;</span><span class="op">;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">test</span>(<span class="st">&#39;user can switch tabs&#39;</span><span class="op">,</span> <span class="kw">async</span> ({ page }) <span class="kw">=&gt;</span> {</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> page<span class="op">.</span><span class="fu">goto</span>(<span class="st">&#39;http://localhost:3000&#39;</span>)<span class="op">;</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> <span class="fu">expect</span>(page<span class="op">.</span><span class="fu">getByText</span>(<span class="st">&#39;Standings&#39;</span><span class="op">,</span> { exact<span class="op">:</span> <span class="kw">false</span> }))<span class="op">.</span><span class="fu">toBeVisible</span>()<span class="op">;</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> page<span class="op">.</span><span class="fu">getByRole</span>(<span class="st">&#39;tab&#39;</span><span class="op">,</span> { name<span class="op">:</span> <span class="ss">/matches/i</span> })<span class="op">.</span><span class="fu">click</span>()<span class="op">;</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> <span class="fu">expect</span>(page<span class="op">.</span><span class="fu">getByText</span>(<span class="ss">/Round 1/i</span>))<span class="op">.</span><span class="fu">toBeVisible</span>()<span class="op">;</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> page<span class="op">.</span><span class="fu">getByRole</span>(<span class="st">&#39;tab&#39;</span><span class="op">,</span> { name<span class="op">:</span> <span class="ss">/analytics/i</span> })<span class="op">.</span><span class="fu">click</span>()<span class="op">;</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">await</span> <span class="fu">expect</span>(page<span class="op">.</span><span class="fu">getByText</span>(<span class="ss">/points breakdown/i</span>))<span class="op">.</span><span class="fu">toBeVisible</span>()<span class="op">;</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<p>Add a <code>playwright.config.ts</code>:</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { defineConfig } <span class="im">from</span> <span class="st">&#39;@playwright/test&#39;</span><span class="op">;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="fu">defineConfig</span>({</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  testDir<span class="op">:</span> <span class="st">&#39;./e2e&#39;</span><span class="op">,</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  use<span class="op">:</span> {</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    baseURL<span class="op">:</span> <span class="st">&#39;http://localhost:3000&#39;</span><span class="op">,</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  webServer<span class="op">:</span> {</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    command<span class="op">:</span> <span class="st">&#39;npm run dev&#39;</span><span class="op">,</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    url<span class="op">:</span> <span class="st">&#39;http://localhost:3000&#39;</span><span class="op">,</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    reuseExistingServer<span class="op">:</span> <span class="op">!</span><span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">CI</span><span class="op">,</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<p>Add to <code>package.json</code>:</p>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;test:e2e&quot;</span><span class="er">:</span> <span class="st">&quot;playwright test&quot;</span></span></code></pre></div>
+<p>Run <code>npm run test:e2e</code>. Playwright will spin up the dev
+server, open a real Chromium browser, and walk through the test. Take a
+moment to watch it; it’s satisfying.</p>
+<h3 id="what-this-test-catches">What this test catches</h3>
+<ul>
+<li><strong>Hydration errors</strong> — if the server-rendered HTML
+doesn’t match the client tree, Playwright would see a console
+error.</li>
+<li><strong>Routing bugs</strong> — if a tab click stops working, the
+test fails.</li>
+<li><strong>Missing accessibility roles</strong> —
+<code>getByRole('tab')</code> only finds elements with the right ARIA.
+Half of writing E2E tests is being forced to add proper a11y, which is a
+feature.</li>
+</ul>
+</section>
+<section id="ci-with-github-actions" class="slide level2">
+<h2>11. CI with GitHub Actions</h2>
+<p>Create <code>.github/workflows/ci.yml</code>:</p>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> CI</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pull_request</span><span class="kw">:</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">test</span><span class="kw">:</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/setup-node@v4</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">node-version</span><span class="kw">:</span><span class="at"> </span><span class="dv">20</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">cache</span><span class="kw">:</span><span class="at"> npm</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm ci</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm run lint</span></span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm test</span></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">run</span><span class="kw">:</span><span class="at"> npm run build</span></span></code></pre></div>
+<p>Push that to GitHub. Open the <strong>Actions</strong> tab. Within ~2
+minutes you’ll see a green check next to your commit.</p>
+<h3 id="why-include-npm-run-build">Why include
+<code>npm run build</code>?</h3>
+<p>Because a passing test suite isn’t worth much if the production build
+is broken. The build is itself a giant smoke test — it type-checks,
+bundles, and lints everything.</p>
+<h3 id="why-not-run-e2e-in-ci-yet">Why not run E2E in CI yet?</h3>
+<p>Playwright in CI requires a Linux runner with browsers preinstalled,
+plus more orchestration. It’s worth doing eventually. For a personal
+portfolio project, run E2E locally before pushing big changes.</p>
+</section>
+<section id="the-five-test-rule" class="slide level2">
+<h2>12. The five-test rule</h2>
+<p>If you take one thing from this lesson:</p>
+<blockquote>
+<p><strong>A small project deserves a small test suite. Don’t aim for
+100% coverage; aim for the five tests that catch the bugs that actually
+happen.</strong></p>
+</blockquote>
+<p>For <em>this</em> app, those are:</p>
+<ol type="1">
+<li><code>scorePick</code> returns the right number for the right
+inputs. (Unit)</li>
+<li><code>calculateTeamScores</code> doesn’t crash on missing data.
+(Unit)</li>
+<li>The standings tab renders all teams. (Integration)</li>
+<li>Tab switching works. (E2E)</li>
+<li>The build succeeds. (CI)</li>
+</ol>
+<p>Anything beyond this is bonus. Ship and iterate.</p>
+</section>
+<section id="vibe-prompt-you-would-have-used-1" class="slide level2">
+<h2>13. Vibe prompt you would have used</h2>
+<blockquote>
+<p>“I have a Next.js 14 app deployed on Vercel via GitHub. Set up Vitest
++ React Testing Library. Write three unit tests for my pure scoring
+functions in <code>lib/scoring.ts</code> and one integration test that
+renders <code>&lt;StandingsTab&gt;</code> with realistic props and
+asserts every team name is in the DOM. Then set up Playwright with a
+single E2E test that opens the home page, clicks the Matches tab, and
+asserts that ‘Round 1’ is visible. Finally, write a GitHub Actions
+workflow that runs lint, test, and build on every push. Use TypeScript
+everywhere.”</p>
+</blockquote>
+<p>Notice:</p>
+<ul>
+<li><strong>One LLM, four deliverables.</strong> A focused prompt
+produces focused output.</li>
+<li><strong>Specific assertions.</strong> Saying “every team name is in
+the DOM” gives the LLM a target instead of generating vague test
+scaffolding.</li>
+<li><strong>Toolchain named.</strong> Vitest <em>and</em> RTL
+<em>and</em> Playwright <em>and</em> Actions. The LLM doesn’t have to
+guess.</li>
+</ul>
+</section>
+<section id="check-yourself-1" class="slide level2">
+<h2>14. CHECK YOURSELF</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />What’s the difference between
+<code>NEXT_PUBLIC_*</code> and an unprefixed env var?</label></li>
+<li><label><input type="checkbox" />What’s a <em>preview deployment</em>
+and why are they valuable?</label></li>
+<li><label><input type="checkbox" />What’s the difference between
+build-time and run-time in Next.js?</label></li>
+<li><label><input type="checkbox" />Why is testing pure functions the
+highest-ROI testing you can do?</label></li>
+<li><label><input type="checkbox" />What does Kent C. Dodds mean by
+<em>“the more your tests resemble the way your software is used, the
+more confidence they can give you”</em>?</label></li>
+<li><label><input type="checkbox" />Why does Playwright’s
+<code>getByRole('tab')</code> reward you for writing accessible
+code?</label></li>
+<li><label><input type="checkbox" />What’s the testing trophy, and how
+does it differ from the testing pyramid?</label></li>
+<li><label><input type="checkbox" />Why include
+<code>npm run build</code> in CI?</label></li>
+<li><label><input type="checkbox" />What are the 5 tests this app needs,
+and why does it not need more?</label></li>
+<li><label><input type="checkbox" />How would you switch from build-time
+data to live data fetched from an API?</label></li>
+</ul>
+</section>
+<section id="where-you-are-now-1" class="slide level2">
+<h2>15. Where you are now</h2>
+<ul>
+<li>The app is live on the public internet.</li>
+<li>Every PR gets a preview URL.</li>
+<li>Five tests guard the things that matter.</li>
+<li>CI runs on every push.</li>
+</ul>
+<p>You can confidently say <em>“the app is shipped”</em> in an
+interview. Move on to <strong><a
+href="./03-interview-narrative.md">03-interview-narrative.md</a></strong>
+— the closing lesson, where we turn this entire project into a 90-second
+story you can tell from memory.</p>
+</section></section>
+<section>
+<section id="lesson-7.3-the-interview-narrative"
+class="title-slide slide level1">
+<h1>Lesson 7.3 — The Interview Narrative</h1>
+<blockquote>
+<p><strong>Building the app got you in the room. Talking about it gets
+you the offer.</strong> This is the lesson that turns 1,654 lines of
+code into a 90-second story.</p>
+</blockquote>
+<p>By the end of this lesson you will:</p>
+<ul>
+<li>Have a memorized <strong>90-second walkthrough</strong> of the
+project that hits architecture, decisions, and trade-offs.</li>
+<li>Know how to answer the <strong>ten interview questions</strong> that
+are asked about React projects 95% of the time.</li>
+<li>Have a tight <strong>vibe-coding prompt library</strong> distilled
+from this entire course.</li>
+<li>Know how to handle the dreaded <em>“What would you do
+differently?”</em> question.</li>
+<li>Be ready to share the GitHub link with confidence.</li>
+</ul>
+<p>This is the closing lesson. It’s the most important. The strongest
+engineer in the world loses the interview to a slightly-less-strong
+engineer who <em>talks better</em> about their work. We’re going to fix
+that for you.</p>
+</section>
+<section id="the-90-second-walkthrough" class="slide level2">
+<h2>1. The 90-second walkthrough</h2>
+<p>When the interviewer says <em>“Tell me about a project you’ve worked
+on,”</em> you have ninety seconds before they zone out. Use them like
+this:</p>
+<h3 id="the-script-memorize-this-shape-swap-your-own-words">1.1. The
+script (memorize this shape, swap your own words)</h3>
+<blockquote>
+<p><em>“This is <strong>Snooker Fantasy League</strong> — a Next.js 14
+app I built for an 8-team fantasy league my friends and I run. The data
+is the picks each team made for each round of the World Snooker
+Championship, and the app scores those picks against actual
+results.</em></p>
+<p><em>Architecturally, it’s a single-page app with five tabs:
+standings, matches, predictions, players, and analytics. The state lives
+in one orchestrator component at the top — <code>useState</code> for the
+active tab and the selected team, <code>useMemo</code> to derive scored
+teams from raw team data so I don’t recompute on every render. Pure
+scoring functions in <code>lib/</code> make the whole thing trivial to
+unit-test.</em></p>
+<p><em>The interesting decisions were two: first, picks are stored as
+<strong>arrays where index matches the match-index</strong> instead of
+using IDs, which keeps the scoring code five lines but enforces an
+invariant the type system can’t catch. Second, the <strong>analytics tab
+pivots team-data into match-data</strong> to answer “where did the
+league agree?” — that’s a cleaner mental model than trying to make the
+chart understand teams.</em></p>
+<p><em>I deployed it on Vercel through GitHub. Vitest covers the pure
+logic, Playwright covers the tab navigation, and Lighthouse comes back
+at 95+ across the board.</em></p>
+<p><em>If I were starting over I’d probably use a <strong>discriminated
+union</strong> for the agreement-data type — I went with optional fields
+and it works, but the union would be stricter.”</em></p>
+</blockquote>
+<p>That’s around 200 words, ~75 seconds at a normal pace. Practice it
+out loud until it feels conversational.</p>
+<h3 id="why-this-script-works">1.2. Why this script works</h3>
+<p>It hits the <strong>five things every interviewer wants to
+hear</strong>:</p>
+<ol type="1">
+<li><strong>What is it?</strong> (Snooker Fantasy League, fantasy sports
+app.)</li>
+<li><strong>What technology?</strong> (Next.js 14, TypeScript.)</li>
+<li><strong>What’s the architecture?</strong> (Single orchestrator,
+useState + useMemo, pure functions.)</li>
+<li><strong>What was hard / what did I think about?</strong>
+(Index-based picks, pivot pattern.)</li>
+<li><strong>How is it run?</strong> (Vercel via GitHub, tested,
+audited.)</li>
+</ol>
+<p>And it <strong>invites the next question</strong> with the closing
+<em>“if I were starting over…”</em> line. Interviewers love when you
+bring up your own trade-offs — it signals you’ve thought past <em>“it
+works on my machine.”</em></p>
+<h3 id="the-variant-for-non-technical-interviewers">1.3. The variant for
+non-technical interviewers</h3>
+<p>If you’re talking to a recruiter or a non-engineer hiring
+manager:</p>
+<blockquote>
+<p><em>“It’s a fantasy sports site for an 8-team snooker league. You log
+in, see who’s leading, drill into one team’s picks, and look at charts
+of who agreed with whom. It’s hosted free on Vercel. Took me about two
+weekends. I built it because I wanted a hands-on excuse to get fluent in
+Next.js and TypeScript, and a real spreadsheet of friends’ picks was the
+perfect data set.”</em></p>
+</blockquote>
+<p>No jargon. Outcome-first. Suitable for the first 5 minutes of any
+interview.</p>
+</section>
+<section id="the-ten-questions-you-will-be-asked" class="slide level2">
+<h2>2. The ten questions you will be asked</h2>
+<p>Every React/Next.js interview asks variations of these. We’re going
+to answer each one <em>using this app as the example</em>. Memorize the
+structure.</p>
+<h3 id="walk-me-through-your-folder-structure.">2.1. <em>“Walk me
+through your folder structure.”</em></h3>
+<blockquote>
+<p>“Top-level: <code>app/</code> for routes, <code>components/</code>
+for UI, <code>lib/</code> for data and pure logic, <code>course/</code>
+for documentation. Inside <code>components/</code>, I split by
+<em>role</em>, not by <em>type</em>: a <code>tabs/</code> folder for
+top-level tab components, a <code>standings/</code> folder for
+everything that’s only used inside the standings tab, and so on. The
+advantage is that when I want to delete the analytics tab, I delete one
+folder and don’t have to chase down stragglers in a generic
+<code>widgets/</code> directory.”</p>
+</blockquote>
+<h3 id="how-does-state-management-work-in-your-app">2.2. <em>“How does
+state management work in your app?”</em></h3>
+<blockquote>
+<p>“I deliberately <em>don’t</em> use Redux or Zustand. The app has two
+pieces of shared state — the active tab and the selected team — and both
+live in the top-level <code>SnookerFantasyLeague</code> component as
+plain <code>useState</code>. Tab-local state, like which round is
+selected inside the matches tab, lives inside that tab. The rule I
+follow: lift state only when <em>something else needs it</em>. State
+libraries are tools for the day a <code>useState</code> tree becomes
+painful — and that day hasn’t come for an 8-team app.”</p>
+</blockquote>
+<h3 id="how-do-you-decide-when-to-extract-a-component">2.3. <em>“How do
+you decide when to extract a component?”</em></h3>
+<blockquote>
+<p>“Two triggers. First, when I copy-paste the same JSX twice — the
+second time I write a function. Second, when a piece of JSX has a
+<em>name</em>: ‘this is a stat card,’ ‘this is a path step.’ Naming
+forces extraction. I avoid premature extraction because
+over-componentized React is just as painful as under-componentized — you
+end up chasing props through ten files instead of two.”</p>
+</blockquote>
+<h3 id="how-do-you-handle-data-fetching">2.4. <em>“How do you handle
+data fetching?”</em></h3>
+<blockquote>
+<p>“Right now this app’s data is hardcoded — eight teams, ~60 matches,
+all in <code>lib/</code>. So technically there’s no fetching. The way
+I’d add it: convert <code>app/page.tsx</code> to an <code>async</code>
+server component, <code>await fetch</code> from a sports-results API at
+request time, and pass the data down. The pure scoring functions in
+<code>lib/scoring.ts</code> would not change at all. That’s the value of
+separating data from logic from UI.”</p>
+</blockquote>
+<h3 id="whats-the-trade-off-between-server-and-client-components">2.5.
+<em>“What’s the trade-off between server and client
+components?”</em></h3>
+<blockquote>
+<p>“Server components run only on the server. They can read environment
+variables and talk to databases, but they can’t use
+<code>useState</code> or event handlers. Client components run in the
+browser. They have hooks and interactivity, but they bloat the JS
+bundle. The default in App Router is server, and I push
+<code>'use client'</code> down to leaves — only the orchestrator and any
+tab that uses <code>useState</code> get that directive. The static parts
+above stay server-rendered.”</p>
+</blockquote>
+<h3 id="how-do-you-optimize-performance-in-react">2.6. <em>“How do you
+optimize performance in React?”</em></h3>
+<blockquote>
+<p>“Three layers. First, the <em>render layer</em> —
+<code>useMemo</code> for derived data, <code>React.memo</code> for
+expensive components, but only after profiling says I need them. Second,
+the <em>bundle layer</em> — <code>next/dynamic</code> for code-splitting
+heavy tabs like analytics with Recharts. Third, the <em>paint layer</em>
+— <code>loading.tsx</code> for instant skeletons during transitions. I
+never optimize before measuring; the React DevTools Profiler is my first
+stop.”</p>
+</blockquote>
+<h3 id="how-do-you-handle-errors">2.7. <em>“How do you handle
+errors?”</em></h3>
+<blockquote>
+<p>“An error boundary at the root catches anything thrown during render
+and shows a friendly fallback. Async errors don’t bubble through error
+boundaries, so I wrap fetches in <code>try/catch</code> and surface the
+message in the UI. In production I’d ship <code>componentDidCatch</code>
+output to Sentry. And I lean hard on TypeScript to make ‘this object
+might be undefined’ a compile-time error rather than a runtime one.”</p>
+</blockquote>
+<h3 id="whats-your-testing-strategy">2.8. <em>“What’s your testing
+strategy?”</em></h3>
+<blockquote>
+<p>“Five tests for this app. Three Vitest unit tests on the pure scoring
+functions — those are the highest ROI tests in the codebase. One React
+Testing Library integration test that renders the standings tab and
+asserts every team name is in the DOM. One Playwright E2E that confirms
+tab switching works. Plus the full TypeScript build, which is itself a
+giant static test. I aim for confidence, not coverage percentage.”</p>
+</blockquote>
+<h3 id="how-would-you-scale-this-to-1000-teams">2.9. <em>“How would you
+scale this to 1,000 teams?”</em></h3>
+<blockquote>
+<p>“Three things change. First, the data moves out of <code>lib/</code>
+into a database — Postgres for relational picks-vs-matches, with a real
+foreign key instead of array-index correspondence. Second, the
+orchestrator’s <code>useMemo</code> over all teams becomes a paginated
+server-side query — you don’t render 1,000 rows in a table. Third, the
+Recharts visualizations either get aggregated server-side or switch to a
+canvas-based library because SVG can’t draw 1,000 bars. None of those
+changes touch the UI layer’s component shape — that’s a deliberate
+result of the data/logic/UI separation.”</p>
+</blockquote>
+<h3 id="what-would-you-do-differently">2.10. <em>“What would you do
+differently?”</em></h3>
+<p>This is the one that trips most candidates. <strong>They say
+“nothing.”</strong> Wrong answer. The right answer:</p>
+<blockquote>
+<p>“Three things. First, I’d type the agreement-data shape as a
+discriminated union instead of optional fields — stricter, less room for
+<code>if (datum.correct)</code> mistakes. Second, I’d add a tiny custom
+hook called <code>useTabState</code> that wraps
+<code>useState&lt;TabId&gt;</code> plus history-pushing so the URL
+reflects the active tab — right now reloading drops you to standings.
+Third, I’d extract the inline styles into Tailwind once the app
+stabilized — I went with inline styles to move fast, and that decision
+is now paying interest.”</p>
+</blockquote>
+<p>Three concrete, modest, technically literate trade-offs. Not “I’d
+rewrite it in Rust.” Not “nothing.”</p>
+</section>
+<section id="the-vibe-coding-prompt-library" class="slide level2">
+<h2>3. The vibe-coding prompt library</h2>
+<p>This entire course was built around the idea that <em>the prompt is
+the source of truth</em>. Here’s the distilled prompt library that
+produced this codebase. Steal these.</p>
+<h3 id="the-project-shaping-prompt">3.1. The <em>project-shaping</em>
+prompt</h3>
+<blockquote>
+<p>“I want to build a [DOMAIN] app. The data is [DESCRIBE THE DATA SHAPE
+IN ONE PARAGRAPH]. The user can [DESCRIBE 3-5 USER ACTIONS]. Don’t write
+code yet — just confirm you understand the data and the actions, and
+propose a 5-tab UI. Push back on anything that’s ambiguous.”</p>
+</blockquote>
+<p>This is <strong>Lesson 0 distilled</strong>. The “don’t write code
+yet” line is the magic ingredient. It forces the LLM to surface
+ambiguities you didn’t see.</p>
+<h3 id="the-data-modeling-prompt">3.2. The <em>data-modeling</em>
+prompt</h3>
+<blockquote>
+<p>“Define TypeScript interfaces for [the entities]. Be strict — no
+<code>any</code>, no implicit optional fields. Make every invariant
+explicit with a comment. If two interfaces share fields, use composition
+rather than inheritance.”</p>
+</blockquote>
+<p>This is <strong>Lesson 1 distilled</strong>. Strict types, named
+invariants. Output is interfaces you can almost commit verbatim.</p>
+<h3 id="the-pure-logic-prompt">3.3. The <em>pure-logic</em> prompt</h3>
+<blockquote>
+<p>“Write [N] pure functions that take [INPUTS] and return [OUTPUTS]. No
+side effects, no React, no state. The functions should be testable in
+isolation. Add JSDoc comments explaining each one.”</p>
+</blockquote>
+<p>This is <strong>Lesson 2 distilled</strong>. Pure functions are the
+parts that survive every refactor. Get them right first.</p>
+<h3 id="the-first-component-prompt">3.4. The <em>first-component</em>
+prompt</h3>
+<blockquote>
+<p>“Render [the simplest possible thing] using my types from
+<code>lib/types.ts</code>. Use a functional component with explicit
+props. No useState. No useMemo. Just JSX over the data. Use inline
+styles for now.”</p>
+</blockquote>
+<p><strong>Lesson 3.</strong> Smallest thing first. Inline styles to
+move fast. State and abstraction earn their way in later.</p>
+<h3 id="the-progressive-enhancement-prompt">3.5. The
+<em>progressive-enhancement</em> prompt</h3>
+<blockquote>
+<p>“Add [ONE FEATURE] to [EXISTING COMPONENT]. Don’t redesign anything.
+Don’t refactor unrelated code. If the change touches more than three
+files, stop and tell me which files, before changing them.”</p>
+</blockquote>
+<p><strong>Lesson 3.3 distilled, and the most useful prompt in the
+library.</strong> It prevents the LLM from helpfully rewriting half your
+project.</p>
+<h3 id="the-state-and-tabs-prompt">3.6. The <em>state-and-tabs</em>
+prompt</h3>
+<blockquote>
+<p>“Refactor [SINGLE-COMPONENT FILE] into an orchestrator pattern. The
+orchestrator owns <code>[STATE PIECES]</code> with
+<code>useState</code>. Tab components receive props and a callback. Use
+<code>useMemo</code> for [DERIVED VALUE]. Keep all styling
+identical.”</p>
+</blockquote>
+<p><strong>Lesson 4.</strong> Names the pattern, names the state, names
+the derivation, locks the styling. Output is clean.</p>
+<h3 id="the-composition-prompt">3.7. The <em>composition</em>
+prompt</h3>
+<blockquote>
+<p>“Extract a [COMPONENT NAME] from [PARENT FILE]. Move only the JSX
+that has a single responsibility — [DESCRIBE]. Pass props for [INPUTS].
+Don’t introduce Context. Don’t change behavior.”</p>
+</blockquote>
+<p><strong>Lesson 5.</strong> Pinpoints the unit of extraction. Forbids
+accidental Context introduction. Forbids behavior drift.</p>
+<h3 id="the-charting-prompt">3.8. The <em>charting</em> prompt</h3>
+<blockquote>
+<p>“Generate a Recharts [CHART TYPE] from this data shape: [PASTE A
+SAMPLE ROW]. Bars stacked by [KEY1] and [KEY2]. Use
+<code>&lt;ResponsiveContainer&gt;</code> and the
+<code>&lt;ChartCard&gt;</code> wrapper from
+<code>components/analytics/ChartCard.tsx</code>. Match the existing
+color palette.”</p>
+</blockquote>
+<p><strong>Lesson 6.</strong> Data shape <em>first</em>. The
+chart-library specifics get filled in around it.</p>
+<h3 id="the-production-polish-prompt">3.9. The
+<em>production-polish</em> prompt</h3>
+<blockquote>
+<p>“Audit my [COMPONENT] for: (1) ARIA roles, (2) keyboard reachability,
+(3) loading and empty states, (4) defensive null checks. Add them
+in-place without changing the visual design.”</p>
+</blockquote>
+<p><strong>Lesson 7.1.</strong> Specific list of polish items.
+<em>In-place</em> is the keyword that prevents the LLM from rewriting
+the file.</p>
+<h3 id="the-testing-prompt">3.10. The <em>testing</em> prompt</h3>
+<blockquote>
+<p>“Write [3 unit + 1 integration + 1 E2E] tests. Unit tests cover [PURE
+FUNCTION] with [3 BOUNDARY CASES]. Integration test renders [COMPONENT]
+with [REAL DATA] and asserts [VISIBLE BEHAVIOR]. E2E test opens the app
+and [USER ACTION]. Use Vitest, RTL, Playwright.”</p>
+</blockquote>
+<p><strong>Lesson 7.2.</strong> Counts the tests. Names the tools. Names
+the assertions. Output runs first try most of the time.</p>
+</section>
+<section id="the-pattern-behind-every-prompt" class="slide level2">
+<h2>4. The pattern behind every prompt</h2>
+<p>Look at all ten prompts above. They share a structure:</p>
+<ol type="1">
+<li><strong>Verb first.</strong> “Render”, “Refactor”, “Extract”, “Add”,
+“Audit”, “Generate”, “Write”.</li>
+<li><strong>One clear deliverable.</strong> Not a wishlist.</li>
+<li><strong>Constraints named.</strong> Don’t introduce X. Match Y. Use
+Z.</li>
+<li><strong>Existing context referenced by file path.</strong>
+<code>components/analytics/ChartCard.tsx</code>, not “you know that
+chart wrapper I have.”</li>
+<li><strong>Failure modes anticipated.</strong> “If this touches more
+than three files, stop.”</li>
+</ol>
+<p>This is the <strong>vibe-coding contract</strong>. Whenever an
+LLM-generated mess shows up in your codebase, look back at the prompt —
+it almost always violated one of those five rules.</p>
+</section>
+<section id="the-hardest-interview-questions-rehearsed"
+class="slide level2">
+<h2>5. The hardest interview questions, rehearsed</h2>
+<p>A few real ones I’ve been asked. Use these to practice.</p>
+<h3
+id="show-me-the-worst-code-in-this-project.-why-is-it-the-worst">5.1.
+<em>“Show me the worst code in this project. Why is it the
+worst?”</em></h3>
+<p>Pick one. Be specific.</p>
+<blockquote>
+<p>“The <code>buildAgreementData</code> function in
+<code>AnalyticsTab.tsx</code> is the worst piece of code in the project.
+It’s a 40-line nested function with a ternary inside a
+<code>.filter()</code> callback that special-cases the final round. It
+works, and the test suite covers it, but readability is poor. If I had
+another hour I’d extract it to <code>lib/analytics.ts</code>, split the
+finished and pending paths into two helpers, and add a
+discriminated-union return type.”</p>
+</blockquote>
+<p>What this signals: <strong>you can name your own technical
+debt.</strong> That’s a senior trait.</p>
+<h3 id="why-didnt-you-use-redux-zustand-tanstack-query">5.2. <em>“Why
+didn’t you use Redux / Zustand / TanStack Query?”</em></h3>
+<blockquote>
+<p>“Because the app has two pieces of shared state and zero remote data.
+Redux solves a problem this app doesn’t have yet. TanStack Query solves
+a problem this app <em>will</em> have the day I add live API data — and
+that’s the day I’d pull it in. Premature library adoption is a cost:
+extra learning, extra surface area for bugs, extra bundle size. I add
+libraries when local code starts to suffer, not preemptively.”</p>
+</blockquote>
+<h3 id="how-would-i-know-if-a-feature-you-added-broke-something">5.3.
+<em>“How would I know if a feature you added broke something?”</em></h3>
+<blockquote>
+<p>“The CI pipeline runs lint, type-check, unit tests, integration
+tests, and the production build on every PR. The Playwright E2E covers
+the tab-switching happy path. Vercel preview deployments give a
+clickable URL on every PR for visual review. Beyond that, I’d want a
+real user-tracking and error-tracking layer in production — Sentry for
+crashes, PostHog or similar for usage. None of that is in the project
+yet because it’s a personal app, but I’d add it on day one of a paid
+project.”</p>
+</blockquote>
+<h3 id="whats-the-most-react-specific-bug-youve-fixed">5.4. <em>“What’s
+the most React-specific bug you’ve fixed?”</em></h3>
+<p>Tell a story. The structure is <strong>STAR</strong>: Situation,
+Task, Action, Result.</p>
+<blockquote>
+<p>“<strong>Situation:</strong> I had a list of teams that re-sorted by
+score on every keystroke in an unrelated search box.
+<strong>Task:</strong> figure out why the chart was re-rendering when
+the search-box state changed. <strong>Action:</strong> opened React
+DevTools Profiler, saw that the parent re-rendered the chart’s parent
+because its props identity changed every render — even though the
+underlying data was equal. I wrapped the derived data in
+<code>useMemo</code>. <strong>Result:</strong> chart re-renders dropped
+from once-per-keystroke to only when scores actually changed. The lesson
+is reference equality matters more than value equality in React’s
+diffing.”</p>
+</blockquote>
+<p>This is <strong>the</strong> interview structure. Memorize STAR.</p>
+</section>
+<section id="closing-the-interview-strong" class="slide level2">
+<h2>6. Closing the interview strong</h2>
+<p>When the interviewer asks <em>“Do you have any questions for
+me?”</em> — and they will — have three ready.</p>
+<h3 id="about-the-codebase">6.1. About the codebase</h3>
+<ul>
+<li><em>“What’s the one part of your codebase that everyone on the team
+agrees needs a rewrite, but nobody has time for?”</em></li>
+</ul>
+<p>This question is a goldmine. It tells you exactly where the technical
+debt is and how the team handles it.</p>
+<h3 id="about-the-team">6.2. About the team</h3>
+<ul>
+<li><em>“How do you decide what’s worth a unit test vs. an integration
+test on this team?”</em></li>
+</ul>
+<p>This one signals you care about testing without forcing them to
+ask.</p>
+<h3 id="about-the-role">6.3. About the role</h3>
+<ul>
+<li><em>“What does success look like in the first 90 days?”</em></li>
+</ul>
+<p>Forces them to articulate expectations in a way you can hold them to
+later.</p>
+</section>
+<section id="the-portfolio-link" class="slide level2">
+<h2>7. The portfolio link</h2>
+<p>Your README is the second thing the interviewer looks at after the
+live URL. Make sure it has:</p>
+<ul>
+<li>A <strong>screenshot</strong> of the standings tab (saved as
+<code>docs/screenshot.png</code>).</li>
+<li>A <strong>two-paragraph summary</strong> of what the app does.</li>
+<li>A <strong>bullet list of tech</strong>: Next.js 14, TypeScript,
+Tailwind, Recharts, Vitest, Playwright.</li>
+<li>A <strong>link to the deployed app</strong> at the top, in
+bold.</li>
+<li>A <strong>link to the course folder</strong> with the line <em>“I
+wrote a 7-chapter course teaching React from scratch using this
+app.”</em></li>
+</ul>
+<p>That last bullet is <strong>massive</strong>. It signals: <em>I don’t
+just code. I teach.</em> That’s a senior trait. Hiring committees
+notice.</p>
+</section>
+<section id="the-final-vibe-prompt" class="slide level2">
+<h2>8. The final vibe prompt</h2>
+<blockquote>
+<p>“I have completed a Next.js 14 portfolio project. Help me write a
+90-second elevator pitch and a <code>README.md</code> for the GitHub
+repo. The pitch should hit (1) what the app is, (2) the tech stack, (3)
+one interesting architectural decision, (4) one trade-off I’d revisit.
+The README should have a hero screenshot, two-paragraph summary, tech
+list, deployed-URL link, and a ‘lessons learned’ section. Tone:
+confident but not arrogant. Length: under 400 words for the README
+intro.”</p>
+</blockquote>
+<p>Everything we built in this lesson, captured in one prompt. Save it.
+Run it on your <em>next</em> portfolio project. The output will have the
+shape we just memorized.</p>
+</section>
+<section id="check-yourself-2" class="slide level2">
+<h2>9. CHECK YOURSELF</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Can you deliver the 90-second
+walkthrough from memory, twice in a row, without notes?</label></li>
+<li><label><input type="checkbox" />Can you answer all ten common
+questions in section 2 with concrete references to <em>this</em>
+codebase?</label></li>
+<li><label><input type="checkbox" />Do you have three “what would you do
+differently” answers ready, all modest and technically
+real?</label></li>
+<li><label><input type="checkbox" />Have you memorized at least five of
+the ten vibe-coding prompts?</label></li>
+<li><label><input type="checkbox" />Can you describe the difference
+between <strong>server components</strong> and <strong>client
+components</strong> without checking the docs?</label></li>
+<li><label><input type="checkbox" />Can you tell a STAR-format story
+about a React bug you fixed?</label></li>
+<li><label><input type="checkbox" />Have you prepared three questions to
+ask the interviewer at the end?</label></li>
+<li><label><input type="checkbox" />Is your GitHub README in the shape
+described in section 7?</label></li>
+</ul>
+<p>If yes to all eight, you are ready. Genuinely.</p>
+</section>
+<section id="where-you-are-now-2" class="slide level2">
+<h2>10. Where you are now</h2>
+<p>You have:</p>
+<ul>
+<li>A working Next.js 14 + TypeScript + Tailwind + Recharts app,
+deployed on Vercel.</li>
+<li>A separation of data, logic, and UI that scales beyond this
+project.</li>
+<li>Five tests covering the things that matter.</li>
+<li>A polished, accessible, resilient UI.</li>
+<li>A 90-second pitch and ten interview answers ready to roll.</li>
+<li>A vibe-coding prompt library you can use on the next project to move
+3× faster.</li>
+</ul>
+<p>You also have a 7-chapter course in your <code>course/</code> folder
+that <strong>demonstrates you can teach React</strong>, not just write
+it. That’s the differentiator at most senior hires.</p>
+</section>
+<section id="final-words" class="slide level2">
+<h2>11. Final words</h2>
+<p>This course taught you React, Next.js, TypeScript, and a way of
+thinking about code that survives any framework change. The frameworks
+will move. The principles — <strong>separate data from logic from UI,
+lift state only when something else needs it, write pure functions
+first, polish before you ship, test the things that break</strong> —
+those will outlast every JavaScript meta-framework that comes next.</p>
+<p>Go to interviews. Tell the story you just rehearsed. Build the next
+app in a third of the prompts.</p>
+<p>You’ve got this.</p>
+<p>— <em>End of course.</em></p>
+<blockquote>
+<p>Re-read <strong><a
+href="../README.md"><code>course/README.md</code></a></strong> any time
+you want a refresher on the chapter map. The original single-file
+walkthrough lives at <strong><a
+href="../SNOOKER_FANTASY_LEAGUE_COURSE.md"><code>course/SNOOKER_FANTASY_LEAGUE_COURSE.md</code></a></strong>
+for one-stop reading.</p>
+</blockquote>
+</section></section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^5/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

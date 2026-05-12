@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Chapter 01 Foundations</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {  background-color: #f8f8f8; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ef2929; } /* Alert */
+    code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #204a87; } /* Attribute */
+    code span.bn { color: #0000cf; } /* BaseN */
+    code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4e9a06; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #8f5902; font-style: italic; } /* Comment */
+    code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+    code span.dt { color: #204a87; } /* DataType */
+    code span.dv { color: #0000cf; } /* DecVal */
+    code span.er { color: #a40000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #0000cf; } /* Float */
+    code span.fu { color: #204a87; font-weight: bold; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+    code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+    code span.ot { color: #8f5902; } /* Other */
+    code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+    code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+    code span.ss { color: #4e9a06; } /* SpecialString */
+    code span.st { color: #4e9a06; } /* String */
+    code span.va { color: #000000; } /* Variable */
+    code span.vs { color: #4e9a06; } /* VerbatimString */
+    code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/theme/white.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Chapter 01 Foundations</h1>
+</section>
+
+<section>
+<section id="chapter-1-foundations" class="title-slide slide level1">
+<h1>Chapter 1 — Foundations</h1>
+<blockquote>
+<p><strong>Before you write a single line of React, you need to
+understand the problem and the data.</strong> Half of senior interviews
+are <em>“how would you model this?”</em> — and that’s a question that’s
+answered before any JSX gets typed.</p>
+</blockquote>
+</section>
+<section id="what-youll-learn" class="slide level2">
+<h2>What you’ll learn</h2>
+<ul>
+<li>How to <strong>read a problem statement</strong> and identify the
+data shapes it implies.</li>
+<li>How to <strong>design a data model</strong> in TypeScript —
+interfaces, unions, optional fields.</li>
+<li>Why <strong>pure functions</strong> are the foundation of every
+React app, even before React enters the picture.</li>
+<li>The mental difference between <em>the data</em> and <em>the view of
+the data</em>.</li>
+<li>Why <code>null</code> is a valid value (and so is
+<code>undefined</code>, but they mean different things).</li>
+</ul>
+</section>
+<section id="lessons-in-this-chapter" class="slide level2">
+<h2>Lessons in this chapter</h2>
+<ol type="1">
+<li><strong><a href="./01-the-problem.md">01-the-problem.md</a></strong>
+— A pub-style explanation of the fantasy snooker league. No code. The
+questions every senior asks before opening their editor.</li>
+<li><strong><a
+href="./02-data-modeling.md">02-data-modeling.md</a></strong> —
+Translating “8 friends, 32 players, 31 matches” into TypeScript
+interfaces. The most important invariant in the whole codebase.</li>
+<li><strong><a
+href="./03-pure-functions-and-scoring.md">03-pure-functions-and-scoring.md</a></strong>
+— Writing <code>scorePick</code> and <code>calculateTeamScores</code>
+with zero React, zero JSX, zero DOM.</li>
+</ol>
+</section>
+<section id="files-youll-create-in-this-chapter" class="slide level2">
+<h2>Files you’ll create in this chapter</h2>
+<ul>
+<li><code>lib/types.ts</code> — TypeScript interfaces for
+<code>Match</code>, <code>Team</code>, <code>PlayerInfo</code>,
+<code>ScoreDetail</code>, <code>TeamScores</code>.</li>
+<li><code>lib/scoring.ts</code> — the two pure functions
+<code>scorePick</code> and <code>calculateTeamScores</code>.</li>
+</ul>
+</section>
+<section id="new-reactnext.js-concepts-introduced" class="slide level2">
+<h2>New React/Next.js concepts introduced</h2>
+<p><strong>None.</strong> That’s the point of Chapter 1. You’ll use
+<code>interface</code>, <code>type</code>, and plain JavaScript
+functions — no React imports yet.</p>
+<blockquote>
+<p><strong>Why no React yet?</strong> Because <strong>the data layer is
+what survives every UI rewrite.</strong> If you can’t model the problem
+cleanly without React, adding React won’t fix it. Junior devs reach for
+<code>useState</code> on day one and end up with a mess. Seniors model
+the data first, then ask “where does this <em>change</em>?” — and the
+answer to that question is what becomes state. Chapter 1 is the
+foundation Chapter 4 builds on.</p>
+</blockquote>
+</section>
+<section id="how-long-it-should-take" class="slide level2">
+<h2>How long it should take</h2>
+<ul>
+<li>30 min reading per lesson</li>
+<li>30 min typing the code in lessons 2 and 3</li>
+<li>~2.5 hours total for the chapter</li>
+</ul>
+</section>
+<section id="before-you-start" class="slide level2">
+<h2>Before you start</h2>
+<p>Make sure you have:</p>
+<ul>
+<li>A working Node.js install (<code>node --version</code> should print
+v20 or v22).</li>
+<li>An empty folder where you’ll build the project (or use this repo’s
+root if you’re following along with the finished version open in another
+window).</li>
+<li>90 minutes of uninterrupted time. The lessons reference each other;
+binge-reading lesson 1 then doing lesson 2 a week later won’t
+stick.</li>
+</ul>
+<p>Open <code>01-the-problem.md</code> and start there.</p>
+</section></section>
+<section>
+<section id="chapter-1-lesson-1-the-problem-no-code-yet"
+class="title-slide slide level1">
+<h1>Chapter 1 · Lesson 1 — The Problem (no code yet)</h1>
+<blockquote>
+<p><em>Goal: read this lesson without writing a single line of code, and
+end with a clear, written-down understanding of what we are about to
+build and why.</em></p>
+</blockquote>
+</section>
+<section id="why-this-lesson-exists-before-any-code"
+class="slide level2">
+<h2>Why this lesson exists before any code</h2>
+<p>Junior developers open their editor first. Senior developers open a
+<strong>scratch pad</strong> first. The difference is that seniors know
+they’re going to spend two hours coding the wrong thing if they don’t
+spend ten minutes understanding the <em>right</em> thing.</p>
+<p>Open a notes file. Or grab a piece of paper. We’re going to talk
+about the app for fifteen minutes before we touch a keyboard, and at the
+end you should be able to answer a friend asking <em>“what does the app
+do?”</em> in two sentences without hand-waving.</p>
+<p>This is the same skill that gets you through interview whiteboarding.
+The candidate who writes code immediately fails. The candidate who says
+<em>“hold on, let me make sure I understand the problem”</em> and asks
+two clarifying questions passes.</p>
+</section>
+<section id="the-pub-conversation" class="slide level2">
+<h2>The pub conversation</h2>
+<p>Imagine you and seven friends watch the World Snooker Championship
+every May. Sheffield, the Crucible, two weeks of tense green-baize
+matches. Someone — let’s say it’s you — says <em>“we should make a
+fantasy league out of this.”</em> Everyone agrees. Pints are raised.</p>
+<p>Now what?</p>
+<p>Snooker has a feature that makes fantasy especially cheap to build:
+<strong>the bracket is published before the tournament starts.</strong>
+All 32 players are seeded, paired up, and the entire knockout structure
+is fixed. Every match in every round is <strong>known in
+advance</strong> — only the winners are unknown.</p>
+<p>That single fact does an enormous amount of architectural work for
+us. Read it again: <em>every match in every round is known in advance,
+only the winners are unknown.</em></p>
+<p>What follows from it?</p>
+<ul>
+<li>We can ask each of our 8 friends to <strong>fill out the entire
+bracket up front</strong> — 16 picks for the round of 32, 8 picks for
+the round of 16, 4 for the quarter-finals, 2 for the semis, 1 for the
+final. <strong>31 picks per friend, 248 total</strong>, all locked in
+before the first ball is potted.</li>
+<li>We can list every match by <strong>bracket position</strong>, not by
+<code>matchId</code>. The matches don’t get added or removed during the
+tournament; only their <code>winner</code> field gets filled in.</li>
+<li>The tournament is <strong>finite</strong>. There’s a defined end
+state — somebody wins the final — at which point every team’s score is
+final too.</li>
+<li>The data is <strong>small</strong>. We’re talking ~250 picks, 31
+matches, 32 players, 8 teams. That fits in a single JavaScript file.
+<strong>No database needed.</strong></li>
+</ul>
+<p>That last point is the one that quietly determines the whole stack.
+If we needed a database, we’d need a backend, which means an API, which
+means hosting. We don’t, so we get to build a static page that anyone
+can host for free.</p>
+<p><strong>Decision dropped out of the problem statement, no opinions
+required.</strong></p>
+</section>
+<section id="the-8-fantasy-teams" class="slide level2">
+<h2>The 8 fantasy teams</h2>
+<p>Real teams from the real app:</p>
+<table>
+<thead>
+<tr>
+<th>Team name</th>
+<th>Vibe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Invincibles</td>
+<td>“Unstoppable &amp; Unbeatable” ⚡</td>
+</tr>
+<tr>
+<td>Uncredibles</td>
+<td>“Bold predictions, bolder mistakes” 💥</td>
+</tr>
+<tr>
+<td>Hopeless</td>
+<td>“We tried, we failed, we’re charming” 😅</td>
+</tr>
+<tr>
+<td>Clueless</td>
+<td>“What’s a maximum break?” 🤷</td>
+</tr>
+<tr>
+<td>Break Builders United (BBU)</td>
+<td>“Old school grinders” 🎩</td>
+</tr>
+<tr>
+<td>The Untouchables</td>
+<td>“Smooth, calculated, lethal” 🎯</td>
+</tr>
+<tr>
+<td>Selbies</td>
+<td>“Mark Selby fan club, basically” 🏆</td>
+</tr>
+<tr>
+<td>One Four Sevens</td>
+<td>“Maximum vibes only” 💎</td>
+</tr>
+</tbody>
+</table>
+<p>Each team is one or two friends sitting at home with a printout of
+the bracket, picking who they think wins each match.</p>
+<p>Notice that the team names are <strong>personality-driven</strong>,
+not strategy-driven. <em>Invincibles</em> isn’t a description; it’s a
+brag. <em>Hopeless</em> isn’t a strategy; it’s a shrug. <strong>The data
+carries the vibe.</strong> That’s a pattern: when an app has
+personality, that personality lives in the data, not the code. The code
+reads <code>team.motto</code>; the data is what makes the motto
+charming.</p>
+</section>
+<section id="the-5-rounds-and-the-31-matches" class="slide level2">
+<h2>The 5 rounds and the 31 matches</h2>
+<p>The tournament is structured as a single-elimination knockout:</p>
+<pre><code>Round 1   (Last 32)   16 matches    Best of 19 frames
+Round 2   (Last 16)    8 matches    Best of 25 frames
+Quarter-Finals (QF)    4 matches    Best of 25 frames
+Semi-Finals (SF)       2 matches    Best of 33 frames
+Final                  1 match      Best of 35 frames</code></pre>
+<p>Add them up: <strong>16 + 8 + 4 + 2 + 1 = 31 matches</strong>. The
+math works because each match eliminates exactly one player, so going
+from 32 players to 1 champion takes exactly 31 eliminations.</p>
+<p>For our app, that means <strong>5 separate “rounds” of data</strong>,
+each one half the size of the previous. The shape of the data tells you
+the shape of the UI: probably a tab or a section per round, probably
+similar-but-not-identical layouts in each.</p>
+</section>
+<section id="the-scoring-rules-this-is-the-heart" class="slide level2">
+<h2>The scoring rules — this is the heart</h2>
+<p>There are exactly three rules. Memorize them, because everything else
+in the codebase is derived from them.</p>
+<ol type="1">
+<li><strong>3 points</strong> if your pick wins their match.</li>
+<li><strong>1 point</strong> (a “consolation”) if your pick loses their
+match.</li>
+<li><strong><code>null</code></strong> — <em>not zero, not false</em> —
+if the match has not yet been played.</li>
+</ol>
+<p>Rule 3 is the one beginners get wrong. Let’s spell it out.</p>
+<p>Imagine it’s Day 1 of the tournament. Round 1 is just starting. Out
+of 16 R1 matches, <strong>zero</strong> are finished. What’s
+<em>Invincibles</em>’ Round 1 score?</p>
+<p>A naive answer says “zero.” But zero is wrong. Zero implies “we
+computed the score and it came out to zero — like getting all 16 picks
+wrong.” Zero would put a team that <em>will</em> score 30 points
+indistinguishable from a team that <em>did</em> score 0. That’s a
+bug.</p>
+<p>The correct answer is <strong>the score is undefined yet</strong>.
+It’s not yet a number. It’s <code>null</code> — the absence of a number.
+As matches finish, picks get scored; the score creeps up from null
+toward its eventual value. <strong>Pending and zero are different
+states.</strong></p>
+<p>This three-state thinking — <em>correct, wrong, pending</em> — runs
+through every UI screen in the app. The standings table greys out
+pending columns. The predictions matrix uses three colors (green, red,
+gray). The pick-list cards have three border colors. They all come back
+to: <strong>the underlying scoring function returns 3, 1, or
+null</strong> — never 0 for a pending pick.</p>
+<p>If you only take one thing away from this lesson, take this. The most
+senior thing you can do in a data model is <strong>respect the
+difference between absent and zero</strong>.</p>
+</section>
+<section id="what-the-app-actually-has-to-do-the-user-stories"
+class="slide level2">
+<h2>What the app actually has to do (the user stories)</h2>
+<p>Once the picks are in and the tournament starts, the friends want to
+be able to:</p>
+<ol type="1">
+<li><strong>See who’s leading.</strong> <em>Standings tab.</em> A
+leaderboard with totals and per-round breakdowns.</li>
+<li><strong>See match results.</strong> <em>Matches tab.</em> Cards per
+match, marked finished/not-finished, scores visible.</li>
+<li><strong>See whose picks were right or wrong.</strong>
+<em>Predictions tab.</em> A matrix comparing all 8 teams’ picks
+side-by-side, color-coded.</li>
+<li><strong>Drill into a player.</strong> <em>Players tab.</em> Click
+any of 32 players, see who they were, who picked them, who picked
+against them, what they earned for their backers.</li>
+<li><strong>See trends.</strong> <em>Analytics tab.</em> Bar charts of
+points per round, accuracy by team, who agreed on what.</li>
+</ol>
+<p>Five user stories, five tabs. <strong>The UI is determined by the
+user stories</strong>, not by what looks cool. If a tab can’t be traced
+back to a thing one of the eight friends would actually click for, it
+doesn’t exist.</p>
+<p>When you’re prepping for an interview, this is the answer to <em>“how
+would you decide what to build first?”</em> — you start with the user
+stories, count them, name them, and the architecture falls out.</p>
+</section>
+<section id="what-the-app-explicitly-does-not-do" class="slide level2">
+<h2>What the app explicitly does NOT do</h2>
+<p>Equally important. By saying these out loud you save yourself from
+over-engineering:</p>
+<ul>
+<li><strong>No login.</strong> Eight friends, one shared web page. No
+accounts.</li>
+<li><strong>No database.</strong> Picks are typed into a JavaScript file
+by hand. The “admin” updating winners is whoever owns the repo
+(you).</li>
+<li><strong>No real-time updates.</strong> When a match ends, the file
+owner edits <code>winner: 'Wu Yize'</code> and pushes. Friends refresh.
+That’s the entire ops story.</li>
+<li><strong>No mobile app.</strong> Just a web page that looks decent on
+a phone.</li>
+<li><strong>No multi-tournament support.</strong> This codebase is for
+<em>the 2026 Crucible</em>. Next year’s tournament is a new repo (or a
+fork).</li>
+</ul>
+<p>Each of those “nots” is a feature. Every “no” is a thing you don’t
+have to build, debug, or maintain. <strong>A senior engineer is as proud
+of what’s not in the codebase as what is.</strong></p>
+</section>
+<section id="the-architecture-this-implies" class="slide level2">
+<h2>The architecture this implies</h2>
+<p>We haven’t picked a framework yet, but the problem has already chosen
+one for us.</p>
+<ul>
+<li><strong>Single-page app</strong> (one URL, all interaction is
+client-side).</li>
+<li><strong>Static deployment</strong> (no backend, no database — just
+files served from a CDN).</li>
+<li><strong>Data lives in code</strong> (a <code>lib/</code> folder full
+of TypeScript constants).</li>
+<li><strong>State is small</strong> (which tab is active, which team or
+player is selected — that’s basically it).</li>
+</ul>
+<p>That description matches <strong>Next.js with the App Router,
+statically rendered</strong>. Or React + Vite. Or even plain HTML + JS.
+We’ll pick Next.js in Chapter 2 because it gives us file-based routing,
+TypeScript out of the box, and zero-config Vercel deployment. But notice
+we picked it <strong>after</strong> describing the problem, not before.
+The problem dictated the requirements; the requirements dictated the
+framework. <strong>Never the other way around.</strong> That’s the
+difference between a senior and a junior — juniors pick a framework they
+like and bend the problem to fit; seniors describe the problem and let
+the framework choose itself.</p>
+</section>
+<section id="two-sentence-summary" class="slide level2">
+<h2>Two-sentence summary</h2>
+<p>Try writing this for yourself before reading mine:</p>
+<blockquote>
+<p><strong>An eight-team fantasy snooker league for the 2026 World
+Championship. Each team locks in 31 picks (16 R1, 8 R2, 4 QF, 2 SF, 1
+Final) before the tournament; as matches finish, picks score 3 for a
+winner and 1 for a loser, and the app shows standings, match results,
+prediction comparisons, per-player drill-downs, and analytics
+charts.</strong></p>
+</blockquote>
+<p>If your version says roughly the same thing, you’re ready for Lesson
+2. If it doesn’t, re-read the user stories section.</p>
+</section>
+<section
+id="vibe-prompt-you-would-have-used-to-verify-understanding-before-coding"
+class="slide level2">
+<h2>Vibe prompt you would have used (to verify understanding before
+coding)</h2>
+<blockquote>
+<p><em>“I’m about to build a single-page React app for a fantasy snooker
+league. Eight teams pick winners across five rounds (R1: 16 picks, R2:
+8, QF: 4, SF: 2, Final: 1). Scoring: 3 points if the pick wins, 1 if it
+loses, <code>null</code> while the match is unplayed. No database —
+bracket and team picks are edited by hand in code. Five tabs: Standings,
+Matches, Predictions, Players, Analytics. <strong>Don’t write any code
+yet.</strong> Just confirm you understand the problem and ask me
+anything that’s ambiguous.”</em></p>
+</blockquote>
+<p>The “don’t write any code yet” line is the single most useful trick
+in this lesson. It forces the LLM (and yourself) to surface ambiguities.
+Try it on every problem: <em>“summarise the problem back to me, ask
+three clarifying questions, then I’ll tell you to start
+coding.”</em></p>
+</section>
+<section id="check-yourself" class="slide level2">
+<h2>CHECK YOURSELF</h2>
+<p>Answer these out loud or in writing. If you can’t answer one, scroll
+back up.</p>
+<ol type="1">
+<li><strong>Why is <code>null</code> the right value for a pending pick
+instead of <code>0</code>?</strong> What goes wrong if you use
+<code>0</code>?</li>
+<li><strong>Why are there exactly 31 matches in the tournament?</strong>
+Justify the number from first principles.</li>
+<li><strong>The problem statement says “no database.” What three
+follow-on decisions does that single constraint make for us?</strong>
+(Hint: hosting, auth, who-can-edit.)</li>
+<li><strong>Two friends ask to add a 9th fantasy team next year. What’s
+the minimum data change required?</strong> (You don’t need to write the
+code — just say which file/structure you’d touch.)</li>
+<li><strong>The five user stories map to five tabs. If the friends asked
+for a “schedule” tab showing matches in chronological order, would that
+be a sixth user story or the same as the existing Matches tab?</strong>
+Argue both sides.</li>
+</ol>
+<p>When you’ve answered these, head to <strong><a
+href="./02-data-modeling.md">02-data-modeling.md</a></strong>. We’ll
+start translating the problem into TypeScript shapes.</p>
+</section></section>
+<section>
+<section id="chapter-1-lesson-2-data-modeling-typescript-interfaces"
+class="title-slide slide level1">
+<h1>Chapter 1 · Lesson 2 — Data Modeling (TypeScript interfaces)</h1>
+<blockquote>
+<p><em>Goal: translate yesterday’s pub conversation into precise
+TypeScript types. By the end of this lesson you’ll have written
+<code>lib/types.ts</code> — the single most important file in the
+codebase, even though it doesn’t render anything.</em></p>
+</blockquote>
+</section>
+<section id="why-we-model-the-data-before-we-render-it"
+class="slide level2">
+<h2>Why we model the data before we render it</h2>
+<p>There’s a saying in engineering: <strong>“Show me your data
+structures and I’ll know your code.”</strong> It’s attributed to Linus
+Torvalds, but the idea is older. The shape of your data <strong>dictates
+the shape of your code</strong>. Everything else is decoration.</p>
+<p>If you walk into a React interview and the interviewer hands you a
+problem, the first move that separates seniors from juniors is <em>what
+you draw on the whiteboard first</em>. Juniors draw a component tree.
+Seniors draw the data. Once the data is right, the component tree falls
+out almost mechanically.</p>
+<p>So before we ever import React, we’re going to spend this lesson
+drawing the data — but in TypeScript instead of on a whiteboard.</p>
+</section>
+<section id="a-60-second-typescript-primer-for-total-beginners"
+class="slide level2">
+<h2>A 60-second TypeScript primer (for total beginners)</h2>
+<p>If you’ve never used TypeScript, two things to know:</p>
+<ol type="1">
+<li><strong>TypeScript is JavaScript plus type annotations.</strong>
+Every TS file is also a valid JS file once the types are erased. Types
+are a development-time feature; they vanish at runtime.</li>
+<li><strong>Types describe shapes.</strong> When we write
+<code>interface Match { id: number; winner?: string; }</code>, we are
+saying <em>“any object claiming to be a Match must have an
+<code>id</code> field that is a number, and may optionally have a
+<code>winner</code> field that is a string.”</em></li>
+</ol>
+<p>That’s almost all you need for this lesson. Two more details, then
+we’ll write some types:</p>
+<ul>
+<li><strong><code>?</code></strong> after a field name means
+<strong>optional</strong> — the field may be present or absent.
+<code>winner?: string</code> means <em>winner might be a string, or
+might not exist at all (<code>undefined</code>)</em>.</li>
+<li><strong><code>|</code></strong> is a <strong>union</strong> —
+“either this or that”. <code>pick: string | null</code> means <em>pick
+is either a string or the literal value null</em>.</li>
+</ul>
+<p>That’s the whole TypeScript story we need for Chapter 1. Don’t
+overthink it. The compiler is just a really pedantic friend reading over
+your shoulder.</p>
+</section>
+<section id="modeling-match" class="slide level2">
+<h2>Modeling Match</h2>
+<p>A match is a single contest between two players. From Lesson 1 we
+know it has:</p>
+<ul>
+<li>A position in the bracket (its “id”, really an ordinal — match 1,
+match 2, …)</li>
+<li>Two players (let’s call them <code>p1</code> and
+<code>p2</code>)</li>
+<li>A winner — <em>but only after the match is played</em></li>
+<li>A score — display only, like <code>'10-7'</code></li>
+<li>For Round 1, the seed of player 1 (because R1 pairs are usually
+shown as “1 vs 32”, “2 vs 31”, etc.)</li>
+</ul>
+<p>In TypeScript:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">interface</span> Match {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  id<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  p1<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  p2<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  winner<span class="op">?:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  score<span class="op">?:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  seed1<span class="op">?:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Six fields, three required, three optional. Read each <code>?</code>
+carefully — the <code>?</code> is <strong>load-bearing</strong>. It’s
+the difference between <em>“this field always exists”</em> and <em>“this
+field exists only sometimes.”</em></p>
+<h3 id="why-winner-is-optional">Why <code>winner?</code> is
+optional</h3>
+<p>This is the fork in the road that powers the whole app. Re-read
+Lesson 1’s scoring rules: a match that hasn’t been played has
+<code>null</code> (or, equivalently here, <code>undefined</code>) for
+every team’s score. The data-level mechanism that produces that
+behaviour is <strong>the absence of
+<code>match.winner</code></strong>.</p>
+<p>When the file owner adds a winner, the field appears. Until then,
+it’s not there at all. There is no <code>winner: null</code> in the
+data, no <code>winner: ''</code>, no <code>winner: 'TBD'</code>. There
+is <em>just no winner field</em>. That’s the cleanest way to model “not
+yet known”: <strong>the field doesn’t exist.</strong></p>
+<p>The TypeScript compiler will then, on its own, force every consumer
+of <code>match.winner</code> to handle the undefined case:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> w <span class="op">=</span> match<span class="op">.</span><span class="at">winner</span><span class="op">;</span>          <span class="co">// type is `string | undefined`</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> isWin <span class="op">=</span> pick <span class="op">===</span> w<span class="op">;</span>        <span class="co">// works, but isWin is false if w is undefined</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (match<span class="op">.</span><span class="at">winner</span>) { <span class="co">/* ... */</span> }  <span class="co">// narrowed to `string` inside this block</span></span></code></pre></div>
+<p>That’s the type system <strong>doing free safety work for
+you</strong>. If you’d modeled <code>winner</code> as
+<code>winner: string</code> (required), every place that called
+<code>scorePick</code> would happily compare <code>pick === ''</code>
+and silently return <em>consolation</em> instead of <em>pending</em>.
+The optional <code>?</code> is what saves you.</p>
+<h3 id="why-score-and-seed1-are-optional">Why <code>score?</code> and
+<code>seed1?</code> are optional</h3>
+<p><code>score</code> is optional because finished matches have one and
+pending matches don’t. Same logic as <code>winner</code>.</p>
+<p><code>seed1</code> is more interesting. It’s only on R1 matches in
+our data. Why? Because that’s the only round where the <em>bracket
+position is meaningful enough to display</em>. By round 2, “seed 1 vs
+unseeded qualifier” is no longer the point — the point is the matchup
+itself, “Zhao vs Murphy”. So we never bother to add seeds in R2/QF/SF/F
+objects, and the type accommodates that with <code>?</code>. Optional
+fields aren’t about “data we forgot to fill in” — they’re about
+<strong>fields that simply don’t exist for this row</strong>.</p>
+</section>
+<section id="modeling-team" class="slide level2">
+<h2>Modeling Team</h2>
+<p>A team has a name, some cosmetics (color, accent, icon, motto), and
+<strong>five arrays of picks</strong>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">interface</span> Team {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  name<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  color<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  accent<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  icon<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  motto<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  r1<span class="op">:</span> <span class="dt">string</span>[]<span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  r2<span class="op">:</span> <span class="dt">string</span>[]<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  qf<span class="op">:</span> <span class="dt">string</span>[]<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  sf<span class="op">:</span> <span class="dt">string</span>[]<span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  final<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Round-2 lookup tables for handling players whose path traveled through different</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">// bracket halves than the simple seed pairing implies (used by scoring as a hint, not required).</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  r1Players<span class="op">?:</span> <span class="dt">string</span>[]<span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  r2Players<span class="op">?:</span> <span class="dt">string</span>[]<span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Three things to notice:</p>
+<h3
+id="r1-r2-qf-sf-are-arrays-of-strings-but-final-is-just-a-string.">1.
+<code>r1</code>, <code>r2</code>, <code>qf</code>, <code>sf</code> are
+arrays of strings — but <code>final</code> is just a string.</h3>
+<p>Lesson 1 reminded us there’s only one Final match. So a team only
+makes one Final pick. We <em>could</em> have written
+<code>final: string[]</code> with one element, but that would cost us
+readability everywhere we touch it:
+<code>team.final[0] === 'Wu Yize'</code> reads worse than
+<code>team.final === 'Wu Yize'</code>. So we accept the asymmetry. The
+cost is that scoring code has one branch for Final and another for
+everything else (we’ll see this in Lesson 3).</p>
+<p><strong>Asymmetry in your data is fine when it matches the real-world
+asymmetry.</strong> “There is one final” is a real-world constraint. The
+data should reflect it.</p>
+<h3 id="the-cosmetics-live-next-to-the-picks.">2. The cosmetics live
+next to the picks.</h3>
+<p><code>color</code>, <code>accent</code>, <code>icon</code>,
+<code>motto</code> are decorative. They drive every gradient, badge, and
+chip in the UI. They live on the same object as the picks because
+<strong>each team is one logical thing</strong> — not two (a “team
+identity” plus “team picks”). Splitting them would buy nothing and add a
+level of indirection.</p>
+<p>This is a common beginner mistake: over-normalizing. SQL databases
+want you to factor out shared data into separate tables. <strong>A
+250-row JavaScript file does not.</strong> When the data is small and
+self-contained, denormalize. Optimize for reading the data with your
+eyes, not for storage efficiency.</p>
+<h3 id="r1players-and-r2players-exist-for-a-subtle-scoring-case.">3.
+<code>r1Players?</code> and <code>r2Players?</code> exist for a subtle
+scoring case.</h3>
+<p>These aren’t needed for normal scoring — they’re a hint used by
+<code>calculateTeamScores</code> when a team’s pick <em>advances</em>
+through the round in a non-obvious way (e.g. the team picked someone in
+their R1 spot, but the R2 spot is for a different bracket position than
+they expected). For most teams these arrays are unused. They’re optional
+precisely because most teams won’t have them.</p>
+<p>We’ll come back to this in Lesson 3 when we write the scoring
+function. For now, just know the field exists and is rare.</p>
+</section>
+<section id="the-most-important-rule-in-the-codebase-the-invariant"
+class="slide level2">
+<h2>The most important rule in the codebase (the invariant)</h2>
+<p>This is the thing that, if you forget it, every score in the app
+silently goes wrong:</p>
+<blockquote>
+<p><strong>For each round, the i-th element of <code>team.r1</code> (or
+<code>team.r2</code>, <code>qf</code>, <code>sf</code>) corresponds to
+the i-th element of <code>ROUND1_MATCHES</code> (or
+<code>ROUND2_MATCHES</code>, <code>QF_MATCHES</code>,
+<code>SF_MATCHES</code>).</strong></p>
+</blockquote>
+<p>There is no <code>matchId</code> field on each pick. There is no key
+linking a pick to a match. <strong>Order is the contract.</strong> Index
+0 of <code>team.r1</code> is the team’s pick for
+<code>ROUND1_MATCHES[0]</code>. Index 5 is the pick for
+<code>ROUND1_MATCHES[5]</code>. Always.</p>
+<p>If you re-order <code>ROUND1_MATCHES</code> and forget to re-order
+all 8 teams’ <code>r1</code> arrays in lockstep, every Round 1 score is
+wrong. There is <strong>no warning</strong>, no compile error, no
+runtime test catching this. It’s a convention enforced by you, the
+developer.</p>
+<p>In a “proper” enterprise codebase you’d add a foreign key — each pick
+would be <code>{ matchId: 5, player: 'Mark Allen' }</code> and scoring
+would <code>find()</code> the match by id. That’s safer but
+<strong>noisier to read and write</strong>. For an 8-team league with
+one owner editing the file, the convention is fine. The moment a 9th
+team or 33rd player enters, you’d reconsider.</p>
+<p>This is a recurring tradeoff in software: <strong>safety
+vs. simplicity.</strong> Senior engineers know when each is right. The
+answer is rarely “always one or always the other.”</p>
+</section>
+<section id="modeling-playerinfo-the-dictionary-not-an-array"
+class="slide level2">
+<h2>Modeling PlayerInfo (the dictionary, not an array)</h2>
+<p>There are 32 players. Each has a country flag, a seed, a status
+string, a flag-text label:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">interface</span> PlayerInfo {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  country<span class="op">:</span> <span class="dt">string</span><span class="op">;</span>   <span class="co">// emoji flag, e.g. &#39;🇨🇳&#39;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  seed<span class="op">?:</span> <span class="dt">number</span><span class="op">;</span>     <span class="co">// 1-16, or undefined for qualifiers</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  status<span class="op">:</span> <span class="dt">string</span><span class="op">;</span>    <span class="co">// &#39;Defending Champion&#39;, &#39;World No. 1&#39;, etc.</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  flag<span class="op">:</span> <span class="dt">string</span><span class="op">;</span>      <span class="co">// 3-letter, e.g. &#39;CHN&#39;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Notice <code>seed?</code> is optional — only the top 16 are seeded.
+Qualifiers don’t have a seed.</p>
+<p>But the more interesting decision is what <em>container</em> we put
+32 of these in. Two options:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Option A: array of objects with a &#39;name&#39; field</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> PLAYERS<span class="op">:</span> { name<span class="op">:</span> <span class="dt">string</span><span class="op">;</span> country<span class="op">:</span> <span class="dt">string</span><span class="op">;</span> seed<span class="op">?:</span> <span class="dt">number</span><span class="op">;</span> <span class="op">...</span> }[] <span class="op">=</span> [</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  { name<span class="op">:</span> <span class="st">&#39;Zhao Xintong&#39;</span><span class="op">,</span> country<span class="op">:</span> <span class="st">&#39;🇨🇳&#39;</span><span class="op">,</span> seed<span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="op">...</span> }<span class="op">,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>]<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Option B: object keyed by name</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> PLAYER_INFO<span class="op">:</span> <span class="bu">Record</span><span class="op">&lt;</span><span class="dt">string</span><span class="op">,</span> PlayerInfo<span class="op">&gt;</span> <span class="op">=</span> {</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;Zhao Xintong&#39;</span><span class="op">:</span> { country<span class="op">:</span> <span class="st">&#39;🇨🇳&#39;</span><span class="op">,</span> seed<span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="op">...</span> }<span class="op">,</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>Both are valid. The codebase picks <strong>Option B</strong>.
+Why?</p>
+<p>Because the most common operation in the app is <em>“given a player’s
+name (from a match’s <code>p1</code>/<code>p2</code>, or from a team’s
+pick), get the metadata for that player.”</em> That’s a hash lookup:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> info <span class="op">=</span> PLAYER_INFO[<span class="st">&#39;Zhao Xintong&#39;</span>]<span class="op">;</span>  <span class="co">// O(1)</span></span></code></pre></div>
+<p>If we’d picked Option A, every lookup would be:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> info <span class="op">=</span> PLAYERS<span class="op">.</span><span class="fu">find</span>(p <span class="kw">=&gt;</span> p<span class="op">.</span><span class="at">name</span> <span class="op">===</span> <span class="st">&#39;Zhao Xintong&#39;</span>)<span class="op">;</span>  <span class="co">// O(n)</span></span></code></pre></div>
+<p>For 32 players, the performance difference is negligible. The
+<strong>readability</strong> difference, however, is significant — and
+the readability difference is multiplied by the number of times the
+lookup appears in the code. In our codebase, it appears in
+<code>&lt;PlayerDetail&gt;</code>, in
+<code>&lt;MatchPickAnalysis&gt;</code>, in the standings hover tooltip,
+in the player card, etc. Probably 10+ places. Each of them reads cleaner
+with Option B.</p>
+<p>This decision — <em>what’s the lookup key?</em> — is one you’ll make
+on every dataset. Ask yourself <em>“how will I most commonly query
+this?”</em> The answer becomes the key.</p>
+</section>
+<section
+id="modeling-the-score-detail-output-of-scoring-used-by-every-ui"
+class="slide level2">
+<h2>Modeling the score detail (output of scoring, used by every UI)</h2>
+<p>When <code>calculateTeamScores</code> runs, it doesn’t just return a
+number. It returns <strong>detail records</strong> that the UI uses to
+color cells, write tooltips, count corrects/wrongs. Each detail looks
+like this:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">interface</span> ScoreDetail {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  match<span class="op">:</span> Match<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  pick<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  points<span class="op">:</span> <span class="dt">number</span> <span class="op">|</span> <span class="dt">null</span><span class="op">;</span>     <span class="co">// 3 | 1 | null</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  correct<span class="op">:</span> <span class="dt">boolean</span> <span class="op">|</span> <span class="dt">null</span><span class="op">;</span>   <span class="co">// true | false | null</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Two tri-state fields. <code>points</code> is <code>3</code>
+(correct), <code>1</code> (wrong), or <code>null</code> (pending).
+<code>correct</code> is <code>true</code>, <code>false</code>, or
+<code>null</code> (pending).</p>
+<p>You might ask <em>“why both?”</em> Aren’t <code>correct</code> and
+<code>points</code> redundant? Almost, but not quite:</p>
+<ul>
+<li><code>points</code> is what you sum to get a total.</li>
+<li><code>correct</code> is what you count to get a hit-rate
+(e.g. <em>“Invincibles got 11 of 16 R1 picks right”</em>).</li>
+</ul>
+<p>Both come up. The UI reads <code>correct</code> for stat tiles (“11
+of 16”) and <code>points</code> for the running totals (“33 / 48”).
+Storing them both, computed once, saves every UI place from re-deriving
+one from the other.</p>
+</section>
+<section id="putting-it-all-together-libtypes.ts" class="slide level2">
+<h2>Putting it all together: <code>lib/types.ts</code></h2>
+<p>Here’s the whole file, all in one place. Open
+<code>lib/types.ts</code> in the project root and compare:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// lib/types.ts</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">interface</span> Match {</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  id<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  p1<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  p2<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  winner<span class="op">?:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  score<span class="op">?:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  seed1<span class="op">?:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">interface</span> PlayerInfo {</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  country<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  seed<span class="op">?:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  status<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  flag<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">interface</span> ScoreDetail {</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  match<span class="op">:</span> Match<span class="op">;</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  pick<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  points<span class="op">:</span> <span class="dt">number</span> <span class="op">|</span> <span class="dt">null</span><span class="op">;</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  correct<span class="op">:</span> <span class="dt">boolean</span> <span class="op">|</span> <span class="dt">null</span><span class="op">;</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">interface</span> TeamScores {</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  r1<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>  r2<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>  qf<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>  sf<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>  f<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>  total<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>  r1Details<span class="op">:</span> ScoreDetail[]<span class="op">;</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>  r2Details<span class="op">:</span> ScoreDetail[]<span class="op">;</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>  qfDetails<span class="op">:</span> ScoreDetail[]<span class="op">;</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>  sfDetails<span class="op">:</span> ScoreDetail[]<span class="op">;</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>  fDetails<span class="op">:</span> ScoreDetail[]<span class="op">;</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">interface</span> Team {</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>  name<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>  color<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>  accent<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>  icon<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>  motto<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>  r1<span class="op">:</span> <span class="dt">string</span>[]<span class="op">;</span></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>  r2<span class="op">:</span> <span class="dt">string</span>[]<span class="op">;</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>  qf<span class="op">:</span> <span class="dt">string</span>[]<span class="op">;</span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>  sf<span class="op">:</span> <span class="dt">string</span>[]<span class="op">;</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>  final<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>  r1Players<span class="op">?:</span> <span class="dt">string</span>[]<span class="op">;</span></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>  r2Players<span class="op">?:</span> <span class="dt">string</span>[]<span class="op">;</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">interface</span> TeamWithScores <span class="kw">extends</span> Team {</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>  scores<span class="op">:</span> TeamScores<span class="op">;</span></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Six interfaces. Read each one. <strong>None of them imports
+React.</strong> None has a JSX angle bracket. This is pure data
+modeling, and it’s the most important file in the project.</p>
+<p>The <code>extends Team</code> at the bottom is a TypeScript trick: a
+<code>TeamWithScores</code> is a <code>Team</code> with one extra field,
+<code>scores: TeamScores</code>. The orchestrator component (Chapter 4)
+builds <code>TeamWithScores</code> objects by spreading the original
+team and adding scores. Until then, just notice that the type system
+tracks both.</p>
+</section>
+<section id="why-the-typescript-compiler-is-your-friend"
+class="slide level2">
+<h2>Why the TypeScript compiler is your friend</h2>
+<p>If you typed <code>team.r1[0]</code> somewhere in this app,
+TypeScript knows it’s a <code>string</code>. If you typed
+<code>match.winner</code> somewhere, TypeScript knows it might be
+<code>undefined</code> and forces you to handle that. If you tried to
+assign a <code>Team</code> to a variable typed <code>Match</code>,
+TypeScript yells at you immediately.</p>
+<p><strong>The types are the contract.</strong> Once they’re written,
+every piece of code that touches a <code>Team</code> or
+<code>Match</code> has to obey them. That’s the safety net that lets you
+refactor confidently — change a type, and the compiler tells you every
+file that breaks.</p>
+<p>A common interview question: <em>“why use TypeScript instead of plain
+JavaScript?”</em> The answer in two parts: (1) <strong>catch errors at
+compile time</strong> instead of runtime, (2) <strong>document the data
+shapes</strong> so future-you (or future-collaborator) knows what’s
+going where. The second one is at least as important as the first. Types
+are documentation that <strong>doesn’t drift out of sync with the
+code</strong>, because the code won’t compile if it does.</p>
+</section>
+<section id="the-quick-exercise" class="slide level2">
+<h2>The quick exercise</h2>
+<p>Open <code>lib/types.ts</code> in the repo. Compare it to what we
+wrote above. Is there anything different? (Spoiler: no — the file is
+exactly what’s in this lesson, possibly with the order reshuffled. The
+types in the lesson are the live, working types in the app.)</p>
+<p>If you’re following along by re-creating the project from scratch,
+type the file out yourself. Don’t copy-paste. Typing it is how the
+patterns sink in. The whole file is about 50 lines.</p>
+</section>
+<section id="vibe-prompt-you-would-have-used" class="slide level2">
+<h2>Vibe prompt you would have used</h2>
+<blockquote>
+<p><em>“Write me a <code>lib/types.ts</code> file with TypeScript
+interfaces for: (1) <code>Match</code> with
+<code>id: number, p1: string, p2: string</code>, optional
+<code>winner?: string</code>, optional <code>score?: string</code>,
+optional <code>seed1?: number</code>; (2) <code>PlayerInfo</code> with
+<code>country, status, flag</code> strings and optional
+<code>seed?: number</code>; (3) <code>ScoreDetail</code> with
+<code>match: Match, pick: string, points: number | null, correct: boolean | null</code>;
+(4) <code>TeamScores</code> with the 5 round totals plus
+<code>total</code> and 5 <code>Details</code> arrays; (5)
+<code>Team</code> with name, four cosmetic strings, picks arrays for
+r1[], r2[], qf[], sf[], a single <code>final: string</code>, and two
+optional helper arrays; (6) <code>TeamWithScores extends Team</code>
+with one additional <code>scores: TeamScores</code> field. Don’t write
+any other code.”</em></p>
+</blockquote>
+<p>Notice how specific every field name is. This is what a good vibe
+prompt looks like for type generation: each field is named, each type is
+given, each <code>?</code> is intentional. The LLM has nothing to
+hallucinate. <strong>Specificity in the prompt means specificity in the
+output.</strong></p>
+</section>
+<section id="check-yourself-1" class="slide level2">
+<h2>CHECK YOURSELF</h2>
+<ol type="1">
+<li><strong>What’s the difference between a <code>winner?: string</code>
+and <code>winner: string | undefined</code> in TypeScript?</strong>
+(Subtle — answer at the end of this lesson.)</li>
+<li><strong><code>team.final</code> is a <code>string</code> but
+<code>team.sf</code> is a <code>string[]</code>. Justify the asymmetry.
+What would it cost in code-readability to “fix” it by making
+<code>final</code> an array of one?</strong></li>
+<li><strong><code>PLAYER_INFO</code> is an object keyed by name, not an
+array. Name two other places in the app where this lookup pattern would
+be cheaper than <code>.find()</code>.</strong> (You don’t have to know
+the codebase yet — guess.)</li>
+<li><strong>The “match arrays in pick array order” invariant is enforced
+by convention, not by the type system.</strong> What change to the
+<code>Team</code> interface would let TypeScript enforce it for you?
+What’s the cost?</li>
+<li><strong>Open <code>lib/types.ts</code> and find one type you don’t
+immediately understand. Read it three times. Write down what every field
+is for.</strong> (No question, just an exercise.)</li>
+</ol>
+<h3 id="answer-to-1-because-its-a-real-gotcha">Answer to #1 (because
+it’s a real gotcha)</h3>
+<p><code>winner?: string</code> and
+<code>winner: string | undefined</code> look almost the same, but they
+differ on <strong>whether the field has to be specified at all</strong>
+when constructing the object.</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> A { winner<span class="op">?:</span> <span class="dt">string</span><span class="op">;</span> }</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">interface</span> B { winner<span class="op">:</span> <span class="dt">string</span> <span class="op">|</span> <span class="dt">undefined</span><span class="op">;</span> }</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> a<span class="op">:</span> A <span class="op">=</span> {}<span class="op">;</span>                       <span class="co">// ✓ valid (field omitted)</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> a2<span class="op">:</span> A <span class="op">=</span> { winner<span class="op">:</span> <span class="dt">undefined</span> }<span class="op">;</span>   <span class="co">// ✓ valid (field present, undefined)</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> b<span class="op">:</span> B <span class="op">=</span> {}<span class="op">;</span>                       <span class="co">// ✗ ERROR: &#39;winner&#39; is missing</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> b2<span class="op">:</span> B <span class="op">=</span> { winner<span class="op">:</span> <span class="dt">undefined</span> }<span class="op">;</span>   <span class="co">// ✓ valid (field present, undefined)</span></span></code></pre></div>
+<p><code>?</code> says <em>“the property may not exist on the object at
+all.”</em> <code>| undefined</code> says <em>“the property must exist,
+but its value can be undefined.”</em> For our <code>Match</code> type we
+want <code>?</code> — pending matches simply don’t have a
+<code>winner</code> field, period.</p>
+<p>When you’ve got these answered, head to <strong><a
+href="./03-pure-functions-and-scoring.md">03-pure-functions-and-scoring.md</a></strong>.</p>
+</section></section>
+<section>
+<section id="chapter-1-lesson-3-pure-functions-scoring"
+class="title-slide slide level1">
+<h1>Chapter 1 · Lesson 3 — Pure Functions &amp; Scoring</h1>
+<blockquote>
+<p><em>Goal: write <code>lib/scoring.ts</code> — two pure functions, no
+React, no JSX, no DOM. By the end of this lesson the heart of the
+application is beating, and you haven’t typed <code>import React</code>
+even once.</em></p>
+</blockquote>
+</section>
+<section id="what-is-a-pure-function-and-why-do-we-care"
+class="slide level2">
+<h2>What is a “pure function” and why do we care?</h2>
+<p>A <strong>pure function</strong> has two properties:</p>
+<ol type="1">
+<li>Given the same inputs, it always returns the same output.</li>
+<li>It has no side effects — it doesn’t mutate any state outside itself,
+doesn’t write to disk, doesn’t make network calls, doesn’t
+<code>console.log</code>, doesn’t read a global variable that might
+change.</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Pure</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">add</span>(a<span class="op">:</span> <span class="dt">number</span><span class="op">,</span> b<span class="op">:</span> <span class="dt">number</span>)<span class="op">:</span> <span class="dt">number</span> {</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Impure (uses external state)</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> counter <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">increment</span>()<span class="op">:</span> <span class="dt">number</span> {</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  counter <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> counter<span class="op">;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Pure functions are the part of your codebase that <strong>survives
+every refactor</strong>. UI frameworks come and go — React might be
+replaced by Solid in three years, you might migrate to Vue, you might
+one day rewrite the whole thing as a CLI tool. But
+<code>scorePick(pick, match)</code> doesn’t change. It’s just a rule
+about snooker scoring expressed in code.</p>
+<p>In our app, <code>scorePick</code> and
+<code>calculateTeamScores</code> are the <strong>business logic
+layer</strong>. Everything else — the components, the styles, the
+gradients — is the <strong>presentation layer</strong>. Mixing them is
+the most common React mistake. Keeping them separated is the senior
+move.</p>
+<blockquote>
+<p><strong>Interview tip.</strong> When asked <em>“how do you structure
+a React app?”</em>, the seniors say <em>“separate pure data/logic from
+rendering.”</em> If you can point to your own <code>lib/</code> folder
+full of pure functions and your <code>components/</code> folder of pure
+presentation, you’ve got a working answer with proof.</p>
+</blockquote>
+</section>
+<section id="walking-through-scorepick" class="slide level2">
+<h2>Walking through <code>scorePick</code></h2>
+<p>Open <code>lib/scoring.ts</code> in the repo. The first function is
+six lines:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="im">type</span> { Match } <span class="im">from</span> <span class="st">&#39;./types&#39;</span><span class="op">;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">scorePick</span>(pick<span class="op">:</span> <span class="dt">string</span> <span class="op">|</span> <span class="dt">null</span><span class="op">,</span> match<span class="op">:</span> Match <span class="op">|</span> <span class="dt">undefined</span>)<span class="op">:</span> <span class="dt">number</span> <span class="op">|</span> <span class="dt">null</span> {</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>match <span class="op">||</span> <span class="op">!</span>match<span class="op">.</span><span class="at">winner</span>) <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (pick <span class="op">===</span> match<span class="op">.</span><span class="at">winner</span>) <span class="cf">return</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Read it. Three branches:</p>
+<h3 id="branch-1-if-match-match.winner-return-null">Branch 1:
+<code>if (!match || !match.winner) return null;</code></h3>
+<p>This is the “pending” branch. Two ways the function arrives here:</p>
+<ul>
+<li><strong><code>!match</code></strong> — there’s no match object at
+all. This is defensive. We use it because some teams have <em>fewer</em>
+picks than there are slots in later rounds (e.g. a team’s pick lost in
+R1, so their R2 pick technically points at a player who doesn’t appear
+in R2). The match lookup returns <code>undefined</code>. We don’t want
+to crash; we want to return <code>null</code>. <strong>Defensive coding
+without sloppy coding.</strong></li>
+<li><strong><code>!match.winner</code></strong> — the match exists but
+no one has won yet. The <code>winner</code> field is
+<code>undefined</code> (recall Lesson 2: it’s an <em>optional</em> field
+that’s literally absent on pending matches).</li>
+</ul>
+<p>Return <code>null</code>. Not <code>0</code>. Lesson 1 covered this;
+here’s the line of code that enforces it.</p>
+<h3 id="branch-2-if-pick-match.winner-return-3">Branch 2:
+<code>if (pick === match.winner) return 3;</code></h3>
+<p>If we reach this line, we know <code>match.winner</code> is a string
+(TypeScript narrowed it from the previous early-return). If the team’s
+pick matches the winner, they get <strong>3 points</strong>.</p>
+<p>Notice the <code>===</code> (strict equality). In JavaScript that
+means <em>same type, same value</em>. Both <code>pick</code> and
+<code>match.winner</code> are strings, so it’s a plain string
+comparison.</p>
+<p>This is also why <strong>player names must match exactly</strong>. If
+a team writes <code>pick: 'Zhao Xintong'</code> but the match record
+says <code>winner: 'Zhao  Xintong'</code> (with two spaces), the
+comparison silently fails and the team gets the wrong score. This is the
+kind of bug that hides for days. Most teams discover it once they
+accidentally save the file with a trailing space and watch their score
+drop by 3 points.</p>
+<h3 id="branch-3-return-1">Branch 3: <code>return 1;</code></h3>
+<p>The match has a winner, but the pick wasn’t them. The team gets a
+<strong>consolation point</strong>. Snooker’s hard; you tried.</p>
+<p>This branch is the implicit <code>else</code>. There’s no
+<code>else</code> keyword needed because the previous two branches both
+<code>return</code>. Once we get past them, the only remaining case is
+“match finished, pick wrong.”</p>
+<h3 id="the-whole-function-in-one-breath">The whole function in one
+breath</h3>
+<blockquote>
+<p><em>“If the match isn’t finished, return null. Otherwise, return 3 if
+the pick won, 1 otherwise.”</em></p>
+</blockquote>
+<p>That’s the entire scoring rule. <strong>Six lines of code, infinite
+consequences.</strong></p>
+</section>
+<section id="walking-through-calculateteamscores" class="slide level2">
+<h2>Walking through <code>calculateTeamScores</code></h2>
+<p>This is the workhorse. Open <code>lib/scoring.ts</code> and look at
+the second function. We’ll go piece by piece.</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { ROUND1_MATCHES<span class="op">,</span> ROUND2_MATCHES<span class="op">,</span> QF_MATCHES<span class="op">,</span> SF_MATCHES<span class="op">,</span> FINAL_MATCH } <span class="im">from</span> <span class="st">&#39;./matches&#39;</span><span class="op">;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="im">type</span> { Team<span class="op">,</span> TeamScores<span class="op">,</span> ScoreDetail } <span class="im">from</span> <span class="st">&#39;./types&#39;</span><span class="op">;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">calculateTeamScores</span>(team<span class="op">:</span> Team)<span class="op">:</span> TeamScores {</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> r1 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> r2 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> qf <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> sf <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> f <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code></pre></div>
+<p>The function takes a <code>Team</code> and returns a
+<code>TeamScores</code> (the wide return shape we modeled in Lesson 2: 6
+numeric totals + 5 detail arrays).</p>
+<p>The <code>let</code> declarations initialize five running totals to
+zero. We’ll add to them as we walk each round.</p>
+<p>Why <code>let</code> instead of <code>const</code>? Because we’re
+going to mutate these. <code>let</code> is “I’ll reassign.”
+<code>const</code> is “I won’t.” TypeScript / JS strict-mode lints you
+on mismatches. <strong>Naming things accurately is part of writing
+readable code.</strong></p>
+<h3 id="round-1-walkthrough">Round 1 walkthrough</h3>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> r1Details<span class="op">:</span> ScoreDetail[] <span class="op">=</span> team<span class="op">.</span><span class="at">r1</span><span class="op">.</span><span class="fu">map</span>((pick<span class="op">,</span> i) <span class="kw">=&gt;</span> {</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> pts <span class="op">=</span> <span class="fu">scorePick</span>(pick<span class="op">,</span> ROUND1_MATCHES[i])<span class="op">;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    r1 <span class="op">+=</span> pts <span class="op">||</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>      match<span class="op">:</span> ROUND1_MATCHES[i]<span class="op">,</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>      pick<span class="op">,</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>      points<span class="op">:</span> pts<span class="op">,</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>      correct<span class="op">:</span> pts <span class="op">===</span> <span class="kw">null</span> <span class="op">?</span> <span class="kw">null</span> <span class="op">:</span> pts <span class="op">===</span> <span class="dv">3</span><span class="op">,</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span></code></pre></div>
+<p>Five lines, four ideas:</p>
+<h4 id="idea-1-team.r1.mappick-i-...">Idea 1:
+<code>team.r1.map((pick, i) =&gt; ...)</code></h4>
+<p><code>.map()</code> is JavaScript’s “transform every item in this
+array into something else.” For each <code>pick</code> (a player name
+string) at position <code>i</code>, run the callback and collect the
+results. The callback receives both the value (<code>pick</code>) and
+the index (<code>i</code>).</p>
+<p>We need <code>i</code> because we’re going to look up the
+<em>matching</em> match by position: <code>ROUND1_MATCHES[i]</code>.
+<strong>The invariant from Lesson 2 in action</strong>: the i-th pick is
+for the i-th match. Without that invariant, this <code>.map</code>
+couldn’t be 5 lines — it’d need a <code>.find()</code> or a lookup
+table.</p>
+<h4 id="idea-2-scorepickpick-round1_matchesi">Idea 2:
+<code>scorePick(pick, ROUND1_MATCHES[i])</code></h4>
+<p>We call our pure function from earlier. It returns
+<code>3 | 1 | null</code>. We assign that to <code>pts</code>.</p>
+<p>This is the only place in the whole codebase that the scoring rule is
+applied. <strong>Logic centralized, used everywhere.</strong> If the
+league rules change next year (e.g. “5 points for picking a final-frame
+thriller”), there’s exactly one function to update.</p>
+<h4 id="idea-3-r1-pts-0">Idea 3: <code>r1 += pts || 0;</code></h4>
+<p>This is a small but clever line. <code>pts</code> might be
+<code>3</code>, <code>1</code>, or <code>null</code>. JavaScript’s
+<code>||</code> operator returns the first <em>truthy</em> value,
+treating <code>null</code> as falsy. So:</p>
+<ul>
+<li><code>pts = 3</code> → <code>r1 += 3 || 0</code> →
+<code>r1 += 3</code></li>
+<li><code>pts = 1</code> → <code>r1 += 1 || 0</code> →
+<code>r1 += 1</code></li>
+<li><code>pts = null</code> → <code>r1 += null || 0</code> →
+<code>r1 += 0</code></li>
+</ul>
+<p>Pending picks add nothing. The total reflects only finished matches.
+As Round 1 plays out, <code>r1</code> creeps up from 0 toward its final
+value, never spiking incorrectly.</p>
+<p>A more “modern” version would use the nullish coalescing operator:
+<code>r1 += pts ?? 0</code>. The <code>??</code> only treats
+<code>null</code> and <code>undefined</code> as falsy (unlike
+<code>||</code> which also rejects <code>0</code>). For our case it
+doesn’t matter — <code>pts</code> is never <code>0</code>. But
+<code>??</code> is the pedantically correct choice. The codebase uses
+<code>||</code>; either is acceptable.</p>
+<h4 id="idea-4-the-returned-detail-object">Idea 4: the returned detail
+object</h4>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  match<span class="op">:</span> ROUND1_MATCHES[i]<span class="op">,</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  pick<span class="op">,</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  points<span class="op">:</span> pts<span class="op">,</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  correct<span class="op">:</span> pts <span class="op">===</span> <span class="kw">null</span> <span class="op">?</span> <span class="kw">null</span> <span class="op">:</span> pts <span class="op">===</span> <span class="dv">3</span><span class="op">,</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>Each iteration of <code>.map</code> returns one
+<code>ScoreDetail</code>. By the end of the <code>.map</code>,
+<code>r1Details</code> is an array of 16 ScoreDetail objects, one per
+Round 1 match.</p>
+<p>Notice <code>correct: pts === null ? null : pts === 3</code>. This is
+a <strong>ternary inside a ternary</strong> that produces a tri-state
+boolean:</p>
+<ul>
+<li>If <code>pts === null</code>, <code>correct</code> is
+<code>null</code> (pending).</li>
+<li>Otherwise (<code>pts</code> is 3 or 1), <code>correct</code> is
+<code>pts === 3</code> — i.e. <code>true</code> if 3 points,
+<code>false</code> if 1.</li>
+</ul>
+<p>That tri-state is what powers three-color UI cells: green for
+correct, red for wrong, gray for pending. Without it, “wrong” and
+“pending” would render the same.</p>
+<h3 id="rounds-2-through-final">Rounds 2 through Final</h3>
+<p>The pattern repeats:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> r2Details<span class="op">:</span> ScoreDetail[] <span class="op">=</span> team<span class="op">.</span><span class="at">r2</span><span class="op">.</span><span class="fu">map</span>((pick<span class="op">,</span> i) <span class="kw">=&gt;</span> {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> pts <span class="op">=</span> <span class="fu">scorePick</span>(pick<span class="op">,</span> ROUND2_MATCHES[i])<span class="op">;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    r2 <span class="op">+=</span> pts <span class="op">||</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>      match<span class="op">:</span> ROUND2_MATCHES[i]<span class="op">,</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>      pick<span class="op">,</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>      points<span class="op">:</span> pts<span class="op">,</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>      correct<span class="op">:</span> pts <span class="op">===</span> <span class="kw">null</span> <span class="op">?</span> <span class="kw">null</span> <span class="op">:</span> pts <span class="op">===</span> <span class="dv">3</span><span class="op">,</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ... and the same shape for qf, sf</span></span></code></pre></div>
+<p>Five almost-identical blocks, one per round.
+<strong>Duplication-by-round</strong> is one of the recurring patterns
+of this codebase.</p>
+<p>A more architected version would parameterize over a list of
+rounds:</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> ROUNDS <span class="op">=</span> [</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  { key<span class="op">:</span> <span class="st">&#39;r1&#39;</span><span class="op">,</span> matches<span class="op">:</span> ROUND1_MATCHES }<span class="op">,</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  { key<span class="op">:</span> <span class="st">&#39;r2&#39;</span><span class="op">,</span> matches<span class="op">:</span> ROUND2_MATCHES }<span class="op">,</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>] <span class="im">as</span> <span class="kw">const</span><span class="op">;</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>ROUNDS<span class="op">.</span><span class="fu">forEach</span>(({ key<span class="op">,</span> matches }) <span class="kw">=&gt;</span> { <span class="co">/* shared logic */</span> })<span class="op">;</span></span></code></pre></div>
+<p>Cleaner? Yes. But it has costs:</p>
+<ul>
+<li>The TypeScript types need to be more flexible (not all rounds have
+the same shape; the Final is special).</li>
+<li>The reader needs to load the abstract loop in their head before they
+can see what each round does.</li>
+<li>Each round is currently <em>grep-able</em> by its name — a
+debug-friendly property.</li>
+</ul>
+<p>The codebase chose copy-paste for <strong>5 rounds in one
+place</strong>. That’s a trade-off, not a mistake. <strong>Copy-paste is
+forgiveable up to about 3 occurrences; beyond that you should consider
+abstracting.</strong> Five round blocks is right at the edge — you could
+argue it either way. The author chose readability. Both choices
+ship.</p>
+<h3 id="the-final-is-special">The Final is special</h3>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> finalMatch <span class="op">=</span> FINAL_MATCH[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> fPts <span class="op">=</span> <span class="fu">scorePick</span>(team<span class="op">.</span><span class="at">final</span><span class="op">,</span> finalMatch)<span class="op">;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  f <span class="op">+=</span> fPts <span class="op">||</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> fDetails<span class="op">:</span> ScoreDetail[] <span class="op">=</span> [{</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    match<span class="op">:</span> finalMatch<span class="op">,</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    pick<span class="op">:</span> team<span class="op">.</span><span class="at">final</span><span class="op">,</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    points<span class="op">:</span> fPts<span class="op">,</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    correct<span class="op">:</span> fPts <span class="op">===</span> <span class="kw">null</span> <span class="op">?</span> <span class="kw">null</span> <span class="op">:</span> fPts <span class="op">===</span> <span class="dv">3</span><span class="op">,</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  }]<span class="op">;</span></span></code></pre></div>
+<p>Three reasons it’s different:</p>
+<ol type="1">
+<li><strong><code>team.final</code> is a string, not an array.</strong>
+Recall Lesson 2 — there’s only one Final, so we accept the
+asymmetry.</li>
+<li><strong><code>FINAL_MATCH[0]</code></strong> — even though there’s
+only one Final match, we kept it in an array for consistency with the
+other rounds. So we index into it once.</li>
+<li><strong><code>fDetails</code> is wrapped in an array of one</strong>
+— for consistency with the other <code>*Details</code> arrays. UI code
+that does <code>team.scores.fDetails.map(...)</code> works exactly like
+<code>r1Details.map(...)</code>. <strong>Symmetry where the UI sees it;
+asymmetry where the data needs it.</strong></li>
+</ol>
+<h3 id="the-total-and-the-return">The total and the return</h3>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> total <span class="op">=</span> r1 <span class="op">+</span> r2 <span class="op">+</span> qf <span class="op">+</span> sf <span class="op">+</span> f<span class="op">;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { r1<span class="op">,</span> r2<span class="op">,</span> qf<span class="op">,</span> sf<span class="op">,</span> f<span class="op">,</span> total<span class="op">,</span> r1Details<span class="op">,</span> r2Details<span class="op">,</span> qfDetails<span class="op">,</span> sfDetails<span class="op">,</span> fDetails }<span class="op">;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Sum the five round totals into <code>total</code>. Return all 11
+fields. <strong>Compute once, render five different ways</strong> —
+Lesson 2’s “wide return shape” pays off here. Every UI screen in the app
+will read from this object in different ways. None of them re-runs the
+scoring.</p>
+</section>
+<section id="why-is-the-return-shape-so-wide" class="slide level2">
+<h2>Why is the return shape so wide?</h2>
+<p>You might think <em>“why return both <code>r1</code> (the number) and
+<code>r1Details</code> (the array)? Couldn’t we always derive the number
+from the array?”</em></p>
+<p>We could:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> r1 <span class="op">=</span> r1Details<span class="op">.</span><span class="fu">reduce</span>((sum<span class="op">,</span> d) <span class="kw">=&gt;</span> sum <span class="op">+</span> (d<span class="op">.</span><span class="at">points</span> <span class="op">||</span> <span class="dv">0</span>)<span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span></span></code></pre></div>
+<p>But:</p>
+<ul>
+<li>The standings table needs the number. Computing it from the array on
+every render of every row would be wasteful.</li>
+<li>The number is what most callers want; the array is what some callers
+want. Pre-computing both means <strong>every caller picks what’s
+cheap.</strong></li>
+<li>The data is small enough (5 numbers) that the storage cost is
+zero.</li>
+</ul>
+<p>This is <strong>the wide-return-object pattern</strong>: when a
+function naturally produces several related pieces of data and they’re
+all going to be consumed somewhere, return them all in one object. Don’t
+make the caller call you N times.</p>
+</section>
+<section id="the-whole-libscoring.ts" class="slide level2">
+<h2>The whole <code>lib/scoring.ts</code></h2>
+<p>Open the file in the repo. Compare to what we’ve discussed:</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { ROUND1_MATCHES<span class="op">,</span> ROUND2_MATCHES<span class="op">,</span> QF_MATCHES<span class="op">,</span> SF_MATCHES<span class="op">,</span> FINAL_MATCH } <span class="im">from</span> <span class="st">&#39;./matches&#39;</span><span class="op">;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="im">type</span> { Team<span class="op">,</span> TeamScores<span class="op">,</span> ScoreDetail<span class="op">,</span> Match } <span class="im">from</span> <span class="st">&#39;./types&#39;</span><span class="op">;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">scorePick</span>(pick<span class="op">:</span> <span class="dt">string</span> <span class="op">|</span> <span class="dt">null</span><span class="op">,</span> match<span class="op">:</span> Match <span class="op">|</span> <span class="dt">undefined</span>)<span class="op">:</span> <span class="dt">number</span> <span class="op">|</span> <span class="dt">null</span> {</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>match <span class="op">||</span> <span class="op">!</span>match<span class="op">.</span><span class="at">winner</span>) <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (pick <span class="op">===</span> match<span class="op">.</span><span class="at">winner</span>) <span class="cf">return</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">calculateTeamScores</span>(team<span class="op">:</span> Team)<span class="op">:</span> TeamScores {</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> r1 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> r2 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> qf <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> sf <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> f <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> r1Details<span class="op">:</span> ScoreDetail[] <span class="op">=</span> team<span class="op">.</span><span class="at">r1</span><span class="op">.</span><span class="fu">map</span>((pick<span class="op">,</span> i) <span class="kw">=&gt;</span> {</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> pts <span class="op">=</span> <span class="fu">scorePick</span>(pick<span class="op">,</span> ROUND1_MATCHES[i])<span class="op">;</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    r1 <span class="op">+=</span> pts <span class="op">||</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> { match<span class="op">:</span> ROUND1_MATCHES[i]<span class="op">,</span> pick<span class="op">,</span> points<span class="op">:</span> pts<span class="op">,</span> correct<span class="op">:</span> pts <span class="op">===</span> <span class="kw">null</span> <span class="op">?</span> <span class="kw">null</span> <span class="op">:</span> pts <span class="op">===</span> <span class="dv">3</span> }<span class="op">;</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> r2Details<span class="op">:</span> ScoreDetail[] <span class="op">=</span> team<span class="op">.</span><span class="at">r2</span><span class="op">.</span><span class="fu">map</span>((pick<span class="op">,</span> i) <span class="kw">=&gt;</span> {</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> pts <span class="op">=</span> <span class="fu">scorePick</span>(pick<span class="op">,</span> ROUND2_MATCHES[i])<span class="op">;</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    r2 <span class="op">+=</span> pts <span class="op">||</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> { match<span class="op">:</span> ROUND2_MATCHES[i]<span class="op">,</span> pick<span class="op">,</span> points<span class="op">:</span> pts<span class="op">,</span> correct<span class="op">:</span> pts <span class="op">===</span> <span class="kw">null</span> <span class="op">?</span> <span class="kw">null</span> <span class="op">:</span> pts <span class="op">===</span> <span class="dv">3</span> }<span class="op">;</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> qfDetails<span class="op">:</span> ScoreDetail[] <span class="op">=</span> team<span class="op">.</span><span class="at">qf</span><span class="op">.</span><span class="fu">map</span>((pick<span class="op">,</span> i) <span class="kw">=&gt;</span> {</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> pts <span class="op">=</span> <span class="fu">scorePick</span>(pick<span class="op">,</span> QF_MATCHES[i])<span class="op">;</span></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    qf <span class="op">+=</span> pts <span class="op">||</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> { match<span class="op">:</span> QF_MATCHES[i]<span class="op">,</span> pick<span class="op">,</span> points<span class="op">:</span> pts<span class="op">,</span> correct<span class="op">:</span> pts <span class="op">===</span> <span class="kw">null</span> <span class="op">?</span> <span class="kw">null</span> <span class="op">:</span> pts <span class="op">===</span> <span class="dv">3</span> }<span class="op">;</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> sfDetails<span class="op">:</span> ScoreDetail[] <span class="op">=</span> team<span class="op">.</span><span class="at">sf</span><span class="op">.</span><span class="fu">map</span>((pick<span class="op">,</span> i) <span class="kw">=&gt;</span> {</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> pts <span class="op">=</span> <span class="fu">scorePick</span>(pick<span class="op">,</span> SF_MATCHES[i])<span class="op">;</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    sf <span class="op">+=</span> pts <span class="op">||</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> { match<span class="op">:</span> SF_MATCHES[i]<span class="op">,</span> pick<span class="op">,</span> points<span class="op">:</span> pts<span class="op">,</span> correct<span class="op">:</span> pts <span class="op">===</span> <span class="kw">null</span> <span class="op">?</span> <span class="kw">null</span> <span class="op">:</span> pts <span class="op">===</span> <span class="dv">3</span> }<span class="op">;</span></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> finalMatch <span class="op">=</span> FINAL_MATCH[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> fPts <span class="op">=</span> <span class="fu">scorePick</span>(team<span class="op">.</span><span class="at">final</span><span class="op">,</span> finalMatch)<span class="op">;</span></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>  f <span class="op">+=</span> fPts <span class="op">||</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> fDetails<span class="op">:</span> ScoreDetail[] <span class="op">=</span> [{</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>    match<span class="op">:</span> finalMatch<span class="op">,</span></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>    pick<span class="op">:</span> team<span class="op">.</span><span class="at">final</span><span class="op">,</span></span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>    points<span class="op">:</span> fPts<span class="op">,</span></span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>    correct<span class="op">:</span> fPts <span class="op">===</span> <span class="kw">null</span> <span class="op">?</span> <span class="kw">null</span> <span class="op">:</span> fPts <span class="op">===</span> <span class="dv">3</span><span class="op">,</span></span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>  }]<span class="op">;</span></span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> total <span class="op">=</span> r1 <span class="op">+</span> r2 <span class="op">+</span> qf <span class="op">+</span> sf <span class="op">+</span> f<span class="op">;</span></span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { r1<span class="op">,</span> r2<span class="op">,</span> qf<span class="op">,</span> sf<span class="op">,</span> f<span class="op">,</span> total<span class="op">,</span> r1Details<span class="op">,</span> r2Details<span class="op">,</span> qfDetails<span class="op">,</span> sfDetails<span class="op">,</span> fDetails }<span class="op">;</span></span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>About 40 lines. Five round blocks plus two utility functions.
+<strong>No React, no JSX, no DOM.</strong> This file would compile and
+run correctly in Node.js, in Deno, in a browser console, in a Cloudflare
+Worker, in a serverless function — anywhere JavaScript runs.</p>
+<p>That portability is a feature. If next year you decide to write a
+Discord bot that posts standings hourly, this scoring file goes into the
+bot unchanged. It’s pure logic.</p>
+</section>
+<section id="trying-it-out-optional" class="slide level2">
+<h2>Trying it out (optional)</h2>
+<p>If you want to feel it work, paste this into a Node REPL:</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { scorePick } <span class="im">from</span> <span class="st">&#39;./lib/scoring&#39;</span><span class="op">;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scorePick</span>(<span class="st">&#39;Wu Yize&#39;</span><span class="op">,</span> { id<span class="op">:</span> <span class="dv">1</span><span class="op">,</span> p1<span class="op">:</span> <span class="st">&#39;Wu Yize&#39;</span><span class="op">,</span> p2<span class="op">:</span> <span class="st">&#39;Murphy&#39;</span><span class="op">,</span> winner<span class="op">:</span> <span class="st">&#39;Wu Yize&#39;</span> })<span class="op">;</span>   <span class="co">// 3</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scorePick</span>(<span class="st">&#39;Murphy&#39;</span><span class="op">,</span>  { id<span class="op">:</span> <span class="dv">1</span><span class="op">,</span> p1<span class="op">:</span> <span class="st">&#39;Wu Yize&#39;</span><span class="op">,</span> p2<span class="op">:</span> <span class="st">&#39;Murphy&#39;</span><span class="op">,</span> winner<span class="op">:</span> <span class="st">&#39;Wu Yize&#39;</span> })<span class="op">;</span>   <span class="co">// 1</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">scorePick</span>(<span class="st">&#39;Wu Yize&#39;</span><span class="op">,</span> { id<span class="op">:</span> <span class="dv">1</span><span class="op">,</span> p1<span class="op">:</span> <span class="st">&#39;Wu Yize&#39;</span><span class="op">,</span> p2<span class="op">:</span> <span class="st">&#39;Murphy&#39;</span> })<span class="op">;</span>                      <span class="co">// null</span></span></code></pre></div>
+<p>That’s the entire scoring engine, from a black box. Three calls,
+three predictable answers.</p>
+</section>
+<section id="vibe-prompt-you-would-have-used-1" class="slide level2">
+<h2>Vibe prompt you would have used</h2>
+<blockquote>
+<p><em>“Write <code>lib/scoring.ts</code>. Two pure functions. (1)
+<code>scorePick(pick: string | null, match: Match | undefined): number | null</code>
+— return <code>null</code> if <code>!match || !match.winner</code>, else
+3 if <code>pick === match.winner</code>, else 1. (2)
+<code>calculateTeamScores(team: Team): TeamScores</code> — for each of
+r1/r2/qf/sf use
+<code>team.rX.map((pick, i) =&gt; scorePick(pick, ROUNDx_MATCHES[i]))</code>,
+accumulate the points (treating null as 0), and produce per-pick
+<code>ScoreDetail</code> records of shape
+<code>{ match, pick, points, correct }</code> where <code>correct</code>
+is <code>points === null ? null : points === 3</code>. Final is special:
+<code>team.final</code> is a single string against
+<code>FINAL_MATCH[0]</code>. Return
+<code>{ r1, r2, qf, sf, f, total, r1Details, r2Details, qfDetails, sfDetails, fDetails }</code>.
+Import <code>Match</code>, <code>Team</code>, <code>TeamScores</code>,
+<code>ScoreDetail</code> from <code>./types</code>. No React, no side
+effects.”</em></p>
+</blockquote>
+<p>This is the most precise vibe prompt you’ll write. Notice every type
+is named, every shape is given, the asymmetry of Final is called out,
+the imports are listed. <strong>The LLM has nothing to invent.</strong>
+A prompt this specific produces the right answer almost regardless of
+which model you use.</p>
+</section>
+<section id="check-yourself-2" class="slide level2">
+<h2>CHECK YOURSELF</h2>
+<ol type="1">
+<li><strong><code>r1 += pts || 0</code> — what would happen if you
+removed the <code>|| 0</code>?</strong> Walk through the case
+<code>pts = null</code> step by step.</li>
+<li><strong><code>scorePick</code> is called from inside
+<code>calculateTeamScores.map</code>. Is <code>scorePick</code> still a
+pure function in that context, even though it’s called inside a
+loop?</strong> Why or why not?</li>
+<li><strong>Why does <code>calculateTeamScores</code> return both
+<code>r1</code> (the total) and <code>r1Details</code> (the array of
+details)?</strong> Is one redundant? Could the UI live without one of
+them?</li>
+<li><strong>The Final case is hard-coded as one extra block at the
+bottom of the function.</strong> Sketch what the function would look
+like if <code>team.final</code> were instead a one-element array
+(<code>team.final: string[]</code>). Does the function become longer or
+shorter? Easier to read or harder?</li>
+<li><strong>You’re given a new league rule: a team that picks a player
+who reaches the Final but loses gets +5 bonus points (regardless of
+whether they were the team’s Final pick). Where in this codebase would
+you add that logic?</strong> Is it a change to <code>scorePick</code>,
+to <code>calculateTeamScores</code>, or to the data? Why?</li>
+</ol>
+<p>When you’ve answered these, you’ve finished Chapter 1. Onward to
+<strong><a href="../chapter-02-project-setup/README.md">Chapter 2 —
+Project Setup</a></strong>, where we’ll finally open Next.js and turn
+this pile of types and functions into a running web page.</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^5/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

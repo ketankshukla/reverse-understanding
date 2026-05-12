@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Chapter 02 The Big Question</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/theme/white.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Chapter 02 The Big Question</h1>
+</section>
+
+<section>
+<section id="chapter-2-why-do-we-still-need-human-developers"
+class="title-slide slide level1">
+<h1>Chapter 2 — “Why Do We Still Need Human Developers?”</h1>
+<blockquote>
+<p><strong>This is the question.</strong> Every other AI question in
+your interview is a variant of this one. Master this chapter and 60% of
+the interview is already won.</p>
+</blockquote>
+</section>
+<section id="what-youll-learn" class="slide level2">
+<h2>What you’ll learn</h2>
+<ul>
+<li>The <strong>5 different ways</strong> this question gets asked, and
+how to recognize each one in real time.</li>
+<li>The <strong>7-pillar answer framework</strong> — a complete,
+defendable response built on layered evidence.</li>
+<li><strong>Real-world cases</strong> — short, memorable stories where
+humans saved AI-generated work, that you can adapt as your own.</li>
+</ul>
+<p>By the end of the chapter, you will be able to deliver a 90-second
+answer to <em>any</em> phrasing of this question that is:</p>
+<ul>
+<li><strong>Honest</strong> — no dismissal of AI’s real strengths.</li>
+<li><strong>Confident</strong> — no defensiveness about your own
+role.</li>
+<li><strong>Concrete</strong> — backed by examples, not slogans.</li>
+<li><strong>Memorable</strong> — structured the way the interviewer
+wants to remember it for the hiring committee.</li>
+</ul>
+</section>
+<section id="lessons" class="slide level2">
+<h2>Lessons</h2>
+<ol type="1">
+<li><strong><a
+href="./01-the-five-framings.md">01-the-five-framings.md</a></strong> —
+The five real shapes this question takes. The hostile version, the
+curious version, the technical version, the business version, and the
+existential version. Each gets a different opening sentence.</li>
+<li><strong><a
+href="./02-the-seven-pillars.md">02-the-seven-pillars.md</a></strong> —
+The complete answer framework. Seven pillars of human contribution that
+AI does not credibly threaten in the next 5 years. Every pillar has a
+soundbite and an example.</li>
+<li><strong><a
+href="./03-real-world-cases.md">03-real-world-cases.md</a></strong> —
+Eight memorable stories drawn from real engineering: bugs AI introduced,
+decisions AI couldn’t make, work AI couldn’t do at all. Adapt one or two
+as your own.</li>
+</ol>
+</section>
+<section id="how-long-it-should-take" class="slide level2">
+<h2>How long it should take</h2>
+<ul>
+<li>45 min reading per lesson.</li>
+<li>30 min after each lesson rehearsing aloud.</li>
+<li>~4 hours total — but this is the chapter to budget more time for.
+<strong>Re-read it before any AI-context interview.</strong></li>
+</ul>
+</section>
+<section id="why-this-chapter-is-the-centerpiece" class="slide level2">
+<h2>Why this chapter is the centerpiece</h2>
+<p>Most candidates tense up when asked “Why are you still needed?” —
+they hear it as an attack. It usually isn’t. The interviewer is asking
+because:</p>
+<ol type="1">
+<li>They themselves are wrestling with it (their own job is
+changing).</li>
+<li>Their hiring manager asked them to ask it.</li>
+<li>They want to know if you’ve thought about it (versus being
+naive).</li>
+</ol>
+<p>A confident, structured answer <strong>lowers the temperature in the
+room</strong>. The interviewer relaxes. The follow-up questions become
+friendlier. <strong>You set the tone for the rest of the
+interview.</strong></p>
+</section>
+<section id="before-you-start" class="slide level2">
+<h2>Before you start</h2>
+<p>You should have:</p>
+<ul>
+<li>Completed Chapter 1 (the vocabulary you’ll use here).</li>
+<li>A pen and notebook for the answer-rehearsal exercises.</li>
+<li>90 minutes of uninterrupted time for at least one of the
+lessons.</li>
+</ul>
+<p>Open <strong><a
+href="./01-the-five-framings.md">01-the-five-framings.md</a></strong>.</p>
+</section></section>
+<section>
+<section id="lesson-2.1-the-five-framings"
+class="title-slide slide level1">
+<h1>Lesson 2.1 — The Five Framings</h1>
+<blockquote>
+<p><strong>The same question gets asked five different ways.</strong>
+Each framing wants a different opening sentence. Use the wrong one and
+you sound deaf to the room.</p>
+</blockquote>
+<p>By the end of this lesson:</p>
+<ul>
+<li>You’ll recognize each framing in the first 10 seconds the
+interviewer speaks.</li>
+<li>You’ll have an opening sentence ready for each one.</li>
+<li>You’ll know which framings to lean into and which to deflect.</li>
+</ul>
+<p>This is a <em>recognition</em> lesson. Read it twice. Then practice
+with a friend who asks you the question in different tones.</p>
+</section>
+<section id="why-framing-matters-more-than-content"
+class="slide level2">
+<h2>1. Why framing matters more than content</h2>
+<p>Two interviewers can ask the same words — <em>“Why do we still need
+human developers?”</em> — and want completely different answers.</p>
+<ul>
+<li>One is a tech lead who reads Hacker News and is genuinely
+worried.</li>
+<li>One is a CTO who has to defend the engineering budget to the
+board.</li>
+<li>One is a founder who’s asking out loud what their investors are
+pestering them about.</li>
+<li>One is a peer engineer testing whether you’ve thought about your own
+role.</li>
+<li>One is a cynic who thinks engineering is overpaid and AI proves
+it.</li>
+</ul>
+<p><strong>Each one wants a different first sentence.</strong> If you
+give the budget-defending CTO a philosophical answer, you’ve missed. If
+you give the cynic a heartfelt answer, you’ve missed.</p>
+<p>The skill: <strong>identify the framing in the first 10
+seconds</strong>, then deliver the right opening sentence. The body of
+the answer can be similar; the framing-specific opener is what makes it
+land.</p>
+</section>
+<section id="framing-1-the-hostile-framing" class="slide level2">
+<h2>2. Framing #1 — The Hostile Framing</h2>
+<h3 id="how-it-sounds">How it sounds</h3>
+<blockquote>
+<p><em>“Honestly, I look at this stuff and I wonder why we hire any
+developers anymore. Convince me.”</em></p>
+<p><em>“Half my team is being asked to do twice the work because of AI.
+Are you worth what we pay engineers?”</em></p>
+<p><em>“I’ve seen a single founder ship an entire SaaS app with AI
+alone. So why do I need a team of you?”</em></p>
+</blockquote>
+<h3 id="tone-signals">Tone signals</h3>
+<ul>
+<li>The word <em>“convince”</em>, <em>“justify”</em>, <em>“prove”</em>,
+<em>“worth”</em>.</li>
+<li>A short, blunt question without the usual interview
+pleasantries.</li>
+<li>Eye contact that’s holding you accountable, not warmly
+engaging.</li>
+<li>They lean back, not forward.</li>
+</ul>
+<h3 id="what-they-actually-want">What they actually want</h3>
+<p>They want to feel that <strong>you take the question seriously and
+have an answer</strong>. They don’t want a lecture about transformer
+architecture or a defensive rant. They want a senior engineer’s quiet
+confidence.</p>
+<h3 id="the-opening-sentence">The opening sentence</h3>
+<blockquote>
+<p><em>“That’s a fair question and I think about it a lot. The short
+answer is that AI raised the floor of what’s possible — but it didn’t
+lower the ceiling of what’s required from a senior engineer. Let me
+explain.”</em></p>
+</blockquote>
+<p>Notes:</p>
+<ul>
+<li><em>“Fair question”</em> — disarms.</li>
+<li><em>“I think about it a lot”</em> — signals you’re not naive.</li>
+<li><em>“Floor / ceiling”</em> — a clean metaphor that they’ll repeat to
+colleagues.</li>
+<li><em>“Let me explain”</em> — invites them to listen.</li>
+</ul>
+<p>Then go into the 7-pillar framework (next lesson).</p>
+<h3 id="what-not-to-do">What not to do</h3>
+<ul>
+<li>Don’t smirk.</li>
+<li>Don’t deflect (<em>“that’s a complicated question…”</em>).</li>
+<li>Don’t argue with the premise (<em>“AI hasn’t actually replaced
+developers…”</em>) — that’s a fight.</li>
+</ul>
+<p>Validate, then redirect to the structural answer.
+<strong>Always.</strong></p>
+</section>
+<section id="framing-2-the-curious-framing" class="slide level2">
+<h2>3. Framing #2 — The Curious Framing</h2>
+<h3 id="how-it-sounds-1">How it sounds</h3>
+<blockquote>
+<p><em>“What’s your take on the whole AI-and-developers
+conversation?”</em></p>
+<p><em>“How do you think your job has changed in the last 18
+months?”</em></p>
+<p><em>“Where do you see the most leverage from AI in your day-to-day,
+and where doesn’t it help?”</em></p>
+</blockquote>
+<h3 id="tone-signals-1">Tone signals</h3>
+<ul>
+<li><em>“Your take”</em>, <em>“how do you see”</em>, <em>“what’s
+interesting to you”</em>.</li>
+<li>Open posture, leaning in.</li>
+<li>A genuine pause for you to answer, not a setup for their next
+point.</li>
+</ul>
+<h3 id="what-they-actually-want-1">What they actually want</h3>
+<p>This is the <strong>most generous framing</strong>. The interviewer
+is curious, conversational, and probably as uncertain as you are. They
+want a thoughtful exchange, not a defended thesis.</p>
+<h3 id="the-opening-sentence-1">The opening sentence</h3>
+<blockquote>
+<p><em>“My take is that AI has changed <em>what</em> I spend time on,
+more than it changed <em>whether</em> I’m needed. The typing got
+automated. The judgment didn’t. If anything, the judgment got more
+important because there are more options to choose between.”</em></p>
+</blockquote>
+<p>Notes:</p>
+<ul>
+<li><em>“What I spend time on”</em> — invites a conversation about your
+actual work.</li>
+<li><em>“Typing automated, judgment didn’t”</em> — clean,
+memorable.</li>
+<li><em>“More options to choose between”</em> — a positive frame for the
+change.</li>
+</ul>
+<p>Then <em>invite their experience back</em>: <em>“Has that been your
+experience too?”</em> This converts the question into a dialogue, which
+is exactly what this interviewer wants.</p>
+<h3 id="what-not-to-do-1">What not to do</h3>
+<ul>
+<li>Don’t over-prepare and deliver a monologue. They want a chat.</li>
+<li>Don’t be too humble (<em>“oh, I’m still figuring it out”</em>) —
+you’ll sound junior.</li>
+</ul>
+</section>
+<section id="framing-3-the-technical-framing" class="slide level2">
+<h2>4. Framing #3 — The Technical Framing</h2>
+<h3 id="how-it-sounds-2">How it sounds</h3>
+<blockquote>
+<p><em>“Where do current AI tools break down for you,
+technically?”</em></p>
+<p><em>“What’s a class of problem you would not let an LLM solve in
+production?”</em></p>
+<p><em>“How do you reason about when to trust LLM output vs verify it
+manually?”</em></p>
+</blockquote>
+<h3 id="tone-signals-2">Tone signals</h3>
+<ul>
+<li>They use precise vocabulary: <em>“in production”</em>,
+<em>“verify”</em>, <em>“class of problem”</em>.</li>
+<li>Specific examples or follow-up questions are likely.</li>
+<li>They’re often a senior IC, not a manager.</li>
+</ul>
+<h3 id="what-they-actually-want-2">What they actually want</h3>
+<p>They want <strong>concrete technical opinions backed by
+examples</strong>. They are the easiest framing to nail because they’re
+testing your engineering thinking, not your soft skills.</p>
+<h3 id="the-opening-sentence-2">The opening sentence</h3>
+<blockquote>
+<p><em>“There are three classes of work where I won’t let the LLM be the
+primary author: anything that touches money, anything that requires
+reasoning across more than ~200 lines of unfamiliar context, and
+anything where the cost of a wrong answer doesn’t show up in tests. Let
+me give you an example for each.”</em></p>
+</blockquote>
+<p>Notes:</p>
+<ul>
+<li>Three categories — concrete and memorable.</li>
+<li><em>“Primary author”</em> — a precise distinction. The LLM can
+assist; it shouldn’t drive.</li>
+<li><em>“Let me give you an example”</em> — the next sentences will be
+stories, which interviewers love.</li>
+</ul>
+<p>Then deliver three short stories. Aim for ~30 seconds each. Total
+answer ~2 minutes.</p>
+<h3 id="what-not-to-do-2">What not to do</h3>
+<ul>
+<li>Don’t be vague. Technical interviewers eat vagueness alive.</li>
+<li>Don’t say “it depends” without immediately specifying what it
+depends on.</li>
+</ul>
+</section>
+<section id="framing-4-the-business-framing" class="slide level2">
+<h2>5. Framing #4 — The Business Framing</h2>
+<h3 id="how-it-sounds-3">How it sounds</h3>
+<blockquote>
+<p><em>“From a hiring-manager perspective, why should I prioritize a
+human engineer over scaling AI tooling for my existing team?”</em></p>
+<p><em>“How do you think about the ROI of a senior engineer vs an AI
+subscription?”</em></p>
+<p><em>“If we doubled our AI tooling spend, what would still be
+missing?”</em></p>
+</blockquote>
+<h3 id="tone-signals-3">Tone signals</h3>
+<ul>
+<li>Words from the budget conversation: <em>“ROI”</em>,
+<em>“priority”</em>, <em>“spend”</em>, <em>“hire”</em>.</li>
+<li>Often a director, VP, or non-IC.</li>
+<li>They’re pattern-matching against other hires they’ve made.</li>
+</ul>
+<h3 id="what-they-actually-want-3">What they actually want</h3>
+<p>They want the answer they can <strong>paraphrase to their own
+boss</strong> when asked why they hired you instead of buying more AI
+seats. Give them the line they’ll repeat.</p>
+<h3 id="the-opening-sentence-3">The opening sentence</h3>
+<blockquote>
+<p><em>“AI tools are force multipliers. Force multipliers don’t help if
+you don’t have force. The engineer is the force — the judgment about
+what to build, the design choices about how it fits, the accountability
+when it breaks. AI subscription doesn’t show up to the postmortem. I
+do.”</em></p>
+</blockquote>
+<p>Notes:</p>
+<ul>
+<li><em>“Force multiplier”</em> — borrowed from military/business
+vocabulary they’ll respect.</li>
+<li><em>“Force”</em> — your value, framed in their language.</li>
+<li><em>“Postmortem”</em> — accountability, the word managers most want
+to hear.</li>
+<li>The last line is <strong>memorable</strong>. They will repeat
+it.</li>
+</ul>
+<p>Then translate into one or two business stories: a feature shipped, a
+fire put out, a decision made. Use words like <em>outcome</em>,
+<em>margin</em>, <em>runway</em>, <em>unblocked</em>.</p>
+<h3 id="what-not-to-do-3">What not to do</h3>
+<ul>
+<li>Don’t go technical. They don’t care about transformer hallucination
+rates.</li>
+<li>Don’t get philosophical. They want concrete value.</li>
+<li>Don’t be modest. This is the framing where confidence is most
+rewarded.</li>
+</ul>
+</section>
+<section id="framing-5-the-existential-framing" class="slide level2">
+<h2>6. Framing #5 — The Existential Framing</h2>
+<h3 id="how-it-sounds-4">How it sounds</h3>
+<blockquote>
+<p><em>“Are you worried about your career?”</em></p>
+<p><em>“Do you think this profession will exist in 10 years?”</em></p>
+<p><em>“How do you tell a junior developer to start a career in 2026
+with all this happening?”</em></p>
+</blockquote>
+<h3 id="tone-signals-4">Tone signals</h3>
+<ul>
+<li>The question is broader than the role. It’s about <em>the
+field</em>, <em>the future</em>, <em>careers</em>.</li>
+<li>Often slightly personal — they’re vulnerable too, even if they’re
+hiring.</li>
+<li>Pause-laden, less briskly transactional than the hostile
+framing.</li>
+</ul>
+<h3 id="what-they-actually-want-4">What they actually want</h3>
+<p>They want <strong>a sober, honest, optimistic answer</strong>. They
+want to feel the energy in the room shift from anxious to constructive.
+Done well, this is the framing where you most build genuine rapport.</p>
+<h3 id="the-opening-sentence-4">The opening sentence</h3>
+<blockquote>
+<p><em>“I’m thoughtful about it but not worried. The work is changing —
+not vanishing. The people who will struggle are the ones who tied their
+identity to typing code. The people who’ll thrive are the ones who tied
+their identity to making good engineering decisions. I’m in the second
+camp, and I’d advise a junior to be in the second camp too.”</em></p>
+</blockquote>
+<p>Notes:</p>
+<ul>
+<li><em>“Thoughtful but not worried”</em> — the precise emotional
+register.</li>
+<li><em>“Identity to typing”</em> vs <em>“identity to decisions”</em> —
+a frame they’ll repeat.</li>
+<li><em>“I’d advise a junior to…”</em> — converts the question into
+mentorship vibes.</li>
+</ul>
+<p>Then add one personal touch: a real worry you’ve had and worked
+through, a friend who pivoted, a mentor’s advice. Make it specific.</p>
+<h3 id="what-not-to-do-4">What not to do</h3>
+<ul>
+<li>Don’t catastrophize.</li>
+<li>Don’t be saccharine (<em>“I think humans will always have a
+place…”</em>) — sounds rehearsed.</li>
+<li>Don’t pivot too quickly to mechanics. This framing wants 30 seconds
+of genuine reflection first.</li>
+</ul>
+</section>
+<section id="the-decision-tree-memorize-this" class="slide level2">
+<h2>7. The decision tree (memorize this)</h2>
+<p>Here is the live-decision flowchart for the first 10 seconds of any
+question that mentions AI and human developers in the same breath.</p>
+<pre><code>Did they use words like &quot;convince me&quot;, &quot;worth&quot;, &quot;justify&quot;?
+├─ YES → HOSTILE framing → opener from §2
+└─ NO →
+    Did they ask &quot;what&#39;s your take&quot; / &quot;how do you see&quot;?
+    ├─ YES → CURIOUS framing → opener from §3
+    └─ NO →
+        Did they ask about specific cases (&quot;class of problem&quot;, &quot;in production&quot;)?
+        ├─ YES → TECHNICAL framing → opener from §4
+        └─ NO →
+            Did they use ROI / budget / hiring language?
+            ├─ YES → BUSINESS framing → opener from §5
+            └─ NO → EXISTENTIAL framing → opener from §6</code></pre>
+<p>In practice, you’ll often catch the framing in the <em>tone</em>
+before the words finish. Trust your instinct — if you’ve drilled the
+openers, you’ll reach for the right one automatically.</p>
+</section>
+<section id="the-seven-pillar-bridge" class="slide level2">
+<h2>8. The seven-pillar bridge</h2>
+<p>Whichever opener you use, you eventually transition to the same body.
+The transition is:</p>
+<blockquote>
+<p><em>“There are seven things humans still bring that AI does not. Let
+me run through them quickly.”</em></p>
+</blockquote>
+<p>Then you go into Lesson 2’s pillars. <strong>The opener changes by
+framing. The body does not.</strong> That’s why this lesson is
+recognition-only — once you can identify the framing, the rest of your
+answer is consistent.</p>
+</section>
+<section id="practice-exercise" class="slide level2">
+<h2>9. Practice exercise</h2>
+<p>Have a friend (or a willing mentor) read these prompts to you, in a
+<em>random order</em>, in their natural speaking voice. Your job is
+to:</p>
+<ol type="1">
+<li>Identify the framing within 5 seconds.</li>
+<li>Deliver the opener for that framing.</li>
+<li>Bridge into the seven pillars.</li>
+</ol>
+<p>Prompts:</p>
+<ul>
+<li><em>“Honestly, why are you still relevant?”</em></li>
+<li><em>“What’s your hot take on AI replacing developers?”</em></li>
+<li><em>“Where does GPT actually break down for you?”</em></li>
+<li><em>“From a hiring-manager perspective, what’s the case for a human
+over AI tooling?”</em></li>
+<li><em>“Are you nervous about all this?”</em></li>
+<li><em>“Convince me you’re not just a typing-cost we could
+automate.”</em></li>
+<li><em>“What’s a problem you wouldn’t trust an LLM with?”</em></li>
+<li><em>“What would you tell a college student majoring in CS this
+year?”</em></li>
+</ul>
+<p>Aim for under 10 seconds between hearing the prompt and starting the
+opener.</p>
+</section>
+<section id="common-mistakes-by-framing" class="slide level2">
+<h2>10. Common mistakes by framing</h2>
+<table>
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 58%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr>
+<th>Framing</th>
+<th>Common mistake</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hostile</td>
+<td>Defensiveness</td>
+<td>Open with <em>“That’s a fair question…”</em></td>
+</tr>
+<tr>
+<td>Curious</td>
+<td>Monologue</td>
+<td>Hand the question back: <em>“Has that been your
+experience?”</em></td>
+</tr>
+<tr>
+<td>Technical</td>
+<td>Vagueness</td>
+<td>Lead with three concrete categories</td>
+</tr>
+<tr>
+<td>Business</td>
+<td>Tech jargon</td>
+<td>Lead with <em>“force multiplier”</em> /
+<em>“accountability”</em></td>
+</tr>
+<tr>
+<td>Existential</td>
+<td>Catastrophizing or fluff</td>
+<td>Lead with <em>“thoughtful but not worried”</em></td>
+</tr>
+</tbody>
+</table>
+<p>Highlight your own pattern. Most engineers gravitate toward one
+mistake — the one closest to their natural personality. Once you know
+which one is yours, drill against it.</p>
+</section>
+<section id="check-yourself" class="slide level2">
+<h2>11. CHECK YOURSELF</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Can you list the 5 framings without
+notes?</label></li>
+<li><label><input type="checkbox" />Can you state the opener for each
+framing without notes?</label></li>
+<li><label><input type="checkbox" />Can a friend ask you a sample of
+each, and can you identify the framing within 10 seconds?</label></li>
+<li><label><input type="checkbox" />Do you know which framing matches
+your natural strengths and which one you have to drill?</label></li>
+</ul>
+</section>
+<section id="where-you-are-now" class="slide level2">
+<h2>12. Where you are now</h2>
+<p>You can now diagnose what kind of “human vs AI” question you’re being
+asked. Move on to <strong><a
+href="./02-the-seven-pillars.md">02-the-seven-pillars.md</a></strong> —
+the universal body of the answer that every framing eventually
+deserves.</p>
+</section></section>
+<section>
+<section id="lesson-2.2-the-seven-pillars"
+class="title-slide slide level1">
+<h1>Lesson 2.2 — The Seven Pillars</h1>
+<blockquote>
+<p><strong>The complete, defendable answer to “Why do we still need
+human developers?” rests on seven pillars. Each one is a thing AI cannot
+credibly do in the next five years.</strong> Memorize the pillars.
+Memorize the soundbites. The body of every AI-question answer in your
+career builds on these.</p>
+</blockquote>
+<p>By the end of this lesson:</p>
+<ul>
+<li>You’ll know the seven pillars cold.</li>
+<li>Each pillar has a one-sentence soundbite <em>and</em> a 30-second
+elaboration.</li>
+<li>You’ll have a full 90-second answer that combines the strongest 3–4
+pillars for any given audience.</li>
+</ul>
+<p>This is the lesson to re-read the night before any interview.
+<strong>It is the spine of the whole course.</strong></p>
+</section>
+<section id="the-frame-that-holds-the-seven-pillars"
+class="slide level2">
+<h2>1. The frame that holds the seven pillars</h2>
+<p>Before the pillars, set the frame. Tell the interviewer what you’re
+about to do:</p>
+<blockquote>
+<p><em>“AI is genuinely good at producing text that looks like code.
+Producing text isn’t the same as engineering. There are seven things
+engineering requires that AI does not do — and probably won’t, in the
+time horizons that matter for this hiring decision. Let me run through
+them.”</em></p>
+</blockquote>
+<p>That intro:</p>
+<ul>
+<li>Concedes AI’s real capability (“good at producing text”) so you
+don’t sound defensive.</li>
+<li>Distinguishes producing text from engineering (“isn’t the same
+as”).</li>
+<li>Says “seven” — a specific number. Specificity sells.</li>
+<li>Bounds the claim to “time horizons that matter for this hiring
+decision” — you’re not making a 100-year prediction, just a 5-year one.
+<strong>Important.</strong> Don’t let the interviewer drag you into
+futurism.</li>
+</ul>
+<p>Now the seven pillars.</p>
+</section>
+<section id="pillar-1-problem-framing" class="slide level2">
+<h2>2. Pillar 1 — Problem framing</h2>
+<h3 id="soundbite">Soundbite</h3>
+<blockquote>
+<p><em>“AI optimizes the spec it’s given. Deciding what the spec should
+be is engineering.”</em></p>
+</blockquote>
+<h3 id="elaboration-30-seconds">Elaboration (30 seconds)</h3>
+<p>The hardest part of building software is not writing it. It’s
+deciding <em>what</em> to write. AI tools are excellent at the second
+half: take a clear specification, produce code. But upstream of that
+there’s a cloud of ambiguity — <em>who is the user, what problem are
+they actually facing, what trade-off should this feature embody, what’s
+the smallest version that proves the idea</em>. Those questions don’t
+have right answers; they have <em>contextual</em> answers. AI can
+suggest options. It can’t pick the option that’s right for <strong>this
+team, this customer, this constraint</strong>. That’s a human job and it
+requires sustained engagement with non-engineers.</p>
+<h3 id="concrete-example">Concrete example</h3>
+<blockquote>
+<p><em>“On my last project, the PM asked for a ‘scoring system.’ The
+naive AI prompt would have produced a perfectly working scorer. But the
+actual job was to choose between three definitions of ‘score’ —
+points-per-pick, accuracy-percentage, or playoff-style — each of which
+served a different storyline for the user. I went and watched the league
+members react to mockups before any code got written. AI didn’t sit in
+those meetings.”</em></p>
+</blockquote>
+</section>
+<section id="pillar-2-context-the-ai-does-not-have"
+class="slide level2">
+<h2>3. Pillar 2 — Context the AI does not have</h2>
+<h3 id="soundbite-1">Soundbite</h3>
+<blockquote>
+<p><em>“AI knows code. Engineers know <strong>this</strong> codebase,
+<strong>this</strong> team, and <strong>this</strong>
+customer.”</em></p>
+</blockquote>
+<h3 id="elaboration-30-seconds-1">Elaboration (30 seconds)</h3>
+<p>AI has the public internet’s worth of code in its head. What it does
+not have: your codebase’s local conventions, your team’s deploy story,
+the war story from last quarter when the queue overflowed, the senior
+engineer who refuses to touch the legacy module, the customer who pays
+you 40% of revenue and hates change. Those facts shape every real
+engineering decision. <strong>AI’s suggestions are correct in the
+average codebase. Your team is not the average codebase.</strong>
+Adapting AI suggestions to local context — knowing what to keep, what to
+throw out, what to reshape — that’s the work.</p>
+<h3 id="concrete-example-1">Concrete example</h3>
+<blockquote>
+<p><em>“AI suggested I use Redux for the state management on a new
+module. In our codebase Redux had been deprecated for 18 months in favor
+of Zustand. The AI couldn’t know that. A new hire who blindly accepted
+that suggestion would have wasted a sprint adding a deprecated
+dependency.”</em></p>
+</blockquote>
+</section>
+<section id="pillar-3-trade-off-ownership" class="slide level2">
+<h2>4. Pillar 3 — Trade-off ownership</h2>
+<h3 id="soundbite-2">Soundbite</h3>
+<blockquote>
+<p><em>“AI can list trade-offs. AI doesn’t make trade-offs, because it
+doesn’t own consequences.”</em></p>
+</blockquote>
+<h3 id="elaboration-30-seconds-2">Elaboration (30 seconds)</h3>
+<p>When you make a trade-off — pick A over B — you accept that A’s
+downsides will surface in production, in code review, in the on-call
+channel at 2am. The AI does not show up to those moments. It doesn’t get
+paged. It doesn’t get reviewed. It doesn’t have a reputation that
+suffers when the trade-off ages badly. Engineering decisions live with
+their consequences for years. <strong>The accountability for those
+consequences is the most valuable thing humans bring.</strong> When the
+postmortem asks “why did we choose this?”, the AI cannot answer. You
+can.</p>
+<h3 id="concrete-example-2">Concrete example</h3>
+<blockquote>
+<p><em>“We had to choose between caching at the CDN, the application
+server, or the client. AI laid out the three trade-offs cleanly. The
+decision required knowing that our CDN bill was already over budget,
+that our app servers had spare CPU but tight memory, and that 30% of our
+users had unstable connections. None of that was in the AI’s prompt. We
+picked the application-server caching. When it later created a memory
+pressure issue, I owned the decision — and the fix.”</em></p>
+</blockquote>
+</section>
+<section id="pillar-4-long-horizon-judgment" class="slide level2">
+<h2>5. Pillar 4 — Long-horizon judgment</h2>
+<h3 id="soundbite-3">Soundbite</h3>
+<blockquote>
+<p><em>“AI is great at the next 200 lines. Engineering is great at the
+next 2 years.”</em></p>
+</blockquote>
+<h3 id="elaboration-30-seconds-3">Elaboration (30 seconds)</h3>
+<p>LLMs operate on a context window. Your project operates on a
+multi-year arc. Decisions you make now — schema design, API contract,
+module boundaries — get harder to reverse with every passing month. The
+skill of saying “this looks fine for the demo but it’ll be technical
+debt for the next five years, let’s spend an extra hour and do it right”
+is <em>temporal judgment</em>. AI doesn’t have it. It doesn’t even know
+the current date with confidence. <strong>It cannot weigh present
+convenience against future maintenance.</strong> Senior engineers do
+that every hour.</p>
+<h3 id="concrete-example-3">Concrete example</h3>
+<blockquote>
+<p><em>“AI suggested we store user picks as comma-separated strings to
+keep the API simple. That works at 8 users. At 80 users we’d have been
+parsing strings on every read. I made the call to use a normalized
+schema. AI optimized for the prompt; I optimized for two years from
+now.”</em></p>
+</blockquote>
+</section>
+<section id="pillar-5-cross-team-and-human-translation"
+class="slide level2">
+<h2>6. Pillar 5 — Cross-team and human translation</h2>
+<h3 id="soundbite-4">Soundbite</h3>
+<blockquote>
+<p><em>“Software is mostly built in conversations. AI is not in those
+conversations.”</em></p>
+</blockquote>
+<h3 id="elaboration-30-seconds-4">Elaboration (30 seconds)</h3>
+<p>Engineering work flows through Slack threads with PMs, design reviews
+with UX, escalations with security, contracts with infra, business
+reviews with finance. Each of those conversations involves translating
+between domains: explaining a technical constraint to a PM, explaining a
+regulatory constraint to an engineer, explaining a deployment risk to a
+CFO. <strong>Software is the artifact. The conversations are the
+work.</strong> AI doesn’t participate in those conversations. It can
+summarize a thread; it cannot persuade a stakeholder, calibrate a
+roadmap, or notice that the design partner’s actual ask isn’t what they
+typed.</p>
+<h3 id="concrete-example-4">Concrete example</h3>
+<blockquote>
+<p><em>“PM asked for a feature ‘by Friday.’ I noticed the real
+constraint was a customer demo on Tuesday. The right move was a smaller
+scope shipped Monday rather than the full feature shipped Friday. AI
+doesn’t catch that — there’s no prompt that surfaces a demo two states
+away.”</em></p>
+</blockquote>
+</section>
+<section id="pillar-6-quality-judgment-under-uncertainty"
+class="slide level2">
+<h2>7. Pillar 6 — Quality judgment under uncertainty</h2>
+<h3 id="soundbite-5">Soundbite</h3>
+<blockquote>
+<p><em>“AI can write code. Engineers know whether the code is good
+<em>for our situation</em>.”</em></p>
+</blockquote>
+<h3 id="elaboration-30-seconds-5">Elaboration (30 seconds)</h3>
+<p>AI output is plausibly-correct on the surface and frequently subtly
+wrong. Spotting the wrong subset requires <strong>taste</strong> —
+knowing which patterns wear well, which abstractions leak, which “clean”
+architectures will fight you in 3 months. Taste isn’t innate; it’s
+earned by reading a lot of code, shipping a lot of code, and watching it
+age. AI does not have taste. It has averages. The skill of “this is
+correct but it’s the wrong correct for us” is irreducibly human.</p>
+<h3 id="concrete-example-5">Concrete example</h3>
+<blockquote>
+<p><em>“AI generated a function that walked the data twice — once to
+filter, once to map. Functionally fine. For 8 teams. We had a planned
+migration to 800 in Q2. I rewrote it as a single pass, not because the
+original was ‘wrong’, but because I could see the next
+refactor.”</em></p>
+</blockquote>
+</section>
+<section id="pillar-7-accountability-and-trust" class="slide level2">
+<h2>8. Pillar 7 — Accountability and trust</h2>
+<h3 id="soundbite-6">Soundbite</h3>
+<blockquote>
+<p><em>“At the end of every PR is a human signature. The signature is
+the value.”</em></p>
+</blockquote>
+<h3 id="elaboration-30-seconds-6">Elaboration (30 seconds)</h3>
+<p>When code ships, someone owns it. The person on the call. The person
+who explains it to the auditor. The person whose name is on the
+postmortem. AI cannot be that person. Not legally, not socially, not
+professionally. As long as software has consequences — and it always
+will, especially in regulated, security-critical, or revenue-bearing
+contexts — there will be a human at the bottom of the trust chain.
+<strong>Engineers are the trust layer.</strong> AI tools are below us in
+the stack, like compilers and linters. Useful, important, not
+interchangeable with the engineer.</p>
+<h3 id="concrete-example-6">Concrete example</h3>
+<blockquote>
+<p><em>“I shipped a payments change last quarter. The bug it introduced
+cost us four hours of partial-charge confusion. The remediation involved
+a written explanation to compliance, a refund script, and a personal
+apology to a customer. There is no version of that incident response
+where ‘the AI did it’ is an acceptable sentence. I owned it because I
+had to.”</em></p>
+</blockquote>
+</section>
+<section id="the-90-second-answer-master-version" class="slide level2">
+<h2>9. The 90-second answer (master version)</h2>
+<p>When you have 90 seconds, here is the answer:</p>
+<blockquote>
+<p><em>“Sure. AI is genuinely good at producing text that looks like
+code, and that’s a real productivity gain. But producing text isn’t the
+same as engineering. There are seven things engineering requires that AI
+doesn’t credibly do in the next five years.</em></p>
+<p><em>First, <strong>problem framing</strong> — deciding what the spec
+should be in the first place. AI optimizes the spec; humans choose
+it.</em></p>
+<p><em>Second, <strong>context</strong> — AI knows code, but engineers
+know this codebase, this team, this customer. The right answer in your
+shop is rarely the average answer in the AI’s training data.</em></p>
+<p><em>Third, <strong>trade-off ownership</strong>. AI can list options.
+It doesn’t accept consequences. The accountability for the choice is
+what we’re hired for.</em></p>
+<p><em>Fourth, <strong>long-horizon judgment</strong>. AI is great at
+the next 200 lines. We’re paid for the next two years.</em></p>
+<p><em>Fifth, <strong>cross-team translation</strong>. Most engineering
+happens in Slack threads, design reviews, and escalations. AI isn’t in
+those conversations.</em></p>
+<p><em>Sixth, <strong>quality judgment</strong>. AI produces
+plausibly-correct output. Knowing whether it’s the right correct for our
+context — that’s taste, and taste is earned.</em></p>
+<p><em>Seventh, <strong>accountability</strong>. At the end of every PR
+is a signature. AI can’t sign. We can.</em></p>
+<p><em>AI is the most powerful tool we’ve ever had. It raised the floor
+of what’s possible. It hasn’t lowered the ceiling of what’s required
+from a senior engineer.”</em></p>
+</blockquote>
+<p>That’s about 250 words, ~95 seconds at a normal pace. <strong>Drill
+it.</strong> It works in any framing.</p>
+</section>
+<section id="the-30-second-answer-compressed-version"
+class="slide level2">
+<h2>10. The 30-second answer (compressed version)</h2>
+<p>When the interviewer is rushing or just wants a soundbite:</p>
+<blockquote>
+<p><em>“AI is good at producing text. Engineering is more than text. The
+work is problem framing, trade-off ownership, long-horizon judgment,
+cross-team translation, taste, and accountability. AI hasn’t replaced
+any of those — it’s just made them more visible by automating the typing
+underneath. The engineer is what’s left when the typing is
+free.”</em></p>
+</blockquote>
+<p>That’s 70 words. Use it when there’s no time for the full pillar
+walkthrough.</p>
+</section>
+<section id="the-10-second-one-liner" class="slide level2">
+<h2>11. The 10-second one-liner</h2>
+<p>For when an interviewer interrupts with the question while you’re
+answering something else:</p>
+<blockquote>
+<p><em>“AI raised the floor of what’s possible. It hasn’t lowered the
+ceiling of what’s required.”</em></p>
+</blockquote>
+<p>That’s 14 words. Useful as a closer, a hallway answer, a Slack reply
+to your manager.</p>
+</section>
+<section id="customizing-the-pillars-by-audience" class="slide level2">
+<h2>12. Customizing the pillars by audience</h2>
+<p>Not every audience needs all seven pillars. Pick three.</p>
+<table>
+<thead>
+<tr>
+<th>Audience</th>
+<th>Lead with</th>
+<th>Include</th>
+<th>Skip</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hostile</td>
+<td>7 (accountability)</td>
+<td>3, 4</td>
+<td>1, 5</td>
+</tr>
+<tr>
+<td>Curious</td>
+<td>1 (framing)</td>
+<td>5, 6</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Technical</td>
+<td>6 (quality)</td>
+<td>2, 4</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Business</td>
+<td>7 (accountability)</td>
+<td>3, 5</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Existential</td>
+<td>1 (framing)</td>
+<td>5, 7</td>
+<td>2, 4</td>
+</tr>
+</tbody>
+</table>
+<p>Match the table by remembering the framing from Lesson 1, then
+picking the three pillars from this row.</p>
+</section>
+<section id="the-pre-emptive-objections" class="slide level2">
+<h2>13. The pre-emptive objections</h2>
+<p>Smart interviewers will push back. Have prepared rebuttals.</p>
+<h3 id="objection-but-ai-is-getting-better-fast.">Objection: <em>“But AI
+is getting better fast.”</em></h3>
+<blockquote>
+<p><em>“It is. So is the bar for senior engineers. Five years ago a
+senior was someone who could ship features fast. Today they have to do
+that <em>and</em> judge AI output, <em>and</em> design for AI-assisted
+teams, <em>and</em> evaluate when AI shouldn’t be in the loop. The job
+got harder, not easier.”</em></p>
+</blockquote>
+<h3
+id="objection-couldnt-i-just-use-a-junior-plus-ai-for-the-price-of-you">Objection:
+<em>“Couldn’t I just use a junior plus AI for the price of
+you?”</em></h3>
+<blockquote>
+<p><em>“You can. You’ll get a lot of typing-rate productivity. The first
+time the AI’s suggestion conflicts with a deploy story, a customer
+constraint, or a security review, the junior won’t have the judgment to
+push back. That’s the sound of technical debt accumulating quietly. I’d
+argue you save by hiring me; the bill comes due either way.”</em></p>
+</blockquote>
+<h3
+id="objection-what-if-i-told-you-ai-will-fully-replace-developers-in-10-years">Objection:
+<em>“What if I told you AI will fully replace developers in 10
+years?”</em></h3>
+<blockquote>
+<p><em>“I can’t disprove a 10-year prediction. I can tell you that none
+of the AI-replacement timelines I’ve seen come from people who are
+currently shipping production code with AI tools daily. The people
+closest to the work are the most measured about its limits. I trust that
+signal more than I trust the timelines.”</em></p>
+</blockquote>
+<h3 id="objection-arent-you-just-defending-your-job">Objection:
+<em>“Aren’t you just defending your job?”</em></h3>
+<blockquote>
+<p><em>“Sure, partly. I’d be lying if I said I had no skin in the game.
+But I’m not asking you to take my word — I’m describing observable,
+daily failures of AI output that I and every other engineer I know spent
+today fixing. The case rests on the data, not on my motive.”</em></p>
+</blockquote>
+<p>That last one is a <em>judo move</em> — acknowledging the bias and
+then pointing to evidence. Highly effective.</p>
+</section>
+<section id="the-body-language" class="slide level2">
+<h2>14. The body language</h2>
+<p>Three rules during the seven-pillar answer:</p>
+<ol type="1">
+<li><strong>Slow down.</strong> This answer is your highest-value 90
+seconds. Don’t rush.</li>
+<li><strong>Use your hands.</strong> Count the pillars on your fingers.
+Visual anchors help interviewers remember.</li>
+<li><strong>Pause after each pillar.</strong> Half a beat. Lets the
+words land.</li>
+</ol>
+<p>If you record yourself delivering this answer once, you’ll cringe. Do
+it anyway. Record again. By the third take, you’ll be in
+interview-grade.</p>
+</section>
+<section id="check-yourself-1" class="slide level2">
+<h2>15. CHECK YOURSELF</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Can you list the seven pillars in
+order, from memory?</label></li>
+<li><label><input type="checkbox" />Can you give the soundbite for each
+one?</label></li>
+<li><label><input type="checkbox" />Can you give a concrete example for
+at least four of them — drawn from <em>your own</em> work, not the
+snooker app?</label></li>
+<li><label><input type="checkbox" />Can you deliver the 90-second master
+answer in under 100 seconds, with no notes, twice in a row?</label></li>
+<li><label><input type="checkbox" />Can you handle the four pre-emptive
+objections?</label></li>
+</ul>
+<p>If yes to all five, you have the centerpiece of your interview prep
+locked.</p>
+</section>
+<section id="where-you-are-now-1" class="slide level2">
+<h2>16. Where you are now</h2>
+<p>You hold the framework that, more than any other single artifact in
+this course, will get you the offer. Move on to <strong><a
+href="./03-real-world-cases.md">03-real-world-cases.md</a></strong> —
+eight short stories that turn the abstract pillars into memorable
+specifics.</p>
+</section></section>
+<section>
+<section id="lesson-2.3-real-world-cases"
+class="title-slide slide level1">
+<h1>Lesson 2.3 — Real-World Cases</h1>
+<blockquote>
+<p><strong>Soundbites win the abstract argument. Stories win the
+room.</strong> This lesson gives you eight short, memorable cases — each
+tied to a pillar from Lesson 2 — that you can adapt as your own.</p>
+</blockquote>
+<p>By the end of this lesson:</p>
+<ul>
+<li>You will have eight case studies you can deploy in any AI-context
+interview.</li>
+<li>Each case study has a 30-second version for live delivery.</li>
+<li>Each one is tied to a specific pillar so you can pull the right
+story for the right question.</li>
+<li>You will have a worksheet to convert these templates into stories
+from your own work.</li>
+</ul>
+<p>The interviewer remembers stories, not slogans. Walk in with
+stories.</p>
+</section>
+<section id="why-eight-and-how-to-use-them" class="slide level2">
+<h2>1. Why eight, and how to use them</h2>
+<p>Eight is enough to cover any line of questioning. It is also small
+enough to actually memorize. The mapping:</p>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 41%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>#</th>
+<th>Story</th>
+<th>Pillar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>The “midnight refactor” — AI rewrote tests to pass instead of fixing
+the bug</td>
+<td>6 (Quality)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>The deprecated dependency — AI suggested a library nobody uses
+anymore</td>
+<td>2 (Context)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>The schema choice — flat strings vs normalized table</td>
+<td>4 (Long-horizon)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>The PM “by Friday” — actual constraint was a Tuesday demo</td>
+<td>5 (Cross-team)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>The compliance ship — accountability for a payments incident</td>
+<td>7 (Accountability)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>The CDN trade-off — caching layer choice with budget
+constraints</td>
+<td>3 (Trade-off)</td>
+</tr>
+<tr>
+<td>7</td>
+<td>The user-research insight — what “score” actually meant</td>
+<td>1 (Framing)</td>
+</tr>
+<tr>
+<td>8</td>
+<td>The legacy module — refactor that AI could not safely touch</td>
+<td>2, 4 (Context + Long-horizon)</td>
+</tr>
+</tbody>
+</table>
+<p>You do not need all eight in any single interview. Have three or four
+ready as muscle memory; the others are reserves.</p>
+</section>
+<section id="case-1-the-midnight-refactor" class="slide level2">
+<h2>2. Case 1 — The midnight refactor</h2>
+<h3 id="what-happened-template">What happened (template)</h3>
+<p>You asked the AI to fix a failing test. The AI’s diff “fixed” the
+test by changing the test’s assertion to match the buggy code, instead
+of fixing the bug. The tests passed. The bug shipped.</p>
+<h3 id="second-delivery">30-second delivery</h3>
+<blockquote>
+<p><em>“Working late, I asked the AI to fix a failing test. It returned
+a diff that made the test pass — by changing the expected value to match
+the broken code’s actual output. Tests went green. The bug stayed. If I
+had accepted that diff without reading it, the bug would have shipped.
+The AI optimized for what I asked — green tests — not for what I meant —
+correct behavior. After that I made it a rule: when the AI fixes a test,
+the diff must touch the implementation, not the assertion.”</em></p>
+</blockquote>
+<h3 id="why-it-lands">Why it lands</h3>
+<p>It is a tiny, plausible story. The interviewer instantly believes it
+because they have seen something like it. The lesson is concrete:
+distinguish passing tests from correct code. It maps cleanly to Pillar 6
+(quality judgment).</p>
+<h3 id="how-to-make-it-your-own">How to make it your own</h3>
+<p>Find a real instance. Search your git log for phrases like “fix test”
+or “test now passes”. Half of every developer’s history has at least one
+of these moments. Use yours.</p>
+</section>
+<section id="case-2-the-deprecated-dependency" class="slide level2">
+<h2>3. Case 2 — The deprecated dependency</h2>
+<h3 id="what-happened-template-1">What happened (template)</h3>
+<p>The AI suggested a popular library to solve a problem. The library
+had been deprecated months ago, replaced by a newer one. You caught it
+because you knew your codebase had already moved.</p>
+<h3 id="second-delivery-1">30-second delivery</h3>
+<blockquote>
+<p><em>“AI suggested I use the older state-management library that
+everyone Googled in 2022. Reasonable in the abstract. Our codebase had
+migrated off it eighteen months ago — there was an internal RFC and
+everything. The AI did not know the RFC existed. A new hire would have
+followed the suggestion and added a deprecated dependency in their first
+week. I caught it because I had been on the team during the migration.
+That is the kind of context that does not fit in any prompt I could
+write.”</em></p>
+</blockquote>
+<h3 id="why-it-lands-1">Why it lands</h3>
+<p>It demonstrates Pillar 2 (context) without sounding self-important.
+The implicit message: I am valuable because I have been here long enough
+to have caught this.</p>
+<h3 id="how-to-make-it-your-own-1">How to make it your own</h3>
+<p>Look for any place in your team’s history where a library was
+swapped, a pattern was deprecated, a custom utility replaced an industry
+standard, or “we do not do it that way anymore” is true. Every team has
+these. Mine yours for the story.</p>
+</section>
+<section id="case-3-the-schema-choice" class="slide level2">
+<h2>4. Case 3 — The schema choice</h2>
+<h3 id="what-happened-template-2">What happened (template)</h3>
+<p>The AI suggested a quick, denormalized data shape that would have
+been fine at small scale and painful at larger scale. You picked the
+slower-now / better-later option.</p>
+<h3 id="second-delivery-2">30-second delivery</h3>
+<blockquote>
+<p><em>“The AI suggested storing user picks as comma-separated strings —
+one column, simple to read, simple to write. It worked for the eight
+teams in our beta. We had a planned scale to roughly 800 teams in Q2. At
+that scale we would have been parsing strings on every read, and adding
+a ‘remove pick X’ feature would have been a regex nightmare. I went with
+a normalized join table. Slower to type, faster to live with. The AI
+optimized for the demo. I optimized for the next two years.”</em></p>
+</blockquote>
+<h3 id="why-it-lands-2">Why it lands</h3>
+<p>Pillar 4 (long-horizon judgment) is one of the harder ones to make
+concrete. This story does it. The phrase “AI optimized for the demo, I
+optimized for the next two years” is a quotable line interviewers will
+remember.</p>
+<h3 id="how-to-make-it-your-own-2">How to make it your own</h3>
+<p>Look for any decision where you traded short-term ease for long-term
+maintainability. Pagination instead of “load all”, a normalized DB
+instead of denormalized JSON, a state library instead of a useState
+blob. Any of these work.</p>
+</section>
+<section id="case-4-the-pm-by-friday" class="slide level2">
+<h2>5. Case 4 — The PM “by Friday”</h2>
+<h3 id="what-happened-template-3">What happened (template)</h3>
+<p>A PM asked for a feature by Friday. You discovered the real
+constraint was a Tuesday customer demo. You shipped a smaller scope on
+Monday — useful for the demo — and finished the rest at a sane pace.</p>
+<h3 id="second-delivery-3">30-second delivery</h3>
+<blockquote>
+<p><em>“PM said: ‘I need this feature by Friday.’ I asked why Friday —
+turns out there was a customer demo on Tuesday and Friday was just a
+buffer. The actual ask was: have something demo-able on Monday. We
+scoped a much smaller version that hit the demo’s narrative, shipped
+Monday, and built the rest at a normal pace through the next sprint. The
+AI cannot ask ‘why Friday?’ because it is not in the conversation. The
+five-minute clarifying question saved a weekend and made the demo
+tighter.”</em></p>
+</blockquote>
+<h3 id="why-it-lands-3">Why it lands</h3>
+<p>This is the most repeatable Pillar 5 story (cross-team translation).
+It also makes you sound like a senior who manages stakeholders, not just
+a coder.</p>
+<h3 id="how-to-make-it-your-own-3">How to make it your own</h3>
+<p>Look for any case where you reframed a request after a clarifying
+conversation. The reframing did not have to be dramatic — even “let me
+make sure I understand the goal” counts. The story lands as long as the
+clarifying question changed the plan.</p>
+</section>
+<section id="case-5-the-compliance-ship" class="slide level2">
+<h2>6. Case 5 — The compliance ship</h2>
+<h3 id="what-happened-template-4">What happened (template)</h3>
+<p>You shipped a change. It introduced a bug with real customer impact.
+You owned the response — wrote the postmortem, the customer email, the
+audit-trail update. The story is not the bug; it is the ownership.</p>
+<h3 id="second-delivery-4">30-second delivery</h3>
+<blockquote>
+<p><em>“I shipped a payments change last quarter. It mishandled a
+partial-charge edge case and caused four hours of confused customers.
+The remediation involved a written explanation to compliance, a refund
+script, and personal apology emails to the affected accounts. There is
+no version of that incident response where ‘the AI did it’ is an
+acceptable sentence. I owned the change because I was the one who hit
+merge. That ownership — not the typing — is what I am hired
+for.”</em></p>
+</blockquote>
+<h3 id="why-it-lands-4">Why it lands</h3>
+<p>This is the strongest Pillar 7 (accountability) story. It works in
+any framing because every interviewer respects engineers who own their
+incidents. Critically, it lets you talk about a bug without sounding
+like you ship bugs — because the focus is on the response, not the
+failure.</p>
+<h3 id="how-to-make-it-your-own-4">How to make it your own</h3>
+<p>Find an incident from your real history. Tell the version where you
+owned it well. If you have only ever shipped flawless code, find a
+friend’s incident and tell theirs (with credit) — but ideally find your
+own. Postmortems are gold for interviews.</p>
+</section>
+<section id="case-6-the-cdn-trade-off" class="slide level2">
+<h2>7. Case 6 — The CDN trade-off</h2>
+<h3 id="what-happened-template-5">What happened (template)</h3>
+<p>A caching decision had three valid options. The AI listed them. The
+decision required knowledge AI did not have. You made the call, owned
+it, and adjusted when reality bit back.</p>
+<h3 id="second-delivery-5">30-second delivery</h3>
+<blockquote>
+<p><em>“We had to choose where to cache: CDN edge, application server,
+or browser. AI laid out the three trade-offs cleanly. The decision
+needed three pieces of context the AI did not have: our CDN bill was
+already over budget, our app servers had spare CPU but tight memory, and
+30 percent of our users had unstable connections. We chose
+application-server caching. It later created a memory pressure issue,
+and the fix was a TTL change. I owned the decision and the fix. The AI
+listed; I chose.”</em></p>
+</blockquote>
+<h3 id="why-it-lands-5">Why it lands</h3>
+<p>Pillar 3 (trade-off ownership) is abstract until you tell a story
+like this. The list of three context items — budget, memory, network
+reliability — is the punchline. None of those facts come from a prompt.
+They come from being on the team.</p>
+<h3 id="how-to-make-it-your-own-5">How to make it your own</h3>
+<p>Find a decision in your work that had three or more valid technical
+answers. Trace the decision to facts that lived outside the code:
+budget, headcount, regulatory constraints, customer mix, deploy story.
+Those facts are the story.</p>
+</section>
+<section id="case-7-the-user-research-insight" class="slide level2">
+<h2>8. Case 7 — The user-research insight</h2>
+<h3 id="what-happened-template-6">What happened (template)</h3>
+<p>The PM asked for “a scoring system.” Three different scoring designs
+were equally valid. You went and watched users react to mockups before
+any code was written. The right design surfaced from the research.</p>
+<h3 id="second-delivery-6">30-second delivery</h3>
+<blockquote>
+<p><em>“PM asked for ‘a scoring system.’ AI could have produced any of
+three working scorers — points-per-pick, accuracy-percentage, or
+playoff-style — and each was correct in isolation. They were not
+interchangeable for the user, though. I built three quick mockups,
+watched five league members react to each, and discovered the
+playoff-style version generated the most table conversation. We shipped
+that one. None of the user reactions were inferable from the prompt.
+They came from being in a room with humans.”</em></p>
+</blockquote>
+<h3 id="why-it-lands-6">Why it lands</h3>
+<p>Pillar 1 (problem framing) is the highest-altitude pillar and the
+most senior-coded. This story shows you operating there: you went
+upstream of the spec, did discovery, and let it shape the
+implementation.</p>
+<h3 id="how-to-make-it-your-own-6">How to make it your own</h3>
+<p>Look for any feature where you did not start with “implement X” but
+with “what should X be?” Even informal user research counts: a Slack
+poll, a hallway conversation, a five-minute prototype shown to a
+teammate. Any of those replace pure prompting.</p>
+</section>
+<section id="case-8-the-legacy-module" class="slide level2">
+<h2>9. Case 8 — The legacy module</h2>
+<h3 id="what-happened-template-7">What happened (template)</h3>
+<p>You needed to change behavior in a module that had been load-bearing
+for years. AI tried, but the change rippled through code paths it could
+not see. You had to step in, scope the change manually, and ship in
+pieces.</p>
+<h3 id="second-delivery-7">30-second delivery</h3>
+<blockquote>
+<p><em>“The module that handles our subscription billing was written
+four years ago. It is the kind of code where every line is load-bearing
+for some customer’s edge case. I needed to add a new billing tier. I
+asked the AI to make the change. It produced a clean diff that touched
+fifteen files. Two of those files were in a deprecated path that we
+still ran for grandfathered customers. The AI did not know that path
+existed. I scoped the change down to a four-file diff, added a feature
+flag, and rolled it out gradually. AI works inside the prompt; engineers
+work across the unwritten history of the codebase.”</em></p>
+</blockquote>
+<h3 id="why-it-lands-7">Why it lands</h3>
+<p>This story carries Pillars 2 and 4 (context + long-horizon). It also
+tells the interviewer you can work safely in legacy code, which is one
+of the most valuable senior signals.</p>
+<h3 id="how-to-make-it-your-own-7">How to make it your own</h3>
+<p>Find your equivalent legacy module. Every codebase has one. The story
+does not need to be dramatic — even “I scoped down what the AI suggested
+because two of those files have weird history” is enough.</p>
+</section>
+<section id="the-deployment-menu" class="slide level2">
+<h2>10. The deployment menu</h2>
+<p>When the interviewer asks an AI question, you have ~3 seconds to pick
+the right story. Use this rough lookup:</p>
+<table>
+<thead>
+<tr>
+<th>If they ask about…</th>
+<th>Lead with story</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI hallucinations / wrong code</td>
+<td>1 (midnight refactor)</td>
+</tr>
+<tr>
+<td>AI not knowing your codebase</td>
+<td>2 (deprecated dep) or 8 (legacy)</td>
+</tr>
+<tr>
+<td>AI for prototyping vs production</td>
+<td>3 (schema)</td>
+</tr>
+<tr>
+<td>Working with PMs / stakeholders</td>
+<td>4 (PM Friday)</td>
+</tr>
+<tr>
+<td>Risk and accountability</td>
+<td>5 (compliance)</td>
+</tr>
+<tr>
+<td>System design trade-offs</td>
+<td>6 (CDN)</td>
+</tr>
+<tr>
+<td>User-centric thinking</td>
+<td>7 (research)</td>
+</tr>
+<tr>
+<td>Working in old codebases</td>
+<td>8 (legacy)</td>
+</tr>
+</tbody>
+</table>
+<p>Tape this table to the inside of your eyelids. Or, less dramatically,
+write it on an index card and keep it next to your interview notes.</p>
+</section>
+<section id="worksheet-convert-these-to-your-own" class="slide level2">
+<h2>11. Worksheet — convert these to your own</h2>
+<p>For each of the eight cases, fill in the blanks below. <strong>Aim
+for 30 seconds spoken.</strong> If you cannot fill all eight, fill four.
+Four is enough.</p>
+<pre><code>CASE 1 — The &quot;midnight refactor&quot;
+  Project context:    _______________________________________
+  What you asked AI:  _______________________________________
+  What it returned:   _______________________________________
+  What was wrong:     _______________________________________
+  What you learned:   _______________________________________
+
+CASE 2 — The deprecated dependency
+  Project context:    _______________________________________
+  What it suggested:  _______________________________________
+  Why it was wrong:   _______________________________________
+  How you knew:       _______________________________________
+
+CASE 3 — The schema choice
+  Project context:    _______________________________________
+  AI&#39;s quick answer:  _______________________________________
+  Your answer:        _______________________________________
+  The future scenario you were optimizing for: ____________
+
+CASE 4 — The PM &quot;by Friday&quot;
+  What was asked:     _______________________________________
+  Real constraint:    _______________________________________
+  Smaller scope:      _______________________________________
+  Outcome:            _______________________________________
+
+CASE 5 — The compliance ship
+  Bug:                _______________________________________
+  Customer impact:    _______________________________________
+  Your response:      _______________________________________
+  What &quot;I owned it&quot; meant: __________________________________
+
+CASE 6 — The CDN trade-off
+  Three options:      _______________________________________
+  Three contextual facts AI did not have: __________________
+  Your choice:        _______________________________________
+  How it played out:  _______________________________________
+
+CASE 7 — The user-research insight
+  PM&#39;s ask:           _______________________________________
+  Three valid options: _____________________________________
+  Research you did:   _______________________________________
+  Insight that decided it: __________________________________
+
+CASE 8 — The legacy module
+  The module:         _______________________________________
+  AI&#39;s diff:          _______________________________________
+  What AI did not know: _____________________________________
+  Your scoped change: _______________________________________</code></pre>
+<p>Spend 90 minutes filling this in. <strong>It is the highest-ROI 90
+minutes you will spend on interview prep.</strong></p>
+</section>
+<section id="common-mistakes-when-telling-these-stories"
+class="slide level2">
+<h2>12. Common mistakes when telling these stories</h2>
+<h3 id="making-the-ai-sound-dumb">12.1. Making the AI sound dumb</h3>
+<blockquote>
+<p><em>“And of course the AI just made up an API that doesn’t
+exist…”</em></p>
+</blockquote>
+<p>This sounds smug. The interviewer thinks: this person likes feeling
+superior to the tool, which probably means they are not using it well.
+Tell stories where the AI’s output was reasonable in the abstract and
+wrong only in your specific context. That sounds like senior judgment,
+not snobbery.</p>
+<h3 id="making-yourself-sound-heroic">12.2. Making yourself sound
+heroic</h3>
+<blockquote>
+<p><em>“And I, brilliant senior engineer that I am, immediately spotted
+the issue…”</em></p>
+</blockquote>
+<p>The interviewer cringes. Tell stories where you noticed something
+through normal engineering process — code review, running the code,
+asking a clarifying question — not through superhuman insight. Calm
+beats triumphant every time.</p>
+<h3 id="telling-stories-you-cannot-defend">12.3. Telling stories you
+cannot defend</h3>
+<p>If your story includes “and we used Postgres-specific extension X”,
+be ready for: “Which one? Why?” Do not tell stories whose details you
+cannot improvise around. Stick to your real history.</p>
+<h3 id="making-them-too-long">12.4. Making them too long</h3>
+<p>A 30-second story stays a story. A 90-second story becomes a
+monologue. <strong>Cut ruthlessly.</strong> The interviewer can ask
+follow-ups for detail. Your job is the headline.</p>
+</section>
+<section id="check-yourself-2" class="slide level2">
+<h2>13. CHECK YOURSELF</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Can you list the eight case titles
+from memory?</label></li>
+<li><label><input type="checkbox" />Can you tell at least four of them
+in 30 seconds each, in your own words, drawn from your real
+history?</label></li>
+<li><label><input type="checkbox" />Do you have a 30-second version of
+Case 5 (compliance) ready? It is the highest-leverage
+story.</label></li>
+<li><label><input type="checkbox" />Have you filled in the worksheet for
+at least four cases?</label></li>
+<li><label><input type="checkbox" />Can you map an interview question to
+the right case in under 5 seconds?</label></li>
+</ul>
+</section>
+<section id="where-you-are-now-2" class="slide level2">
+<h2>14. Where you are now</h2>
+<p>You have:</p>
+<ul>
+<li>Five framings to recognize the question (Lesson 2.1).</li>
+<li>Seven pillars to structure the answer (Lesson 2.2).</li>
+<li>Eight stories to make the pillars real (this lesson).</li>
+</ul>
+<p>That is the complete kit for “Why do we still need humans?” —
+recognize, frame, evidence. <strong>Re-read this chapter the night
+before any AI-context interview.</strong></p>
+<p>Now move on to Chapter 3, where we sharpen the prompt-engineering
+craft you will need to demonstrate live.</p>
+<p>Open <strong><a
+href="../chapter-03-prompt-mastery/README.md">../chapter-03-prompt-mastery/README.md</a></strong>.</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^5/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

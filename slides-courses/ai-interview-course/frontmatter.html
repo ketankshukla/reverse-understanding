@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Frontmatter</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/theme/white.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Frontmatter</h1>
+</section>
+
+<section>
+<section id="ai-assisted-development-interview-prep-course"
+class="title-slide slide level1">
+<h1>AI-Assisted Development — Interview Prep Course</h1>
+<blockquote>
+<p><strong>A 6-chapter course for engineers who use AI tools daily and
+need to defend their craft in interviews.</strong> This is the answer to
+the question every hiring manager is asking in 2026: <em>“Why should I
+still hire human developers?”</em></p>
+</blockquote>
+</section>
+<section id="who-this-course-is-for" class="slide level2">
+<h2>Who this course is for</h2>
+<p>You. Specifically, you are:</p>
+<ul>
+<li>A developer who uses Cascade, Cursor, Copilot, ChatGPT, Claude, or
+any other AI coding assistant <em>every day</em>.</li>
+<li>About to interview for a software role — junior, mid, senior,
+staff.</li>
+<li>Worried that “vibe coding” will be held against you, <em>or</em>
+that you’ll be asked questions about AI you can’t answer.</li>
+<li>Tired of LinkedIn takes and want a focused, practical,
+interview-grade resource.</li>
+</ul>
+<p>This course is <strong>not</strong> a how-to-prompt tutorial. There
+are dozens of those. This is <strong>interview prep</strong>: how to
+talk about AI-assisted development with the depth and nuance that gets
+you hired over the candidate next to you.</p>
+</section>
+<section id="what-this-course-teaches" class="slide level2">
+<h2>What this course teaches</h2>
+<p>By the time you finish:</p>
+<ol type="1">
+<li>You’ll be able to <strong>answer “why do we still need human
+developers?”</strong> with a confident, multi-layered response that
+lasts 90 seconds and lands every time.</li>
+<li>You’ll have <strong>18 prepared answers</strong> to the most common
+AI-related interview questions of 2026.</li>
+<li>You’ll know how to <strong>survive a live coding interview that uses
+AI</strong> — both the “build it with the AI” format and the “debug what
+the AI built” format.</li>
+<li>You’ll have a <strong>prompt library</strong> you can deploy in any
+interview that asks you to <em>demonstrate</em> your AI workflow.</li>
+<li>You’ll understand the <strong>risks, ethics, and
+accountability</strong> questions deeply enough to answer the “what
+about hallucinations? IP? security?” follow-ups without flinching.</li>
+<li>You’ll have a <strong>portfolio narrative</strong> that frames AI
+use as an <em>asset</em>, not a crutch.</li>
+</ol>
+</section>
+<section id="why-this-course-exists" class="slide level2">
+<h2>Why this course exists</h2>
+<p>Every senior interviewer I’ve talked to in the last 12 months says
+the same thing:</p>
+<blockquote>
+<p><em>“Candidates who use AI well are easy to spot. So are candidates
+who use it badly. The hard ones are candidates who use it badly but
+<strong>think they use it well</strong>. Those are the hires we
+regret.”</em></p>
+</blockquote>
+<p>This course makes you the first kind. It does it by forcing you to
+articulate, in plain English, the things you already do unconsciously
+when AI assists you well — and by sharpening the things you do
+unconsciously when it assists you badly.</p>
+<p>There are also questions you’ve probably never been asked but
+<em>will</em> be asked soon:</p>
+<ul>
+<li><em>“If I gave you a $50,000 budget for AI tooling for your team,
+how would you spend it?”</em></li>
+<li><em>“Tell me about a time AI gave you wrong code. What did you
+do?”</em></li>
+<li><em>“Why shouldn’t I just hire a junior developer with Claude Code
+instead of you?”</em></li>
+<li><em>“How do you evaluate the quality of AI-generated code in code
+review?”</em></li>
+<li><em>“What’s a problem you would <em>not</em> trust AI to solve, and
+why?”</em></li>
+</ul>
+<p>You can’t wing those. You can rehearse them.</p>
+</section>
+<section id="course-structure" class="slide level2">
+<h2>Course structure</h2>
+<pre><code>ai-interview-course/
+│
+├── README.md                                ← YOU ARE HERE
+│
+├── chapter-01-foundations/                  ← THE MODERN AI-ASSISTED ENGINEER
+│   ├── README.md
+│   ├── 01-what-changed.md                   The 2026 baseline: what every dev does now
+│   ├── 02-the-skill-stack.md                What&#39;s still yours, what&#39;s the AI&#39;s
+│   └── 03-the-mindset-shift.md              From &quot;code-typist&quot; to &quot;engineering judgment owner&quot;
+│
+├── chapter-02-the-big-question/             ← &quot;WHY DO WE STILL NEED HUMANS?&quot;
+│   ├── README.md
+│   ├── 01-the-five-framings.md              The 5 ways this question is asked
+│   ├── 02-the-seven-pillars.md              The complete answer framework
+│   └── 03-real-world-cases.md               Stories where humans saved the day
+│
+├── chapter-03-prompt-mastery/               ← VIBE-CODING FOR INTERVIEWS
+│   ├── README.md
+│   ├── 01-anatomy-of-a-prompt.md            The structure of a prompt that ships
+│   ├── 02-the-twelve-patterns.md            12 reusable prompt templates
+│   └── 03-rejecting-ai-output.md            When to push back, rewrite, or throw it out
+│
+├── chapter-04-live-scenarios/               ← THE REAL INTERVIEW EXERCISES
+│   ├── README.md
+│   ├── 01-live-pair-programming.md          The &quot;build it with AI in front of me&quot; format
+│   ├── 02-debugging-ai-bugs.md              The &quot;debug this AI-generated code&quot; exercise
+│   └── 03-code-review-of-ai.md              Reviewing AI output as a senior engineer
+│
+├── chapter-05-system-design/                ← ARCHITECTURE WITH AI
+│   ├── README.md
+│   ├── 01-what-humans-still-own.md          The architecture decisions AI cannot make
+│   ├── 02-design-with-ai-walkthrough.md     &quot;Design Twitter with AI assistance&quot; — fully worked
+│   └── 03-trade-off-conversations.md        Talking trade-offs in front of a panel
+│
+└── chapter-06-behavioral-and-closing/       ← BEHAVIORAL &amp; CLOSING
+    ├── README.md
+    ├── 01-risks-and-accountability.md       Hallucinations, security, IP, accountability
+    ├── 02-team-dynamics.md                  How AI changes pair programming, code review, ownership
+    └── 03-portfolio-narrative.md            Your AI-assisted story + Q&amp;A mastery</code></pre>
+<p><strong>18 lessons. ~25 hours of focused study. Designed to be
+finished in 2 weeks before an interview round.</strong></p>
+</section>
+<section id="how-to-use-this-course" class="slide level2">
+<h2>How to use this course</h2>
+<h3 id="the-14-day-plan-recommended">The 14-day plan (recommended)</h3>
+<table>
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 57%" />
+</colgroup>
+<thead>
+<tr>
+<th>Day</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Chapter 1 (foundations) — read all 3 lessons</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Chapter 2 lesson 1 (the 5 framings) — memorize the framings</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Chapter 2 lessons 2 &amp; 3 (the 7 pillars + cases) — rehearse the
+pillar answer aloud 3×</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Chapter 3 lesson 1 (anatomy of a prompt)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Chapter 3 lesson 2 (12 patterns) — copy patterns to a personal notes
+file</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Chapter 3 lesson 3 (rejecting AI output)</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Mid-course rehearsal day</strong>: do the 90-second pitch +
+5 random questions out loud</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Chapter 4 lesson 1 (live pair programming) — practice with a real
+prompt session</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Chapter 4 lessons 2 &amp; 3 (debug + code review) — work through the
+exercises</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Chapter 5 lessons 1 &amp; 2 (architecture + design walkthrough)</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Chapter 5 lesson 3 (trade-off conversations)</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Chapter 6 lessons 1 &amp; 2 (risks + team dynamics)</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Chapter 6 lesson 3 (portfolio + Q&amp;A) — write your answers to all
+18 questions</td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>Full mock interview</strong>: 60 minutes, friend asks the
+questions, you answer cold</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-i-have-an-interview-tomorrow-plan">The “I have an interview
+tomorrow” plan</h3>
+<p>Read in this order:</p>
+<ol type="1">
+<li><code>chapter-02-the-big-question/02-the-seven-pillars.md</code> —
+memorize the framework.</li>
+<li><code>chapter-06-behavioral-and-closing/03-portfolio-narrative.md</code>
+— get your story tight.</li>
+<li><code>chapter-04-live-scenarios/01-live-pair-programming.md</code> —
+know what to expect.</li>
+<li><code>chapter-03-prompt-mastery/02-the-twelve-patterns.md</code> —
+skim the patterns.</li>
+</ol>
+<p>That’s ~3 hours of focused reading. Sleep on it. You’ll be 80%
+ready.</p>
+</section>
+<section id="what-you-bring-to-this-course" class="slide level2">
+<h2>What you bring to this course</h2>
+<ul>
+<li>You write code regularly (any language; examples lean
+React/TypeScript but the lessons are language-agnostic).</li>
+<li>You’ve used at least one AI coding tool seriously for ≥ 3
+months.</li>
+<li>You can articulate, however roughly, what you used AI for last
+week.</li>
+<li>You’re willing to <strong>say things out loud</strong>. This is
+interview prep. Reading silently is not enough.</li>
+</ul>
+</section>
+<section id="what-you-do-not-need" class="slide level2">
+<h2>What you do <em>not</em> need</h2>
+<ul>
+<li>A degree in ML.</li>
+<li>An understanding of how transformers work internally.</li>
+<li>Experience with multiple AI tools (one is enough).</li>
+<li>A finished project. We’ll reference one fantasy snooker app
+throughout, but every example is portable.</li>
+</ul>
+</section>
+<section id="the-promise" class="slide level2">
+<h2>The promise</h2>
+<p>If you complete this course and rehearse the answers, you will:</p>
+<ul>
+<li>Walk into your next interview with <strong>zero anxiety</strong>
+about the AI questions.</li>
+<li>Be able to <strong>defend AI-assisted code</strong> as
+professionally as any senior reviewer would.</li>
+<li>Have <strong>a clear, honest, optimistic answer</strong> to “why are
+you still relevant?” — one that isn’t dismissive, defensive, or
+cocky.</li>
+<li>Hand interviewers a <strong>memorable narrative</strong> about you
+and AI tools that they’ll repeat to the hiring committee.</li>
+</ul>
+<p>That last one is the whole game. You don’t need to be the best
+engineer in the room. You need to be the one the panel <strong>remembers
+favorably</strong>. This course is built around that.</p>
+</section>
+<section id="a-note-on-the-worry-behind-this-question"
+class="slide level2">
+<h2>A note on the worry behind this question</h2>
+<p>You’re probably reading this because, somewhere in the back of your
+head, there’s a quiet worry: <em>“What if AI does replace developers?
+What if I’m prepping for a job that won’t exist in 5 years?”</em></p>
+<p>We address that worry head-on in <strong>Chapter 2 Lesson 2</strong>.
+The short version: the role <em>changes</em>, but the person who can
+<em>judge</em> code, <em>own</em> outcomes, <em>negotiate</em>
+trade-offs, and <em>unblock</em> a team will always be more valuable
+than a tool that produces text. AI raises the floor of what’s possible —
+it does not raise the ceiling of what’s required.</p>
+<p>Your job is to be measurably above the floor. This course teaches you
+how to <em>show</em> that you are.</p>
+</section>
+<section id="start-here" class="slide level2">
+<h2>Start here</h2>
+<p>Open <strong><a
+href="./chapter-01-foundations/README.md"><code>chapter-01-foundations/README.md</code></a></strong>.</p>
+<p>You won’t write a single line of code in Chapter 1. You’ll write
+<em>answers</em>. Bring a notebook.</p>
+</section></section>
+<section>
+<section id="day-study-plan-ai-assisted-development-interview-prep"
+class="title-slide slide level1">
+<h1>21-Day Study Plan — AI-Assisted Development Interview Prep</h1>
+<p>A day-by-day schedule to internalize all 6 chapters, drill the
+18-question catalog, and walk into any AI-context interview ready to
+perform.</p>
+<blockquote>
+<p>Use the in-app drill at <code>/interview-drill</code> for randomized
+question practice and <code>/study</code> to track lesson completion.
+Both persist in your browser via localStorage.</p>
+</blockquote>
+</section>
+<section id="week-1-the-conceptual-foundation-days-1-7"
+class="slide level2">
+<h2>Week 1 — The Conceptual Foundation (Days 1-7)</h2>
+<blockquote>
+<p>Goal by Sunday: confident on the modern engineer’s role; can deliver
+the 90-second self-intro and the seven-pillar answer cold.</p>
+</blockquote>
+<h3 id="day-1-60-min-orientation">Day 1 (60 min) — Orientation</h3>
+<ul>
+<li>Read <code>ai-interview-course/README.md</code> end to end.</li>
+<li>Skim every chapter README to see the arc.</li>
+<li>Open the live deployed React Snooker app — that’s your portfolio
+example throughout this course.</li>
+<li><em>Output</em>: list the 3 questions you most want to answer well
+by Day 21.</li>
+</ul>
+<h3 id="day-2-60-min-chapter-1.1">Day 2 (60 min) — Chapter 1.1</h3>
+<ul>
+<li>Read <code>chapter-01-foundations/01-what-changed.md</code>.</li>
+<li>Memorize the <strong>5 generations of AI tooling</strong> and the
+<strong>3 workflows</strong>.</li>
+<li>Practice the 30-second self-intro out loud, twice.</li>
+<li><em>Output</em>: write down your real-life “AI generation” — which
+one are you actually on?</li>
+</ul>
+<h3 id="day-3-60-min-chapter-1.2-1.3">Day 3 (60 min) — Chapter 1.2 +
+1.3</h3>
+<ul>
+<li>Read <code>02-the-skill-stack.md</code> and
+<code>03-the-mindset-shift.md</code>.</li>
+<li>Identify the 5 layers of engineering work and which you’re strongest
+/ weakest at.</li>
+<li><em>Output</em>: 1 example from your own work for each of the 5
+layers.</li>
+</ul>
+<h3 id="day-4-75-min-chapter-2.1-the-big-question-part-1">Day 4 (75 min)
+— Chapter 2.1 (The Big Question, part 1)</h3>
+<ul>
+<li>Read
+<code>chapter-02-the-big-question/01-the-five-framings.md</code>.</li>
+<li>For each framing, practice the opening 15 seconds of your
+response.</li>
+<li><em>Output</em>: pick the framing you find hardest and write a full
+answer to it.</li>
+</ul>
+<h3 id="day-5-90-min-chapter-2.2-the-centerpiece">Day 5 (90 min) —
+Chapter 2.2 (THE centerpiece)</h3>
+<ul>
+<li>Read <code>02-the-seven-pillars.md</code>.</li>
+<li>Memorize all 7 pillars by name.</li>
+<li>Practice the 90-second master answer 3 times, looking up only as
+needed.</li>
+<li><em>Output</em>: deliver the master answer end-to-end without notes;
+record it.</li>
+</ul>
+<h3 id="day-6-75-min-chapter-2.3">Day 6 (75 min) — Chapter 2.3</h3>
+<ul>
+<li>Read <code>03-real-world-cases.md</code>.</li>
+<li>Fill in the STAR worksheet at the bottom with 2-3 of your own real
+cases.</li>
+<li>Practice telling one case story in 60 seconds.</li>
+<li><em>Output</em>: 3 STAR stories in your notes file.</li>
+</ul>
+<h3 id="day-7-60-min-week-1-review">Day 7 (60 min) — Week 1 review</h3>
+<ul>
+<li>Re-read <code>cheat-sheets/ai-ch01.md</code> and
+<code>cheat-sheets/ai-ch02.md</code>.</li>
+<li>30-minute flashcard session: tags <code>self-quiz</code> and
+<code>concept</code>, source chapter 1-2.</li>
+<li>Practice 5 random questions in <code>/interview-drill</code>.</li>
+<li><em>Output</em>: weekly retro paragraph.</li>
+</ul>
+</section>
+<section id="week-2-craft-and-live-skill-days-8-14"
+class="slide level2">
+<h2>Week 2 — Craft and Live Skill (Days 8-14)</h2>
+<blockquote>
+<p>Goal by Sunday: prompt mastery solid, can walk into a live
+pair-programming round and run the 60-second playbook.</p>
+</blockquote>
+<h3 id="day-8-60-min-chapter-3.1">Day 8 (60 min) — Chapter 3.1</h3>
+<ul>
+<li>Read
+<code>chapter-03-prompt-mastery/01-anatomy-of-a-prompt.md</code>.</li>
+<li>Pull out 3 real prompts from your last week of work; analyze each on
+the 6 components.</li>
+<li><em>Output</em>: rewrite one of them using all 6 components.</li>
+</ul>
+<h3 id="day-9-60-min-chapter-3.2">Day 9 (60 min) — Chapter 3.2</h3>
+<ul>
+<li>Read <code>02-the-twelve-patterns.md</code>.</li>
+<li>Pick the 4 patterns most relevant to your daily work; memorize their
+names.</li>
+<li><em>Output</em>: deploy each of the 4 patterns once today in your
+actual editor.</li>
+</ul>
+<h3 id="day-10-60-min-chapter-3.3">Day 10 (60 min) — Chapter 3.3</h3>
+<ul>
+<li>Read <code>03-rejecting-ai-output.md</code>.</li>
+<li>Start a <code>REJECTION_JOURNAL.md</code> in your private notes;
+commit to logging 1 rejection/day for the next week.</li>
+<li><em>Output</em>: today’s first rejection journal entry.</li>
+</ul>
+<h3 id="day-11-75-min-chapter-4.1">Day 11 (75 min) — Chapter 4.1</h3>
+<ul>
+<li>Read
+<code>chapter-04-live-scenarios/01-live-pair-programming.md</code>.</li>
+<li>Memorize the 60-second playbook (the 4 spoken opening lines).</li>
+<li>Practice the playbook out loud on a fake prompt (“build a function
+that…”).</li>
+<li><em>Output</em>: deliver the playbook from memory.</li>
+</ul>
+<h3 id="day-12-75-min-chapter-4.2">Day 12 (75 min) — Chapter 4.2</h3>
+<ul>
+<li>Read <code>02-debugging-ai-bugs.md</code>.</li>
+<li>Memorize the 4-step diagnosis flowchart and the 7 failure
+signatures.</li>
+<li><em>Output</em>: write down 1 real bug you’ve debugged that matches
+one of the signatures.</li>
+</ul>
+<h3 id="day-13-60-min-chapter-4.3">Day 13 (60 min) — Chapter 4.3</h3>
+<ul>
+<li>Read <code>03-code-review-of-ai.md</code>.</li>
+<li>Memorize the 11-item review checklist.</li>
+<li>Apply it to a real PR or a recent diff from your work.</li>
+<li><em>Output</em>: list of 3 things the checklist would have
+caught.</li>
+</ul>
+<h3 id="day-14-60-min-week-2-review">Day 14 (60 min) — Week 2
+review</h3>
+<ul>
+<li>Re-read <code>cheat-sheets/ai-ch03.md</code> and
+<code>cheat-sheets/ai-ch04.md</code>.</li>
+<li>30-minute flashcard session: chapters 3-4.</li>
+<li>Practice 10 random questions in <code>/interview-drill</code>.</li>
+<li><em>Output</em>: weekly retro.</li>
+</ul>
+</section>
+<section id="week-3-architecture-culture-closing-days-15-21"
+class="slide level2">
+<h2>Week 3 — Architecture, Culture, Closing (Days 15-21)</h2>
+<blockquote>
+<p>Goal by Sunday: full 18-question catalog at your fingertips,
+90-second portfolio narrative locked, 3 closing questions ready.</p>
+</blockquote>
+<h3 id="day-15-60-min-chapter-5.1">Day 15 (60 min) — Chapter 5.1</h3>
+<ul>
+<li>Read
+<code>chapter-05-system-design/01-what-humans-still-own.md</code>.</li>
+<li>Memorize the 6 categories of architecture decision.</li>
+<li><em>Output</em>: 1 personal example for each category.</li>
+</ul>
+<h3 id="day-16-90-min-chapter-5.2">Day 16 (90 min) — Chapter 5.2</h3>
+<ul>
+<li>Read <code>02-design-with-ai-walkthrough.md</code>.</li>
+<li>Walk through the 60-minute design hour out loud, on paper, on your
+own.</li>
+<li><em>Output</em>: your own version of the architecture sketch.</li>
+</ul>
+<h3 id="day-17-60-min-chapter-5.3">Day 17 (60 min) — Chapter 5.3</h3>
+<ul>
+<li>Read <code>03-trade-off-conversations.md</code>.</li>
+<li>Memorize the 5-step trade-off structure and the 8 axes.</li>
+<li>Pick 3 of the 12 rapid-drill trade-offs; deliver each in 60
+seconds.</li>
+<li><em>Output</em>: 3 recorded 60-second trade-off answers.</li>
+</ul>
+<h3 id="day-18-75-min-chapter-6.1">Day 18 (75 min) — Chapter 6.1</h3>
+<ul>
+<li>Read
+<code>chapter-06-behavioral-and-closing/01-risks-and-accountability.md</code>.</li>
+<li>Memorize the 5 risks and the “Mine.” accountability answer.</li>
+<li>Write your 1-sentence personal commitment statement.</li>
+<li><em>Output</em>: personal commitment statement on a sticky
+note.</li>
+</ul>
+<h3 id="day-19-60-min-chapter-6.2">Day 19 (60 min) — Chapter 6.2</h3>
+<ul>
+<li>Read <code>02-team-dynamics.md</code>.</li>
+<li>Memorize the 7 cultural questions.</li>
+<li>Practice the “AI raises the floor; it doesn’t lower the ceiling”
+line until it sounds natural.</li>
+<li><em>Output</em>: a 60-second answer to “how would you onboard a
+junior?”</li>
+</ul>
+<h3 id="day-20-90-min-chapter-6.3-the-closing">Day 20 (90 min) — Chapter
+6.3 (the closing)</h3>
+<ul>
+<li>Read <code>03-portfolio-narrative.md</code>.</li>
+<li>Write your 90-second portfolio narrative based on the React Snooker
+project.</li>
+<li>Write your 3 closing questions to ask the interviewer.</li>
+<li>Write your 30/60/90-day promise.</li>
+<li><em>Output</em>: all three in your notes, fully drafted.</li>
+</ul>
+<h3 id="day-21-90-min-capstone">Day 21 (90 min) — Capstone</h3>
+<ul>
+<li>Run through the <strong>18-question catalog</strong>
+(<code>chapter-06-behavioral-and-closing/03-portfolio-narrative.md</code>).</li>
+<li>For each, deliver a clean answer in 60-90 seconds.</li>
+<li>Do a full mock-interview session in <code>/interview-drill</code> —
+10 random questions, timed.</li>
+<li><em>Output</em>: a self-graded scorecard, plus a sticky note of the
+3 questions you most need to keep drilling.</li>
+</ul>
+</section>
+<section id="daily-habits-every-day-15-min-on-top" class="slide level2">
+<h2>Daily habits (every day, ~15 min on top)</h2>
+<ul>
+<li>10-minute flashcard review (<code>flashcards/ai-interview.csv</code>
+loaded in Anki).</li>
+<li>5 minutes in <code>/interview-drill</code> doing 2 random
+questions.</li>
+<li>Listen to that day’s audio narration MP3
+(<code>audio/ai-interview-course/...</code>) while walking.</li>
+<li>1 rejection journal entry.</li>
+</ul>
+</section>
+<section id="the-interview-tomorrow-condensed-plan"
+class="slide level2">
+<h2>The “interview tomorrow” condensed plan</h2>
+<p>If you have a real interview within 48 hours:</p>
+<ol type="1">
+<li><strong>Day -2 evening</strong>: read
+<code>01-foundations/01-what-changed.md</code> +
+<code>02-the-big-question/02-the-seven-pillars.md</code> +
+<code>06-behavioral-and-closing/03-portfolio-narrative.md</code>.</li>
+<li><strong>Day -1 morning</strong>: deliver the 90-second narrative and
+the seven-pillar answer 3x each.</li>
+<li><strong>Day -1 afternoon</strong>: 10-question drill in
+<code>/interview-drill</code>.</li>
+<li><strong>Day -1 evening</strong>: re-read all 6 cheat sheets back to
+back (<code>cheat-sheets/ai-*.md</code>).</li>
+<li><strong>Day of</strong>: re-read the “Mine.” accountability answer
+once. Coffee. Camera/mic check. One deep breath.</li>
+</ol>
+</section>
+<section id="when-you-finish" class="slide level2">
+<h2>When you finish</h2>
+<p>Re-take the AI course in 3 months. The field will have moved. So will
+you.</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^5/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

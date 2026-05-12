@@ -1,0 +1,2287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Frontmatter</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {  background-color: #f8f8f8; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ef2929; } /* Alert */
+    code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #204a87; } /* Attribute */
+    code span.bn { color: #0000cf; } /* BaseN */
+    code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4e9a06; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #8f5902; font-style: italic; } /* Comment */
+    code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+    code span.dt { color: #204a87; } /* DataType */
+    code span.dv { color: #0000cf; } /* DecVal */
+    code span.er { color: #a40000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #0000cf; } /* Float */
+    code span.fu { color: #204a87; font-weight: bold; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+    code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+    code span.ot { color: #8f5902; } /* Other */
+    code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+    code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+    code span.ss { color: #4e9a06; } /* SpecialString */
+    code span.st { color: #4e9a06; } /* String */
+    code span.va { color: #000000; } /* Variable */
+    code span.vs { color: #4e9a06; } /* VerbatimString */
+    code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/theme/white.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Frontmatter</h1>
+</section>
+
+<section>
+<section id="learn-react-next.js-by-building-a-snooker-fantasy-league"
+class="title-slide slide level1">
+<h1>Learn React + Next.js by Building a Snooker Fantasy League</h1>
+<blockquote>
+<p>A structured, beginner-friendly course that teaches you React from
+scratch by <strong>rebuilding</strong> a real, working fantasy-sports
+app — one component at a time, in the order a senior engineer would
+actually build it. Designed to take you from zero to
+interview-ready.</p>
+</blockquote>
+</section>
+<section id="who-this-course-is-for" class="slide level2">
+<h2>Who this course is for</h2>
+<p>You. Specifically, you if you:</p>
+<ul>
+<li>Have written a tiny bit of JavaScript or another language (Python,
+Java, etc.) but <strong>never built a real React app</strong>.</li>
+<li>Want to understand <strong>why</strong> React is structured the way
+it is — not just memorize syntax.</li>
+<li>Want to prepare for <strong>React interviews</strong> by building
+something you can show off and explain.</li>
+<li>Want to get good at <strong>vibe coding</strong> — directing an AI
+to produce clean, maintainable code instead of accepting whatever it
+spits out.</li>
+</ul>
+<p>If you’ve already built three React apps and just want a quick
+reference, the single-file course at
+<code>SNOOKER_FANTASY_LEAGUE_COURSE.md</code> (preserved untouched in
+this folder) is a denser, faster read. This expanded multi-chapter
+version is the one to read if you actually want to <strong>learn the
+craft</strong>.</p>
+</section>
+<section id="what-youll-build" class="slide level2">
+<h2>What you’ll build</h2>
+<p>By the end of this course you will have built — by hand, line by
+line, with full understanding — a complete Next.js + TypeScript
+application:</p>
+<ul>
+<li>A <strong>standings table</strong> ranking 8 fantasy teams by
+points</li>
+<li>A <strong>matches view</strong> with cards for every match across 5
+rounds (32 → 16 → 8 → 4 → 1 = 31 matches)</li>
+<li>A <strong>predictions matrix</strong> comparing 8 teams’ picks
+side-by-side</li>
+<li>A <strong>players directory</strong> with deep per-player
+drill-downs (32 player profiles)</li>
+<li>An <strong>analytics dashboard</strong> with five Recharts
+visualizations</li>
+</ul>
+<p>The finished version of all of this lives at
+<code>components/</code>, <code>lib/</code>, and <code>app/</code> in
+the project root. <strong>You’ll rebuild it from scratch as you
+learn.</strong> The course tells you exactly what to type, why to type
+it, and what each line does.</p>
+</section>
+<section id="what-youll-learn-the-react-inventory" class="slide level2">
+<h2>What you’ll learn (the React inventory)</h2>
+<p>By the time you finish Chapter 7, you will have used and
+<strong>understood</strong> every one of these React concepts:</p>
+<table>
+<colgroup>
+<col style="width: 70%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Where you’ll meet it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Functional components</td>
+<td>Chapter 3</td>
+</tr>
+<tr>
+<td>Props &amp; prop types</td>
+<td>Chapter 3</td>
+</tr>
+<tr>
+<td><code>useState</code></td>
+<td>Chapter 4</td>
+</tr>
+<tr>
+<td><code>useMemo</code></td>
+<td>Chapter 4</td>
+</tr>
+<tr>
+<td>Lifting state up</td>
+<td>Chapter 4</td>
+</tr>
+<tr>
+<td>Conditional rendering</td>
+<td>Chapter 3, 4</td>
+</tr>
+<tr>
+<td>Lists &amp; keys</td>
+<td>Chapter 3</td>
+</tr>
+<tr>
+<td>Event handlers</td>
+<td>Chapter 4</td>
+</tr>
+<tr>
+<td>Component composition</td>
+<td>Chapter 5</td>
+</tr>
+<tr>
+<td>Prop drilling vs Context</td>
+<td>Chapter 5</td>
+</tr>
+<tr>
+<td>Controlled components</td>
+<td>Chapter 4</td>
+</tr>
+<tr>
+<td>TypeScript with React</td>
+<td>Throughout</td>
+</tr>
+<tr>
+<td>Inline styles vs Tailwind vs CSS</td>
+<td>Chapter 3</td>
+</tr>
+<tr>
+<td>Pure functions in UI code</td>
+<td>Chapter 1</td>
+</tr>
+<tr>
+<td>Data transforms for charts</td>
+<td>Chapter 6</td>
+</tr>
+<tr>
+<td>Server vs client components (Next.js App Router)</td>
+<td>Chapter 2, 7</td>
+</tr>
+<tr>
+<td><code>useState</code> inside a child vs at the top</td>
+<td>Chapter 6</td>
+</tr>
+<tr>
+<td>Re-renders, references, and identity</td>
+<td>Chapter 4</td>
+</tr>
+</tbody>
+</table>
+<p>You’ll also pick up the <strong>mental models</strong> that
+experienced React developers carry around — when to split a component,
+when to memoize, what state lives where, why prop drilling is fine for
+three levels and a problem at six. These don’t show up in tutorials, but
+they show up in every senior interview.</p>
+</section>
+<section id="how-the-course-is-structured" class="slide level2">
+<h2>How the course is structured</h2>
+<p>Seven chapters. Each chapter has three lessons. Each lesson is around
+1,500–2,500 words and ends with a <strong>CHECK YOURSELF</strong> box of
+questions you should be able to answer before moving on.</p>
+<pre><code>course/
+├── README.md                                ← you are here
+├── SNOOKER_FANTASY_LEAGUE_COURSE.md         ← original single-file version (reference)
+│
+├── chapter-01-foundations/                  ← UNDERSTAND THE PROBLEM
+│   ├── 01-the-problem.md
+│   ├── 02-data-modeling.md
+│   └── 03-pure-functions-and-scoring.md
+│
+├── chapter-02-project-setup/                ← FROM EMPTY FOLDER TO RUNNING DEV SERVER
+│   ├── 01-why-nextjs-typescript.md
+│   ├── 02-scaffolding-the-project.md
+│   └── 03-creating-data-files.md
+│
+├── chapter-03-first-component/              ← YOUR FIRST REACT COMPONENT
+│   ├── 01-anatomy-of-a-component.md
+│   ├── 02-rendering-the-standings.md
+│   └── 03-progressive-enhancement.md
+│
+├── chapter-04-state-and-hooks/              ← INTERACTIVITY &amp; SHARED STATE
+│   ├── 01-useState-mental-model.md
+│   ├── 02-the-orchestrator-pattern.md
+│   └── 03-useMemo-and-derived-data.md
+│
+├── chapter-05-composition/                  ← BIG COMPONENTS, SMALL COMPONENTS
+│   ├── 01-when-to-split-components.md
+│   ├── 02-prop-drilling-vs-context.md
+│   └── 03-building-player-detail.md
+│
+├── chapter-06-data-visualization/           ← CHARTS WITH RECHARTS
+│   ├── 01-recharts-fundamentals.md
+│   ├── 02-reshaping-data.md
+│   └── 03-pivots-and-internal-state.md
+│
+└── chapter-07-mastery-and-interviews/       ← INTERVIEW PREP &amp; VIBE CODING
+    ├── 01-production-polish.md
+    ├── 02-deployment-and-testing.md
+    └── 03-interview-narrative.md</code></pre>
+<p>Each chapter folder also has its own <code>README.md</code> with a
+chapter-level overview, a list of new concepts introduced, and a list of
+files you’ll have created by the end of the chapter.</p>
+</section>
+<section id="how-to-use-this-course" class="slide level2">
+<h2>How to use this course</h2>
+<h3 id="the-recommended-workflow">The recommended workflow</h3>
+<ol type="1">
+<li><strong>Read the lesson</strong> in your IDE or browser.</li>
+<li><strong>Open a second editor window</strong> showing the
+<em>finished</em> version of whatever file the lesson is teaching (in
+<code>components/</code>, <code>lib/</code>, etc.). Use it as the answer
+key.</li>
+<li><strong>Type the code yourself</strong> as you go. Don’t copy-paste.
+Typing is how the patterns become muscle memory.</li>
+<li><strong>Run <code>npm run dev</code></strong> at the end of each
+lesson and look at the result in the browser. If the screen looks wrong,
+you skipped something.</li>
+<li><strong>Answer the CHECK YOURSELF questions out loud</strong> (or in
+writing) before moving on. They’re not optional. They’re the difference
+between <em>reading</em> React and <em>knowing</em> React.</li>
+<li><strong>Commit at the end of every lesson</strong> with a message
+like <code>Chapter 3 Lesson 2: render the standings table</code>.
+Building a real git history is part of the point.</li>
+</ol>
+<h3 id="pace-yourself">Pace yourself</h3>
+<p>The full course is about 35,000 words plus typing the code.
+Realistically:</p>
+<ul>
+<li><strong>One lesson per evening (1–2 hrs)</strong> = comfortable
+pace, ~3 weeks total.</li>
+<li><strong>One chapter per weekend</strong> = aggressive but doable, ~3
+weekends.</li>
+<li><strong>Binge</strong> = don’t. You’ll forget. Spaced repetition
+wins.</li>
+</ul>
+<h3 id="dont-skip-chapter-1">Don’t skip Chapter 1</h3>
+<p>Chapter 1 has zero React in it. It’s about <strong>the
+problem</strong> and <strong>the data model</strong>. Beginners always
+want to skip to “the React part.” Don’t. Half of senior interview
+questions are <em>“How would you model X?”</em> and <em>“What state is
+owned where?”</em> — and those are answered before any JSX gets typed.
+Chapter 1 is where you build the muscle for that.</p>
+<h3 id="reading-vs-building">Reading vs building</h3>
+<p>Each lesson has two layers:</p>
+<ul>
+<li><strong>Concepts</strong> — the <em>why</em>. Why do components
+return JSX? Why is <code>useState</code> a hook? Why does this data
+shape work for this chart?</li>
+<li><strong>Code</strong> — the <em>what</em>. The exact lines you’ll
+type, copy-pasted from the real codebase.</li>
+</ul>
+<p>Both matter. If you only read the concepts, you’ll be a React
+philosopher who can’t ship. If you only type the code, you’ll be a React
+typist who can’t debug. The course alternates deliberately.</p>
+</section>
+<section id="whats-in-the-rest-of-the-repo" class="slide level2">
+<h2>What’s in the rest of the repo</h2>
+<p>Beyond the course folder, the repo contains the <strong>finished
+application</strong> so you can compare your work to the answer key at
+any point:</p>
+<pre><code>e:\reverse-understanding\
+├── _source/
+│   └── SnookerFantasyLeague.jsx     ← the original 1,654-line single-file build
+│                                       (preserved verbatim, the artifact this course
+│                                        was reverse-engineered from)
+├── _briefs/
+│   ├── PROMPT_1_NEXTJS_REFACTOR.md  ← the spec that generated the refactor
+│   └── PROMPT_2_REVERSE_ENGINEERING_COURSE.md
+│                                     ← the spec that generated this course
+├── app/                              ← Next.js App Router entry points
+├── components/                       ← all the React components, organized by feature
+│   ├── SnookerFantasyLeague.tsx     ← the top-level orchestrator
+│   ├── tabs/                         ← StandingsTab, MatchesTab, PredictionsTab, ...
+│   ├── standings/                    ← LeagueTable, StatCard, FormBadge
+│   ├── matches/                      ← MatchesList, PlayerLine, RoundButton
+│   ├── predictions/                  ← PredictionMatrix, TeamCardView, PicksList
+│   ├── players/                      ← PlayerCard, PlayerDetail, MatchPickAnalysis
+│   └── analytics/                    ← LeagueAgreementChart, ChartCard, InsightCard
+├── lib/                              ← pure data + logic (no React)
+│   ├── types.ts                      ← TypeScript interfaces
+│   ├── matches.ts                    ← all 31 matches
+│   ├── teams.ts                      ← all 8 fantasy teams + their picks
+│   ├── players.ts                    ← player metadata
+│   ├── scoring.ts                    ← scorePick + calculateTeamScores
+│   └── constants.ts                  ← shared style helpers + ball colors
+├── package.json
+├── tsconfig.json
+├── tailwind.config.ts
+└── next.config.mjs</code></pre>
+<p>You’ll re-create most of these files yourself by following the
+lessons. The originals stay there as your reference.</p>
+</section>
+<section id="prerequisites" class="slide level2">
+<h2>Prerequisites</h2>
+<p>You <strong>need</strong>:</p>
+<ul>
+<li>Node.js 20+ (for Next.js 14)</li>
+<li>npm (comes with Node)</li>
+<li>A code editor (VS Code, Cursor, Windsurf — anything)</li>
+<li>A browser</li>
+<li>~15–20 hours of focused time</li>
+</ul>
+<p>You <strong>don’t need</strong>:</p>
+<ul>
+<li>Prior React experience</li>
+<li>A computer-science degree</li>
+<li>Mac or Linux (this course was written on Windows; PowerShell
+commands are noted explicitly)</li>
+<li>Any paid services</li>
+</ul>
+</section>
+<section id="conventions-used-in-this-course" class="slide level2">
+<h2>Conventions used in this course</h2>
+<ul>
+<li><strong><code>backticks</code></strong> for variable, function,
+file, and component names.</li>
+<li><strong>Code blocks</strong> with a language tag
+(<code>```tsx</code>, <code>```ts</code>, <code>```bash</code>,
+<code>```json</code>).</li>
+<li><strong>CHECK YOURSELF boxes</strong> at the end of each lesson.
+Don’t skip them.</li>
+<li><strong>Real code only.</strong> Every code snippet in this course
+is taken from the actual finished app in this repo. There are no toy
+examples or simplified pretend-code.</li>
+<li><strong>TypeScript everywhere.</strong> If you’ve never touched TS,
+don’t worry — the lessons explain types as they appear.</li>
+</ul>
+</section>
+<section id="a-note-on-ai-vibe-coding" class="slide level2">
+<h2>A note on AI / vibe coding</h2>
+<p>The original build of this app was done with AI assistance (“vibe
+coding”). This course teaches you both the <strong>React
+fundamentals</strong> and the <strong>prompting craft</strong> that
+produced the codebase. Chapter 7 is dedicated to making you a better
+vibe coder: when an LLM gives you React, what do you accept and what do
+you reject? When do you ask for “extract this into a component” versus
+“rewrite this”?</p>
+<p>Interviewers in 2026 don’t ask “Do you use AI?” — they ask
+“<strong>How</strong> do you use AI?” If you can articulate why a
+particular component should be split, why a particular piece of state
+lives where it does, why a particular memoization is or isn’t worth it —
+you sound like a senior, regardless of whether you typed the code or
+prompted it.</p>
+</section>
+<section id="ready" class="slide level2">
+<h2>Ready?</h2>
+<p>Start at <a href="./chapter-01-foundations/01-the-problem.md">Chapter
+1, Lesson 1: The Problem</a>.</p>
+<p>You won’t write a single line of JavaScript in Chapter 1. By the end
+of Chapter 7 you’ll have built a complete Next.js application from
+scratch and you’ll be able to explain every architectural decision in
+it. <strong>That’s how you pass interviews.</strong></p>
+</section></section>
+<section>
+<section id="snooker-fantasy-league-a-reverse-engineering-course"
+class="title-slide slide level1">
+<h1>Snooker Fantasy League: A Reverse-Engineering Course</h1>
+<blockquote>
+<p>A nine-lesson walk-back from a finished 1,654-line React app to the
+first commit it would have come from. Read alongside
+<code>_source/SnookerFantasyLeague.jsx</code> open in another
+window.</p>
+</blockquote>
+</section>
+<section id="confirming-the-source" class="slide level2">
+<h2>Confirming the source</h2>
+<p>I read <code>SnookerFantasyLeague.jsx</code> end-to-end. The five
+top-level <strong>data constants</strong> are:</p>
+<ol type="1">
+<li><code>ROUND1_MATCHES</code> — 16 first-round matches</li>
+<li><code>ROUND2_MATCHES</code> — 8 last-16 matches</li>
+<li><code>QF_MATCHES</code> — 4 quarter-finals</li>
+<li><code>SF_MATCHES</code> — 2 semi-finals</li>
+<li><code>FINAL_MATCH</code> — 1 final</li>
+</ol>
+<p>…with two more big data structures that the app leans on:
+<code>TEAMS</code> (the eight fantasy teams and their picks) and
+<code>PLAYER_INFO</code> (per-player metadata, keyed by name).</p>
+<p>The five <strong>tabs</strong> are:</p>
+<ol type="1">
+<li><strong>Standings</strong> — leaderboard + headline stats</li>
+<li><strong>Matches</strong> — match cards per round,
+finished/not-finished</li>
+<li><strong>Predictions</strong> — comparison matrix + single-team
+card</li>
+<li><strong>Players</strong> — 32-player grid + a deep player-detail
+view</li>
+<li><strong>Analytics</strong> — Recharts dashboards (points, accuracy,
+agreement, insights)</li>
+</ol>
+<p>All set. Course starts below. Each lesson ends with a <strong>Vibe
+prompt you would have used</strong> section and a <strong>CHECK
+YOURSELF</strong> box.</p>
+</section>
+<section id="lesson-0-the-problem-no-code" class="slide level2">
+<h2>Lesson 0 — The Problem (no code)</h2>
+<h3 id="imagine-the-pub-conversation">Imagine the pub conversation</h3>
+<p>You and seven mates watch the World Snooker Championship every May.
+Sheffield, Crucible, two weeks of green-baize warfare. Someone —
+probably you — says: <em>“We should make a fantasy league out of
+this.”</em> Everyone agrees. Pints are raised. Now what?</p>
+<p>A snooker tournament has a fixed <strong>bracket of 32
+players</strong>. They play through five rounds: Round 1 (last 32),
+Round 2 (last 16), Quarter-Finals (last 8), Semi-Finals (last 4), and
+the Final. The bracket is published before a ball is potted. So
+<strong>every match is known in advance</strong> — only the winners are
+unknown.</p>
+<p>That’s the whole hook. If every match is known, then every team can
+submit picks for every match in every round, <strong>before the
+tournament starts</strong>. As results come in, the league scores those
+picks.</p>
+<h3 id="the-8-teams">The 8 teams</h3>
+<p>There are eight fantasy teams: <em>Invincibles, Uncredibles,
+Hopeless, Clueless, Break Builders United, The Untouchables, Selbies,
+One Four Sevens</em>. Each one is a person (or a couple) sitting at home
+with their bracket, picking who they think wins each match. Each team
+needs:</p>
+<ul>
+<li>16 picks for Round 1 (one per match)</li>
+<li>8 picks for Round 2</li>
+<li>4 picks for the Quarter-Finals</li>
+<li>2 picks for the Semi-Finals</li>
+<li>1 pick for the Final</li>
+</ul>
+<p>That’s <strong>31 picks per team, times 8 teams = 248 picks
+total</strong>, all locked in before the first break-off.</p>
+<h3 id="the-scoring-rules-3-bullets">The scoring rules (3 bullets)</h3>
+<ul>
+<li><strong>3 points</strong> if your pick wins the match.</li>
+<li><strong>1 point</strong> (a “consolation”) if your pick loses — you
+still showed up.</li>
+<li><strong>null / pending</strong> if the match hasn’t been played yet
+— neither right nor wrong, just not scored.</li>
+</ul>
+<p>That last point matters more than it looks. Lesson 2 is built around
+it.</p>
+<h3 id="what-the-app-needs-to-do">What the app needs to do</h3>
+<p>When the tournament is live, you want to be able to: see who’s
+leading, see how each round shook out, drill into one team’s picks,
+drill into one player’s appearances, and see charts of who agreed and
+who didn’t. That’s it. <strong>No login, no database, no
+sharing.</strong> It’s a static page; the data is edited by hand as
+results come in.</p>
+<p>That gives the architecture away already: it’s a single-page React
+app whose entire “database” is a few JavaScript constants. Lesson 1
+starts there.</p>
+<h3 id="vibe-prompt-you-would-have-used">Vibe prompt you would have
+used</h3>
+<blockquote>
+<p><em>“I want to build a single-page React app for a fantasy snooker
+league. Eight teams pick winners across five rounds (R1: 16 picks, R2:
+8, QF: 4, SF: 2, Final: 1). Scoring: 3 points if the pick wins, 1 if it
+loses, null while the match is unplayed. No database — the bracket and
+team picks are edited by hand in code. The page should have tabs for
+Standings, Matches, Predictions, Players, and Analytics. Don’t write any
+code yet — just confirm you understand the problem and ask me anything
+that’s ambiguous.”</em></p>
+</blockquote>
+<p>That last sentence (“don’t write any code yet — just confirm”) is the
+single most useful trick in this lesson. It forces the LLM to surface
+ambiguities you didn’t think of.</p>
+<h3 id="check-yourself">CHECK YOURSELF</h3>
+<ol type="1">
+<li>Why does scoring use <strong>null</strong> for unplayed matches
+instead of <strong>0</strong>?</li>
+<li>Why are there exactly <strong>31 picks per team</strong>, no more
+and no less?</li>
+<li>If a 9th friend wanted to join, what’s the minimum data change
+required? (Hint: it’s a one-line addition.)</li>
+</ol>
+</section>
+<section id="lesson-1-the-shape-of-the-data-data-modeling-no-ui-yet"
+class="slide level2">
+<h2>Lesson 1 — The Shape of the Data (data modeling, no UI yet)</h2>
+<p>Before any pixel renders, you need to decide what shapes you’re
+pushing around. In a Python data-engineering background this is the part
+that feels comfortable — it’s a schema design problem, just expressed in
+JS objects instead of <code>pydantic</code> models.</p>
+<h3 id="whats-a-match">What’s a Match?</h3>
+<p>Every match in the tournament is the same shape:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>{ <span class="dt">id</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">p1</span><span class="op">:</span> <span class="st">&#39;Zhao Xintong&#39;</span><span class="op">,</span> <span class="dt">p2</span><span class="op">:</span> <span class="st">&#39;Liam Highfield&#39;</span><span class="op">,</span> <span class="dt">winner</span><span class="op">:</span> <span class="st">&#39;Zhao Xintong&#39;</span><span class="op">,</span> <span class="dt">score</span><span class="op">:</span> <span class="st">&#39;10-7&#39;</span><span class="op">,</span> <span class="dt">seed1</span><span class="op">:</span> <span class="dv">1</span> }</span></code></pre></div>
+<p>Five fields, three of which are obvious (<code>id</code>,
+<code>p1</code>, <code>p2</code>) and two of which are the interesting
+ones:</p>
+<ul>
+<li><code>winner</code> is <strong>either a string or
+undefined</strong>. Undefined means <em>the match hasn’t been
+played</em>. As soon as a result comes in, you set <code>winner</code>
+to one of the two player names. This is the field that drives the
+scoring logic.</li>
+<li><code>score</code> is a display-only string like <code>'10-7'</code>
+or <code>'17-18'</code>. The app never parses it for points; it only
+splits it on <code>'-'</code> to render two big numbers next to the
+players.</li>
+<li><code>seed1</code> is on R1 only, because that’s the only round
+where the bracket is constructed by seed; later rounds the seed is
+implied by the path.</li>
+</ul>
+<p>The app declares the matches up-front in five flat arrays — one per
+round — in match order:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> ROUND1_MATCHES <span class="op">=</span> [</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">id</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">p1</span><span class="op">:</span> <span class="st">&#39;Zhao Xintong&#39;</span><span class="op">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">p2</span><span class="op">:</span> <span class="st">&#39;Liam Highfield&#39;</span><span class="op">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">winner</span><span class="op">:</span> <span class="st">&#39;Zhao Xintong&#39;</span><span class="op">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">score</span><span class="op">:</span> <span class="st">&#39;10-7&#39;</span><span class="op">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">seed1</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  { <span class="dt">id</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">p1</span><span class="op">:</span> <span class="st">&#39;Judd Trump&#39;</span><span class="op">,</span> <span class="dt">p2</span><span class="op">:</span> <span class="st">&#39;Gary Wilson&#39;</span><span class="op">,</span> <span class="dt">winner</span><span class="op">:</span> <span class="st">&#39;Judd Trump&#39;</span><span class="op">,</span> <span class="dt">score</span><span class="op">:</span> <span class="st">&#39;10-5&#39;</span><span class="op">,</span> <span class="dt">seed1</span><span class="op">:</span> <span class="dv">2</span> }<span class="op">,</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ... 14 more</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>]<span class="op">;</span></span></code></pre></div>
+<p>The match order is <strong>the bracket order</strong>, top to bottom.
+R1 has 16 entries, R2 has 8, QF has 4, SF has 2, Final has 1 — the exact
+halving you’d expect from a knockout draw.</p>
+<h3 id="whats-a-team">What’s a Team?</h3>
+<p>A team is a name + a vibe + five arrays of picks:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Invincibles&#39;</span><span class="op">,</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> <span class="st">&#39;#0F5132&#39;</span><span class="op">,</span> <span class="dt">accent</span><span class="op">:</span> <span class="st">&#39;#10B981&#39;</span><span class="op">,</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">icon</span><span class="op">:</span> <span class="st">&#39;⚡&#39;</span><span class="op">,</span> <span class="dt">motto</span><span class="op">:</span> <span class="st">&#39;Unstoppable &amp; Unbeatable&#39;</span><span class="op">,</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">r1</span><span class="op">:</span> [<span class="st">&#39;Zhao Xintong&#39;</span><span class="op">,</span><span class="st">&#39;Judd Trump&#39;</span><span class="op">, </span><span class="co">/* 14 more */</span>]<span class="op">,</span>   <span class="co">// 16 picks</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">r2</span><span class="op">:</span> [<span class="st">&#39;Zhao Xintong&#39;</span><span class="op">,</span><span class="st">&#39;Xiao Guodong&#39;</span><span class="op">, </span><span class="co">/* 6 more */</span>]<span class="op">,</span>  <span class="co">// 8 picks</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">qf</span><span class="op">:</span> [<span class="st">&#39;Zhao Xintong&#39;</span><span class="op">,</span><span class="st">&#39;Mark Allen&#39;</span><span class="op">,</span><span class="st">&#39;John Higgins&#39;</span><span class="op">,</span><span class="st">&#39;Wu Yize&#39;</span>]<span class="op">,</span>  <span class="co">// 4 picks</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">sf</span><span class="op">:</span> [<span class="st">&#39;Shaun Murphy&#39;</span><span class="op">,</span><span class="st">&#39;Wu Yize&#39;</span>]<span class="op">,</span>                              <span class="co">// 2 picks</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">final</span><span class="op">:</span> <span class="st">&#39;Wu Yize&#39;</span><span class="op">,</span>                                            <span class="co">// 1 pick (not an array)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The <code>color</code> / <code>accent</code> / <code>icon</code> /
+<code>motto</code> are pure cosmetics — they drive every gradient header
+and team chip in the UI. The five pick arrays are where the actual game
+lives.</p>
+<p><code>final</code> is a single string instead of a one-element array.
+That asymmetry is on purpose: there’s only one Final, and it’s nicer to
+write <code>team.final === 'Wu Yize'</code> than
+<code>team.final[0] === 'Wu Yize'</code>. The cost is that the scoring
+code has one branch for <code>final</code> and another for everything
+else (you’ll see this in <code>calculateTeamScores</code>).</p>
+<h3 id="whats-player_info-and-why-is-it-an-object-keyed-by-name">What’s
+PLAYER_INFO and why is it an object keyed by name?</h3>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> PLAYER_INFO <span class="op">=</span> {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;Zhao Xintong&#39;</span><span class="op">:</span> { <span class="dt">country</span><span class="op">:</span> <span class="st">&#39;🇨🇳&#39;</span><span class="op">,</span> <span class="dt">seed</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">status</span><span class="op">:</span> <span class="st">&#39;Defending Champion&#39;</span><span class="op">,</span> <span class="dt">flag</span><span class="op">:</span> <span class="st">&#39;CHN&#39;</span> }<span class="op">,</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;Judd Trump&#39;</span><span class="op">:</span> { <span class="dt">country</span><span class="op">:</span> <span class="st">&#39;🏴&#39;</span><span class="op">,</span> <span class="dt">seed</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">status</span><span class="op">:</span> <span class="st">&#39;World No. 1&#39;</span><span class="op">,</span> <span class="dt">flag</span><span class="op">:</span> <span class="st">&#39;ENG&#39;</span> }<span class="op">,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ... 30 more</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>It’s an object (a dictionary, a map) keyed by <strong>player
+name</strong> — not an array. Why? Because every other place in the app
+already has a player’s name as a string (from a match’s
+<code>p1</code>/<code>p2</code>, or from a team’s pick), and the most
+common operation is <em>“given a name, get the metadata for that
+player.”</em> That’s a hash lookup:
+<code>PLAYER_INFO['Zhao Xintong']</code>. If it were an array of
+<code>{ name, country, seed, ... }</code> objects, you’d be writing
+<code>.find(p =&gt; p.name === name)</code> everywhere — O(n) instead of
+O(1), and uglier to read.</p>
+<p>The Python equivalent is the same instinct that makes you reach for
+<code>dict[str, PlayerInfo]</code> instead of
+<code>list[PlayerInfo]</code>.</p>
+<h3 id="the-most-important-rule-in-the-codebase">The most important rule
+in the codebase</h3>
+<p>Here is the invariant that the entire scoring engine depends on:</p>
+<blockquote>
+<p><strong>For each round, the i-th element of <code>team.r1</code> (or
+<code>r2</code>, or <code>qf</code>, or <code>sf</code>) corresponds to
+the i-th element of <code>ROUND1_MATCHES</code> (or
+<code>ROUND2_MATCHES</code>, …).</strong></p>
+</blockquote>
+<p>Index 0 of <code>team.r1</code> is the team’s pick for
+<code>ROUND1_MATCHES[0]</code>. Index 1 is the pick for match 1. And so
+on. There is no <code>matchId</code> field on the picks. There is no
+key. <strong>Order is the contract.</strong></p>
+<p>That’s why <code>scorePick</code> can be the trivial five-line
+function it is in Lesson 2 — it just takes a pick and a match and asks
+“did the pick equal the match’s winner?” If you ever re-order
+<code>ROUND1_MATCHES</code> without re-ordering all eight teams’
+<code>r1</code> arrays in lockstep, every score in Round 1 silently goes
+wrong. There is no warning, no test, no type system catching this — it’s
+a convention enforced by the file.</p>
+<p>If you grew up writing SQL, this feels barbaric (“where’s the foreign
+key?”). It’s barbaric. It’s also fine for an 8-team league where one
+person owns the file. The moment a 9th team or 33rd player shows up,
+this is the first thing that needs schema-ing.</p>
+<h3 id="vibe-prompt-you-would-have-used-1">Vibe prompt you would have
+used</h3>
+<blockquote>
+<p><em>“Here’s the data model for my fantasy snooker league. Don’t
+generate any UI yet. I want to define the constants. Match:
+<code>{ id, p1, p2, winner?, score?, seed1? }</code>. Team:
+<code>{ name, color, accent, icon, motto, r1[16], r2[8], qf[4], sf[2], final }</code>
+where each pick array is in the same order as the matching round’s match
+array. PlayerInfo: an object keyed by player name with
+<code>{ country, seed, status, flag }</code>. Generate empty constants
+for ROUND1_MATCHES through FINAL_MATCH (5 arrays), an empty TEAMS array
+of 8 with placeholder picks, and a PLAYER_INFO object stub with the 16
+seeded players. Add a comment above the team picks reminding the reader:
+‘pick array index i corresponds to match index i of the matching
+round.’”</em></p>
+</blockquote>
+<h3 id="check-yourself-1">CHECK YOURSELF</h3>
+<ol type="1">
+<li>If you swapped match 7 and match 8 in <code>ROUND1_MATCHES</code>
+but forgot to swap them in every team’s <code>r1</code> array, what
+would visibly go wrong in the UI?</li>
+<li>Why is <code>PLAYER_INFO</code> keyed by name and not by seed?</li>
+<li><code>team.final</code> is a string but <code>team.sf</code> is an
+array. What’s the smallest code change that would make them consistent,
+and what would it cost in readability?</li>
+</ol>
+</section>
+<section id="lesson-2-the-pure-logic-scoring-before-any-react"
+class="slide level2">
+<h2>Lesson 2 — The Pure Logic (scoring, before any React)</h2>
+<p>This is the smallest, most important file in the project. It’s about
+40 lines and it’s the <strong>heart</strong> of the app — every UI
+screen is just a different lens on its output.</p>
+<h3 id="why-scoring-lives-outside-react">Why scoring lives outside
+React</h3>
+<p>The original file declares two functions before the first JSX
+tag:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">scorePick</span>(pick<span class="op">,</span> match) {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>match <span class="op">||</span> <span class="op">!</span>match<span class="op">.</span><span class="at">winner</span>) <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (pick <span class="op">===</span> match<span class="op">.</span><span class="at">winner</span>) <span class="cf">return</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">calculateTeamScores</span>(team) {</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* ... */</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Neither of them imports React. Neither knows what a component is.
+They take plain data in and return plain data out. That’s deliberate.
+<strong>Pure functions are the part of your codebase that survives every
+refactor.</strong> When Phase 1 of this project moves the app to
+Next.js, these two functions are copied into <code>lib/scoring.ts</code>
+essentially unchanged — the components around them are rewritten, but
+<code>scorePick</code> is the same.</p>
+<p>The Python instinct here is right: this is the “business logic”
+layer. Keep it free of framework concerns. UIs come and go; the rule
+that picking-the-winner = 3 points doesn’t.</p>
+<h3 id="walking-through-scorepick-line-by-line">Walking through
+<code>scorePick</code> line by line</h3>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">scorePick</span>(pick<span class="op">,</span> match) {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="op">!</span>match <span class="op">||</span> <span class="op">!</span>match<span class="op">.</span><span class="at">winner</span>) <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span> <span class="co">// pending</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (pick <span class="op">===</span> match<span class="op">.</span><span class="at">winner</span>) <span class="cf">return</span> <span class="dv">3</span><span class="op">;</span> <span class="co">// correct</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// wrong (consolation)</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Three branches:</p>
+<ol type="1">
+<li><strong><code>!match || !match.winner</code> →
+<code>null</code>.</strong> If the match doesn’t exist (defensive) or
+hasn’t been played yet (<code>winner</code> is undefined), the pick
+can’t be scored. The function returns <code>null</code>, <strong>not
+0</strong> and <strong>not false</strong>. That distinction is the heart
+of the round.</li>
+<li><strong><code>pick === match.winner</code> →
+<code>3</code>.</strong> Right pick.</li>
+<li><strong>Else → <code>1</code>.</strong> Wrong pick, but you
+participated, so 1 point.</li>
+</ol>
+<h3 id="why-correct-is-null-not-false">Why <code>correct</code> is null,
+not false</h3>
+<p>Inside <code>calculateTeamScores</code> you’ll see this pattern
+repeated for every round:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> r1Details <span class="op">=</span> team<span class="op">.</span><span class="at">r1</span><span class="op">.</span><span class="fu">map</span>((pick<span class="op">,</span> i) <span class="kw">=&gt;</span> {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> pts <span class="op">=</span> <span class="fu">scorePick</span>(pick<span class="op">,</span> ROUND1_MATCHES[i])<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  r1 <span class="op">+=</span> pts <span class="op">||</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { <span class="dt">match</span><span class="op">:</span> ROUND1_MATCHES[i]<span class="op">,</span> pick<span class="op">,</span> <span class="dt">points</span><span class="op">:</span> pts<span class="op">,</span> <span class="dt">correct</span><span class="op">:</span> pts <span class="op">===</span> <span class="kw">null</span> <span class="op">?</span> <span class="kw">null</span> <span class="op">:</span> pts <span class="op">===</span> <span class="dv">3</span> }<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<p>Look at the last expression:
+<code>correct: pts === null ? null : pts === 3</code>.</p>
+<p><code>correct</code> has <strong>three states</strong>, not two:</p>
+<ul>
+<li><code>true</code> — the match is finished and the pick was
+right.</li>
+<li><code>false</code> — the match is finished and the pick was
+wrong.</li>
+<li><code>null</code> — the match isn’t finished yet.</li>
+</ul>
+<p>The UI uses this directly. In <code>&lt;PicksList&gt;</code>:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> pickPending <span class="op">=</span> d<span class="op">.</span><span class="at">points</span> <span class="op">===</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>background<span class="op">:</span> pickPending <span class="op">?</span> <span class="st">&#39;#F9FAFB&#39;</span> <span class="op">:</span> d<span class="op">.</span><span class="at">correct</span> <span class="op">?</span> <span class="st">&#39;#DCFCE7&#39;</span> <span class="op">:</span> <span class="st">&#39;#FEE2E2&#39;</span><span class="op">,</span></span></code></pre></div>
+<p>Three colors: gray for pending, green for correct, red for wrong. If
+<code>correct</code> were just a boolean, “pending” and “wrong” would
+render as the same red badge — and during the tournament, when most
+matches are still upcoming, the screen would look catastrophic.</p>
+<p>This is the first lesson the brief tells you to internalize:
+<strong>tri-state booleans aren’t a code smell, they’re a
+feature.</strong> The other place this comes up is
+<code>match.winner</code> itself — undefined means “not played”, a
+string means “played and winner is this person”. Those are not the same
+as <code>null</code> would be in some languages; the absence of a winner
+is a real first-class state.</p>
+<h3 id="r1-pts-0-the-running-total-trick"><code>r1 += pts || 0</code> —
+the running total trick</h3>
+<p>That line is doing two things at once:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>r1 <span class="op">+=</span> pts <span class="op">||</span> <span class="dv">0</span><span class="op">;</span></span></code></pre></div>
+<p>If <code>pts</code> is <code>3</code> or <code>1</code>, you add it.
+If <code>pts</code> is <code>null</code> (pending),
+<code>null || 0</code> evaluates to <code>0</code> and you add nothing.
+So <code>r1</code> accumulates only finished, scored points. The total
+never goes “wrong” while a round is in progress; it just lags reality
+until results land.</p>
+<h3 id="what-calculateteamscores-returns">What
+<code>calculateTeamScores</code> returns</h3>
+<p>The return shape is wide on purpose:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  r1<span class="op">,</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  r2<span class="op">,</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  qf<span class="op">,</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  sf<span class="op">,</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  f<span class="op">,</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  total<span class="op">,</span> <span class="co">// 6 numbers</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  r1Details<span class="op">,</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  r2Details<span class="op">,</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  qfDetails<span class="op">,</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  sfDetails<span class="op">,</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  fDetails<span class="op">,</span> <span class="co">// 5 arrays of {match, pick, points, correct}</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>Six numbers (the per-round totals + the grand total) plus five arrays
+of the per-pick detail objects. The numbers drive the leaderboard column
+totals. The detail arrays drive the predictions matrix, the team card
+view, the player detail page — anywhere the app says “here’s pick X
+against match Y, was it right, how many points.” <strong>Compute once,
+render five different ways.</strong></p>
+<p>Inside the orchestrator component you’ll see exactly that:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> teamsWithScores <span class="op">=</span> <span class="fu">useMemo</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> TEAMS<span class="op">.</span><span class="fu">map</span>((t) <span class="kw">=&gt;</span> ({ <span class="op">...</span>t<span class="op">,</span> <span class="dt">scores</span><span class="op">:</span> <span class="fu">calculateTeamScores</span>(t) }))<span class="op">.</span><span class="fu">sort</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    (a<span class="op">,</span> b) <span class="kw">=&gt;</span> b<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">total</span> <span class="op">-</span> a<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">total</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>}<span class="op">,</span> [])<span class="op">;</span></span></code></pre></div>
+<p>Every team is decorated with its <code>scores</code> object once, and
+that decorated array is then handed down to every tab. The five tabs
+share the same computation; none of them re-invoke
+<code>calculateTeamScores</code> themselves.</p>
+<h3 id="vibe-prompt-you-would-have-used-2">Vibe prompt you would have
+used</h3>
+<blockquote>
+<p>*“I have my data constants set up (ROUND1_MATCHES through
+FINAL_MATCH, plus a TEAMS array with r1[16]/r2[8]/qf[4]/sf[2]/final
+picks). Write me two pure functions, no React, no JSX.
+<code>scorePick(pick, match)</code> returns 3 if
+<code>pick === match.winner</code>, returns 1 if the match has a winner
+but the pick was wrong, and returns <code>null</code> if
+<code>match.winner</code> is undefined. Then
+<code>calculateTeamScores(team)</code> walks through each round’s pick
+array and the matching match array in parallel by index, sums the points
+(treating <code>null</code> as 0 for the running total), and returns
+<code>{ r1, r2, qf, sf, f, total, r1Details, r2Details, qfDetails, sfDetails, fDetails }</code>
+where each <code>*Details</code>is an array
+of<code>{ match, pick, points, correct }</code>and<code>correct</code>is<code>null</code>if
+pending, otherwise<code>points === 3</code>.”*</p>
+</blockquote>
+<h3 id="check-yourself-2">CHECK YOURSELF</h3>
+<ol type="1">
+<li>If <code>scorePick</code> returned <code>0</code> instead of
+<code>null</code> for pending matches, what’s the first thing that would
+visibly break in the UI? (Hint:
+<code>.filter(d =&gt; d.correct).length</code> is used a lot.)</li>
+<li>Why is <code>calculateTeamScores</code> called inside
+<code>useMemo</code> instead of inline in the JSX?</li>
+<li>Which property of the return value of
+<code>calculateTeamScores</code> do the <strong>standings
+columns</strong> read, and which property do the <strong>predictions
+matrix cells</strong> read? Why are both needed?</li>
+</ol>
+</section>
+<section id="lesson-3-the-first-render-a-single-component-no-tabs-yet"
+class="slide level2">
+<h2>Lesson 3 — The First Render (a single component, no tabs yet)</h2>
+<p>This is the part that vibe coders get wrong on day one: trying to
+build the whole app in the first prompt. Don’t. <strong>A vibe-coded app
+is grown one feature at a time, starting with the smallest thing that
+proves the data is real.</strong> For Snooker Fantasy League, that thing
+is a list of team names with their total points.</p>
+<h3 id="v1-just-team-names-and-totals">v1: just team names and
+totals</h3>
+<p>If you go back to the very beginning of the project, the first
+version of <code>&lt;StandingsTab&gt;</code> would have been about 15
+lines:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">StandingsTab</span>({ teams }) {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;table&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;thead&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;tr&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;th&gt;</span>Rank<span class="kw">&lt;/th&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;th&gt;</span>Team<span class="kw">&lt;/th&gt;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;th&gt;</span>Total<span class="kw">&lt;/th&gt;</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;/tr&gt;</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/thead&gt;</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;tbody&gt;</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">{</span>teams<span class="op">.</span><span class="fu">map</span>((team<span class="op">,</span> i) <span class="kw">=&gt;</span> (</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;tr</span> <span class="ot">key</span><span class="op">=</span><span class="va">{</span>team<span class="op">.</span><span class="at">name</span><span class="va">}</span><span class="kw">&gt;</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;td&gt;</span><span class="va">{</span>i <span class="op">+</span> <span class="dv">1</span><span class="va">}</span><span class="kw">&lt;/td&gt;</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;td&gt;</span><span class="va">{</span>team<span class="op">.</span><span class="at">name</span><span class="va">}</span><span class="kw">&lt;/td&gt;</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>            <span class="kw">&lt;td&gt;</span><span class="va">{</span>team<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">total</span><span class="va">}</span><span class="kw">&lt;/td&gt;</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>          <span class="kw">&lt;/tr&gt;</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>        ))<span class="va">}</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/tbody&gt;</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/table&gt;</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>That’s it. No styles, no icons, no gradients. The point is to
+<strong>prove that the data flow works</strong>:
+<code>calculateTeamScores</code> runs, the totals compute,
+<code>.sort()</code> orders the rows, and React renders eight rows. If
+any one of those is wrong, you find out in the first 30 seconds, not in
+hour three after you’ve added a hero header and tab bar.</p>
+<p>Once that’s on screen you have your foothold. Everything afterwards
+is “now add a column.”</p>
+<h3 id="v2-per-round-columns">v2: per-round columns</h3>
+<p>The next thing a human builder would notice is <em>“I can’t tell
+which team is doing well in which round.”</em> So you add R1 and R2
+columns:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;th&gt;</span>Rank<span class="kw">&lt;/th&gt;&lt;th&gt;</span>Team<span class="kw">&lt;/th&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;th&gt;</span>R1<span class="kw">&lt;/th&gt;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;th&gt;</span>R2<span class="kw">&lt;/th&gt;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;th&gt;</span>Total<span class="kw">&lt;/th&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;td&gt;</span><span class="va">{</span>team<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">r1</span><span class="va">}</span><span class="kw">&lt;/td&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;td&gt;</span><span class="va">{</span>team<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">r2</span><span class="va">}</span><span class="kw">&lt;/td&gt;</span></span></code></pre></div>
+<p>This is a one-line-prompt change (“add a column for R1 score next to
+the team name”). You don’t redesign the table; you just add cells. The
+fact that <code>team.scores</code> already has <code>r1</code> and
+<code>r2</code> waiting is exactly why Lesson 2’s “wide return shape”
+was worth it.</p>
+<h3 id="v3-progressive-enhancement-of-the-same-column">v3: progressive
+enhancement of the same column</h3>
+<p>Then the tournament progresses and you add <code>qf</code>,
+<code>sf</code>, and <code>final</code>. By the end of the tournament,
+the row in the production code looks like the one in the file:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;td</span> <span class="ot">style</span><span class="op">=</span><span class="va">{</span>{ <span class="op">...</span>td<span class="op">,</span> <span class="dt">textAlign</span><span class="op">:</span> <span class="st">&#39;center&#39;</span> }<span class="va">}</span><span class="kw">&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;div</span> <span class="ot">style</span><span class="op">=</span><span class="va">{</span>{ <span class="dt">fontWeight</span><span class="op">:</span> <span class="dv">700</span><span class="op">,</span> <span class="dt">fontSize</span><span class="op">:</span> <span class="dv">17</span><span class="op">,</span> <span class="dt">color</span><span class="op">:</span> <span class="st">&#39;#0F5132&#39;</span> }<span class="va">}</span><span class="kw">&gt;</span><span class="va">{</span>team<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">r1</span><span class="va">}</span><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;div</span> <span class="ot">style</span><span class="op">=</span><span class="va">{</span>{ <span class="dt">fontSize</span><span class="op">:</span> <span class="dv">11</span><span class="op">,</span> <span class="dt">color</span><span class="op">:</span> <span class="st">&#39;#6B7280&#39;</span> }<span class="va">}</span><span class="kw">&gt;</span>/ 48<span class="kw">&lt;/div&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/td&gt;</span></span></code></pre></div>
+<p>Two divs, not just a number — the team’s R1 score over the maximum
+possible 48 (16 matches × 3 points). That <code>/48</code> line was
+almost certainly added in a separate prompt: <em>“under the R1 number,
+show ‘/ 48’ in a smaller gray font so I can see how close they are to a
+perfect round.”</em> This is the right grain for a vibe prompt — small,
+specific, low-risk.</p>
+<h3 id="v4-the-special-final-pick-cell">v4: the special “Final Pick”
+cell</h3>
+<p>The Final column is different from the others. It’s not a number —
+it’s a <strong>chip</strong> showing who the team picked, color-coded by
+whether the actual champion matched:</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;td</span> <span class="ot">style</span><span class="op">=</span><span class="va">{</span>{ <span class="op">...</span>td<span class="op">,</span> <span class="dt">textAlign</span><span class="op">:</span> <span class="st">&#39;center&#39;</span> }<span class="va">}</span><span class="kw">&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;div</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="ot">style</span><span class="op">=</span><span class="va">{</span>{</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">display</span><span class="op">:</span> <span class="st">&#39;inline-block&#39;</span><span class="op">,</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">padding</span><span class="op">:</span> <span class="st">&#39;4px 10px&#39;</span><span class="op">,</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">borderRadius</span><span class="op">:</span> <span class="dv">12</span><span class="op">,</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">background</span><span class="op">:</span> team<span class="op">.</span><span class="at">final</span> <span class="op">===</span> <span class="st">&#39;Wu Yize&#39;</span> <span class="op">?</span> <span class="st">&#39;#FEE2E2&#39;</span> <span class="op">:</span> <span class="st">&#39;#DBEAFE&#39;</span><span class="op">,</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">color</span><span class="op">:</span> team<span class="op">.</span><span class="at">final</span> <span class="op">===</span> <span class="st">&#39;Wu Yize&#39;</span> <span class="op">?</span> <span class="st">&#39;#991B1B&#39;</span> <span class="op">:</span> <span class="st">&#39;#1E40AF&#39;</span><span class="op">,</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fontWeight</span><span class="op">:</span> <span class="dv">700</span><span class="op">,</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fontSize</span><span class="op">:</span> <span class="dv">12</span><span class="op">,</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    }<span class="va">}</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&gt;</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    🏆 <span class="va">{</span>team<span class="op">.</span><span class="at">final</span><span class="va">}</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/div&gt;</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/td&gt;</span></span></code></pre></div>
+<p>Notice that the colors here are <strong>hard-coded</strong> to “if
+the pick is Wu Yize, red — otherwise blue.” That’s a tell that this code
+was written <strong>after the final result was known</strong>. During
+the tournament, when the champion wasn’t yet decided, this branch would
+have looked completely different — probably just neutral coloring. The
+hard-coded <code>'Wu Yize'</code> is a tournament-end snapshot. A more
+general version would compare against
+<code>FINAL_MATCH[0]?.winner</code>. The code is one prompt away from
+being made tournament-agnostic.</p>
+<p>This is a normal pattern in vibe-coded codebases: <strong>branches
+that were once dynamic become hard-coded after the data is
+final.</strong> Not technically wrong, but worth knowing it’s there.</p>
+<h3 id="v5-the-leader-highlight">v5: the leader highlight</h3>
+<p>The leader row deserves a crown. So somewhere mid-project a prompt
+added:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> rankColor <span class="op">=</span> rank <span class="op">===</span> <span class="dv">1</span> <span class="op">?</span> <span class="st">&#39;#FBBF24&#39;</span> <span class="op">:</span> rank <span class="op">===</span> <span class="dv">2</span> <span class="op">?</span> <span class="st">&#39;#9CA3AF&#39;</span> <span class="op">:</span> rank <span class="op">===</span> <span class="dv">3</span> <span class="op">?</span> <span class="st">&#39;#B45309&#39;</span> <span class="op">:</span> <span class="st">&#39;#E5E7EB&#39;</span><span class="op">;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="ot">style</span><span class="op">=</span><span class="va">{</span>{ <span class="op">...</span> <span class="dt">background</span><span class="op">:</span> rankColor<span class="op">,</span> <span class="op">...</span> }<span class="va">}</span><span class="kw">&gt;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="va">{</span>rank <span class="op">===</span> <span class="dv">1</span> <span class="op">?</span> <span class="st">&#39;👑&#39;</span> <span class="op">:</span> rank<span class="va">}</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<p>Gold for 1st, silver for 2nd, bronze for 3rd, gray otherwise. The
+leader gets a crown emoji instead of “1”. That’s two visual rules added
+in one prompt; you can see how a single sentence (“medal-color the rank
+circle and replace 1st place’s number with a crown emoji”) becomes those
+four lines.</p>
+<h3 id="v6-the-form-badge">v6: the form badge</h3>
+<p>Last, the rightmost column tracks form — whether the team is doing
+better in R2 than they did in R1. That’s
+<code>&lt;FormBadge&gt;</code>:</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">FormBadge</span>({ r1Pct<span class="op">,</span> r2Pct }) {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> trending <span class="op">=</span> r2Pct <span class="op">&gt;</span> r1Pct <span class="op">?</span> <span class="st">&#39;up&#39;</span> <span class="op">:</span> r2Pct <span class="op">&lt;</span> r1Pct <span class="op">?</span> <span class="st">&#39;down&#39;</span> <span class="op">:</span> <span class="st">&#39;flat&#39;</span><span class="op">;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> Icon <span class="op">=</span> trending <span class="op">===</span> <span class="st">&#39;up&#39;</span> <span class="op">?</span> TrendingUp <span class="op">:</span> trending <span class="op">===</span> <span class="st">&#39;down&#39;</span> <span class="op">?</span> TrendingDown <span class="op">:</span> Circle<span class="op">;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ... renders an arrow + label</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>It’s a tiny presentational component. Notice it’s a <strong>separate
+function</strong>, not inlined into the table row. That’s because you’ll
+want it again in player cards, in summary tiles, anywhere you want to
+express “this is going up / down / sideways.” Lesson 5 will come back to
+this idea: when a thing has a name, give it a function.</p>
+<h3 id="vibe-prompt-you-would-have-used-at-each-step">Vibe prompt you
+would have used (at each step)</h3>
+<blockquote>
+<p>v1: <em>“Render the eight teams as a table sorted by
+<code>team.scores.total</code>. Three columns: Rank, Team, Total. Plain
+HTML, no styles yet, just verify the totals are right.”</em></p>
+<p>v2: <em>“Add R1 and R2 columns next to Team showing
+<code>team.scores.r1</code> and <code>team.scores.r2</code>.”</em></p>
+<p>v3: <em>“Under each round score in the table, show the maximum
+possible like ‘/ 48’ for R1 and ‘/ 24’ for R2 in a smaller gray
+font.”</em></p>
+<p>v4: <em>“Add a Final Pick column. Render <code>team.final</code>
+inside a rounded chip with a 🏆 emoji. If the pick equals the eventual
+champion (Wu Yize), use a red background; otherwise blue.”</em></p>
+<p>v5: <em>“Make the rank circle gold for 1st, silver for 2nd, bronze
+for 3rd. Show a 👑 emoji instead of the number for 1st place.”</em></p>
+<p>v6: <em>“Add a Form column at the right that compares the team’s R1
+percentage to their R2 percentage. If they’re improving show a green
+up-arrow and ‘Rising’; if dropping, red down-arrow ‘Falling’; if flat,
+gray circle ‘Steady’. Extract it to a <code>&lt;FormBadge&gt;</code>
+component.”</em></p>
+</blockquote>
+<p>The shape is always the same: <strong>one column, one widget, one
+prompt.</strong> Never <em>“redesign the standings table”</em> — that’s
+the kind of prompt that produces 800 lines of speculative CSS and breaks
+something invisible.</p>
+<h3 id="check-yourself-3">CHECK YOURSELF</h3>
+<ol type="1">
+<li>The Final Pick chip currently hard-codes <code>'Wu Yize'</code> to
+choose its color. What’s the one-line edit to make it
+tournament-agnostic?</li>
+<li>Why is <code>&lt;FormBadge&gt;</code> extracted into its own
+function instead of inlined into the table cell?</li>
+<li>If you wanted to add a new “% correct” column between R2 and Total,
+what minimum changes would the prompt need to specify? (Hint: it’s two
+cells per row plus one header.)</li>
+</ol>
+</section>
+<section id="lesson-4-state-tabs-introducing-usestate"
+class="slide level2">
+<h2>Lesson 4 — State &amp; Tabs (introducing useState)</h2>
+<p>Up until now we’ve talked about the app like it’s one screen. It
+isn’t — it’s five tabs that share data. The moment you have two screens
+that show the <em>same</em> data with <em>different</em> lenses, you
+need a top-level component that owns the state and feeds it down. This
+is the React mental model that breaks the most for newcomers, so it’s
+worth getting right.</p>
+<h3 id="two-pieces-of-state-one-home">Two pieces of state, one home</h3>
+<p>The orchestrator component is
+<code>&lt;SnookerFantasyLeague&gt;</code>. Its top three lines:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">SnookerFantasyLeague</span>() {</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> [activeTab<span class="op">,</span> setActiveTab]       <span class="op">=</span> <span class="fu">useState</span>(<span class="st">&#39;standings&#39;</span>)<span class="op">;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> [selectedTeam<span class="op">,</span> setSelectedTeam] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">null</span>)<span class="op">;</span></span></code></pre></div>
+<p>Two pieces of state. <strong><code>activeTab</code></strong> is a
+string like <code>'standings'</code> or <code>'predictions'</code> —
+which of the five tabs is currently visible.
+<strong><code>selectedTeam</code></strong> is either <code>null</code>
+(nobody clicked yet) or one of the team objects — used by the
+Predictions tab to know which team’s deep card to show.</p>
+<p>These two pieces of state cannot live inside the individual tab
+components, because <strong>clicking a row in
+<code>&lt;StandingsTab&gt;</code> needs to switch the visible tab to
+<code>&lt;PredictionsTab&gt;</code> and remember which team to
+highlight.</strong> That cross-tab effect needs a place where both tabs
+can read and write the same state. That place is the parent.</p>
+<p>The pattern is:</p>
+<blockquote>
+<p><strong>State up, callbacks down.</strong> The state lives at the
+highest component that needs to see all of it. The leaf components don’t
+own state; they receive props and call back when they want a change.</p>
+</blockquote>
+<h3 id="usememo-for-the-decorated-team-list"><code>useMemo</code> for
+the decorated team list</h3>
+<p>The next line is the unsung hero of the whole file:</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> teamsWithScores <span class="op">=</span> <span class="fu">useMemo</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> TEAMS<span class="op">.</span><span class="fu">map</span>((t) <span class="kw">=&gt;</span> ({ <span class="op">...</span>t<span class="op">,</span> <span class="dt">scores</span><span class="op">:</span> <span class="fu">calculateTeamScores</span>(t) }))<span class="op">.</span><span class="fu">sort</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    (a<span class="op">,</span> b) <span class="kw">=&gt;</span> b<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">total</span> <span class="op">-</span> a<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">total</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>}<span class="op">,</span> [])<span class="op">;</span></span></code></pre></div>
+<p>Read it inside-out:</p>
+<ul>
+<li><code>TEAMS.map(t =&gt; ({ ...t, scores: calculateTeamScores(t) }))</code>
+— for each of the 8 teams, spread its fields (<code>name</code>,
+<code>color</code>, <code>r1[]</code>, …) and add a fresh
+<code>scores</code> object computed from
+<code>calculateTeamScores</code>.</li>
+<li><code>.sort((a, b) =&gt; b.scores.total - a.scores.total)</code> —
+descending by total points so index 0 is the leader.</li>
+<li>Wrapped in <code>useMemo(..., [])</code> — compute this
+<strong>once</strong> on first render and reuse forever.</li>
+</ul>
+<p>Why <code>useMemo</code>? Because <strong>without it, every time the
+user clicks a tab, React would recompute all 8 teams’ scores from
+scratch</strong>. That’s 8 × 31 = 248 <code>scorePick</code> calls per
+click. It’s not slow enough to feel, but it’s wasteful, and more
+importantly it would mean a new <code>teamsWithScores</code> array
+reference on every render — which can cascade into spurious re-renders
+of every tab that receives it as a prop.</p>
+<p>The empty dependency array <code>[]</code> says: <em>“the inputs
+don’t change during the lifetime of the component — <code>TEAMS</code>
+is a module-level constant — so cache the result once.”</em> If
+<code>TEAMS</code> were ever loaded from an API and stored in state,
+that array would have to include the state variable.</p>
+<p>This is the same reflex as memoizing an expensive
+<code>.transform()</code> step in a Pandas pipeline. The data layer’s
+free; the UI layer should look it up, not recompute it.</p>
+<h3 id="wiring-the-tabs">Wiring the tabs</h3>
+<p>After the state and the memoized data, the component renders three
+things:</p>
+<ol type="1">
+<li>The hero header (decorative — no state).</li>
+<li>A horizontal nav bar that maps over a <code>tabs</code> array and
+renders five buttons. Clicking any button calls
+<code>setActiveTab(tab.id)</code>.</li>
+<li>The content area, which <strong>switches on
+<code>activeTab</code></strong> and renders the right tab
+component:</li>
+</ol>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  activeTab <span class="op">===</span> <span class="st">&#39;standings&#39;</span> <span class="op">&amp;&amp;</span> (</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;StandingsTab</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>      <span class="ot">teams</span><span class="op">=</span><span class="va">{</span>teamsWithScores<span class="va">}</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>      <span class="ot">onTeamClick</span><span class="op">=</span><span class="va">{</span>(t) <span class="kw">=&gt;</span> {</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">setSelectedTeam</span>(t)<span class="op">;</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">setActiveTab</span>(<span class="st">&#39;predictions&#39;</span>)<span class="op">;</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>      }<span class="va">}</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">/&gt;</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  activeTab <span class="op">===</span> <span class="st">&#39;matches&#39;</span> <span class="op">&amp;&amp; </span><span class="fu">&lt;MatchesTab</span> <span class="fu">/&gt;</span><span class="op">;</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  activeTab <span class="op">===</span> <span class="st">&#39;predictions&#39;</span> <span class="op">&amp;&amp;</span> (</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;PredictionsTab</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>      <span class="ot">teams</span><span class="op">=</span><span class="va">{</span>teamsWithScores<span class="va">}</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>      <span class="ot">selectedTeam</span><span class="op">=</span><span class="va">{</span>selectedTeam<span class="va">}</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>      <span class="ot">setSelectedTeam</span><span class="op">=</span><span class="va">{</span>setSelectedTeam<span class="va">}</span></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">/&gt;</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>  activeTab <span class="op">===</span> <span class="st">&#39;players&#39;</span> <span class="op">&amp;&amp; </span><span class="fu">&lt;PlayersTab</span> <span class="ot">teams</span><span class="op">=</span><span class="va">{</span>teamsWithScores<span class="va">}</span> <span class="fu">/&gt;</span><span class="op">;</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>  activeTab <span class="op">===</span> <span class="st">&#39;analytics&#39;</span> <span class="op">&amp;&amp; </span><span class="fu">&lt;AnalyticsTab</span> <span class="ot">teams</span><span class="op">=</span><span class="va">{</span>teamsWithScores<span class="va">}</span> <span class="fu">/&gt;</span><span class="op">;</span></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Three things to notice:</p>
+<ul>
+<li><strong><code>&lt;MatchesTab /&gt;</code> takes no props.</strong>
+It only uses the static match constants from
+<code>lib/matches.ts</code>. There’s no team data flowing in.</li>
+<li><strong><code>&lt;StandingsTab&gt;</code> receives a callback
+<code>onTeamClick</code></strong> that does <em>two things at once</em>:
+it sets the selected team <strong>and</strong> switches the tab. That’s
+the cross-tab interaction the parent had to coordinate. A child
+component couldn’t have done this on its own.</li>
+<li><strong><code>&lt;PredictionsTab&gt;</code> receives both the read
+(<code>selectedTeam</code>) and the write
+(<code>setSelectedTeam</code>).</strong> This is the pattern that gets
+called “controlled component”: the parent owns the source of truth; the
+child renders against it and asks the parent to update it.</li>
+</ul>
+<h3 id="why-not-put-selectedteam-inside-predictionstab">Why not put
+<code>selectedTeam</code> inside
+<code>&lt;PredictionsTab&gt;</code>?</h3>
+<p>Because then the <code>&lt;StandingsTab&gt;</code>’s row click
+couldn’t reach it. The state has to live at the <strong>lowest common
+ancestor</strong> of every component that needs to read or write it. For
+<code>selectedTeam</code>, the readers are
+<code>&lt;PredictionsTab&gt;</code> and the writers are both
+<code>&lt;StandingsTab&gt;</code> (when you click a row) and
+<code>&lt;PredictionsTab&gt;</code> (when you click a team chip inside
+it). Their lowest common ancestor is
+<code>&lt;SnookerFantasyLeague&gt;</code> itself, so that’s where the
+state lives.</p>
+<h3 id="vibe-prompt-you-would-have-used-3">Vibe prompt you would have
+used</h3>
+<blockquote>
+<p><em>“Wrap my single <code>&lt;StandingsTab&gt;</code> in a top-level
+<code>&lt;SnookerFantasyLeague&gt;</code> component. Add a
+<code>useState</code> for <code>activeTab</code> (default
+<code>'standings'</code>) and a sticky horizontal nav bar with five
+tabs: Standings, Matches, Predictions, Players, Analytics, each with a
+Lucide icon. Render the matching tab component below. Add a second
+<code>useState</code> for <code>selectedTeam</code> (default null). Pass
+<code>teamsWithScores</code> (a <code>useMemo</code>’d sort of
+<code>TEAMS.map(t =&gt; ({ ...t, scores: calculateTeamScores(t) }))</code>
+by descending total) to every tab that needs it. From
+<code>&lt;StandingsTab&gt;</code>, when a row is clicked, set
+<code>selectedTeam</code> and switch <code>activeTab</code> to
+<code>'predictions'</code>.”</em></p>
+</blockquote>
+<h3 id="check-yourself-4">CHECK YOURSELF</h3>
+<ol type="1">
+<li>If you removed <code>useMemo</code> and just wrote
+<code>const teamsWithScores = TEAMS.map(...)</code> directly, what
+specifically would re-run on every tab switch?</li>
+<li>Why does <code>setSelectedTeam</code> get passed down to
+<code>&lt;PredictionsTab&gt;</code> as a prop instead of being created
+with its own <code>useState</code> inside that tab?</li>
+<li>Why does <code>&lt;MatchesTab /&gt;</code> not need any props at
+all, while <code>&lt;StandingsTab&gt;</code> needs two?</li>
+</ol>
+</section>
+<section
+id="lesson-5-composition-prop-drilling-when-to-split-a-component"
+class="slide level2">
+<h2>Lesson 5 — Composition &amp; Prop Drilling (when to split a
+component)</h2>
+<p>A 200-line component is a smell. So is splitting too early. The right
+time to extract a sub-component is when <strong>either</strong> of these
+is true:</p>
+<ul>
+<li>You’re about to copy-paste a chunk of JSX and tweak one
+variable.</li>
+<li>A section is conceptually about a different “thing” than the rest of
+the component.</li>
+</ul>
+<p>Both of those happen all over this codebase. The clearest example is
+the chain
+<code>&lt;PlayersTab&gt; → &lt;PlayerDetail&gt; → &lt;MatchPickAnalysis&gt; → &lt;TeamChip&gt;</code>.</p>
+<h3 id="the-chain-explained">The chain, explained</h3>
+<p><code>&lt;PlayersTab&gt;</code> (top of the players folder) has two
+jobs: render the 32-player grid, and — when a player is clicked — render
+<code>&lt;PlayerDetail&gt;</code> for that player. The rule “two jobs”
+is fine in a parent component; that’s literally what an orchestrator
+does. The actual rendering of those two jobs is delegated:</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (selectedPlayer) {</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return </span><span class="fu">&lt;PlayerDetail</span> <span class="ot">playerName</span><span class="op">=</span><span class="va">{</span>selectedPlayer<span class="va">}</span> <span class="ot">teams</span><span class="op">=</span><span class="va">{</span>teams<span class="va">}</span> <span class="ot">onBack</span><span class="op">=</span><span class="va">{</span><span class="op">...</span><span class="va">}</span> <span class="ot">onSelectPlayer</span><span class="op">=</span><span class="va">{</span>setSelectedPlayer<span class="va">}</span> <span class="fu">/&gt;</span><span class="op">;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">// ... otherwise render the grid of &lt;PlayerCard&gt; buttons</span></span></code></pre></div>
+<p><code>&lt;PlayerDetail&gt;</code> (about 270 lines of computation +
+JSX) does <strong>all</strong> the per-player math: which matches did
+this player appear in, who picked them, who picked against them, did
+they win, what’s their tournament path. That’s a lot. So inside it, the
+per-match analysis is delegated:</p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  pickAnalyses<span class="op">.</span><span class="fu">map</span>((pa<span class="op">,</span> i) <span class="kw">=&gt;</span> (</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;MatchPickAnalysis</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>      <span class="ot">key</span><span class="op">=</span><span class="va">{</span>i<span class="va">}</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>      <span class="ot">analysis</span><span class="op">=</span><span class="va">{</span>pa<span class="va">}</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>      <span class="ot">playerName</span><span class="op">=</span><span class="va">{</span>playerName<span class="va">}</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>      <span class="ot">onSelectPlayer</span><span class="op">=</span><span class="va">{</span>onSelectPlayer<span class="va">}</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">/&gt;</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  ))<span class="op">;</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><code>&lt;MatchPickAnalysis&gt;</code> renders one match
+(e.g. <em>“Murphy vs Wu Yize, Final, Wu won 18-17”</em>) and the two
+columns of teams that backed each side. Inside it, the team chips are
+delegated:</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  teamsBackedThis<span class="op">.</span><span class="fu">map</span>((t) <span class="kw">=&gt; </span><span class="fu">&lt;TeamChip</span> <span class="ot">key</span><span class="op">=</span><span class="va">{</span>t<span class="op">.</span><span class="at">name</span><span class="va">}</span> <span class="ot">team</span><span class="op">=</span><span class="va">{</span>t<span class="va">}</span> <span class="ot">ptsEarned</span><span class="op">=</span><span class="va">{</span>ptsForPicker<span class="va">}</span> <span class="fu">/&gt;</span>)<span class="op">;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><code>&lt;TeamChip&gt;</code> is <strong>15 lines</strong>. It’s a
+single colored pill showing the team icon, name, and the points its
+picker earned. Why does it deserve its own file? Because it’s drawn
+<strong>twice on every single match analysis</strong> — once in the
+“Backed Murphy” column and once in the “Backed Wu” column — and
+copy-pasting 15 lines of JSX twice would be an obvious smell.
+Extract.</p>
+<h3 id="when-to-extract-the-copy-paste-rule">When to extract: the
+copy-paste rule</h3>
+<p>If you find yourself writing the same JSX twice with minor tweaks,
+that’s the signal. Inside <code>&lt;MatchPickAnalysis&gt;</code>:</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;div&gt;</span>BACKED <span class="va">{</span>playerName<span class="op">.</span><span class="fu">toUpperCase</span>()<span class="va">}</span><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="va">{</span>teamsBackedThis<span class="op">.</span><span class="fu">map</span>(t <span class="kw">=&gt; </span><span class="fu">&lt;TeamChip</span> <span class="ot">team</span><span class="op">=</span><span class="va">{</span>t<span class="va">}</span> <span class="ot">ptsEarned</span><span class="op">=</span><span class="va">{</span>ptsForPicker<span class="va">}</span> <span class="fu">/&gt;</span>)<span class="va">}</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div&gt;</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;div&gt;</span>BACKED <span class="va">{</span>opponent<span class="op">.</span><span class="fu">toUpperCase</span>()<span class="va">}</span><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">{</span>teamsBackedOpponent<span class="op">.</span><span class="fu">map</span>(t <span class="kw">=&gt; </span><span class="fu">&lt;TeamChip</span> <span class="ot">team</span><span class="op">=</span><span class="va">{</span>t<span class="va">}</span> <span class="ot">ptsEarned</span><span class="op">=</span><span class="va">{</span>ptsForOpponentPicker<span class="va">}</span> <span class="fu">/&gt;</span>)<span class="va">}</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+<p>Two columns, identical structure, different inputs. The chip is
+extracted; the <strong>column wrapper is not</strong> — because it’s
+only used twice and only in this file, and the difference (color theme,
+points value) is enough that a third level of abstraction would be
+premature. <strong>The right amount of abstraction is the smallest
+amount that keeps you from copy-pasting.</strong></p>
+<h3 id="tiny-components-that-exist-for-readability-not-reuse">Tiny
+components that exist for readability, not reuse</h3>
+<p><code>&lt;PathStep&gt;</code> and <code>&lt;PathArrow&gt;</code> are
+a different breed.</p>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;PathStep</span> <span class="ot">label</span><span class="op">=</span><span class="st">&quot;R1&quot;</span> <span class="ot">status</span><span class="op">=</span><span class="va">{</span>r1Won <span class="op">?</span> <span class="st">&#39;won&#39;</span> <span class="op">:</span> <span class="st">&#39;lost&#39;</span><span class="va">}</span> <span class="fu">/&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;PathArrow</span> <span class="fu">/&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;PathStep</span> <span class="ot">label</span><span class="op">=</span><span class="st">&quot;R2&quot;</span> <span class="ot">status</span><span class="op">=</span><span class="va">{</span>r2Won <span class="op">?</span> <span class="st">&#39;won&#39;</span> <span class="op">:</span> <span class="st">&#39;lost&#39;</span><span class="va">}</span> <span class="fu">/&gt;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;PathArrow</span> <span class="fu">/&gt;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;PathStep</span> <span class="ot">label</span><span class="op">=</span><span class="st">&quot;QF&quot;</span> <span class="ot">status</span><span class="op">=</span><span class="va">{</span>qfFinished <span class="op">?</span> (qfWon <span class="op">?</span> <span class="st">&#39;won&#39;</span> <span class="op">:</span> <span class="st">&#39;lost&#39;</span>) <span class="op">:</span> <span class="st">&#39;live&#39;</span><span class="va">}</span> <span class="fu">/&gt;</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;PathArrow</span> <span class="fu">/&gt;</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;PathStep</span> <span class="ot">label</span><span class="op">=</span><span class="st">&quot;SF&quot;</span> <span class="ot">status</span><span class="op">=</span><span class="va">{</span><span class="op">...</span><span class="va">}</span> <span class="fu">/&gt;</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;PathArrow</span> <span class="fu">/&gt;</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;PathStep</span> <span class="ot">label</span><span class="op">=</span><span class="st">&quot;F&quot;</span>  <span class="ot">status</span><span class="op">=</span><span class="va">{</span><span class="op">...</span><span class="va">}</span> <span class="fu">/&gt;</span></span></code></pre></div>
+<p><code>&lt;PathArrow&gt;</code> is literally one character:
+<code>→</code>. Why is it a component? <strong>Because the JSX above
+reads like a sentence.</strong> If you inlined the arrow’s styling,
+you’d see five identical
+<code>&lt;span style={{ color: ..., fontSize: 18 }}&gt;→&lt;/span&gt;</code>
+blocks interrupting the flow. With the component, the markup tells you
+the structure at a glance: step, arrow, step, arrow, step. That’s the
+“tournament path” widget, and the JSX makes that obvious. Extracting
+<code>&lt;PathArrow&gt;</code> cost nothing and bought one of the
+easier-to-read snippets in the file.</p>
+<p><code>&lt;PathStep&gt;</code> is the same idea at slightly larger
+scale: the four visual states (won / lost / live / na) are mapped from a
+<code>status</code> string to a small style object inside the component.
+That logic could have been inlined, but then the parent would carry five
+copies of a
+<code>if (status === 'won') ... else if (status === 'lost') ...</code>
+block. By moving it inside <code>&lt;PathStep&gt;</code>, the parent
+declares <strong>what it wants</strong> (“step labelled R1, status
+‘won’”) instead of <strong>how to render it</strong>. That’s the
+canonical reason to make a component: separating <em>what</em> from
+<em>how</em>.</p>
+<h3 id="prop-drilling-when-its-fine">Prop drilling: when it’s fine</h3>
+<p><code>teams</code> gets passed from
+<code>&lt;SnookerFantasyLeague&gt;</code> to
+<code>&lt;PlayersTab&gt;</code> to <code>&lt;PlayerDetail&gt;</code> to
+<code>&lt;MatchPickAnalysis&gt;</code>. Three levels. That’s “prop
+drilling” and at some point newcomers ask “shouldn’t this be a Context
+or a Redux store?”</p>
+<p>For an app with one shared array and three levels of nesting?
+<strong>No.</strong> Context exists to spare you from passing the
+<strong>same</strong> prop through five-plus levels of unrelated
+components. Three levels of clearly named props is <strong>cheaper to
+reason about</strong> than introducing a global. The day you have ten
+teams’ worth of state plus user auth plus filters plus a settings panel,
+you re-evaluate. Until then,
+<code>&lt;Component teams={teams}&gt;</code> is fine and the file will
+tell you.</p>
+<h3 id="vibe-prompt-you-would-have-used-4">Vibe prompt you would have
+used</h3>
+<blockquote>
+<p><em>“This <code>&lt;MatchPickAnalysis&gt;</code> component is getting
+long. Extract two pieces. First, the colored pill that shows a team’s
+icon, name, and points-earned chip — call it
+<code>&lt;TeamChip&gt;</code>, props <code>{ team, ptsEarned }</code>.
+Second, the small status step in the tournament-path bar — call it
+<code>&lt;PathStep&gt;</code>, props <code>{ label, status }</code>
+where status is <code>'won' | 'lost' | 'live' | 'na'</code>, each
+mapping to its own colors and icon (<code>✓ ✗ ● —</code>). Also extract
+the literal <code>→</code> arrow into a one-line
+<code>&lt;PathArrow&gt;</code> component so the path JSX reads like
+‘step arrow step arrow step’. Don’t change any visuals — just move the
+JSX into the new files and import them back.”</em></p>
+</blockquote>
+<p>That last sentence (“don’t change any visuals, just move the JSX”) is
+the prompt that turns a refactor from a rewrite back into a refactor.
+Vibe coders have to add it explicitly; LLMs love to redesign while
+they’re moving things.</p>
+<h3 id="check-yourself-5">CHECK YOURSELF</h3>
+<ol type="1">
+<li><code>&lt;PathArrow&gt;</code> has zero props and renders one
+character. What’s the argument <em>for</em> keeping it as its own
+component, even though it could trivially be inlined?</li>
+<li>Why is the <strong>column wrapper</strong> inside
+<code>&lt;MatchPickAnalysis&gt;</code> not extracted, even though it
+appears twice with similar structure?</li>
+<li>At what nesting depth would you reach for Context instead of prop
+drilling? Why isn’t this app there yet?</li>
+</ol>
+</section>
+<section id="lesson-6-charts-data-transforms-recharts"
+class="slide level2">
+<h2>Lesson 6 — Charts &amp; Data Transforms (Recharts)</h2>
+<p>The trick most React-charting tutorials skip is the part that
+actually matters: <strong>charts in React are about data shape, not
+chart libraries.</strong> Recharts (or Victory, or any other) takes an
+array of plain objects with a known schema and draws bars/lines/cells
+from it. Your job, 90% of the time, is to <em>reshape your existing data
+into the schema the chart wants</em>. The other 10% is choosing axes and
+colors.</p>
+<p>Look at the Analytics tab. Almost every chart in it begins with a
+<code>teams.map(...)</code> that produces a brand new array. That array
+is the chart’s “data.”</p>
+<h3 id="reshape-1-stacked-bar-totals">Reshape #1: stacked-bar
+totals</h3>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> r1Data <span class="op">=</span> teams<span class="op">.</span><span class="fu">map</span>((t) <span class="kw">=&gt;</span> ({</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">team</span><span class="op">:</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    t<span class="op">.</span><span class="at">name</span><span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">12</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>      <span class="op">?</span> t<span class="op">.</span><span class="at">name</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span><span class="fu">split</span>(<span class="st">&#39; &#39;</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span><span class="fu">map</span>((w) <span class="kw">=&gt;</span> w[<span class="dv">0</span>])</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span><span class="fu">join</span>(<span class="st">&#39;&#39;</span>)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>      <span class="op">:</span> t<span class="op">.</span><span class="at">name</span><span class="op">,</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">fullName</span><span class="op">:</span> t<span class="op">.</span><span class="at">name</span><span class="op">,</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">R1</span><span class="op">:</span> t<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">r1</span><span class="op">,</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">R2</span><span class="op">:</span> t<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">r2</span><span class="op">,</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">QF</span><span class="op">:</span> t<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">qf</span><span class="op">,</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">SF</span><span class="op">:</span> t<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">sf</span><span class="op">,</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Final</span><span class="op">:</span> t<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">f</span><span class="op">,</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Total</span><span class="op">:</span> t<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">total</span><span class="op">,</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>}))<span class="op">;</span></span></code></pre></div>
+<p>Each row is one team. The <code>team</code> field is the X-axis label
+(abbreviated to initials if the name is too long). Then four numeric
+fields — R1, R2, QF, SF, Final — that become the
+<strong>stacks</strong>. Recharts’
+<code>&lt;Bar dataKey="R1" stackId="a" /&gt;</code> reads the
+<code>R1</code> field of every row; the <code>stackId="a"</code> tells
+it to stack on top of the previous bar with the same
+<code>stackId</code>. Same <code>stackId</code> across multiple
+<code>&lt;Bar&gt;</code> elements = a single stacked bar per row:</p>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;Bar</span> <span class="ot">dataKey</span><span class="op">=</span><span class="st">&quot;R1&quot;</span>    <span class="ot">stackId</span><span class="op">=</span><span class="st">&quot;a&quot;</span> <span class="ot">fill</span><span class="op">=</span><span class="st">&quot;#0F5132&quot;</span> <span class="ot">name</span><span class="op">=</span><span class="st">&quot;Round 1&quot;</span> <span class="fu">/&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;Bar</span> <span class="ot">dataKey</span><span class="op">=</span><span class="st">&quot;R2&quot;</span>    <span class="ot">stackId</span><span class="op">=</span><span class="st">&quot;a&quot;</span> <span class="ot">fill</span><span class="op">=</span><span class="st">&quot;#DC2626&quot;</span> <span class="ot">name</span><span class="op">=</span><span class="st">&quot;Round 2&quot;</span> <span class="fu">/&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;Bar</span> <span class="ot">dataKey</span><span class="op">=</span><span class="st">&quot;QF&quot;</span>    <span class="ot">stackId</span><span class="op">=</span><span class="st">&quot;a&quot;</span> <span class="ot">fill</span><span class="op">=</span><span class="st">&quot;#FBBF24&quot;</span> <span class="ot">name</span><span class="op">=</span><span class="st">&quot;Quarter-Finals&quot;</span> <span class="fu">/&gt;</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;Bar</span> <span class="ot">dataKey</span><span class="op">=</span><span class="st">&quot;SF&quot;</span>    <span class="ot">stackId</span><span class="op">=</span><span class="st">&quot;a&quot;</span> <span class="ot">fill</span><span class="op">=</span><span class="st">&quot;#7C3AED&quot;</span> <span class="ot">name</span><span class="op">=</span><span class="st">&quot;Semi-Finals&quot;</span> <span class="fu">/&gt;</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;Bar</span> <span class="ot">dataKey</span><span class="op">=</span><span class="st">&quot;Final&quot;</span> <span class="ot">stackId</span><span class="op">=</span><span class="st">&quot;a&quot;</span> <span class="ot">fill</span><span class="op">=</span><span class="st">&quot;#9F1239&quot;</span> <span class="ot">name</span><span class="op">=</span><span class="st">&quot;Final&quot;</span> <span class="ot">radius</span><span class="op">=</span><span class="va">{</span>[<span class="dv">4</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span>]<span class="va">}</span> <span class="fu">/&gt;</span></span></code></pre></div>
+<p>If you change <code>stackId</code> to a different value (or remove
+it), the same data renders as <strong>grouped</strong> bars (R1, R2, QF
+side-by-side per team) instead of stacked. <strong>Same data, different
+<code>stackId</code>, different chart.</strong> That’s the pattern:
+choose the shape your data fits naturally, then let small props turn it
+into different visualizations.</p>
+<h3 id="reshape-2-per-bar-colors-with-cell">Reshape #2: per-bar colors
+with <code>&lt;Cell&gt;</code></h3>
+<p>The “Pick Distribution” chart for the Final has a special twist: each
+bar should be <strong>green if the player picked is Wu Yize, gray
+otherwise</strong>. Recharts lets you do that by mapping
+<code>&lt;Cell&gt;</code> children:</p>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;Bar</span> <span class="ot">dataKey</span><span class="op">=</span><span class="st">&quot;count&quot;</span> <span class="ot">radius</span><span class="op">=</span><span class="va">{</span>[<span class="dv">6</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span>]<span class="va">}</span> <span class="er">...</span><span class="fu">&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">{</span>finalPickData<span class="op">.</span><span class="fu">map</span>((d<span class="op">,</span> i) <span class="kw">=&gt;</span> (</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">&lt;Cell</span> <span class="ot">key</span><span class="op">=</span><span class="va">{</span>i<span class="va">}</span> <span class="ot">fill</span><span class="op">=</span><span class="va">{</span>d<span class="op">.</span><span class="at">name</span> <span class="op">===</span> <span class="st">&#39;Wu Yize&#39;</span> <span class="op">?</span> <span class="st">&#39;#16A34A&#39;</span> <span class="op">:</span> <span class="st">&#39;#9CA3AF&#39;</span><span class="va">}</span> <span class="fu">/&gt;</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  ))<span class="va">}</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;/Bar&gt;</span></span></code></pre></div>
+<p>A <code>&lt;Cell&gt;</code> is a per-row override. The
+<code>&lt;Bar&gt;</code> defines the default behavior; the
+<code>&lt;Cell&gt;</code> for row <code>i</code> overrides the fill.
+There’s one <code>&lt;Cell&gt;</code> per data row, in the same order.
+Without <code>&lt;Cell&gt;</code>, every bar is the same color. With
+<code>&lt;Cell&gt;</code>, every bar is whatever you want.</p>
+<p>That conditional
+<code>fill={d.name === 'Wu Yize' ? '#16A34A' : '#9CA3AF'}</code> is the
+entire mechanism by which the chart highlights “Wu Yize was right.” Same
+pattern works for any “highlight one thing” chart.</p>
+<h3 id="reshape-3-pivot-from-team-picks-to-match-agreement">Reshape #3:
+pivot from “team picks” to “match agreement”</h3>
+<p>The most interesting chart on the page is
+<code>&lt;LeagueAgreementChart&gt;</code>. The question it answers is:
+<em>“For each match in this round, of the 8 teams, how many picked the
+actual winner?”</em> That’s a <strong>pivot</strong> — the source data
+is per-team-per-round, but the chart needs per-match-per-round.</p>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> buildAgreementData <span class="op">=</span> (matches<span class="op">,</span> pickKey) <span class="kw">=&gt;</span> matches<span class="op">.</span><span class="fu">map</span>((m<span class="op">,</span> i) <span class="kw">=&gt;</span> {</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (m<span class="op">.</span><span class="at">winner</span>) {</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> correct <span class="op">=</span> teams<span class="op">.</span><span class="fu">filter</span>(t <span class="kw">=&gt;</span> {</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>      <span class="kw">const</span> pick <span class="op">=</span> pickKey <span class="op">===</span> <span class="st">&#39;final&#39;</span> <span class="op">?</span> t<span class="op">.</span><span class="at">final</span> <span class="op">:</span> (t[pickKey] <span class="op">?</span> t[pickKey][i] <span class="op">:</span> <span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> pick <span class="op">===</span> m<span class="op">.</span><span class="at">winner</span><span class="op">;</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    })<span class="op">.</span><span class="at">length</span><span class="op">;</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> { <span class="dt">match</span><span class="op">:</span> matchLabel<span class="op">,</span> correct<span class="op">,</span> <span class="dt">wrong</span><span class="op">:</span> <span class="dv">8</span> <span class="op">-</span> correct<span class="op">,</span> <span class="dt">pending</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">finished</span><span class="op">:</span> <span class="kw">true</span> }<span class="op">;</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// pre-tournament: split picks between p1 and p2</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> p1Backers <span class="op">=</span> teams<span class="op">.</span><span class="fu">filter</span>(t <span class="kw">=&gt; </span><span class="co">/* same dance */</span>)<span class="op">.</span><span class="at">length</span><span class="op">;</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> p2Backers <span class="op">=</span> teams<span class="op">.</span><span class="fu">filter</span>(t <span class="kw">=&gt; </span><span class="co">/* same dance */</span>)<span class="op">.</span><span class="at">length</span><span class="op">;</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> { <span class="dt">match</span><span class="op">:</span> matchLabel<span class="op">,</span> p1Backers<span class="op">,</span> p2Backers<span class="op">,</span> <span class="dt">pending</span><span class="op">:</span> <span class="dv">8</span><span class="op">,</span> <span class="dt">finished</span><span class="op">:</span> <span class="kw">false</span> }<span class="op">;</span></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<p>Two important things:</p>
+<ul>
+<li><strong>Same function returns two different shapes</strong>
+depending on whether the match is finished. If finished:
+<code>{ match, correct, wrong, finished: true }</code>. If pending:
+<code>{ match, p1Backers, p2Backers, finished: false }</code>. The chart
+conditionally renders different <code>&lt;Bar&gt;</code> series based on
+<code>isPendingRound = round.data.every(d =&gt; !d.finished)</code>.</li>
+<li><strong>The pivot is index-based.</strong>
+<code>t[pickKey][i]</code> reaches into team <code>t</code>’s pick array
+for round <code>pickKey</code> at index <code>i</code>. That works
+because of Lesson 1’s invariant — the i-th pick is for the i-th match in
+that round. Without that invariant this whole function would need a
+<code>find()</code> against <code>pick.matchId</code>, and it would have
+been twice as long.</li>
+</ul>
+<h3 id="internal-tab-state-inside-a-chart">Internal tab state inside a
+chart</h3>
+<p><code>&lt;LeagueAgreementChart&gt;</code> is the only chart that has
+its own <code>useState</code>:</p>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">LeagueAgreementChart</span>({ rounds }) {</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> [active<span class="op">,</span> setActive] <span class="op">=</span> <span class="fu">useState</span>(<span class="st">&#39;r1&#39;</span>)<span class="op">;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> round <span class="op">=</span> rounds<span class="op">.</span><span class="fu">find</span>(r <span class="kw">=&gt;</span> r<span class="op">.</span><span class="at">id</span> <span class="op">===</span> active) <span class="op">||</span> rounds[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span></code></pre></div>
+<p>Why is its tab state local rather than lifted to
+<code>&lt;SnookerFantasyLeague&gt;</code>? Because <strong>nothing
+outside this chart cares which round is active inside it.</strong> It’s
+a UI-internal toggle, not a piece of cross-cutting application state.
+The rule from Lesson 4 still holds: state lives at the lowest common
+ancestor of its readers and writers. Here both are inside
+<code>&lt;LeagueAgreementChart&gt;</code> itself, so the state is local.
+<strong>Tab state isn’t always app state.</strong> Knowing the
+difference is half the React mental model.</p>
+<h3 id="vibe-prompt-you-would-have-used-5">Vibe prompt you would have
+used</h3>
+<blockquote>
+<p><em>“Add an analytics tab. Three charts at the top: (1) a stacked bar
+chart of points per team across R1/R2/QF/SF/Final using Recharts, X-axis
+is team name, stack each round in a different color. (2) A horizontal
+bar chart of pick accuracy %, one bar per round per team. (3) A bar
+chart of how many of 8 teams picked each Finalist; highlight the bar for
+the actual champion in green using <code>&lt;Cell&gt;</code>. Below
+those, a single ‘League Agreement’ chart with its own internal
+round-toggle (R1, R2, QF, SF, Final) — for each match in that round,
+show two stacked bars: green for teams who picked correctly, red for
+teams who picked wrong. Pull the team data into a fresh array shaped
+exactly how Recharts expects (<code>teams.map(...)</code> returning
+<code>{ team, R1, R2, ... }</code>); don’t try to pass the team objects
+directly. Three insight cards beneath summarising leader, best round,
+champion.”</em></p>
+</blockquote>
+<h3 id="check-yourself-6">CHECK YOURSELF</h3>
+<ol type="1">
+<li>If you remove the <code>stackId="a"</code> prop from every
+<code>&lt;Bar&gt;</code> in the points-breakdown chart, what changes
+visually?</li>
+<li>Why does <code>&lt;LeagueAgreementChart&gt;</code> keep its own
+<code>useState</code> instead of putting <code>active</code> in the
+top-level <code>&lt;SnookerFantasyLeague&gt;</code>?</li>
+<li>The agreement-data builder has two return shapes (finished vs
+pending). What does the chart code use to decide which
+<code>&lt;Bar&gt;</code> series to render — and what would happen if a
+single round had a mix of finished and unfinished matches?</li>
+</ol>
+</section>
+<section id="lesson-7-the-evolution-what-the-git-log-would-have-shown"
+class="slide level2">
+<h2>Lesson 7 — The Evolution (what the git log would have shown)</h2>
+<p>Vibe-coded apps grow in layers, not waves. The current 1,654-line
+file didn’t appear in one prompt. It accreted over (probably) a few
+dozen sessions across the two-week tournament. Here’s what the git log
+would have looked like, reconstructed from the artifacts in the file.
+For each milestone, the <strong>vibe prompt</strong> that would have
+triggered the change.</p>
+<h3 id="milestone-1-just-give-me-the-standings">Milestone 1 — “Just give
+me the standings”</h3>
+<p><strong>Pre-tournament. R1 hasn’t started.</strong> You have the
+bracket. You have eight friends’ picks. You want a single screen that
+shows team totals.</p>
+<blockquote>
+<p><em>“Give me one React component called
+<code>&lt;StandingsTab&gt;</code>. Render a table of 8 teams sorted by
+total points. Hard-code the <code>TEAMS</code> array and a
+<code>ROUND1_MATCHES</code> array (16 entries) above the component.
+Total points are 3 per correct R1 pick, 1 per wrong. Just R1 for now —
+the other rounds don’t exist yet. White background, big readable
+numbers, no styling beyond a green header.”</em></p>
+</blockquote>
+<p>The codebase at this point is <strong>maybe 200 lines</strong>. One
+file, one component, two constants, one <code>scorePick</code> function,
+one inline <code>.reduce()</code> for totals. There is no Matches tab,
+no Predictions tab, no <code>useState</code>, no nav. <strong>This is
+the version you ship to your eight friends so they stop asking you
+“who’s winning.”</strong></p>
+<h3 id="milestone-2-i-want-to-see-the-matches-themselves">Milestone 2 —
+“I want to see the matches themselves”</h3>
+<p><strong>Round 1 is half-finished.</strong> People want to know which
+matches are done and what the scores were.</p>
+<blockquote>
+<p><em>“Add a second screen called Matches. It shows match cards, one
+per match, in a grid: player names, the score (<code>'10-7'</code>
+etc.), and a ‘FINISHED’ badge if the match has a <code>winner</code>. If
+there’s no winner yet, show ‘NOT FINISHED’ with a dashed gray border.
+Make a top-of-page tab bar with two buttons: Standings and Matches. Use
+<code>useState</code> to switch between them.”</em></p>
+</blockquote>
+<p>This is the prompt that introduces <code>useState</code> to the
+codebase. It also introduces the <em>concept of two screens that share
+data</em>, which is the single biggest jump in React complexity for a
+vibe coder. After this milestone the file is around <strong>400
+lines</strong> and has its first orchestrator pattern.</p>
+<h3
+id="milestone-3-i-want-to-compare-predictions-side-by-side">Milestone 3
+— “I want to compare predictions side by side”</h3>
+<p><strong>End of Round 1.</strong> The standings tab tells you the
+<em>total</em>, but doesn’t show <em>whose pick was wrong</em>. You add
+a third screen.</p>
+<blockquote>
+<p><em>“Add a third tab called Predictions. Two views: a comparison
+matrix showing every match as a row and every team as a column, with the
+team’s pick in each cell, green if correct and red if wrong. And a
+single-team card view, where clicking a team in the standings drops you
+here with that team selected. Round buttons inside the predictions tab
+to filter R1/R2/QF/SF.”</em></p>
+</blockquote>
+<p>This is the prompt that introduces the <em>cross-tab interaction</em>
+pattern from Lesson 4 (clicking a team row in Standings switches to
+Predictions). It also introduces nested view state
+(<code>view: 'matrix' | 'team'</code> lives inside
+<code>&lt;PredictionsTab&gt;</code>, not at the top).</p>
+<h3 id="milestone-4-round-2-happened-the-bracket-shrunk">Milestone 4 —
+“Round 2 happened, the bracket shrunk”</h3>
+<p><strong>Round 1 is done. Round 2 results trickle in.</strong> You add
+<code>ROUND2_MATCHES</code> and a <code>r2</code> array on every team.
+The whole <code>calculateTeamScores</code> function gets duplicated for
+R2:</p>
+<blockquote>
+<p><em>“Round 2 is happening. Add <code>ROUND2_MATCHES</code> (8
+entries) above <code>ROUND1_MATCHES</code>. Add
+<code>r2: ['Zhao Xintong', 'Shaun Murphy', ...]</code> (8 picks) to
+every team. Update <code>calculateTeamScores</code> to also walk r2 and
+return <code>{ r1, r2, total: r1 + r2, r1Details, r2Details }</code>.
+Add R2 columns to the standings table next to R1, and a Round 2 button
+to the Matches tab and the Predictions matrix.”</em></p>
+</blockquote>
+<p>This is the prompt that creates the
+<strong>duplication-by-round</strong> pattern that runs through the
+whole file: every round needs a constant, a pick array, a totals field,
+a details field, a tab button, a matrix column. By the time you get to
+the Final, that pattern has fired five times. A more-architected
+codebase would parameterize it
+(<code>ROUNDS = ['r1', 'r2', 'qf', 'sf', 'final']</code> with a single
+loop). The vibe-coded version copies the pattern five times. Both are
+fine for an 8-team league.</p>
+<h3 id="milestone-5-show-me-a-players-tournament-journey">Milestone 5 —
+“Show me a player’s tournament journey”</h3>
+<p><strong>Mid-tournament, QF in flight.</strong> The Standings +
+Matches + Predictions trio is the league-level view. But you want to be
+able to ask, <em>“How is Wu Yize doing? Which teams backed him? Did they
+get points?”</em> That’s the Players tab.</p>
+<blockquote>
+<p><em>“Add a Players tab. Grid of 32 cards, one per player from
+<code>PLAYER_INFO</code>. Filter buttons at the top: Still In,
+Eliminated, All. Click a card to open a deep player detail view: header
+with the player’s name + flag + status, a 5-step tournament path (R1 →
+R2 → QF → SF → F) with each step colored by won/lost/live/na, a stats
+row, and a per-match analysis showing which 8 teams backed this player
+vs the opponent in each round. The opponent’s name should be clickable
+so you can hop to their detail view too.”</em></p>
+</blockquote>
+<p>This is the most ambitious single prompt in the project. It
+introduces <strong>navigation by name</strong> (selecting a player by
+string instead of by index), the <strong><code>stillStanding</code> set
+computed from QF + SF + Final results</strong>, and the
+<strong><code>PathStep</code> + <code>PathArrow</code></strong>
+components from Lesson 5. After this milestone the file is ~1,200
+lines.</p>
+<h3 id="milestone-6-i-want-pretty-charts">Milestone 6 — “I want pretty
+charts”</h3>
+<p><strong>Late tournament.</strong> With most matches in, you want
+trend visuals — points by round, accuracy by round, agreement on each
+match.</p>
+<blockquote>
+<p><em>“Add an Analytics tab using Recharts. Three charts up top in a
+grid: stacked bars for total points (R1+R2+QF+SF+Final), horizontal bars
+for accuracy %, vertical bars for the Finalist pick distribution with
+the actual champion’s bar in green. Below them a ‘League Agreement’
+chart with its own round-toggle showing per-match correct-vs-wrong
+stacks. Three colored insight cards at the bottom summarising leader,
+best R1, champion.”</em></p>
+</blockquote>
+<p>This is where the file picks up Recharts as a dependency. The
+data-reshape pattern from Lesson 6 starts here.</p>
+<h3 id="milestone-7-wu-yize-won.-crown-him.">Milestone 7 — “Wu Yize won.
+Crown him.”</h3>
+<p><strong>Tournament ends.</strong> The Final result is in: Wu Yize 18,
+Murphy 17. The codebase needs to acknowledge that the champion is
+decided and the league is done.</p>
+<blockquote>
+<p><em>“Wu Yize won the Final 18-17. Update <code>FINAL_MATCH</code> to
+set winner: ‘Wu Yize’. In the hero header, replace the ‘tournament in
+progress’ badge with ‘🏆 WU YIZE — WORLD CHAMPION 2026 (18-17)’. In the
+standings, the Final Pick chip should be red for teams who picked Wu
+Yize and blue for teams who didn’t. In the Players tab, the player card
+for Wu Yize gets a 🏆 WORLD CHAMPION badge; Murphy gets 🥈 RUNNER-UP.
+The other Crucible-eliminated players say OUT. Tournament-complete
+language everywhere it says ‘tournament’ so I can put it in past
+tense.”</em></p>
+</blockquote>
+<p>That last sentence is what lands the hard-coded
+<code>'Wu Yize'</code> string we noted in Lesson 3. It’s the trade-off:
+the prompt was easier to write because it referenced the actual champion
+by name; the cost was that the file is now tournament-specific. A purely
+time-symmetric version of this prompt would say <em>“compare against
+<code>FINAL_MATCH[0].winner</code>”</em> — identical UI, future-proof
+code. <strong>A vibe prompt that uses a literal value is faster to write
+and produces faster code; the cost is portability.</strong></p>
+<h3 id="putting-the-timeline-together">Putting the timeline
+together</h3>
+<p>If you read the file with this timeline in mind, you can almost see
+the seams between sessions. The five <code>*Details</code> arrays
+returned by <code>calculateTeamScores</code> each got added in their own
+session. The <code>&lt;RoundButton&gt;</code> and
+<code>&lt;PicksList&gt;</code> components were added at slightly
+different times — the round button has a <code>status</code> prop with
+literal English (<code>'FINISHED'</code>,
+<code>'🏆 WU WINS 18-17'</code>), which is unmistakably
+end-of-tournament wording, while <code>&lt;PicksList&gt;</code> is
+generic (it would render the same on day 1). <strong>The newer code is
+more specific to “the tournament is over;” the older code is more
+generic to “any tournament.”</strong></p>
+<h3 id="vibe-prompt-you-would-have-used-the-meta-pattern">Vibe prompt
+you would have used (the meta-pattern)</h3>
+<p>There isn’t a single prompt for the whole evolution — that’s the
+point. There’s one prompt per milestone, and <strong>each prompt is
+shaped like an addition, not a redesign:</strong></p>
+<blockquote>
+<p><em>“Add X to Y showing Z.”</em></p>
+</blockquote>
+<p>Read back over Milestones 1–7. Every one starts with “Add” or
+“Update” — never “Refactor everything” or “Make it nicer.” That’s the
+discipline that keeps the file growing instead of churning.</p>
+<h3 id="check-yourself-7">CHECK YOURSELF</h3>
+<ol type="1">
+<li>The Final Pick chip’s red/blue coloring is a Milestone 7 artifact.
+What earlier file evidence (in any other component) tells you the
+codebase wasn’t always tournament-end-aware?</li>
+<li>Why is each round’s logic copy-pasted (one block for r1, one for r2,
+…) instead of looped over
+<code>['r1', 'r2', 'qf', 'sf', 'final']</code>? What would looping cost
+in readability for a vibe coder reading this file?</li>
+<li>The Players tab is by far the biggest single milestone in the
+timeline. Why is that a smell <em>only</em> if you have to ship by
+Friday — and why is it fine for this project?</li>
+</ol>
+</section>
+<section
+id="lesson-8-the-shape-of-your-prompts-meta-lesson-on-vibe-coding"
+class="slide level2">
+<h2>Lesson 8 — The Shape of Your Prompts (meta-lesson on vibe
+coding)</h2>
+<p>You’ve now seen eight lessons of “the prompt I would have used.” The
+whole point of those was to give you a private library of prompt
+templates that <strong>demonstrably produced this codebase</strong>.
+Here’s the pattern, distilled.</p>
+<h3 id="the-seven-shapes-of-a-good-vibe-prompt">The seven shapes of a
+good vibe prompt</h3>
+<p>After two weeks of building this app, your prompt library should look
+like this:</p>
+<ol type="1">
+<li><p><strong>The “Add a feature” prompt.</strong> <em>“Add a
+[component / column / tab] to [location] that [does Z when X].”</em>
+Single new thing, single insertion point, single behavior. Example:
+<em>“Add a Form column at the right of the standings table that compares
+a team’s R1 percentage to their R2 percentage and shows Rising / Falling
+/ Steady with an arrow icon.”</em></p></li>
+<li><p><strong>The “Tweak the visual” prompt.</strong> <em>“In
+[component], change [X] when [Y].”</em> Surgical visual edits. No
+structural changes. Example: <em>“In the Standings table, make the rank
+circle gold for 1st, silver for 2nd, bronze for 3rd; replace 1st place’s
+number with a 👑 emoji.”</em></p></li>
+<li><p><strong>The “Extract a sub-component” prompt.</strong> <em>“This
+<code>&lt;Foo&gt;</code> is getting long. Extract [X piece] into a
+<code>&lt;Bar&gt;</code> component with props <code>{ a, b }</code>.
+Don’t change any visuals — just move the JSX.”</em> The “don’t change
+any visuals” clause is mandatory. Without it the LLM redesigns. Example:
+see Lesson 5’s prompt about <code>&lt;TeamChip&gt;</code>,
+<code>&lt;PathStep&gt;</code>, <code>&lt;PathArrow&gt;</code>.</p></li>
+<li><p><strong>The “Wire two screens together” prompt.</strong>
+<em>“When [component A] does X, set [parent state Y] and switch to
+[component B].”</em> Names the cross-tab interaction explicitly. The
+parent component is the one that has to be edited, even though the
+<em>description</em> is about the children. Example: <em>“When a row in
+<code>&lt;StandingsTab&gt;</code> is clicked, set
+<code>selectedTeam</code> and switch the active tab to
+Predictions.”</em></p></li>
+<li><p><strong>The “Reshape data for a chart” prompt.</strong>
+<em>“Build a chart of X using Recharts. The data is
+<code>[teams.map(t =&gt; ({ ... }))]</code>. Bars / lines / cells map to
+fields [a, b, c]; color the bar for [special row] differently using
+<code>&lt;Cell&gt;</code>.”</em> You spell out the data shape inside the
+prompt; that becomes the chart spec. Example: see Lesson 6’s analytics
+prompt.</p></li>
+<li><p><strong>The “Add a column to an existing array of objects”
+prompt.</strong> <em>“Add a <code>[fieldName]</code> field to every
+entry in <code>[constant]</code> and update
+<code>[scorePick / calculateTeamScores / something]</code> to read
+it.”</em> Common when the data model grows. The literal phrasing names
+the constant + the field name + the consumer that needs updating, all in
+one sentence.</p></li>
+<li><p><strong>The “End-of-feature polish” prompt.</strong> <em>“In
+[view], when [end-state condition is true], change [strings / colors /
+badges] to past tense / champion / closed-out wording.”</em> This is the
+Milestone 7 prompt shape. It bakes the final state into the UI.</p></li>
+</ol>
+<h3 id="three-bad-prompts-and-why-theyre-bad">Three bad prompts and why
+they’re bad</h3>
+<p>You’re going to write some of these. Recognise them:</p>
+<ul>
+<li><p><strong>“Make the standings better.”</strong> Too vague. The LLM
+has to invent what “better” means. You’ll get bigger fonts, drop
+shadows, animation, maybe a redesigned card layout, and likely something
+visually nicer that subtly broke the data flow. If you can’t name
+<em>what</em> about the standings should change and <em>why</em>, don’t
+prompt yet — go look at it for another minute and decide.</p></li>
+<li><p><strong>“Use Redux for state.”</strong> Premature abstraction.
+This app has <strong>two</strong> pieces of state at the top level.
+Redux’s overhead (actions, reducers, dispatch wiring, dev tools setup)
+costs more than it buys until your state is contended by a dozen-plus
+components. If a prompt names a <em>technology</em> before naming a
+<em>problem</em>, it’s almost always going to wreck the file. Useful
+version: <em>“<code>teams</code> is being prop-drilled into 3 levels and
+I want to keep it accessible without passing it through
+<code>&lt;MatchesTab&gt;</code> which doesn’t use it. What’s the
+smallest change?”</em> (The honest answer: don’t pass it through
+<code>&lt;MatchesTab&gt;</code>. You’re already there.)</p></li>
+<li><p><strong>“Refactor the whole codebase to use Tailwind classes
+instead of inline styles.”</strong> A redesign disguised as a refactor.
+The visual richness in this app depends on dynamically computed styles
+(gradients with team-specific accent colors, conditional backgrounds,
+dynamic shadows). Tailwind can do most of that, but in JIT-compiled
+arbitrary-value mode that’s noisier than the inline style is, and the
+conversion has to be done file-by-file with visual diffing. Useful
+version: <em>“In <code>&lt;StatCard&gt;</code>, replace the inline style
+on the outer div with Tailwind classes. Keep the dynamic gradient
+(<code>bgColor</code>) as inline because it’s a runtime prop. Don’t
+touch any other component.”</em> One file, one prompt, one verifiable
+diff.</p></li>
+</ul>
+<h3 id="the-prompt-tree-of-this-app">The prompt-tree of this app</h3>
+<p>If you imagine the file as a tree of prompts, the trunk is Milestone
+1’s <em>“Give me the standings”</em> prompt. Every subsequent prompt is
+a branch off an existing branch — never the trunk. <strong>You never
+re-prompt the standings table from scratch.</strong> You always say
+<em>“in the standings, change X.”</em> That discipline is what keeps a
+vibe-coded app from becoming a churning rewrite machine.</p>
+<p>The shape, again:</p>
+<blockquote>
+<p>One feature. One file (or a small set of named files). One sentence
+per change. Avoid technology names. Avoid superlatives. Mention specific
+data fields and component names. Refer to behavior, not “polish.”</p>
+</blockquote>
+<h3 id="final-word">Final word</h3>
+<p>The thing this course was reverse-engineering wasn’t just a
+1,654-line file. It was the <strong>prompting strategy</strong> that
+grew that file without rewrites. If you internalize Lesson 4’s “state
+up, callbacks down,” Lesson 5’s “extract when you copy-paste twice,”
+Lesson 6’s “data shape, not chart library,” and Lesson 8’s “Add X to Y
+showing Z,” you can build the next app — pickleball ladder, World Cup
+pool, whatever — in maybe a third of the prompts.</p>
+<p>That’s the course. Now open
+<code>course/SNOOKER_FANTASY_LEAGUE_COURSE.md</code> next to
+<code>_source/SnookerFantasyLeague.jsx</code> and
+<code>components/SnookerFantasyLeague.tsx</code>, and read the three
+side-by-side. The .jsx is what you built. The course is how you would
+have built it. The .tsx is where it lives now.</p>
+<h3 id="check-yourself-8">CHECK YOURSELF</h3>
+<ol type="1">
+<li>Look back at any vibe prompt you’ve written this month. Which of the
+seven shapes does it match? If none, what’s missing — a target component
+name? a behavior? a data field?</li>
+<li>Why is <em>“Use Redux for state”</em> almost always the wrong prompt
+for an app of this size, and what is the <strong>right</strong> prompt
+to write when you feel that itch?</li>
+<li>The seven prompt shapes in this lesson all share one structural
+feature. What is it? (Hint: count how many of them name a specific
+component, file, or constant by name.)</li>
+</ol>
+</section></section>
+<section>
+<section id="day-study-plan-react-snooker-fantasy-league"
+class="title-slide slide level1">
+<h1>21-Day Study Plan — React + Snooker Fantasy League</h1>
+<p>A day-by-day schedule to finish all 7 chapters and have the deployed
+app on your portfolio, in three weeks at ~60 min/day.</p>
+<blockquote>
+<p>Use the in-app progress tracker at <code>/study</code> to check off
+lessons as you go (it persists in your browser via localStorage).</p>
+</blockquote>
+</section>
+<section id="week-1-foundations-days-1-7" class="slide level2">
+<h2>Week 1 — Foundations (Days 1-7)</h2>
+<blockquote>
+<p>Goal by Sunday: data model in your head, scoring engine memorized,
+project scaffolded, first component rendered.</p>
+</blockquote>
+<h3 id="day-1-60-min-orientation">Day 1 (60 min) — Orientation</h3>
+<ul>
+<li>Read <code>course/README.md</code> end to end.</li>
+<li>Skim the <strong>table of contents</strong> of
+<code>course/SNOOKER_FANTASY_LEAGUE_COURSE.md</code> to get the full
+arc.</li>
+<li>Open the live deployed app (link in <code>README.md</code>) and
+click around for 10 minutes.</li>
+<li><em>Output</em>: a one-paragraph note in <code>progress.txt</code>
+saying what you expect each chapter to teach.</li>
+</ul>
+<h3 id="day-2-60-min-chapter-1.1">Day 2 (60 min) — Chapter 1.1</h3>
+<ul>
+<li>Read <code>chapter-01-foundations/01-the-problem.md</code>.</li>
+<li>Review the 5 corresponding flashcards
+(<code>flashcards/react-snooker.csv</code>, filter by
+<code>01-the-problem</code>).</li>
+<li><em>Output</em>: explain the user / data / scoring rule trio out
+loud, untimed.</li>
+</ul>
+<h3 id="day-3-60-min-chapter-1.2">Day 3 (60 min) — Chapter 1.2</h3>
+<ul>
+<li>Read <code>chapter-01-foundations/02-data-modeling.md</code>.</li>
+<li>Sketch the <code>Player</code>, <code>Match</code>,
+<code>Pick</code> types on paper before reading the answer.</li>
+<li>Review the cheat sheet <code>cheat-sheets/react-ch01.md</code>.</li>
+<li><em>Output</em>: list the three invariants you’d enforce at the type
+system level.</li>
+</ul>
+<h3 id="day-4-75-min-chapter-1.3">Day 4 (75 min) — Chapter 1.3</h3>
+<ul>
+<li>Read
+<code>chapter-01-foundations/03-pure-functions-and-scoring.md</code>.</li>
+<li>Open <code>lib/scoring.ts</code> in this repo and read it
+alongside.</li>
+<li>Write down the test cases you would add for the scoring engine.</li>
+<li><em>Output</em>: list 3 properties you would prove with
+property-based tests.</li>
+</ul>
+<h3 id="day-5-60-min-chapter-2">Day 5 (60 min) — Chapter 2</h3>
+<ul>
+<li>Read all three lessons of
+<code>chapter-02-project-setup/</code>.</li>
+<li>Run <code>npm install</code> and <code>npm run dev</code>; verify
+the app boots locally.</li>
+<li><em>Output</em>: a screenshot of the local app in your notes.</li>
+</ul>
+<h3 id="day-6-60-min-chapter-3.1-3.2">Day 6 (60 min) — Chapter
+3.1-3.2</h3>
+<ul>
+<li>Read
+<code>chapter-03-first-component/01-anatomy-of-a-component.md</code> and
+<code>02-rendering-the-standings.md</code>.</li>
+<li>Open <code>components/StandingsTable.tsx</code> and
+<code>lib/scoring.ts</code>; trace one render top-to-bottom.</li>
+<li><em>Output</em>: list the props the table component receives and
+where each comes from.</li>
+</ul>
+<h3 id="day-7-60-min-chapter-3.3-review">Day 7 (60 min) — Chapter 3.3 +
+review</h3>
+<ul>
+<li>Read
+<code>chapter-03-first-component/03-progressive-enhancement.md</code>.</li>
+<li>Review week 1 cheat sheets back to back.</li>
+<li>15-minute flashcard session: cards tagged <code>chapter-01</code>
+and <code>chapter-02</code>.</li>
+<li><em>Output</em>: write a 1-paragraph weekly retro.</li>
+</ul>
+</section>
+<section id="week-2-composition-hooks-days-8-14" class="slide level2">
+<h2>Week 2 — Composition &amp; Hooks (Days 8-14)</h2>
+<blockquote>
+<p>Goal by Sunday: confident with hooks, can talk about the orchestrator
+pattern, understand prop drilling vs context.</p>
+</blockquote>
+<h3 id="day-8-60-min-chapter-4.1">Day 8 (60 min) — Chapter 4.1</h3>
+<ul>
+<li>Read
+<code>chapter-04-state-and-hooks/01-useState-mental-model.md</code>.</li>
+<li>Write 3 wrong-and-right code snippets for
+<code>useState</code>.</li>
+<li><em>Output</em>: explain <em>why</em> state updates are queued, in
+your own words.</li>
+</ul>
+<h3 id="day-9-60-min-chapter-4.2">Day 9 (60 min) — Chapter 4.2</h3>
+<ul>
+<li>Read <code>02-the-orchestrator-pattern.md</code>.</li>
+<li>Diagram the data flow: which component is the orchestrator, which
+are leaves?</li>
+<li><em>Output</em>: list one alternative to the orchestrator pattern
+and its trade-off.</li>
+</ul>
+<h3 id="day-10-60-min-chapter-4.3">Day 10 (60 min) — Chapter 4.3</h3>
+<ul>
+<li>Read <code>03-useMemo-and-derived-data.md</code>.</li>
+<li>Open <code>components/SnookerFantasyLeague.tsx</code> and find every
+<code>useMemo</code>; explain <em>why</em> each one exists.</li>
+<li><em>Output</em>: identify one <code>useMemo</code> you would remove
+(premature optimization is real).</li>
+</ul>
+<h3 id="day-11-60-min-chapter-5.1">Day 11 (60 min) — Chapter 5.1</h3>
+<ul>
+<li>Read
+<code>chapter-05-composition/01-when-to-split-components.md</code>.</li>
+<li>Pick one big component in this repo; sketch how you would split
+it.</li>
+<li><em>Output</em>: list the four “smells” that suggest a component
+should be split.</li>
+</ul>
+<h3 id="day-12-60-min-chapter-5.2">Day 12 (60 min) — Chapter 5.2</h3>
+<ul>
+<li>Read <code>02-prop-drilling-vs-context.md</code>.</li>
+<li>Find one place in the codebase where prop drilling is fine and one
+where context would be justified.</li>
+<li><em>Output</em>: write 2-sentence reasoning for each.</li>
+</ul>
+<h3 id="day-13-60-min-chapter-5.3">Day 13 (60 min) — Chapter 5.3</h3>
+<ul>
+<li>Read <code>03-building-player-detail.md</code>.</li>
+<li>Open <code>components/PlayerDetailPanel.tsx</code>; trace where its
+state lives and how it’s controlled.</li>
+<li><em>Output</em>: name one prop you would lift up and one you would
+push down.</li>
+</ul>
+<h3 id="day-14-60-min-week-2-review">Day 14 (60 min) — Week 2
+review</h3>
+<ul>
+<li>Re-read the cheat sheets for chapters 4 and 5.</li>
+<li>30-minute flashcard session, tag filter <code>composition</code> and
+<code>hooks</code>.</li>
+<li><em>Output</em>: weekly retro.</li>
+</ul>
+</section>
+<section id="week-3-visualization-polish-deployment-days-15-21"
+class="slide level2">
+<h2>Week 3 — Visualization, Polish, Deployment (Days 15-21)</h2>
+<blockquote>
+<p>Goal by Sunday: app deployed, README is portfolio-quality, you can
+give a 5-minute architecture walkthrough.</p>
+</blockquote>
+<h3 id="day-15-60-min-chapter-6.1">Day 15 (60 min) — Chapter 6.1</h3>
+<ul>
+<li>Read
+<code>chapter-06-data-visualization/01-recharts-fundamentals.md</code>.</li>
+<li>Open <code>components/ScoreHistoryChart.tsx</code>; tweak one prop
+and reload.</li>
+<li><em>Output</em>: name the three things Recharts gives you for
+free.</li>
+</ul>
+<h3 id="day-16-75-min-chapter-6.2">Day 16 (75 min) — Chapter 6.2</h3>
+<ul>
+<li>Read <code>02-reshaping-data.md</code>.</li>
+<li>Manually trace one match through the <code>data</code> array
+transformations.</li>
+<li><em>Output</em>: write a test for one transformation.</li>
+</ul>
+<h3 id="day-17-75-min-chapter-6.3">Day 17 (75 min) — Chapter 6.3</h3>
+<ul>
+<li>Read <code>03-pivots-and-internal-state.md</code>.</li>
+<li>Open <code>components/ResidualHistogram.tsx</code>; identify the
+pivot operation.</li>
+<li><em>Output</em>: describe what the chart shows in one sentence to a
+non-engineer.</li>
+</ul>
+<h3 id="day-18-60-min-chapter-7.1">Day 18 (60 min) — Chapter 7.1</h3>
+<ul>
+<li>Read
+<code>chapter-07-mastery-and-interviews/01-production-polish.md</code>.</li>
+<li>Apply one polish item from the list to your local copy.</li>
+<li><em>Output</em>: a one-line PR title for the change.</li>
+</ul>
+<h3 id="day-19-75-min-chapter-7.2">Day 19 (75 min) — Chapter 7.2</h3>
+<ul>
+<li>Read <code>02-deployment-and-testing.md</code>.</li>
+<li>Deploy your fork to Vercel (free).</li>
+<li><em>Output</em>: shareable deployed URL in
+<code>progress.txt</code>.</li>
+</ul>
+<h3 id="day-20-60-min-chapter-7.3">Day 20 (60 min) — Chapter 7.3</h3>
+<ul>
+<li>Read <code>03-interview-narrative.md</code>.</li>
+<li>Draft your 90-second project pitch using the template.</li>
+<li><em>Output</em>: a recording of yourself delivering it (private
+OK).</li>
+</ul>
+<h3 id="day-21-90-min-capstone">Day 21 (90 min) — Capstone</h3>
+<ul>
+<li>Walk through the full app end-to-end and explain it out loud as if
+presenting to a panel.</li>
+<li>Run through <em>all</em> the cheat sheets at speed.</li>
+<li>45-minute flashcard session, full deck.</li>
+<li><em>Output</em>: portfolio-ready README update + LinkedIn-friendly
+summary.</li>
+</ul>
+</section>
+<section id="daily-habits-every-day-10-min-on-top" class="slide level2">
+<h2>Daily habits (every day, ~10 min on top)</h2>
+<ul>
+<li>10 minutes flashcard review (Anki / Mochi / RemNote — load
+<code>flashcards/react-snooker.csv</code>).</li>
+<li>Listen to that day’s audio narration MP3
+(<code>audio/react-snooker-course/...</code>) while walking or
+cooking.</li>
+</ul>
+</section>
+<section id="what-to-skip-if-youre-short-on-time" class="slide level2">
+<h2>What to skip if you’re short on time</h2>
+<ul>
+<li>Days 18-20 polish/deployment if you only care about the technical
+content. The deployed app is the credibility item, but the technical
+depth is in chapters 1-6.</li>
+</ul>
+</section>
+<section id="what-to-add-if-you-have-more-time" class="slide level2">
+<h2>What to add if you have more time</h2>
+<ul>
+<li>Re-implement <code>lib/scoring.ts</code> from scratch without
+looking.</li>
+<li>Re-implement <code>components/StandingsTable.tsx</code> from
+scratch.</li>
+<li>Write Playwright tests for the deployed app.</li>
+</ul>
+</section>
+<section id="when-you-finish" class="slide level2">
+<h2>When you finish</h2>
+<p>Move directly to the AI interview prep course
+(<code>ai-interview-course/</code>), which uses <em>this</em> project as
+its portfolio example throughout.</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^5/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

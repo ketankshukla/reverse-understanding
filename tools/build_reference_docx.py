@@ -45,18 +45,18 @@ COLOR_BODY = RGBColor(0x1A, 0x1A, 0x1A)       # near-black  -- body text
 COLOR_MUTED = RGBColor(0x55, 0x55, 0x55)      # mid gray    -- subtitle / quote
 COLOR_LINK = RGBColor(0x2E, 0x5A, 0x88)       # mid blue    -- hyperlinks
 
-# Font sizes (points)
-SIZE_TITLE = 32
-SIZE_SUBTITLE = 16
-SIZE_H1 = 24
-SIZE_H2 = 18
-SIZE_H3 = 14
-SIZE_H4 = 12
-SIZE_H5 = 11
-SIZE_H6 = 11
-SIZE_BODY = 11
-SIZE_CODE = 9
-SIZE_QUOTE = 11
+# Font sizes (points) -- larger, glasses-free reading
+SIZE_TITLE = 36
+SIZE_SUBTITLE = 20
+SIZE_H1 = 28
+SIZE_H2 = 22
+SIZE_H3 = 18
+SIZE_H4 = 16
+SIZE_H5 = 14
+SIZE_H6 = 14
+SIZE_BODY = 14
+SIZE_CODE = 12
+SIZE_QUOTE = 14
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TOOLS_DIR = REPO_ROOT / "tools"

@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Chapter 01 Foundations</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/theme/white.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Chapter 01 Foundations</h1>
+</section>
+
+<section>
+<section id="chapter-1-the-modern-ai-assisted-engineer"
+class="title-slide slide level1">
+<h1>Chapter 1 — The Modern AI-Assisted Engineer</h1>
+<blockquote>
+<p><strong>Before you can defend AI-assisted development in an
+interview, you have to be able to define it precisely.</strong> This
+chapter gives you that definition — and the vocabulary that goes with
+it.</p>
+</blockquote>
+</section>
+<section id="what-youll-learn" class="slide level2">
+<h2>What you’ll learn</h2>
+<ul>
+<li>The actual definition of “AI-assisted development” in 2026 (it has
+moved fast).</li>
+<li>The <strong>skill stack</strong>: which parts of engineering are now
+AI’s, which are still yours, and which are <em>new</em> skills that
+didn’t exist five years ago.</li>
+<li>The <strong>mindset shift</strong> from “code-typist” to
+“engineering judgment owner” — the single most important framing for the
+rest of this course.</li>
+</ul>
+<p>By the end of the chapter, when an interviewer says <em>“Tell me how
+you use AI in your day-to-day work”</em>, you will not stammer. You will
+deliver a 60-second answer that distinguishes between
+<em>generation</em>, <em>review</em>, <em>debugging</em>, and
+<em>judgment</em> — and you’ll signal seniority in the first
+sentence.</p>
+</section>
+<section id="lessons" class="slide level2">
+<h2>Lessons</h2>
+<ol type="1">
+<li><strong><a
+href="./01-what-changed.md">01-what-changed.md</a></strong> — The 2026
+baseline. What “AI-assisted development” actually means now. Why the
+term “vibe coding” is loaded and how to talk about it carefully.</li>
+<li><strong><a
+href="./02-the-skill-stack.md">02-the-skill-stack.md</a></strong> — Five
+layers of engineering work, mapped to who does what now (you, the AI, or
+both). The lesson that arms you against “are you still needed?” before
+Chapter 2 even starts.</li>
+<li><strong><a
+href="./03-the-mindset-shift.md">03-the-mindset-shift.md</a></strong> —
+The single biggest difference between juniors who use AI well and
+seniors who use AI well. The phrase that tells an interviewer you’ve
+internalized the shift.</li>
+</ol>
+</section>
+<section id="how-long-it-should-take" class="slide level2">
+<h2>How long it should take</h2>
+<ul>
+<li>30–40 min reading per lesson.</li>
+<li>15 min after each lesson rehearsing the answer aloud.</li>
+<li>~2.5 hours total.</li>
+</ul>
+</section>
+<section id="what-youll-have-when-youre-done" class="slide level2">
+<h2>What you’ll have when you’re done</h2>
+<ul>
+<li>A 30-second definition of AI-assisted development that signals
+seniority.</li>
+<li>A mental model of the <strong>5 layers of engineering
+work</strong>.</li>
+<li>One sentence that, if used in an interview, signals you have
+<em>internalized</em> — not just heard about — the mindset shift.</li>
+</ul>
+</section>
+<section id="before-you-start" class="slide level2">
+<h2>Before you start</h2>
+<p>You don’t need anything technical. Bring:</p>
+<ul>
+<li>A notebook (paper or digital).</li>
+<li>5 minutes of think-time before each lesson to recall what you
+actually did with AI in the last working week.</li>
+<li>An honest read of where you currently fall on the
+junior–senior–staff continuum, so you can pitch your answers at the
+right altitude.</li>
+</ul>
+<p>Open <strong><a
+href="./01-what-changed.md">01-what-changed.md</a></strong> when you’re
+ready.</p>
+</section></section>
+<section>
+<section
+id="lesson-1.1-what-ai-assisted-development-actually-means-in-2026"
+class="title-slide slide level1">
+<h1>Lesson 1.1 — What “AI-Assisted Development” Actually Means in
+2026</h1>
+<blockquote>
+<p><strong>If your interviewer asks “How do you use AI in your work?”
+and you say “I use Copilot for autocomplete,” you’ve already lost the
+room.</strong> This lesson teaches you to answer that question like a
+senior engineer.</p>
+</blockquote>
+<p>By the end of this lesson:</p>
+<ul>
+<li>You’ll have a precise, vocabulary-rich definition of AI-assisted
+development.</li>
+<li>You’ll know the difference between <strong>autocomplete</strong>,
+<strong>agentic</strong>, and <strong>conversational</strong> AI
+workflows — and which one your interviewer probably uses.</li>
+<li>You’ll know how to use the phrase “vibe coding” without getting
+yourself rejected.</li>
+<li>You’ll have a 30-second self-introduction line you can use in any
+AI-context interview.</li>
+</ul>
+</section>
+<section id="the-five-generations-of-ai-tooling-and-where-you-sit"
+class="slide level2">
+<h2>1. The five generations of AI tooling (and where you sit)</h2>
+<p>To talk about AI-assisted development at the senior level, you need
+to know that there have been roughly five overlapping generations of
+tools. Most engineers conflate them. Most interviewers don’t. Knowing
+the difference is a marker of seniority.</p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 6%" />
+<col style="width: 30%" />
+<col style="width: 39%" />
+</colgroup>
+<thead>
+<tr>
+<th>Generation</th>
+<th>Era</th>
+<th>Example tools</th>
+<th>What it gives you</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>G1: Autocomplete</strong></td>
+<td>2021–2022</td>
+<td>GitHub Copilot v1, TabNine</td>
+<td>Single-line and multi-line completions inside the editor</td>
+</tr>
+<tr>
+<td><strong>G2: Chat</strong></td>
+<td>2023</td>
+<td>ChatGPT, Claude.ai, Gemini</td>
+<td>A separate window where you ask questions and paste code</td>
+</tr>
+<tr>
+<td><strong>G3: In-IDE Chat</strong></td>
+<td>2024</td>
+<td>Copilot Chat, Cursor, Continue</td>
+<td>A side panel that knows about your file and selection</td>
+</tr>
+<tr>
+<td><strong>G4: Agentic IDE</strong></td>
+<td>2024–2025</td>
+<td>Cursor Composer, Windsurf, Aider, Cline</td>
+<td>A loop that <em>reads</em>, <em>edits</em>, <em>runs commands</em>,
+and <em>iterates</em> across multiple files</td>
+</tr>
+<tr>
+<td><strong>G5: Autonomous agent</strong></td>
+<td>2025–2026</td>
+<td>Devin, OpenAI Operator, Cascade in plan mode</td>
+<td>Long-horizon tasks: “implement this feature, run tests, open a
+PR”</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Most interviewers in 2026 expect you to be fluent in G3 and
+G4.</strong> If you can articulate the difference between agentic and
+chat-based workflows, you’re in the top 25% of candidates already.</p>
+<h3 id="how-to-drop-this-casually-in-an-interview">How to drop this
+casually in an interview</h3>
+<blockquote>
+<p><em>“I’m primarily on G4 — agentic editing. I use it for multi-file
+refactors and data-shaping. For one-off questions or unfamiliar APIs
+I’ll drop into a G2/G3 chat. I haven’t moved fully to G5 autonomous
+agents yet because I want to review every diff before it
+lands.”</em></p>
+</blockquote>
+<p>That sentence does five things at once: it shows you know the
+taxonomy, names the tools generically (no vendor-shilling), demonstrates
+judgment about which generation is right for which task, and signals
+that you take code review seriously. <strong>Use it.</strong></p>
+</section>
+<section id="the-three-workflows-you-should-be-able-to-name"
+class="slide level2">
+<h2>2. The three workflows you should be able to name</h2>
+<p>Underneath those five tool generations are three actual
+<em>workflows</em>. Senior engineers know the workflows; junior
+engineers know only the tools.</p>
+<h3 id="generation-workflow">2.1. Generation workflow</h3>
+<blockquote>
+<p><strong>You know what you want. You ask. The AI produces it. You
+review and accept.</strong></p>
+</blockquote>
+<p>Example: <em>“Generate a TypeScript interface for a user with id,
+email, name, and createdAt as ISO 8601 string.”</em></p>
+<ul>
+<li><strong>You own</strong>: the spec, the review, the commit.</li>
+<li><strong>AI owns</strong>: typing the lines.</li>
+<li><strong>Skills required</strong>: precise specification, code
+review, type discipline.</li>
+</ul>
+<p>This is the workflow most people <strong>think</strong> AI-assisted
+development is. It’s actually the simplest one and the one with the
+lowest leverage.</p>
+<h3 id="exploration-workflow">2.2. Exploration workflow</h3>
+<blockquote>
+<p><strong>You don’t know what you want. You explore options with the AI
+as a thinking partner.</strong></p>
+</blockquote>
+<p>Example: <em>“I have a list of products with categories. I want a UI
+that lets users filter and search. What are three patterns for this and
+what are the trade-offs?”</em></p>
+<ul>
+<li><strong>You own</strong>: the question, the judgment about which
+pattern fits your codebase, the final pick.</li>
+<li><strong>AI owns</strong>: surfacing options you might not have
+considered, summarizing trade-offs.</li>
+<li><strong>Skills required</strong>: curiosity, the ability to evaluate
+trade-offs, and the discipline to pick <em>one</em> and commit.</li>
+</ul>
+<p>This is the highest-leverage workflow most engineers underuse. Senior
+engineers use it heavily before any code gets written.</p>
+<h3 id="iteration-workflow">2.3. Iteration workflow</h3>
+<blockquote>
+<p><strong>The AI generated something. It’s 80% there. You and the AI
+iterate until it’s right.</strong></p>
+</blockquote>
+<p>Example: <em>“This works but the loading state flickers when the data
+is cached. Fix it without changing the public API.”</em></p>
+<ul>
+<li><strong>You own</strong>: the failure observation, the desired
+behavior, the regression check.</li>
+<li><strong>AI owns</strong>: the diff.</li>
+<li><strong>Skills required</strong>: debugging instincts, the ability
+to specify a fix without specifying <em>the</em> implementation, and
+patience.</li>
+</ul>
+<p>This is the workflow that <strong>actually fills your day</strong>.
+It’s also the workflow interviewers most want to test.</p>
+<h3 id="how-to-drop-this-in-an-interview">How to drop this in an
+interview</h3>
+<blockquote>
+<p><em>“I think of AI-assisted work in three modes: generation when I
+know exactly what I want, exploration when I’m trying to choose between
+approaches, and iteration when I’m refining something that already
+exists. Most of my real work is iteration.”</em></p>
+</blockquote>
+<p>That’s a quote-grade answer. Memorize the structure.</p>
+</section>
+<section id="the-vibe-coding-minefield" class="slide level2">
+<h2>3. The “vibe coding” minefield</h2>
+<p>Andrej Karpathy coined the phrase “vibe coding” in early 2025: <em>“I
+‘vibe code’ — I just see stuff, say stuff, run stuff, and copy-paste
+stuff, and it mostly works.”</em></p>
+<p>Within months it became:</p>
+<ul>
+<li>A celebration on Twitter.</li>
+<li>A pejorative in code review.</li>
+<li>A loaded term in interviews.</li>
+</ul>
+<p>You will get asked about vibe coding. Here is how to handle it.</p>
+<h3 id="what-vibe-coding-means-at-the-good-end">3.1. What “vibe coding”
+means at the <em>good</em> end</h3>
+<ul>
+<li>Iterating quickly with AI assistance.</li>
+<li>Trusting your taste about whether the output looks right.</li>
+<li>Skipping ceremony when ceremony doesn’t earn its keep.</li>
+<li>Letting the LLM type so you can think.</li>
+</ul>
+<h3 id="what-vibe-coding-means-at-the-bad-end">3.2. What “vibe coding”
+means at the <em>bad</em> end</h3>
+<ul>
+<li>Shipping code you can’t read.</li>
+<li>“It works” being the only test.</li>
+<li>Not understanding the abstractions the AI introduced.</li>
+<li>Copying solutions to problems you couldn’t articulate.</li>
+</ul>
+<h3 id="how-interviewers-use-the-phrase">3.3. How interviewers use the
+phrase</h3>
+<p>Interviewers asking “Are you a vibe coder?” are usually asking one of
+three different questions:</p>
+<ol type="1">
+<li><em>“Are you the bad kind of vibe coder?”</em> → They want to
+confirm you read what the AI writes.</li>
+<li><em>“Are you the good kind?”</em> → They want to confirm you can
+move fast with AI without ceremony paralysis.</li>
+<li><em>“Do you know what the term means?”</em> → They’re testing if
+you’ve kept up with the field.</li>
+</ol>
+<p>The right answer is one that disambiguates. Try this:</p>
+<blockquote>
+<p><em>“There’s a good and a bad version of that phrase. The bad version
+is shipping code you can’t explain. The good version is iterating fast
+with AI as your typist while you stay the engineer. I aim for the good
+version. Concretely: I always read the diff before accepting, I write
+tests for AI-generated logic before I trust it, and if I can’t explain a
+function the AI gave me, that’s a flag — I don’t accept it until I
+can.”</em></p>
+</blockquote>
+<p>That answer:</p>
+<ul>
+<li>Acknowledges the phrase exists.</li>
+<li>Distinguishes the two interpretations.</li>
+<li>Stakes a clear position.</li>
+<li>Backs the position with three concrete behaviors.</li>
+</ul>
+<p>It will satisfy almost any interviewer who asks. <strong>Drill this
+answer.</strong></p>
+</section>
+<section id="the-three-categories-of-work-ai-is-genuinely-good-at"
+class="slide level2">
+<h2>4. The three categories of work AI is genuinely good at</h2>
+<p>You’ll be asked: <em>“What do you trust AI to do?”</em> Have a
+structured answer.</p>
+<h3 id="pattern-rich-low-novelty-work">4.1. Pattern-rich, low-novelty
+work</h3>
+<ul>
+<li>Boilerplate (form scaffolds, CRUD endpoints, type definitions).</li>
+<li>Conversions (JSON → TS interfaces, CSS → Tailwind, Python →
+Go).</li>
+<li>Test scaffolding (writing the <em>next</em> test that follows the
+existing pattern).</li>
+<li>Documentation (turning code into prose, generating
+JSDoc/docstrings).</li>
+</ul>
+<p>AI is <em>very</em> good at these. They’re high-volume in real work.
+<strong>Trust them, review them, ship them.</strong></p>
+<h3 id="constrained-well-specified-algorithms">4.2. Constrained,
+well-specified algorithms</h3>
+<ul>
+<li>Implementing a known algorithm given a clear spec (“debounce”,
+“trie”, “merge sort”).</li>
+<li>Glue code between well-known APIs (file → S3, webhook →
+handler).</li>
+<li>Refactors with a clear target (“extract this into a custom
+hook”).</li>
+</ul>
+<p>AI is good at these <em>if you specify them well</em>. <strong>The
+quality of the output is a function of the quality of the
+prompt.</strong></p>
+<h3 id="search-and-synthesis">4.3. Search and synthesis</h3>
+<ul>
+<li>“What are the three ways people typically solve X?”</li>
+<li>“What does this error message usually mean in Postgres?”</li>
+<li>“Compare TanStack Query vs SWR for my use case.”</li>
+</ul>
+<p>AI is faster than Stack Overflow and more current than your memory.
+<strong>It’s a research tool now</strong>, even when it doesn’t write
+code.</p>
+</section>
+<section id="the-three-categories-ai-is-genuinely-bad-at-still"
+class="slide level2">
+<h2>5. The three categories AI is genuinely bad at (still)</h2>
+<p>This is the <strong>other</strong> half of the answer interviewers
+want. If you only list strengths, you sound naive. If you list
+weaknesses with examples, you sound senior.</p>
+<h3 id="novel-architecture-under-real-constraints">5.1. Novel
+architecture under real constraints</h3>
+<p>The LLM doesn’t know your team’s deploy story, your billing tier,
+your historical war stories about the queue that took down prod, your
+manager’s risk tolerance, your timeline. It will produce a design that
+looks reasonable in isolation and is wrong for <em>your</em>
+context.</p>
+<h3 id="cross-cutting-refactors-that-span-a-long-history">5.2.
+Cross-cutting refactors that span a long history</h3>
+<p>Imagine: “rename a field across 60 files, but only in the new code
+paths, leaving the legacy paths alone.” The LLM doesn’t have the
+institutional memory of which paths are legacy. It will rewrite the
+wrong subset, confidently.</p>
+<h3 id="debugging-where-the-bug-is-in-your-understanding">5.3. Debugging
+where the bug is in your <em>understanding</em></h3>
+<p>If you’re prompting the AI to “fix this race condition” but you’ve
+misdiagnosed which two operations are racing, the AI will fix the wrong
+race condition and the bug will return tomorrow.</p>
+</section>
+<section id="your-30-second-self-intro-line" class="slide level2">
+<h2>6. Your 30-second self-intro line</h2>
+<p>Combine the above into one paragraph you can deliver in any interview
+that opens with “Tell me about your relationship with AI tools”:</p>
+<blockquote>
+<p><em>“I’ve been on agentic AI tooling — currently [name a tool you
+actually use] — for about [N] months. I use it across three modes:
+generation, exploration, and iteration. Most of my day is iteration. The
+work I trust AI most for is pattern-rich code — types, tests,
+conversions, scaffolding. The work I keep close is novel architecture
+under team-specific constraints, anything that requires reading a long
+history of the codebase, and debugging where I might have the wrong
+mental model. I always read the diff before accepting it, and if I can’t
+explain a function the AI wrote, I don’t ship it.”</em></p>
+</blockquote>
+<p>That’s ~75 words, ~30 seconds. It hits:</p>
+<ul>
+<li>Tools (without vendor-shilling).</li>
+<li>Workflows (named, not vague).</li>
+<li>Strengths (concrete examples).</li>
+<li>Limits (concrete examples).</li>
+<li>A one-line ethical commitment (“I read the diff”).</li>
+</ul>
+<p><strong>Memorize this. It is your opening.</strong></p>
+</section>
+<section id="three-pitfalls-when-answering-ai-questions"
+class="slide level2">
+<h2>7. Three pitfalls when answering AI questions</h2>
+<h3 id="the-i-love-ai-pitfall">7.1. The “I love AI” pitfall</h3>
+<p>You sound like a fan, not an engineer. The interviewer will dig
+deeper to see if you have any judgment.</p>
+<h3 id="the-im-anti-ai-pitfall">7.2. The “I’m anti-AI” pitfall</h3>
+<p>You sound like you’re hiding the fact that you don’t use it. The
+interviewer will assume you’ll be slower than the AI-fluent
+candidate.</p>
+<h3 id="the-it-depends-pitfall">7.3. The “It depends” pitfall</h3>
+<p>You sound evasive. <strong>“It depends”</strong> is only a great
+answer when you immediately follow with the things it depends on.</p>
+<blockquote>
+<p><em>Bad:</em> “Do you trust AI for production code?” → “It
+depends.”</p>
+<p><em>Good:</em> “Do you trust AI for production code?” → “It depends
+on three things: how high the blast radius is, how good my test coverage
+is around the change, and how well the AI seemed to understand the
+existing patterns. For a CRUD endpoint with 90% test coverage, yes. For
+the billing reconciliation job? I’d review every line and write the
+tests myself.”</p>
+</blockquote>
+</section>
+<section id="check-yourself" class="slide level2">
+<h2>8. CHECK YOURSELF</h2>
+<p>Don’t move on until you can answer these out loud:</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />What are the five generations of AI
+tooling? Which one are <em>you</em> primarily on?</label></li>
+<li><label><input type="checkbox" />What are the three workflows? Which
+one is most of your real work?</label></li>
+<li><label><input type="checkbox" />What are the three things AI is
+genuinely good at? Give one concrete example for each.</label></li>
+<li><label><input type="checkbox" />What are the three things AI is
+genuinely bad at? Give one concrete example for each.</label></li>
+<li><label><input type="checkbox" />How do you respond to “Are you a
+vibe coder?” without dismissing the term <em>or</em> sounding
+cocky?</label></li>
+<li><label><input type="checkbox" />Can you deliver your 30-second
+self-intro line, twice in a row, without notes?</label></li>
+</ul>
+<p>If any of those is fuzzy, scroll back. The next lesson assumes this
+vocabulary.</p>
+</section>
+<section id="where-you-are-now" class="slide level2">
+<h2>9. Where you are now</h2>
+<p>You have:</p>
+<ul>
+<li>A taxonomy of AI tools that puts you in the top quarter of
+candidates by vocabulary alone.</li>
+<li>A workflow model that lets you describe what you actually do all
+day.</li>
+<li>A defended answer to the most loaded phrase in the field (“vibe
+coding”).</li>
+<li>A 30-second opening that signals seniority in the first
+sentence.</li>
+</ul>
+<p>Move on to <strong><a
+href="./02-the-skill-stack.md">02-the-skill-stack.md</a></strong> to map
+out which skills are now AI’s, which are still yours, and which are
+<em>new</em> skills you should be selling in interviews.</p>
+</section></section>
+<section>
+<section id="lesson-1.2-the-skill-stack"
+class="title-slide slide level1">
+<h1>Lesson 1.2 — The Skill Stack</h1>
+<blockquote>
+<p><strong>Engineering work breaks into five layers. AI is now competent
+at two of them. You sell the other three.</strong> This lesson is the
+map.</p>
+</blockquote>
+<p>By the end of this lesson:</p>
+<ul>
+<li>You’ll have a five-layer model of engineering work that you can draw
+on a whiteboard in any interview.</li>
+<li>You’ll know which layer each AI tool actually operates at — and
+where the marketing oversells.</li>
+<li>You’ll know the <em>new</em> skills that didn’t exist five years ago
+and that command a premium today.</li>
+<li>You’ll have a soundbite that converts the question <em>“Why do we
+need you?”</em> into a structural answer.</li>
+</ul>
+<p>This is the lesson that wins the next chapter for you. Read it twice
+if you have to.</p>
+</section>
+<section id="the-five-layers-of-engineering-work" class="slide level2">
+<h2>1. The five layers of engineering work</h2>
+<p>Stack them from concrete to abstract:</p>
+<pre><code>┌─────────────────────────────────────────┐
+│ Layer 5 — VALUE                          │  Why does this work exist?
+├─────────────────────────────────────────┤
+│ Layer 4 — JUDGMENT                       │  Which of these solutions ships?
+├─────────────────────────────────────────┤
+│ Layer 3 — DESIGN                         │  How do the pieces fit together?
+├─────────────────────────────────────────┤
+│ Layer 2 — IMPLEMENTATION                 │  What&#39;s the code that does this?
+├─────────────────────────────────────────┤
+│ Layer 1 — TYPING                         │  What characters land in the file?
+└─────────────────────────────────────────┘</code></pre>
+<p>Every task in your day touches one or more of these layers.
+<strong>Beginners think their job is Layer 1 and 2. Seniors know their
+job is Layer 3, 4, and 5.</strong> The AI revolution made Layers 1 and 2
+cheap. It did <em>not</em> make Layers 3, 4, and 5 cheap.</p>
+<p>Read that paragraph three times. It is the entire thesis of this
+course.</p>
+</section>
+<section id="layer-by-layer-breakdown" class="slide level2">
+<h2>2. Layer-by-layer breakdown</h2>
+<h3 id="layer-1-typing">Layer 1 — Typing</h3>
+<p>What it is: keystrokes. Pressing letter keys to put characters in a
+file.</p>
+<p>Examples:</p>
+<ul>
+<li>Typing <code>const user = { id: 1, email: 'a@b.com' };</code></li>
+<li>Importing a module.</li>
+<li>Copy-pasting boilerplate.</li>
+<li>Renaming a variable in 12 places.</li>
+</ul>
+<p><strong>Who’s doing it now?</strong> The AI. Almost entirely. Even
+when you “write” code, the AI completes the line. This was the entire
+promise of Copilot in 2022 and it’s been delivered.</p>
+<p><strong>What’s left for the human?</strong> Choosing what to type.
+Which is to say: it’s not really a layer anymore.</p>
+<h3 id="layer-2-implementation">Layer 2 — Implementation</h3>
+<p>What it is: turning a clear specification into working code.</p>
+<p>Examples:</p>
+<ul>
+<li>“Implement a debounce function with a 300ms wait.”</li>
+<li>“Add a loading state to this button.”</li>
+<li>“Write a Postgres query that returns the top 10 customers by revenue
+this month.”</li>
+<li>“Convert these JSON samples into a TypeScript interface.”</li>
+</ul>
+<p><strong>Who’s doing it now?</strong> Mostly the AI, <em>given a clear
+spec</em>. AI is excellent at “I know exactly what I want; produce
+it.”</p>
+<p><strong>What’s left for the human?</strong> Writing the spec.
+Reviewing the output. Catching the cases the AI didn’t handle
+(off-by-one, locale, timezone, edge case the spec didn’t mention).</p>
+<h3 id="layer-3-design">Layer 3 — Design</h3>
+<p>What it is: deciding how the pieces fit together.</p>
+<p>Examples:</p>
+<ul>
+<li>“Should this state live in the component, the parent, or a global
+store?”</li>
+<li>“Should this be one endpoint with a query parameter, or two
+endpoints?”</li>
+<li>“Is this a synchronous transformation or an async pipeline?”</li>
+<li>“Should we cache at the CDN, the server, or the client?”</li>
+</ul>
+<p><strong>Who’s doing it now?</strong> <em>Mostly</em> the human, with
+AI as a sounding board.</p>
+<p>The AI can list options. It cannot evaluate them against your team’s
+codebase, deploy story, on-call rotation, customer mix, or last
+quarter’s incident postmortems. <strong>Design is contextual. AI has no
+context except what you give it.</strong></p>
+<p><strong>What’s left for the human?</strong> Almost everything that
+matters. This is where seniority shows.</p>
+<h3 id="layer-4-judgment">Layer 4 — Judgment</h3>
+<p>What it is: deciding <em>which design is right for our
+situation</em>.</p>
+<p>Examples:</p>
+<ul>
+<li>“We have three valid approaches. Which one ships?”</li>
+<li>“Is this performance optimization worth the readability cost?”</li>
+<li>“Should we build this ourselves or pull in a library?”</li>
+<li>“Is this a fast hack we’ll throw away in 3 months, or is this
+load-bearing forever?”</li>
+</ul>
+<p><strong>Who’s doing it now?</strong> The human, exclusively.</p>
+<p>The AI can articulate trade-offs. It cannot <em>make</em> the
+trade-off. The trade-off requires owning the consequences. The AI does
+not own consequences. <strong>You do.</strong></p>
+<p><strong>What’s left for the human?</strong> The decision. And the
+explanation, in the standup, in the docs, in the postmortem six months
+from now.</p>
+<h3 id="layer-5-value">Layer 5 — Value</h3>
+<p>What it is: deciding <em>whether to do this work at all</em>.</p>
+<p>Examples:</p>
+<ul>
+<li>“Is this feature worth building?”</li>
+<li>“Is the right move to scale this team or kill the project?”</li>
+<li>“Should we move our infra to a new cloud, or absorb the cost of
+staying?”</li>
+<li>“Should this go on the roadmap, or should we tell sales no?”</li>
+</ul>
+<p><strong>Who’s doing it now?</strong> Humans, in conversations with
+other humans.</p>
+<p>The AI is irrelevant to Layer 5. It can summarize a doc that helps
+you make the call, but the call itself is yours.</p>
+<p><strong>What’s left for the human?</strong> Everything. Always.</p>
+</section>
+<section id="the-ai-replaced-developers-myth-in-one-diagram"
+class="slide level2">
+<h2>3. The “AI replaced developers” myth, in one diagram</h2>
+<p>Now look at the layers again, with the AI line drawn in:</p>
+<pre><code>┌─────────────────────────────────────────┐
+│ Layer 5 — VALUE                          │  100% human
+├─────────────────────────────────────────┤
+│ Layer 4 — JUDGMENT                       │  ~95% human
+├─────────────────────────────────────────┤
+│ Layer 3 — DESIGN                         │  ~70% human
+├─────────────────────────────────────────┤  ← AI is competent above this line
+│ Layer 2 — IMPLEMENTATION                 │  ~30% human (review + edge cases)
+├─────────────────────────────────────────┤
+│ Layer 1 — TYPING                         │  ~5% human
+└─────────────────────────────────────────┘</code></pre>
+<p>When pundits say “AI replaced developers,” they mean Layer 1 and most
+of Layer 2. They are correct. <strong>They are also describing maybe 20%
+of what a senior engineer’s day is actually about.</strong></p>
+<p>The other 80% is Layer 3, 4, and 5. Those layers grew, in fact,
+because AI made it cheaper to <em>try</em> a solution, which created
+more solutions to evaluate. <strong>More options to choose between →
+more judgment required, not less.</strong></p>
+<p>This is the senior-engineer answer to “AI replaced developers” and it
+is unfailingly persuasive.</p>
+</section>
+<section
+id="the-new-skills-didnt-exist-5-years-ago-command-a-premium-today"
+class="slide level2">
+<h2>4. The new skills (didn’t exist 5 years ago, command a premium
+today)</h2>
+<p>Five skills are <em>new</em>. None of them are in a CS curriculum
+yet. All of them are interview-tested in 2026.</p>
+<h3 id="prompt-engineering-as-engineering">4.1. Prompt engineering as
+engineering</h3>
+<p>Not “prompt hacks.” Real engineering: stable system prompts,
+structured contexts, deterministic output formats, eval suites that
+score prompts the way unit tests score functions.</p>
+<blockquote>
+<p><em>Interview signal:</em> “I treat my prompts like code.
+Version-controlled, with regression evals when I change them.”</p>
+</blockquote>
+<h3 id="eval-driven-development">4.2. Eval-driven development</h3>
+<p>Writing test cases (sometimes called “evals”) that gauge whether an
+AI-driven feature is doing the right thing. Includes ground-truth
+datasets, automated scoring, and human-in-the-loop review.</p>
+<blockquote>
+<p><em>Interview signal:</em> “Before I shipped the AI-summarization
+feature, I had 50 hand-graded test inputs and a CI job that scored each
+new prompt version against them.”</p>
+</blockquote>
+<h3 id="ai-code-review">4.3. AI code review</h3>
+<p>The skill of reviewing AI-generated code with a different mental
+model than human-generated code. AI tends to make different mistakes
+(overconfident plausible-but-wrong APIs, missing edge cases the spec
+didn’t mention, security mistakes in copy-pasted patterns). Knowing the
+failure modes is its own discipline.</p>
+<blockquote>
+<p><em>Interview signal:</em> “AI tends to write code that looks correct
+but uses APIs that don’t exist or are deprecated. My review checklist
+for AI code is different from my review checklist for human code.”</p>
+</blockquote>
+<h3 id="cost-and-latency-thinking">4.4. Cost and latency thinking</h3>
+<p>LLM calls cost money and add latency. Engineering features that use
+LLMs at runtime requires understanding token counts, cache strategies,
+model tiering (“fast model for the easy cases, smart model for the hard
+ones”), and graceful degradation.</p>
+<blockquote>
+<p><em>Interview signal:</em> “We use Claude Haiku for the first pass
+and only escalate to Sonnet if the response fails our quality check.
+That cut our LLM bill 70% and average latency 40%.”</p>
+</blockquote>
+<h3 id="risk-and-safety-thinking">4.5. Risk and safety thinking</h3>
+<p>Knowing where AI must not be in the loop. PII redaction.
+Prompt-injection defense. Output validation. Regulated-industry
+constraints.</p>
+<blockquote>
+<p><em>Interview signal:</em> “We never let user content reach the model
+raw — we run a redaction pass first, and we treat any tool the model can
+call as if a malicious user had typed it.”</p>
+</blockquote>
+</section>
+<section id="the-skills-you-can-stop-selling" class="slide level2">
+<h2>5. The skills you can stop selling</h2>
+<p>Be honest. Some skills you used to sell on resumes are now
+AI-trivial:</p>
+<ul>
+<li>“I write clean code.” (AI writes acceptable code in
+milliseconds.)</li>
+<li>“I know syntax X, Y, Z.” (AI knows syntax X, Y, Z and 200
+others.)</li>
+<li>“I implement features quickly.” (AI implements them faster.)</li>
+<li>“I write good test coverage.” (AI generates tests endlessly.)</li>
+<li>“I refactor for readability.” (AI refactors on command.)</li>
+</ul>
+<p>This doesn’t mean those skills are worthless. It means
+<strong>selling them in 2026 is a junior signal</strong>. Senior
+candidates lead with Layer 3, 4, and 5 stories.</p>
+</section>
+<section id="the-pivot-move-convert-resume-bullets"
+class="slide level2">
+<h2>6. The pivot move: convert resume bullets</h2>
+<p>Take a resume bullet that’s Layer-1-or-2-flavored and rewrite it to
+highlight Layer-3-or-higher work.</p>
+<table>
+<colgroup>
+<col style="width: 54%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr>
+<th>Before</th>
+<th>After</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“Implemented dashboard with 12 charts in React.”</td>
+<td>“Designed dashboard architecture for 12 chart types; chose Recharts
+over D3 because the team’s React fluency was higher than its SVG
+fluency.”</td>
+</tr>
+<tr>
+<td>“Reduced bundle size by 40%.”</td>
+<td>“Identified bundle bloat as a Lighthouse-driven product priority,
+traced it to a charting library import, and lobbied for a code-split
+that traded one network round-trip for 40% smaller initial bundle.”</td>
+</tr>
+<tr>
+<td>“Wrote 90% test coverage on payments module.”</td>
+<td>“Set the testing strategy for the payments module, focused
+integration tests on the cross-cutting failure modes (refunds, partial
+captures, currency rounding), and made the trade-off explicit in the
+team doc.”</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notice the pattern.</strong> The “after” version names a
+<em>decision</em> and a <em>constraint</em>. That’s how you signal Layer
+3+. AI cannot make those bullets for you because AI didn’t make those
+decisions; you did.</p>
+</section>
+<section id="the-interview-soundbite" class="slide level2">
+<h2>7. The interview soundbite</h2>
+<p>When the interviewer asks the loaded version — <em>“Aren’t you just
+doing what AI does now?”</em> — you reach for this:</p>
+<blockquote>
+<p><em>“There are five layers in any engineering task. AI is genuinely
+good at the bottom two: typing and clear-spec implementation. The top
+three — design choices that fit the team’s context, judgment about which
+trade-off ships, and value-level decisions about what to build at all —
+those are still human, and the AI hasn’t moved on them. The reason I’m
+useful isn’t that I type faster than the AI. It’s that I make the design
+choices that decide whether the AI’s typing was worth doing.”</em></p>
+</blockquote>
+<p>That’s ~70 words. It fits anywhere. <strong>Drill it.</strong></p>
+</section>
+<section id="common-mistakes-engineers-make-in-this-conversation"
+class="slide level2">
+<h2>8. Common mistakes engineers make in this conversation</h2>
+<h3 id="conceding-too-much-to-ai">8.1. Conceding too much to AI</h3>
+<blockquote>
+<p><em>“I mean, AI does most of my work now.”</em></p>
+</blockquote>
+<p>You just told the interviewer they don’t need you. <strong>Don’t say
+this even if you privately feel it.</strong> What’s actually true: AI
+does most of your <em>typing</em>. Your <em>work</em> is upstream of
+typing.</p>
+<h3 id="conceding-too-little">8.2. Conceding too little</h3>
+<blockquote>
+<p><em>“AI is overhyped, I barely use it.”</em></p>
+</blockquote>
+<p>You just told the interviewer you’re slower than the AI-fluent
+candidate they’ll see this afternoon. Don’t say this either.</p>
+<h3 id="the-everything-is-the-same-lie">8.3. The “everything is the
+same” lie</h3>
+<blockquote>
+<p><em>“Honestly, my job is the same as it was three years
+ago.”</em></p>
+</blockquote>
+<p>It isn’t. The interviewer knows it isn’t. Saying it is signals you
+haven’t been paying attention.</p>
+<h3 id="the-im-a-manager-now-cop-out">8.4. The “I’m a manager now”
+cop-out</h3>
+<blockquote>
+<p><em>“I just review the AI’s code now, like a manager.”</em></p>
+</blockquote>
+<p>Two problems. First, “I review code” is itself a craft skill, not a
+desk job. Second, the interviewer hires engineers, not managers.
+<strong>Talk about the engineering judgment in the review, not just the
+act of reviewing.</strong></p>
+</section>
+<section id="check-yourself-1" class="slide level2">
+<h2>9. CHECK YOURSELF</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Can you draw the 5-layer model from
+memory?</label></li>
+<li><label><input type="checkbox" />Can you name two examples per layer
+of work that lives there?</label></li>
+<li><label><input type="checkbox" />Can you name three tasks AI is good
+at and three it’s bad at, and assign each to a layer?</label></li>
+<li><label><input type="checkbox" />Can you list the 5 new skills, with
+one concrete example apiece?</label></li>
+<li><label><input type="checkbox" />Can you rewrite a real resume bullet
+of yours to lift it from Layer 2 to Layer 3?</label></li>
+<li><label><input type="checkbox" />Can you deliver the section-7
+soundbite without notes?</label></li>
+</ul>
+</section>
+<section id="where-you-are-now-1" class="slide level2">
+<h2>10. Where you are now</h2>
+<p>You have:</p>
+<ul>
+<li>A defendable model that puts AI’s contribution in proportion.</li>
+<li>The vocabulary to push interviewers’ framing back to your
+strengths.</li>
+<li>A list of new skills you can name and prove.</li>
+<li>An exercise (resume rewrites) that turns this lesson into immediate,
+practical updates to your portfolio.</li>
+</ul>
+<p>Move on to <strong><a
+href="./03-the-mindset-shift.md">03-the-mindset-shift.md</a></strong> —
+the lesson that turns this conceptual model into an <em>attitude</em>
+the interviewer can feel from the first 30 seconds of conversation.</p>
+</section></section>
+<section>
+<section id="lesson-1.3-the-mindset-shift"
+class="title-slide slide level1">
+<h1>Lesson 1.3 — The Mindset Shift</h1>
+<blockquote>
+<p><strong>The interviewer can usually tell within 60 seconds whether a
+candidate uses AI as a <em>tool</em> or as a <em>crutch</em>.</strong>
+This lesson is the difference.</p>
+</blockquote>
+<p>By the end of this lesson:</p>
+<ul>
+<li>You’ll know the single phrase that signals you’ve internalized the
+senior shift.</li>
+<li>You’ll be able to recognize — in your own behavior and in others’ —
+the four “tells” of a crutch user.</li>
+<li>You’ll have a concrete habit list you can adopt this week to make
+your shift visible.</li>
+<li>You’ll have a story-shaped answer (“Tell me about a time you didn’t
+trust the AI…”) that lands every time.</li>
+</ul>
+</section>
+<section id="the-shift-in-one-sentence" class="slide level2">
+<h2>1. The shift in one sentence</h2>
+<blockquote>
+<p><strong>Junior with AI:</strong> “What does the AI think I should
+do?”</p>
+<p><strong>Senior with AI:</strong> “What do <em>I</em> think we should
+do? And how can the AI help me move faster on that?”</p>
+</blockquote>
+<p>That’s the shift. Internal locus of judgment. The AI is your typist,
+your sounding board, your researcher, your reviewer — but it is
+<strong>not</strong> your decider.</p>
+<p>If you remember nothing else from this entire course, remember that.
+<strong>The AI is not the decider.</strong></p>
+</section>
+<section id="the-four-tells-of-a-crutch-user" class="slide level2">
+<h2>2. The four tells of a crutch user</h2>
+<p>These are the patterns interviewers watch for. They’re easy to spot.
+<strong>Audit yourself for them.</strong></p>
+<h3 id="the-let-me-ask-the-ai-reflex">2.1. The “let me ask the AI”
+reflex</h3>
+<p>The crutch user, when asked a question they don’t know the answer to,
+immediately reaches for the AI <strong>before thinking</strong>. They
+don’t form an initial hypothesis. They don’t articulate what they don’t
+know. They just paste-and-pray.</p>
+<p>The senior user thinks first. <em>“What’s the shape of this problem?
+What do I already know? What’s the smallest question I’d need to answer
+to make progress?”</em> Only then do they prompt — and the prompt is
+<strong>specific</strong> because the thinking happened first.</p>
+<blockquote>
+<p><em>Interview equivalent:</em> You’re asked a hard system-design
+question. The crutch user immediately says <em>“Could I look this
+up?”</em> The senior says <em>“Let me think out loud for a minute,”</em>
+sketches a first-pass approach on the whiteboard, then later says
+<em>“In a real working context I’d validate this design with an LLM and
+pressure-test it against alternatives.”</em></p>
+</blockquote>
+<p>Same outcome. Different signal.</p>
+<h3 id="the-the-ai-said-so-defense">2.2. The “the AI said so”
+defense</h3>
+<p>The crutch user, when asked <em>why</em> their code does X, says:
+<em>“That’s how the AI suggested it.”</em></p>
+<p>Three problems:</p>
+<ol type="1">
+<li>It’s not an explanation; it’s an attribution.</li>
+<li>It signals you didn’t read it carefully.</li>
+<li>It moves accountability away from you, which is the opposite of what
+a senior does.</li>
+</ol>
+<p>The senior user <em>can always explain why</em>. If they can’t, they
+don’t ship. <strong>Inability to explain a piece of code in your
+codebase is a personal red flag.</strong></p>
+<blockquote>
+<p><em>Interview equivalent:</em> You’re walking through your portfolio
+project. The interviewer asks why you used <code>useMemo</code> on a
+particular value. <em>“That’s what the AI generated”</em> loses the
+room. <em>“Because the parent re-renders on every keystroke in the
+search box, and without the memo the chart’s data prop changes identity,
+which would cascade into the chart re-rendering”</em> — that wins the
+room.</p>
+</blockquote>
+<h3 id="the-diff-flood-acceptance">2.3. The diff-flood acceptance</h3>
+<p>The crutch user accepts giant diffs without reading them. They watch
+the AI rewrite 14 files, see “tests pass,” and move on. The senior user
+<strong>forces small diffs</strong>. They reject “rewrite this whole
+module” suggestions in favor of “extract this one function” steps they
+can review.</p>
+<blockquote>
+<p><em>In any agentic interview, the senior moves the AI in small steps.
+The crutch user runs the AI on a long task and reviews the result en
+masse.</em></p>
+</blockquote>
+<h3 id="the-novelty-assumption">2.4. The novelty assumption</h3>
+<p>The crutch user assumes anything the AI suggests is current best
+practice. The senior user knows the AI’s training data lags reality by
+months — sometimes years — and that “best practice” is contextual
+anyway.</p>
+<blockquote>
+<p><em>Concrete example:</em> The AI may still suggest
+<code>useState</code> patterns from 2022 when your app would benefit
+from React 19 server actions. It may suggest <code>pages/</code> Next.js
+routes when your codebase is in <code>app/</code>. It may suggest a
+deprecated library because that library was popular when the model was
+trained.</p>
+</blockquote>
+<p><strong>Senior tell:</strong> “I don’t accept dependency suggestions
+from the AI without checking the package’s recent activity and that we
+don’t already have a similar package.”</p>
+</section>
+<section id="the-phrase-that-signals-the-shift" class="slide level2">
+<h2>3. The phrase that signals the shift</h2>
+<p>When an interviewer asks you about a code change you made, work this
+phrase in:</p>
+<blockquote>
+<p><em>“My instinct was X. I asked the AI for a second opinion / a
+sanity check / an alternative, and it suggested Y. I went with [X / Y /
+a hybrid] because [reason rooted in your project’s context].”</em></p>
+</blockquote>
+<p>That phrase, in three lines, conveys:</p>
+<ol type="1">
+<li>You had your own instinct first. <strong>Internal
+locus.</strong></li>
+<li>You used the AI as a <em>peer</em>, not as an oracle.</li>
+<li>You made the final call yourself, citing <strong>your</strong>
+context.</li>
+</ol>
+<p>Compare to the crutch version:</p>
+<blockquote>
+<p><em>“I asked the AI and it told me to do X.”</em></p>
+</blockquote>
+<p>The two sentences describe the same outcome. The first one gets you
+the offer.</p>
+</section>
+<section id="the-did-you-read-what-the-ai-wrote-question"
+class="slide level2">
+<h2>4. The “did you read what the AI wrote?” question</h2>
+<p>This will be asked. Sometimes directly:</p>
+<blockquote>
+<p><em>“Did you actually read every line of code in your portfolio
+project?”</em></p>
+</blockquote>
+<p>Sometimes obliquely:</p>
+<blockquote>
+<p><em>“Walk me through this function.”</em> → They pick the most
+non-obvious one.</p>
+</blockquote>
+<p>The right answer is <em>“Yes,”</em> and the proof is that you can
+walk through any line on demand.</p>
+<p>The defense:</p>
+<ul>
+<li><strong>Spend an hour with your portfolio code before any
+interview.</strong> Read every component. Star anything you don’t fully
+recall. Refresh.</li>
+<li><strong>If you find code you can’t explain, rewrite it.</strong>
+Even if it’s working. The interview goal is to be able to explain
+<em>every</em> line. AI-generated code is fair game; AI-generated code
+you can’t explain is not.</li>
+</ul>
+<p>This is the tax of using AI fluently. Pay it.</p>
+</section>
+<section id="the-four-habits-that-signal-the-shift"
+class="slide level2">
+<h2>5. The four habits that signal the shift</h2>
+<p>Adopt these in your daily work <em>now</em> and they will leak into
+your interview answers naturally.</p>
+<h3 id="form-a-hypothesis-before-you-prompt">5.1. Form a hypothesis
+before you prompt</h3>
+<p>Before typing a single character to the AI, write down (in your head
+or in a comment) what <em>you</em> think the answer is. Even a wrong
+hypothesis is useful — it gives you a baseline to compare the AI’s
+answer against.</p>
+<h3 id="always-read-the-diff">5.2. Always read the diff</h3>
+<p>Even tiny diffs. <em>Especially</em> tiny diffs — the small ones are
+where sneaky behavioral changes hide. Make this a reflex, not a chore.
+Senior engineers can spot a one-character bug in a 200-line diff because
+they’ve read enough diffs.</p>
+<h3 id="run-the-code-before-trusting-it">5.3. Run the code before
+trusting it</h3>
+<p>The AI is confident even when wrong. The compiler isn’t. The test
+runner isn’t. <strong>Run the code.</strong> Run the tests. The number
+of senior engineers who’ve shipped a confident-looking AI output without
+running it is <em>not</em> zero, and they’ll all tell you the same
+horror story when you ask.</p>
+<h3 id="keep-a-log-of-ai-mistakes">5.4. Keep a log of AI mistakes</h3>
+<p>For one week, write down every time the AI was wrong. The format:
+<em>what you asked, what it returned, what was wrong, what the right
+answer was</em>. By Friday you’ll have a personal failure-mode catalog.
+<strong>It will be your best interview prep artifact.</strong></p>
+</section>
+<section id="story-arsenal-tell-me-about-a-time-you-didnt-trust-the-ai"
+class="slide level2">
+<h2>6. Story arsenal: “Tell me about a time you didn’t trust the
+AI…”</h2>
+<p>This question (or a variant) shows up in roughly 60% of interviews
+that mention AI. <strong>Have a story ready.</strong> Use the STAR
+format.</p>
+<blockquote>
+<p><strong>Situation:</strong> “I was working on the scoring engine for
+a fantasy-sports app. Each team has picks across five rounds, and the
+scoring needed to handle both completed and pending matches.”</p>
+<p><strong>Task:</strong> “I needed a function that gracefully handled
+the <em>pending</em> case — not as a zero, but as a separate state —
+because the UI shows three different colors for correct, wrong, and
+pending.”</p>
+<p><strong>Action:</strong> “I asked the AI to write the scoring
+function. It returned a clean implementation that returned 0 for
+unplayed matches. That was wrong for my use case. The bug wouldn’t have
+surfaced in tests of completed tournaments — only during a live
+tournament. I rejected the diff, prompted again with the explicit
+constraint <em>‘unplayed matches must return null, not zero, because the
+UI distinguishes pending from wrong’</em>, and accepted the second
+pass.”</p>
+<p><strong>Result:</strong> “The function works correctly throughout the
+tournament lifecycle. The lesson I keep coming back to: the AI optimizes
+for the spec it was given, and any constraint I forget to mention is a
+constraint it can’t satisfy.”</p>
+</blockquote>
+<p>Memorize a story like this from your own work. <strong>Make sure the
+story has a moment where you exercised judgment the AI
+couldn’t.</strong> That moment is the interview’s gold.</p>
+</section>
+<section
+id="the-what-would-you-do-if-ai-got-10-better-tomorrow-question"
+class="slide level2">
+<h2>7. The “what would you do if AI got 10× better tomorrow?”
+question</h2>
+<p>A wildcard question, but increasingly asked. Have a structured
+answer.</p>
+<blockquote>
+<p><em>“I’d shift more time to design and judgment. The bottom of the
+engineering stack — typing, implementation — would get even cheaper. The
+top — choosing what to build, designing for our specific constraints,
+owning the trade-offs — would not. Those are the layers I’d invest in.
+Concretely: more user research, more architectural-trade-off
+documentation, more time talking to other teams, less time looking at
+code I personally typed. The AI raises the floor of what’s possible. It
+doesn’t raise the ceiling of what’s required from a senior.”</em></p>
+</blockquote>
+</section>
+<section id="three-exercises-for-this-week" class="slide level2">
+<h2>8. Three exercises for this week</h2>
+<h3 id="the-hypothesis-log">8.1. The hypothesis log</h3>
+<p>For the next 5 working days, write down your hypothesis
+<em>before</em> prompting the AI. At the end of the week, look at the
+log. How often were you right? How often was the AI? What patterns of
+disagreement do you see?</p>
+<h3 id="the-diff-drill">8.2. The diff drill</h3>
+<p>Pick the next 10 AI-generated diffs that land in your code.
+<strong>Force yourself to articulate what each one changes, line by
+line, before accepting it.</strong> It will feel slow. After 10 diffs,
+it will be habit.</p>
+<h3 id="the-story-file">8.3. The story file</h3>
+<p>Open <code>interview-stories.md</code>. Write down 5 STAR-format
+stories from your real work in the last 6 months. At least 2 of them
+should feature a moment where you did <em>not</em> trust the AI and made
+the call yourself.</p>
+</section>
+<section id="common-pitfalls-in-this-conversation" class="slide level2">
+<h2>9. Common pitfalls in this conversation</h2>
+<h3 id="the-performative-caution">9.1. The performative caution</h3>
+<blockquote>
+<p><em>“Oh, I’m very careful with AI. I read everything. I run all the
+tests. I never just accept things.”</em></p>
+</blockquote>
+<p>If asked specifically what you check for, the crutch user goes vague.
+<strong>Have specifics.</strong> Otherwise it sounds rehearsed in the
+bad way.</p>
+<h3 id="the-performative-skepticism">9.2. The performative
+skepticism</h3>
+<blockquote>
+<p><em>“AI is interesting but I generally write everything
+myself.”</em></p>
+</blockquote>
+<p>Translation in the interviewer’s head: <em>“This person is
+slow.”</em> Don’t.</p>
+<h3 id="the-performative-depth">9.3. The performative depth</h3>
+<blockquote>
+<p><em>“I deeply understand transformer architecture and use that to
+inform my prompting.”</em></p>
+</blockquote>
+<p>Unless they asked, this is irrelevant trivia. <strong>Don’t lecture
+about ML internals.</strong> Talk about engineering outcomes.</p>
+<h3 id="apologizing-for-ai-use">9.4. Apologizing for AI use</h3>
+<blockquote>
+<p><em>“Yeah, I… used AI for some of this, sorry.”</em></p>
+</blockquote>
+<p>Don’t apologize. AI use is the modern default. <strong>Frame it as
+professional craft, not a confession.</strong></p>
+</section>
+<section id="check-yourself-2" class="slide level2">
+<h2>10. CHECK YOURSELF</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Can you state the one-sentence shift
+(section 1) from memory?</label></li>
+<li><label><input type="checkbox" />Can you list the four “tells” of a
+crutch user and explain each in your own words?</label></li>
+<li><label><input type="checkbox" />Can you give the <em>senior
+version</em> of the phrase from section 3 about your own
+work?</label></li>
+<li><label><input type="checkbox" />Have you done at least one of the
+three exercises in section 8?</label></li>
+<li><label><input type="checkbox" />Do you have a STAR story from your
+real work where you didn’t trust the AI?</label></li>
+</ul>
+<p>If yes to all five, you’ve completed the foundations chapter.
+<strong>Onward.</strong></p>
+</section>
+<section id="where-you-are-now-2" class="slide level2">
+<h2>11. Where you are now</h2>
+<p>After this chapter you have:</p>
+<ul>
+<li>A vocabulary for AI-assisted development with five tool generations
+and three workflows.</li>
+<li>A five-layer model that makes seniority visible.</li>
+<li>A list of new skills that command a premium.</li>
+<li>A mindset shift you can feel and project in conversation.</li>
+<li>An exercise list that takes a week to complete and changes how you
+work.</li>
+</ul>
+<p>This is your platform. Chapter 2 builds the most important answer
+you’ll ever give in an interview: the multi-pillar response to <em>“Why
+do we still need human developers?”</em></p>
+<p>Open <strong><a
+href="../chapter-02-the-big-question/README.md">../chapter-02-the-big-question/README.md</a></strong>
+when you’re ready.</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^5/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

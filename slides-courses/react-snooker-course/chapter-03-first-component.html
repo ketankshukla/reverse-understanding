@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Chapter 03 First Component</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {  background-color: #f8f8f8; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ef2929; } /* Alert */
+    code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #204a87; } /* Attribute */
+    code span.bn { color: #0000cf; } /* BaseN */
+    code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4e9a06; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #8f5902; font-style: italic; } /* Comment */
+    code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+    code span.dt { color: #204a87; } /* DataType */
+    code span.dv { color: #0000cf; } /* DecVal */
+    code span.er { color: #a40000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #0000cf; } /* Float */
+    code span.fu { color: #204a87; font-weight: bold; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+    code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+    code span.ot { color: #8f5902; } /* Other */
+    code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+    code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+    code span.ss { color: #4e9a06; } /* SpecialString */
+    code span.st { color: #4e9a06; } /* String */
+    code span.va { color: #000000; } /* Variable */
+    code span.vs { color: #4e9a06; } /* VerbatimString */
+    code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/theme/white.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Chapter 03 First Component</h1>
+</section>
+
+<section>
+<section id="chapter-3-your-first-react-component"
+class="title-slide slide level1">
+<h1>Chapter 3 — Your First React Component</h1>
+<blockquote>
+<p><strong>Now we write React.</strong> From a 15-line hello-world
+component to a fully styled standings table with sorted rows,
+medal-color rank badges, per-round columns, and a form indicator.</p>
+</blockquote>
+</section>
+<section id="what-youll-learn" class="slide level2">
+<h2>What you’ll learn</h2>
+<ul>
+<li>The <strong>anatomy</strong> of a React component: the function, the
+return, the JSX, the props.</li>
+<li>How <strong>JSX</strong> is just syntactic sugar for
+<code>React.createElement</code> calls (and why that matters).</li>
+<li><strong>Lists and keys</strong> — why React needs a <code>key</code>
+prop on every item in a <code>.map()</code> loop.</li>
+<li><strong>Conditional rendering</strong> with <code>&amp;&amp;</code>,
+ternaries, and early returns.</li>
+<li><strong>Inline styles</strong> with TypeScript’s
+<code>React.CSSProperties</code>.</li>
+<li><strong>Component props</strong> typed with TypeScript
+<code>interface</code>s.</li>
+<li>The discipline of <strong>progressive enhancement</strong> —
+building a feature one column / one widget at a time.</li>
+</ul>
+</section>
+<section id="lessons-in-this-chapter" class="slide level2">
+<h2>Lessons in this chapter</h2>
+<ol type="1">
+<li><strong><a
+href="./01-anatomy-of-a-component.md">01-anatomy-of-a-component.md</a></strong>
+— What a component IS, what JSX IS, and what makes a component “render”.
+The mental model that powers everything else.</li>
+<li><strong><a
+href="./02-rendering-the-standings.md">02-rendering-the-standings.md</a></strong>
+— Building <code>&lt;StandingsTab&gt;</code> v1: a plain table of 8
+teams with totals. The smallest version that proves the data flows.</li>
+<li><strong><a
+href="./03-progressive-enhancement.md">03-progressive-enhancement.md</a></strong>
+— Iterating on the standings: medal-color rank circles, per-round
+columns, the Final Pick chip, the Form badge. Six small features added
+one at a time.</li>
+</ol>
+</section>
+<section id="files-youll-create-in-this-chapter" class="slide level2">
+<h2>Files you’ll create in this chapter</h2>
+<pre><code>components/
+├── SnookerFantasyLeague.tsx       ← stub orchestrator that renders &lt;StandingsTab /&gt;
+├── tabs/
+│   └── StandingsTab.tsx           ← the standings tab
+└── standings/
+    ├── LeagueTable.tsx            ← the table itself (extracted in Lesson 3)
+    ├── StatCard.tsx               ← summary stat tiles above the table
+    └── FormBadge.tsx              ← rising/falling/steady arrow indicator</code></pre>
+</section>
+<section id="new-reactnext.js-concepts-introduced" class="slide level2">
+<h2>New React/Next.js concepts introduced</h2>
+<ul>
+<li><strong>Functional components</strong> — the only kind of component
+you’ll write in 2026.</li>
+<li><strong>Props</strong> — how parent components pass data to
+children.</li>
+<li><strong>Lists with <code>.map()</code></strong> and the
+<code>key</code> prop.</li>
+<li><strong>Conditional rendering</strong> in JSX.</li>
+<li><strong>Inline styles</strong> vs class names.</li>
+<li><strong>The <code>'use client'</code> directive</strong> — when (and
+only when) to use it.</li>
+<li><strong>Component composition</strong> — passing JSX through props
+(<code>children</code>).</li>
+</ul>
+</section>
+<section id="how-long-it-should-take" class="slide level2">
+<h2>How long it should take</h2>
+<ul>
+<li>30 min reading per lesson</li>
+<li>1.5–2 hours typing the code</li>
+<li>~3.5 hours total</li>
+</ul>
+</section>
+<section id="what-youll-see-in-your-browser-at-the-end"
+class="slide level2">
+<h2>What you’ll see in your browser at the end</h2>
+<p>Open <code>http://localhost:3000</code> after Lesson 3 and you should
+see:</p>
+<ul>
+<li>A dark green hero header with “World Snooker Championship” in gold
+serif type and “🏆 WU YIZE — WORLD CHAMPION 2026 (18-17)” in a red-gold
+badge.</li>
+<li>Below it, a sticky tab bar with five tabs (only Standings will work
+for now — clicking other tabs may error or do nothing).</li>
+<li>The Standings table: 8 rows, ranked by total, gold/silver/bronze
+rank circles for the top 3, per-round columns, a Final Pick chip, a Form
+badge, hover effect on each row.</li>
+</ul>
+<p>If your browser shows that, you’ve nailed Chapter 3.</p>
+</section>
+<section id="before-you-start" class="slide level2">
+<h2>Before you start</h2>
+<p>Make sure Chapter 2 is done. You should have:</p>
+<ul>
+<li><code>lib/types.ts</code>, <code>lib/scoring.ts</code>,
+<code>lib/matches.ts</code>, <code>lib/teams.ts</code>,
+<code>lib/players.ts</code>, <code>lib/constants.ts</code> all populated
+with real data.</li>
+<li><code>app/layout.tsx</code>, <code>app/page.tsx</code>,
+<code>app/globals.css</code> all in place.</li>
+<li><code>npm run dev</code> boots without crashing (it’ll error on the
+missing <code>&lt;SnookerFantasyLeague&gt;</code> component — that’s
+fine, you’re about to create it).</li>
+</ul>
+<p>Open <strong><a
+href="./01-anatomy-of-a-component.md">01-anatomy-of-a-component.md</a></strong>.</p>
+</section></section>
+<section>
+<section id="chapter-3-lesson-1-anatomy-of-a-component"
+class="title-slide slide level1">
+<h1>Chapter 3 · Lesson 1 — Anatomy of a Component</h1>
+<blockquote>
+<p><em>Goal: by the end of this lesson, you can look at any React
+component file and identify every part of it — the function, the props,
+the JSX, the return, the imports — and explain what each one does to a
+junior developer.</em></p>
+</blockquote>
+</section>
+<section id="what-is-a-component-really" class="slide level2">
+<h2>What is a “component”, really?</h2>
+<p>In React, a component is <strong>just a function</strong>.
+Specifically, a function that:</p>
+<ol type="1">
+<li>Takes a single argument called <code>props</code> (an object with
+whatever data the parent passes in).</li>
+<li>Returns either a piece of JSX (looks like HTML), a string, a number,
+an array, or <code>null</code>.</li>
+</ol>
+<p>That’s it. There’s no class, no constructor, no <code>extends</code>,
+no decorators. <strong>A component is a function.</strong> If you can
+write a function, you can write a React component.</p>
+<p>Here’s the smallest possible React component:</p>
+<pre class="tsx"><code>function Hello() {
+  return &lt;h1&gt;Hello, world.&lt;/h1&gt;;
+}</code></pre>
+<p>Six tokens. One return. That’s a complete, valid, renderable React
+component. You could put it on a page right now.</p>
+<h3 id="functional-vs-class-components-the-2026-answer">Functional vs
+class components — the 2026 answer</h3>
+<p>If you’ve read any React tutorial older than 2020, you’ve probably
+seen
+<code>class MyComponent extends React.Component { render() { ... } }</code>.
+That’s the <strong>class component</strong> style. It still works, but
+<strong>you should never write a new class component in
+2026.</strong></p>
+<p>The React team has explicitly said functional components + hooks are
+the path forward. Class components are a legacy style that exists for
+backwards compatibility. Every new component in this course is a
+function.</p>
+<p>If an interviewer asks you about class components, the answer is:
+<em>“I know they exist, I can read them, I’d refactor to functional +
+hooks if I owned the code.”</em> That’s enough.</p>
+</section>
+<section id="what-is-jsx" class="slide level2">
+<h2>What is JSX?</h2>
+<p>The thing that looks like HTML inside a component is
+<strong>JSX</strong> — JavaScript XML. It’s a syntax extension to
+JavaScript that lets you write tag-like markup directly in your
+code.</p>
+<pre class="tsx"><code>return &lt;h1&gt;Hello, world.&lt;/h1&gt;;</code></pre>
+<p>That <code>&lt;h1&gt;...&lt;/h1&gt;</code> is JSX. It is <strong>not
+HTML</strong>. It looks like HTML, but it’s actually compiled into a
+JavaScript function call. Specifically, a Next.js / React build pipeline
+transforms the line above into:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> React<span class="op">.</span><span class="fu">createElement</span>(<span class="st">&#39;h1&#39;</span><span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="st">&#39;Hello, world.&#39;</span>)<span class="op">;</span></span></code></pre></div>
+<p><code>React.createElement(type, props, ...children)</code> is what
+JSX is “really” doing under the hood. The compiler does this for you so
+you can write the more readable JSX form. <strong>Knowing this saves you
+from a dozen confusing error messages later.</strong></p>
+<h3 id="why-does-this-matter">Why does this matter?</h3>
+<p>Three implications fall out of “JSX is just function calls”:</p>
+<h4 id="jsx-returns-a-value.">1. JSX returns a value.</h4>
+<p>Because it compiles to <code>React.createElement(...)</code>, JSX
+produces a <strong>JavaScript object</strong> (a “React element”) at
+runtime. You can assign it to a variable:</p>
+<pre class="tsx"><code>const heading = &lt;h1&gt;Hello&lt;/h1&gt;;   // heading is an object, not HTML
+return &lt;div&gt;{heading}&lt;/div&gt;;       // and you can embed it inside more JSX</code></pre>
+<p>That’s why you can store JSX in a variable, return it from a
+function, pass it as a prop, etc. <strong>JSX is data, not
+markup.</strong></p>
+<h4 id="you-can-use-javascript-inside-jsx-with-.">2. You can use
+JavaScript inside JSX with <code>{}</code>.</h4>
+<p>Curly braces inside JSX let you embed any JavaScript expression:</p>
+<pre class="tsx"><code>const name = &#39;Wu Yize&#39;;
+return &lt;h1&gt;Hello, {name}!&lt;/h1&gt;;          // &quot;Hello, Wu Yize!&quot;
+return &lt;p&gt;{1 + 2}&lt;/p&gt;;                    // &quot;3&quot;
+return &lt;p&gt;{teams.map(t =&gt; &lt;span key={t.name}&gt;{t.name}&lt;/span&gt;)}&lt;/p&gt;;  // a list</code></pre>
+<p><strong>Anywhere a JS expression is valid, <code>{}</code> lets you
+drop one in.</strong> Statements (like <code>if</code> and
+<code>for</code>) are not expressions, so they don’t fit; you’ll see
+ternaries (<code>condition ? a : b</code>) and <code>.map()</code> calls
+instead.</p>
+<h4 id="naming-and-capitalization-matter.">3. Naming and capitalization
+matter.</h4>
+<p>JSX distinguishes between <strong>tags</strong> and
+<strong>components</strong> by the first letter:</p>
+<pre class="tsx"><code>&lt;h1&gt;...&lt;/h1&gt;      // lowercase → HTML element
+&lt;Hello /&gt;         // uppercase → React component (your function)</code></pre>
+<p>Compiled output:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>React<span class="op">.</span><span class="fu">createElement</span>(<span class="st">&#39;h1&#39;</span><span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="op">...</span>)    <span class="co">// string type → DOM element</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>React<span class="op">.</span><span class="fu">createElement</span>(Hello<span class="op">,</span> <span class="kw">null</span>)        <span class="co">// function type → React component</span></span></code></pre></div>
+<p>If you accidentally name your component <code>function hello()</code>
+instead of <code>function Hello()</code>, JSX will treat
+<code>&lt;hello /&gt;</code> as the HTML tag <code>&lt;hello&gt;</code>
+(which doesn’t exist) and your component will silently not render.
+<strong>Always capitalize component names.</strong></p>
+</section>
+<section id="the-full-anatomy-a-real-component-line-by-line"
+class="slide level2">
+<h2>The full anatomy: a real component, line by line</h2>
+<p>Open <code>components/standings/StatCard.tsx</code> from the repo.
+It’s a small but complete component:</p>
+<pre class="tsx"><code>import type { LucideIcon } from &#39;lucide-react&#39;;
+
+interface StatCardProps {
+  icon: LucideIcon;
+  label: string;
+  value: string | number;
+  color: string;
+  bgColor: string;
+}
+
+export default function StatCard({ icon: Icon, label, value, color, bgColor }: StatCardProps) {
+  return (
+    &lt;div
+      style={{
+        background: `linear-gradient(135deg, ${bgColor} 0%, ${bgColor}DD 100%)`,
+        color: &#39;#FFFFFF&#39;,
+        padding: 24,
+        borderRadius: 16,
+        boxShadow: `0 8px 24px ${bgColor}40`,
+      }}
+    &gt;
+      &lt;Icon size={28} strokeWidth={2.5} /&gt;
+      &lt;div style={{ fontSize: 13, letterSpacing: &#39;1.5px&#39;, fontWeight: 600, opacity: 0.9 }}&gt;
+        {label}
+      &lt;/div&gt;
+      &lt;div style={{ fontSize: 32, fontWeight: 900, fontFamily: &quot;&#39;Roboto Slab&#39;, serif&quot; }}&gt;
+        {value}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Let’s dissect it from top to bottom.</p>
+<h3 id="line-1-imports">Line 1: imports</h3>
+<pre class="tsx"><code>import type { LucideIcon } from &#39;lucide-react&#39;;</code></pre>
+<p>This component imports a TypeScript <strong>type</strong> (not a
+value) from the <code>lucide-react</code> package.
+<code>LucideIcon</code> is the type of any icon component (Trophy,
+Calendar, Star, etc.). The actual icon will be passed in as a prop —
+this file doesn’t pick a specific one.</p>
+<p><code>import type</code> (vs plain <code>import</code>) tells
+TypeScript “this is type-only; erase from runtime output.” Senior
+projects use it consistently.</p>
+<h3 id="lines-39-the-props-interface">Lines 3–9: the props
+interface</h3>
+<pre class="tsx"><code>interface StatCardProps {
+  icon: LucideIcon;
+  label: string;
+  value: string | number;
+  color: string;
+  bgColor: string;
+}</code></pre>
+<p>This is the <strong>props contract</strong> for the component. Five
+fields:</p>
+<ul>
+<li><code>icon: LucideIcon</code> — the Lucide icon component to render
+(e.g. <code>Trophy</code>, <code>Star</code>).</li>
+<li><code>label: string</code> — the text under the icon (“LEADER”,
+“MATCHES”, etc.).</li>
+<li><code>value: string | number</code> — the big number/text in the
+middle. <strong>Union type</strong> — accepts either.</li>
+<li><code>color: string</code> — primary accent color (used in some
+variants).</li>
+<li><code>bgColor: string</code> — the gradient background base.</li>
+</ul>
+<p>By declaring this interface, <strong>the component documents its
+API</strong>. Any caller using this component must pass props matching
+this shape, or TypeScript yells at them. Conversely, the <em>inside</em>
+of the component knows exactly what it has to work with.</p>
+<p>The convention <code>&lt;ComponentName&gt;Props</code> for the
+interface name is universal in the React community. Stick with it.</p>
+<h3 id="line-11-the-function-declaration">Line 11: the function
+declaration</h3>
+<pre class="tsx"><code>export default function StatCard({ icon: Icon, label, value, color, bgColor }: StatCardProps) {</code></pre>
+<p>Several things going on here:</p>
+<h4 id="export-default"><code>export default</code></h4>
+<p>Means <em>“this is the main export of the file, and a caller can
+<code>import StatCard from './StatCard'</code> without curly
+braces.”</em></p>
+<p>Compare to <code>export function StatCard()</code> (a “named export”)
+which would require <code>import { StatCard } from './StatCard'</code>
+with braces.</p>
+<p>Convention in this codebase (and most React projects): <strong>one
+component per file, exported as default.</strong> The reason is
+consistency with import syntax — every file you import a component from
+looks the same. There are religious wars about default vs named exports;
+pick one and don’t mix.</p>
+<h4 id="destructuring-the-props">Destructuring the props</h4>
+<pre class="tsx"><code>function StatCard({ icon: Icon, label, value, color, bgColor }: StatCardProps) {</code></pre>
+<p>This is JavaScript object destructuring with a TypeScript annotation.
+It’s equivalent to:</p>
+<pre class="tsx"><code>function StatCard(props: StatCardProps) {
+  const Icon = props.icon;
+  const label = props.label;
+  // ...
+}</code></pre>
+<p>But shorter and more idiomatic.</p>
+<p>The <code>icon: Icon</code> part is a <strong>rename</strong> — we’re
+pulling out the prop called <code>icon</code> and giving it the local
+name <code>Icon</code> (capitalized). Why? Because we’re going to render
+it as a JSX tag (<code>&lt;Icon ... /&gt;</code>), and JSX needs
+uppercase to recognize it as a component. <strong>Without the rename,
+<code>&lt;icon /&gt;</code> would compile to a non-existent HTML
+element.</strong></p>
+<p>This is a small but classic React quirk. Whenever you accept a
+component as a prop, capitalize it locally.</p>
+<h3 id="lines-1232-the-return-jsx">Lines 12–32: the return — JSX</h3>
+<pre class="tsx"><code>return (
+  &lt;div style={{ ... }}&gt;
+    &lt;Icon size={28} strokeWidth={2.5} /&gt;
+    &lt;div style={{ ... }}&gt;{label}&lt;/div&gt;
+    &lt;div style={{ ... }}&gt;{value}&lt;/div&gt;
+  &lt;/div&gt;
+);</code></pre>
+<p>Three children of a <code>&lt;div&gt;</code>:</p>
+<ol type="1">
+<li>The icon component
+(e.g. <code>&lt;Trophy size={28} /&gt;</code>).</li>
+<li>A <code>&lt;div&gt;</code> containing the label text.</li>
+<li>A <code>&lt;div&gt;</code> containing the value (number or
+string).</li>
+</ol>
+<p>Notice the <strong><code>return ( ... )</code></strong> with parens
+around the JSX. Why?</p>
+<p>When JSX spans multiple lines, JavaScript’s automatic semicolon
+insertion (ASI) can confuse the parser. Wrapping the JSX in
+<code>( )</code> makes it unambiguous that this is one big expression.
+<strong>Always wrap multi-line JSX in parens.</strong> It’s not strictly
+required by the language; it’s required by every real codebase to avoid
+ASI bugs.</p>
+<h3 id="the-inline-style-attribute">The inline style attribute</h3>
+<pre class="tsx"><code>&lt;div
+  style={{
+    background: `linear-gradient(135deg, ${bgColor} 0%, ${bgColor}DD 100%)`,
+    color: &#39;#FFFFFF&#39;,
+    padding: 24,
+    borderRadius: 16,
+    boxShadow: `0 8px 24px ${bgColor}40`,
+  }}
+&gt;</code></pre>
+<p>Three things happening:</p>
+<h4 id="two-layers-of">Two layers of <code>{}</code></h4>
+<p><code>style={{...}}</code> has TWO layers of braces. The outer pair
+is JSX’s “embed an expression here.” The inner pair is a JavaScript
+<strong>object literal</strong>. So it’s actually <code>style={</code> +
+<code>{...}</code> + <code>}</code> — <em>the JSX expression
+<code>{...}</code> evaluates to an object literal that React assigns to
+the style attribute.</em></p>
+<p>Beginners often forget the second pair and write
+<code>style={...}</code> — that’s a syntax error.</p>
+<h4 id="camelcase-property-names">CamelCase property names</h4>
+<p>CSS uses kebab-case (<code>background-color</code>,
+<code>border-radius</code>). React inline styles use camelCase
+(<code>backgroundColor</code>, <code>borderRadius</code>). Why? Because
+JavaScript object keys can’t have hyphens unless quoted, and unquoted
+keys are nicer to type.</p>
+<p>Internally React converts <code>backgroundColor: 'red'</code> to
+<code>style.backgroundColor = 'red'</code> on the DOM element. The
+browser handles the rest.</p>
+<h4 id="numbers-vs-strings">Numbers vs strings</h4>
+<pre class="tsx"><code>padding: 24,           // OK — React adds &#39;px&#39; for you
+fontSize: 14,          // OK — same
+zIndex: 50,            // OK — but no &#39;px&#39; added (zIndex is unitless)
+padding: &#39;24px&#39;,       // also OK
+padding: &#39;14px 16px&#39;,  // string when you need multiple values</code></pre>
+<p>For most CSS properties that accept a length, React assumes pixels if
+you pass a number. Pass a string when you need a unit other than
+<code>px</code> (<code>'2rem'</code>, <code>'50%'</code>) or multiple
+values.</p>
+<h3 id="template-literals-for-dynamic-colors">Template literals for
+dynamic colors</h3>
+<pre class="tsx"><code>background: `linear-gradient(135deg, ${bgColor} 0%, ${bgColor}DD 100%)`,</code></pre>
+<p>This uses a JS <strong>template literal</strong> (backticks +
+<code>${...}</code>). The expression <code>${bgColor}</code> is the
+value of the <code>bgColor</code> prop interpolated into the string.</p>
+<p>The trailing <code>DD</code> is hex shorthand for ~87% opacity
+(<code>DD</code> = 221 / 255). So if <code>bgColor = '#0F5132'</code>,
+the gradient runs from solid <code>#0F5132</code> to
+<code>#0F5132DD</code> — same color, slightly transparent. This produces
+a smooth 1-color gradient that doesn’t look flat.</p>
+<p>This kind of <strong>dynamic styling based on props</strong> is
+exactly why we use inline styles instead of Tailwind classes. There’s no
+Tailwind class for “this color, 87% opacity, with a 135° gradient”
+computed at runtime. Inline wins.</p>
+<h3 id="self-closing-tags">Self-closing tags</h3>
+<pre class="tsx"><code>&lt;Icon size={28} strokeWidth={2.5} /&gt;</code></pre>
+<p>Components with no children use <strong>self-closing syntax</strong>.
+Same rule as <code>&lt;img /&gt;</code> and <code>&lt;br /&gt;</code> in
+XHTML. A non-self-closing version like
+<code>&lt;Icon size={28}&gt;&lt;/Icon&gt;</code> would also work, but
+self-closing is shorter and more conventional for empty elements.</p>
+</section>
+<section id="recap-the-four-parts-of-every-component-file"
+class="slide level2">
+<h2>Recap: the four parts of every component file</h2>
+<p>You’ll see this skeleton everywhere:</p>
+<pre class="tsx"><code>import { ... } from &#39;...&#39;;   // 1. imports
+
+interface FooProps {           // 2. props contract (TypeScript)
+  bar: string;
+}
+
+export default function Foo({ bar }: FooProps) {   // 3. function with destructured props
+  return (                                         // 4. return JSX
+    &lt;div&gt;{bar}&lt;/div&gt;
+  );
+}</code></pre>
+<p>That’s it. <strong>Every component you’ll ever write follows this
+pattern.</strong> Once you see it three times you’ll see it
+everywhere.</p>
+</section>
+<section id="server-vs-client-components-a-teaser" class="slide level2">
+<h2>Server vs client components — a teaser</h2>
+<p>You may have noticed: at the top of
+<code>components/standings/StatCard.tsx</code> there’s no
+<code>'use client'</code> directive. Neither was there one on
+<code>app/layout.tsx</code>. So what kind of component is this — server
+or client?</p>
+<p><strong>Default is server in the App Router.</strong> A component is
+a server component unless something inside it (or its parent) has
+<code>'use client'</code> declared.</p>
+<p><code>StatCard</code> is a server component. So is
+<code>app/layout.tsx</code>. They render to HTML on the server, ship
+zero JavaScript to the browser. That’s fine because they don’t use any
+browser-only features.</p>
+<p><code>&lt;SnookerFantasyLeague&gt;</code> (the orchestrator) WILL
+need <code>'use client'</code> because it uses <code>useState</code>.
+Once a parent is marked client, all its descendants are also rendered
+client-side. <strong>You only need <code>'use client'</code> at the
+boundary</strong> — the highest component in your tree that needs
+interactivity. Everything below that boundary is automatically
+client.</p>
+<p>Chapter 4 will introduce <code>'use client'</code> formally. For now,
+just know:</p>
+<ul>
+<li>Server components are the default.</li>
+<li>They’re free (zero JS shipped to the browser).</li>
+<li>They cannot use <code>useState</code>, <code>useEffect</code>,
+<code>onClick</code>, <code>localStorage</code>, or any browser
+API.</li>
+<li><code>'use client'</code> opts a file (and its descendants) into
+client rendering.</li>
+</ul>
+</section>
+<section id="vibe-prompt-you-would-have-used" class="slide level2">
+<h2>Vibe prompt you would have used</h2>
+<blockquote>
+<p><em>“Write me a <code>StatCard</code> component in
+<code>components/standings/StatCard.tsx</code>. Props:
+<code>icon: LucideIcon</code>, <code>label: string</code>,
+<code>value: string | number</code>, <code>color: string</code>,
+<code>bgColor: string</code>. Render a div with a gradient background
+using <code>bgColor</code> (linear-gradient 135deg from full to ~87%
+opacity), white text, 24px padding, 16px border radius, big shadow
+tinted with bgColor. Inside: the icon at 28px stroke 2.5, then the label
+in small letterspaced text, then the value as a big serif heading.
+Inline styles only. TypeScript, default export.”</em></p>
+</blockquote>
+<p>The trick is naming <strong>every prop, every style detail, every
+visual choice.</strong> When the spec is this specific, the LLM has
+nothing to invent. <strong>Specificity in, predictability
+out.</strong></p>
+</section>
+<section id="check-yourself" class="slide level2">
+<h2>CHECK YOURSELF</h2>
+<ol type="1">
+<li><strong>Why does the prop destructuring use
+<code>{ icon: Icon }</code> instead of just
+<code>{ icon }</code>?</strong> What would break if you used the
+lowercase form?</li>
+<li><strong><code>style={{ ... }}</code> has two layers of braces. Walk
+through what each layer does.</strong> What error would you get if you
+wrote <code>style={ ... }</code> (one layer)?</li>
+<li><strong><code>padding: 24</code> works, but
+<code>font-size: '14'</code> does not. Why?</strong> What’s the
+difference between unitless numbers and string values in React style
+objects?</li>
+<li><strong>A teammate writes <code>&lt;icon size={28} /&gt;</code> and
+gets a console warning about an unknown HTML element. What’s wrong, and
+what’s the one-character fix?</strong></li>
+<li><strong><code>StatCard.tsx</code> doesn’t have
+<code>'use client'</code> at the top. Is it a server component or a
+client component? Why?</strong> Could you <code>useState</code> inside
+it as-is? Could a parent component with <code>'use client'</code> use
+<code>&lt;StatCard /&gt;</code> inside it?</li>
+</ol>
+<p>When you’ve answered these, head to <strong><a
+href="./02-rendering-the-standings.md">02-rendering-the-standings.md</a></strong>
+— we build our first real, data-driven component.</p>
+</section></section>
+<section>
+<section id="chapter-3-lesson-2-rendering-the-standings"
+class="title-slide slide level1">
+<h1>Chapter 3 · Lesson 2 — Rendering the Standings</h1>
+<blockquote>
+<p><em>Goal: build the first real, data-driven React component in this
+app — <code>&lt;StandingsTab&gt;</code> v1. By the end of this lesson,
+you’ll see a sortable table of 8 fantasy teams in your browser, ranked
+by total points.</em></p>
+</blockquote>
+</section>
+<section id="the-smallest-version-that-proves-data-flows"
+class="slide level2">
+<h2>The smallest version that proves data flows</h2>
+<p>When you start a new feature in React, the first version should be
+<strong>the smallest thing that proves the data is real</strong>. For
+the standings, that’s just team names and totals — no styling, no icons,
+no medals, no per-round columns. Just rows and a number.</p>
+<p>We’ll build that v1 first, see it work, then iterate. <strong>This is
+the way.</strong></p>
+<p>Why? Because if your first version has 200 lines of styling AND data
+binding AND sorting AND conditional rendering, and something doesn’t
+work, you have to debug <em>all of it at once</em>. A 15-line v1 lets
+you find data-binding bugs in 5 seconds. Then you add styling on top,
+debug only the styling, and move on. <strong>One concern at a
+time.</strong></p>
+</section>
+<section id="step-1-stub-the-orchestrator" class="slide level2">
+<h2>Step 1: stub the orchestrator</h2>
+<p>Before the standings tab can render, the page needs
+<em>something</em> to render. Create
+<code>components/SnookerFantasyLeague.tsx</code> with a stub:</p>
+<pre class="tsx"><code>&#39;use client&#39;;
+
+import StandingsTab from &#39;./tabs/StandingsTab&#39;;
+
+export default function SnookerFantasyLeague() {
+  return (
+    &lt;div style={{ padding: 32, fontFamily: &#39;sans-serif&#39; }}&gt;
+      &lt;h1&gt;Snooker Fantasy League&lt;/h1&gt;
+      &lt;StandingsTab /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Five things to notice:</p>
+<h3 id="use-client-at-the-top-finally"><code>'use client'</code> at the
+top — finally</h3>
+<p>This is the directive we’ve been foreshadowing. Putting
+<code>'use client'</code> as the first line of a file marks the file
+(and everything it imports that’s not also marked server) as a
+<strong>client component</strong>. That means it gets shipped to the
+browser as JavaScript and can use <code>useState</code>,
+<code>useEffect</code>, event handlers, etc.</p>
+<p>Why does <code>&lt;SnookerFantasyLeague&gt;</code> need to be a
+client component? Because in the next chapter we’ll add
+<code>useState</code> to track which tab is active. State requires
+client-side hydration. Pre-marking it now saves a refactor later.</p>
+<h4 id="does-this-make-everything-client-side-now">Does this make
+EVERYTHING client-side now?</h4>
+<p>Yes — but only the <code>SnookerFantasyLeague</code> subtree, which
+is most of the app. The <code>app/layout.tsx</code> and
+<code>app/page.tsx</code> are still server components and still render
+to HTML on the server. That HTML wraps the client JS bundle. So the page
+is still <strong>statically prerenderable</strong> (no real-time data)
+and benefits from server rendering for SEO, while still allowing
+client-side interactivity.</p>
+<p>This is the App Router’s superpower: <strong>mix server and client at
+any boundary</strong>. The boundary here is
+<code>&lt;SnookerFantasyLeague&gt;</code>. Above it (in
+<code>layout.tsx</code> and <code>page.tsx</code>) — server. Inside it —
+client.</p>
+<h3 id="importing-from-a-sub-path">Importing from a sub-path</h3>
+<pre class="tsx"><code>import StandingsTab from &#39;./tabs/StandingsTab&#39;;</code></pre>
+<p>The relative import <code>./tabs/StandingsTab</code> works because
+we’re inside <code>components/</code> and <code>StandingsTab.tsx</code>
+is at <code>components/tabs/StandingsTab.tsx</code>.</p>
+<p>We <em>could</em> also use the path alias:
+<code>import StandingsTab from '@/components/tabs/StandingsTab'</code>.
+Both work. The codebase uses relative imports for <em>intra-folder</em>
+references and <code>@/</code> aliases for <em>cross-folder</em>
+references (e.g. <code>@/lib/teams</code>). It’s a soft convention that
+keeps imports local-feeling.</p>
+<h3 id="stub-style-minimal-so-the-data-is-the-focus">Stub style —
+minimal so the data is the focus</h3>
+<pre class="tsx"><code>&lt;div style={{ padding: 32, fontFamily: &#39;sans-serif&#39; }}&gt;</code></pre>
+<p>This wrapper exists purely so the page isn’t visually flush against
+the browser edge. We’ll replace it with the gradient hero in Chapter
+4.</p>
+</section>
+<section id="step-2-the-v1-standingstab" class="slide level2">
+<h2>Step 2: the v1 StandingsTab</h2>
+<p>Create <code>components/tabs/StandingsTab.tsx</code>:</p>
+<pre class="tsx"><code>import { TEAMS } from &#39;@/lib/teams&#39;;
+import { calculateTeamScores } from &#39;@/lib/scoring&#39;;
+
+export default function StandingsTab() {
+  const teamsWithScores = TEAMS.map(t =&gt; ({
+    ...t,
+    scores: calculateTeamScores(t),
+  })).sort((a, b) =&gt; b.scores.total - a.scores.total);
+
+  return (
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Rank&lt;/th&gt;
+          &lt;th&gt;Team&lt;/th&gt;
+          &lt;th&gt;Total&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        {teamsWithScores.map((team, i) =&gt; (
+          &lt;tr key={team.name}&gt;
+            &lt;td&gt;{i + 1}&lt;/td&gt;
+            &lt;td&gt;{team.name}&lt;/td&gt;
+            &lt;td&gt;{team.scores.total}&lt;/td&gt;
+          &lt;/tr&gt;
+        ))}
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  );
+}</code></pre>
+<p>Run <code>npm run dev</code> and visit
+<code>http://localhost:3000</code>. You should see a table with 8 rows
+showing team names ranked by total points.</p>
+<p>It looks ugly. <strong>That’s fine.</strong> It works.</p>
+</section>
+<section id="whats-happening-in-this-file" class="slide level2">
+<h2>What’s happening in this file</h2>
+<p>Walk through each piece.</p>
+<h3 id="line-12-imports">Line 1–2: imports</h3>
+<pre class="tsx"><code>import { TEAMS } from &#39;@/lib/teams&#39;;
+import { calculateTeamScores } from &#39;@/lib/scoring&#39;;</code></pre>
+<p>We’re pulling the data and the scoring function from the
+<code>lib/</code> folder we built in Chapter 2. The <code>@/</code> is
+the path alias from <code>tsconfig.json</code>. <strong>Notice there’s
+no <code>import React from 'react'</code> at the top</strong> — modern
+JSX (since React 17) doesn’t require it. The compiler imports React
+automatically when needed. You’ll only
+<code>import { useState, useMemo } from 'react'</code> for hooks.</p>
+<h3 id="line-4-the-function">Line 4: the function</h3>
+<pre class="tsx"><code>export default function StandingsTab() {</code></pre>
+<p>No props. The component uses imported data directly, with no parent
+involvement. That’s fine for a leaf component that owns its data.</p>
+<h3 id="line-58-derive-the-data">Line 5–8: derive the data</h3>
+<pre class="tsx"><code>const teamsWithScores = TEAMS.map(t =&gt; ({
+  ...t,
+  scores: calculateTeamScores(t),
+})).sort((a, b) =&gt; b.scores.total - a.scores.total);</code></pre>
+<p>This is the most important line in the file. Read it twice.</p>
+<h4 id="step-1-teams.mapt-...t-scores-calculateteamscorest">Step 1:
+<code>TEAMS.map(t =&gt; ({ ...t, scores: calculateTeamScores(t) }))</code></h4>
+<p>For each team, produce a new object that: - Spreads the team’s
+existing fields (<code>name</code>, <code>color</code>, <code>r1</code>,
+<code>r2</code>, …): <code>...t</code> - Adds a new <code>scores</code>
+field computed from <code>calculateTeamScores(t)</code>.</p>
+<p>The result is an array of “team-with-scores” objects — the original
+team plus a <code>scores</code> object containing all the round totals
+and detail arrays.</p>
+<p>The <strong><code>...t</code> spread</strong> is JavaScript shorthand
+for “copy all of <code>t</code>’s fields into the new object.” Without
+it we’d have to type out every field manually:</p>
+<pre class="tsx"><code>{ name: t.name, color: t.color, accent: t.accent, /* etc */ scores: calculateTeamScores(t) }</code></pre>
+<p>Spread is shorter and more maintainable. If a new field is added to
+<code>Team</code> later, the spread automatically picks it up.</p>
+<h4 id="step-2-.sorta-b-b.scores.total---a.scores.total">Step 2:
+<code>.sort((a, b) =&gt; b.scores.total - a.scores.total)</code></h4>
+<p>Sort by <code>scores.total</code> descending. Because
+<code>b - a</code> is positive when <code>b</code> is bigger than
+<code>a</code>, <code>.sort()</code> puts bigger values first.
+<strong>This is the standard “sort descending by a number”
+recipe.</strong></p>
+<p>If you wanted ascending instead, you’d write <code>a - b</code>.</p>
+<h4 id="why-is-sorting-ok-here">Why is sorting OK here?</h4>
+<p><code>.sort()</code> mutates the original array. That’s a footgun in
+React if you’re not careful — sorting a prop array would mutate the
+parent’s data. But here, <strong><code>TEAMS.map(...)</code> produces a
+brand new array</strong> that we then sort. The original
+<code>TEAMS</code> is untouched. <strong>Mutating an array you just made
+is fine.</strong> Mutating an array someone else gave you is not.</p>
+<h4 id="why-is-this-in-the-function-body-not-at-the-module-level">Why is
+this in the function body, not at the module level?</h4>
+<p>We could move the <code>teamsWithScores</code> calculation outside
+the component:</p>
+<pre class="tsx"><code>const teamsWithScores = TEAMS.map(...).sort(...);   // module-level
+
+export default function StandingsTab() {
+  return ( /* ... */ );
+}</code></pre>
+<p>It would still work. It would even be slightly faster (computed once,
+not per-render). But:</p>
+<ul>
+<li>For Chapter 4, we’ll need this calculation inside the component so
+we can pass <code>teamsWithScores</code> to other tabs from the
+orchestrator.</li>
+<li>For now, having it inside is fine — <code>calculateTeamScores</code>
+for 8 teams is microseconds.</li>
+<li>In Chapter 4 we’ll wrap it in <code>useMemo</code> to make the
+per-render cost negligible.</li>
+</ul>
+<p>We’re optimizing for <strong>readability and
+refactor-ability</strong>, not raw speed.</p>
+<h3 id="lines-1122-the-jsx">Lines 11–22: the JSX</h3>
+<pre class="tsx"><code>return (
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;&lt;th&gt;Rank&lt;/th&gt;&lt;th&gt;Team&lt;/th&gt;&lt;th&gt;Total&lt;/th&gt;&lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      {teamsWithScores.map((team, i) =&gt; (
+        &lt;tr key={team.name}&gt;
+          &lt;td&gt;{i + 1}&lt;/td&gt;
+          &lt;td&gt;{team.name}&lt;/td&gt;
+          &lt;td&gt;{team.scores.total}&lt;/td&gt;
+        &lt;/tr&gt;
+      ))}
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+);</code></pre>
+<p>Standard HTML <code>&lt;table&gt;</code> markup. Three things to dig
+into.</p>
+</section>
+<section id="the-key-prop-and-why-it-matters" class="slide level2">
+<h2>The <code>key</code> prop and why it matters</h2>
+<p>Look at this line:</p>
+<pre class="tsx"><code>{teamsWithScores.map((team, i) =&gt; (
+  &lt;tr key={team.name}&gt;</code></pre>
+<p>That <code>key={team.name}</code> is <strong>not optional</strong>.
+It’s React’s identity tracker for list items.</p>
+<h3 id="what-is-react-doing">What is React doing?</h3>
+<p>When the data changes — say, a team’s score goes up and the order
+shifts — React needs to figure out which DOM nodes to keep, which to
+update, and which to throw away. Without keys, React falls back to
+comparing by <strong>position in the array</strong>: the first row is
+the first row, the second is the second, etc.</p>
+<p>That’s a problem if the list re-orders. If “Invincibles” was rank 1
+and “BBU” was rank 2, then BBU jumps to rank 1 — without keys, React
+thinks “the first row is BBU now (was Invincibles); update its content.
+The second row is Invincibles now (was BBU); update its content.” It
+works, but <strong>every row’s content is replaced</strong>, even though
+the rows just swapped.</p>
+<p>With keys, React thinks “the row with key=‘BBU’ moved from position 2
+to 1. The row with key=‘Invincibles’ moved from position 1 to 2. Just
+rearrange them.” Much faster, no re-rendering of contents, animations
+work correctly.</p>
+<h3 id="what-makes-a-good-key">What makes a good key?</h3>
+<p>Three rules:</p>
+<ol type="1">
+<li><strong>Stable</strong> — the same item gets the same key across
+renders. <code>team.name</code> is stable. <code>Math.random()</code> is
+the worst possible key.</li>
+<li><strong>Unique within the list</strong> — no two siblings share a
+key. Two teams can’t have the same name (in our app), so
+<code>team.name</code> is fine. If you had duplicate-able names, use an
+<code>id</code> field.</li>
+<li><strong>Predictable</strong> — derived from the data, not from
+external state. <code>i</code> (the index) works <strong>only</strong>
+if the list never reorders or has items inserted/deleted. For a sortable
+list, <code>i</code> is wrong. <strong>For our standings,
+<code>team.name</code> is right.</strong></li>
+</ol>
+<h3 id="the-classic-key-bug">The classic key bug</h3>
+<p>Beginners often write <code>key={i}</code> because the index is right
+there. It works <strong>right up until the list reorders or has an item
+inserted in the middle</strong>, at which point React applies updates to
+the wrong rows and you get bizarre bugs (form inputs lose their values,
+animations attach to the wrong row, etc.).</p>
+<p>Rule of thumb: <strong>use <code>i</code> only when the list is
+append-only and never sorted.</strong> Otherwise use a stable id.</p>
+<blockquote>
+<p><strong>Interview question:</strong> <em>“What does the
+<code>key</code> prop do?”</em> The wrong answer is “it makes the
+warning go away.” The right answer is “it tells React the identity of
+each list item across renders, so React can reconcile the DOM correctly
+when the list changes.”</p>
+</blockquote>
+</section>
+<section id="embedding-expressions-inside-jsx" class="slide level2">
+<h2>Embedding expressions inside JSX</h2>
+<pre class="tsx"><code>&lt;td&gt;{i + 1}&lt;/td&gt;
+&lt;td&gt;{team.name}&lt;/td&gt;
+&lt;td&gt;{team.scores.total}&lt;/td&gt;</code></pre>
+<p>The <code>{...}</code> lets you embed any JavaScript expression.
+Three different things appear:</p>
+<ul>
+<li><code>i + 1</code> — arithmetic. We add 1 because
+<code>.map</code>’s <code>i</code> is 0-indexed but humans expect ranks
+starting at 1.</li>
+<li><code>team.name</code> — property access on an object.</li>
+<li><code>team.scores.total</code> — nested property access.</li>
+</ul>
+<p>All three are JS expressions. Anything that evaluates to a value
+works inside <code>{}</code>.</p>
+<p>What <strong>doesn’t</strong> work: statements. You can’t write
+<code>{if (foo) ...}</code> because <code>if</code> is a statement, not
+an expression. You’d use a ternary instead:
+<code>{foo ? a : b}</code>.</p>
+</section>
+<section id="returning-jsx-vs-returning-null" class="slide level2">
+<h2>Returning JSX vs returning null</h2>
+<p>What if we want to render nothing in some condition? React lets you
+return:</p>
+<ul>
+<li>JSX</li>
+<li>A string or number (rendered as text)</li>
+<li><code>null</code> (renders nothing)</li>
+<li><code>false</code> (also renders nothing)</li>
+<li>An array of JSX (renders all of them — but every item needs a
+<code>key</code>)</li>
+</ul>
+<pre class="tsx"><code>return null;                      // renders nothing
+return &lt;p&gt;Hello&lt;/p&gt;;              // renders a paragraph
+return condition ? &lt;p&gt;Yes&lt;/p&gt; : null;   // conditional</code></pre>
+<p><strong>Returning <code>null</code> is normal.</strong> It’s not an
+error — it just means “don’t render anything for this component this
+time.”</p>
+<p>This comes up later when, e.g., a <code>&lt;Modal&gt;</code> returns
+<code>null</code> if it’s not open.</p>
+</section>
+<section id="step-3-visit-your-browser" class="slide level2">
+<h2>Step 3: visit your browser</h2>
+<p>After saving both files:</p>
+<ol type="1">
+<li>Make sure <code>npm run dev</code> is running.</li>
+<li>Open <code>http://localhost:3000</code>.</li>
+<li>You should see your stub heading and the table below it.</li>
+</ol>
+<p>If you see something different:</p>
+<ul>
+<li><strong>Blank page or error?</strong> Check the terminal — Next.js
+will print compilation errors. The most common is “Cannot find module
+‘@/lib/teams’” (typo in path) or “TEAMS is not exported” (forgot
+<code>export</code> in <code>lib/teams.ts</code>).</li>
+<li><strong>Table renders but all totals are 0?</strong> Likely the
+matches don’t have <code>winner</code> filled in, or the picks contain
+typos. Add a <code>console.log(teamsWithScores)</code> temporarily and
+inspect.</li>
+<li><strong><code>Hydration failed because the initial UI does not match</code>?</strong>
+Server and client rendered different things. Common cause: using
+<code>Math.random()</code> or <code>Date.now()</code> directly in
+render. Don’t.</li>
+</ul>
+</section>
+<section id="why-this-is-the-right-pace-for-a-beginner"
+class="slide level2">
+<h2>Why this is “the right pace” for a beginner</h2>
+<p>You’ve now written <strong>20 lines of React</strong> that:</p>
+<ul>
+<li>Imports data from a typed module.</li>
+<li>Transforms it via <code>.map()</code> and <code>.sort()</code>.</li>
+<li>Renders it as a table with proper keys.</li>
+<li>Lives inside a Next.js client-component subtree.</li>
+</ul>
+<p>If a friend asked you <em>“what’s React?”</em> tonight, you could
+legitimately say <em>“it’s a way to derive a new data structure from the
+original data and tell the browser to render it as HTML, with React
+managing the diffing.”</em> That’s a senior-level mental model, in 20
+lines.</p>
+<p>The rest of the chapter (and the rest of the course) is just
+<strong>more of the same pattern, with more sophisticated data
+transforms and JSX</strong>. There’s no new fundamental concept after
+this; everything else is variations on a theme.</p>
+</section>
+<section id="vibe-prompt-you-would-have-used-1" class="slide level2">
+<h2>Vibe prompt you would have used</h2>
+<blockquote>
+<p><em>“Create <code>components/tabs/StandingsTab.tsx</code>. Import
+<code>TEAMS</code> from <code>@/lib/teams</code> and
+<code>calculateTeamScores</code> from <code>@/lib/scoring</code>. Build
+a <code>teamsWithScores</code> array by mapping over TEAMS and adding
+<code>scores: calculateTeamScores(t)</code> to each, then sort
+descending by <code>.scores.total</code>. Render a plain
+<code>&lt;table&gt;</code> with thead Rank/Team/Total and a tbody
+mapping over <code>teamsWithScores</code>. Each row needs
+<code>key={team.name}</code>. No styling, no inline styles, just
+structural HTML. Default export.”</em></p>
+</blockquote>
+<p>The “no styling” line is the secret. Without it the LLM will give you
+80 lines of beautiful CSS and you won’t be able to tell what’s broken
+when something is broken.</p>
+</section>
+<section id="check-yourself-1" class="slide level2">
+<h2>CHECK YOURSELF</h2>
+<ol type="1">
+<li><strong><code>&lt;tr key={team.name}&gt;</code> — what would happen
+if you used <code>&lt;tr key={i}&gt;</code> instead?</strong> Walk
+through what React does when you change the sort order. (Hint: think
+about <code>&lt;input&gt;</code> fields if any of the rows had editable
+cells.)</li>
+<li><strong>Why is <code>'use client'</code> on
+<code>SnookerFantasyLeague.tsx</code> but not on
+<code>StandingsTab.tsx</code>?</strong> What determines which files need
+it?</li>
+<li><strong><code>TEAMS.map(t =&gt; ({ ...t, scores: ... })).sort(...)</code>
+— does this mutate the original <code>TEAMS</code> array?</strong> Why
+or why not?</li>
+<li><strong>You add a <code>console.log</code> inside the component
+body, just before <code>return</code>. When does it run?</strong> What
+if the user clicks a button somewhere on the page that doesn’t affect
+this component — does the log run again?</li>
+<li><strong>Add a <code>&lt;th&gt;R1&lt;/th&gt;</code> to the header and
+a <code>&lt;td&gt;{team.scores.r1}&lt;/td&gt;</code> to each
+row.</strong> What’s the minimum change? Now the page shows R1 totals
+next to the grand total. <strong>(Don’t move on until you’ve actually
+done this.)</strong></li>
+</ol>
+<p>When you’ve answered #5 by typing the change and seeing it work,
+you’re ready for Lesson 3 — adding the rest of the columns and the
+visual polish.</p>
+<p>Head to <strong><a
+href="./03-progressive-enhancement.md">03-progressive-enhancement.md</a></strong>.</p>
+</section></section>
+<section>
+<section id="chapter-3-lesson-3-progressive-enhancement"
+class="title-slide slide level1">
+<h1>Chapter 3 · Lesson 3 — Progressive Enhancement</h1>
+<blockquote>
+<p><em>Goal: turn the ugly v1 standings table into the polished version
+you see in the finished app — by adding one feature at a time. By the
+end you’ll have built <code>&lt;LeagueTable&gt;</code>,
+<code>&lt;StatCard&gt;</code>, <code>&lt;FormBadge&gt;</code>, and a
+beautiful, working standings tab.</em></p>
+</blockquote>
+</section>
+<section id="what-progressive-enhancement-means-here"
+class="slide level2">
+<h2>What “progressive enhancement” means here</h2>
+<p>The single most useful workflow for a React beginner is <strong>add
+one thing at a time, run the dev server, look at the screen,
+repeat.</strong> Don’t add five features at once and then try to debug
+the result.</p>
+<p>In this lesson we’ll add seven features to the standings tab. After
+each feature you should:</p>
+<ol type="1">
+<li>Type the change.</li>
+<li>Save the file (hot reload triggers).</li>
+<li>Look at the browser.</li>
+<li>Confirm it looks right.</li>
+<li>Move on.</li>
+</ol>
+<p>If something looks wrong, the diff between the previous-working state
+and the broken state is small. <strong>Small diffs = easy
+debugging.</strong></p>
+</section>
+<section id="v2-extract-the-table-into-its-own-component"
+class="slide level2">
+<h2>v2: extract the table into its own component</h2>
+<p>Right now the standings logic and the rendering both live in
+<code>StandingsTab.tsx</code>. As we add columns and styling, that file
+will balloon. Let’s pre-emptively split the data computation (which
+stays in <code>StandingsTab</code>) from the rendering (which moves to a
+new <code>&lt;LeagueTable&gt;</code> component).</p>
+<p>Create <code>components/standings/LeagueTable.tsx</code>:</p>
+<pre class="tsx"><code>import type { TeamWithScores } from &#39;@/lib/types&#39;;
+import { th, td } from &#39;@/lib/constants&#39;;
+
+interface LeagueTableProps {
+  teams: TeamWithScores[];
+  onTeamClick?: (team: TeamWithScores) =&gt; void;
+}
+
+export default function LeagueTable({ teams, onTeamClick }: LeagueTableProps) {
+  return (
+    &lt;table style={{ width: &#39;100%&#39;, borderCollapse: &#39;collapse&#39; }}&gt;
+      &lt;thead&gt;
+        &lt;tr style={{ background: &#39;#0F5132&#39;, color: &#39;#FBBF24&#39; }}&gt;
+          &lt;th style={{ ...th, textAlign: &#39;center&#39; }}&gt;#&lt;/th&gt;
+          &lt;th style={th}&gt;Team&lt;/th&gt;
+          &lt;th style={{ ...th, textAlign: &#39;center&#39; }}&gt;Total&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        {teams.map((team, i) =&gt; (
+          &lt;tr key={team.name}
+              onClick={() =&gt; onTeamClick?.(team)}
+              style={{ cursor: onTeamClick ? &#39;pointer&#39; : &#39;default&#39; }}&gt;
+            &lt;td style={{ ...td, textAlign: &#39;center&#39;, fontWeight: 700 }}&gt;{i + 1}&lt;/td&gt;
+            &lt;td style={td}&gt;
+              &lt;span style={{ marginRight: 8 }}&gt;{team.icon}&lt;/span&gt;
+              {team.name}
+            &lt;/td&gt;
+            &lt;td style={{ ...td, textAlign: &#39;center&#39;, fontWeight: 800, color: &#39;#0F5132&#39; }}&gt;
+              {team.scores.total}
+            &lt;/td&gt;
+          &lt;/tr&gt;
+        ))}
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  );
+}</code></pre>
+<p>Three new ideas:</p>
+<h3 id="props-for-data-teams-is-now-passed-in">1. Props for data —
+<code>teams</code> is now passed in</h3>
+<p>Before, <code>StandingsTab</code> knew about <code>TEAMS</code>
+directly. Now <code>&lt;LeagueTable&gt;</code> is
+<strong>decoupled</strong> from where the teams come from. It’s a pure
+rendering component: give it teams, it renders them. Anyone could reuse
+it.</p>
+<p>This is the <strong>dumb component pattern</strong> (also called
+<em>presentational component</em>): the component takes data via props
+and renders it. It doesn’t fetch data, doesn’t compute scores, doesn’t
+decide what to do on click. It just renders.</p>
+<h3 id="an-optional-callback-prop-onteamclick">2. An optional callback
+prop — <code>onTeamClick?</code></h3>
+<p>The <code>?</code> in <code>onTeamClick?:</code> makes the prop
+optional. The caller can pass it (and clicks become interactive) or not
+pass it (and clicks do nothing). The component handles both cases:</p>
+<pre class="tsx"><code>onClick={() =&gt; onTeamClick?.(team)}</code></pre>
+<p>The <code>?.</code> is <strong>optional chaining</strong>. If
+<code>onTeamClick</code> is undefined, <code>onTeamClick?.(team)</code>
+does nothing. If it’s a function, it gets called with the team.</p>
+<p>This is a small but powerful pattern: <strong>make features optional
+via optional callbacks.</strong> Components become more reusable, and
+the caller decides what behavior to wire up.</p>
+<h3 id="style-spreading">3. Style spreading</h3>
+<pre class="tsx"><code>&lt;td style={{ ...td, textAlign: &#39;center&#39; }}&gt;</code></pre>
+<p>We import the <code>td</code> style object from
+<code>lib/constants.ts</code> and spread it into a new style object,
+then override <code>textAlign</code>. This is JavaScript object
+spreading — same idea as array spreading. The result is
+<code>{ padding: '12px 8px', borderBottom: '1px solid #F3F4F6', fontSize: 15, textAlign: 'center' }</code>.</p>
+<p>The point: <strong>shared base styles + per-cell overrides</strong>,
+all without CSS classes.</p>
+</section>
+<section id="v3-update-standingstab-to-use-the-new-leaguetable"
+class="slide level2">
+<h2>v3: update StandingsTab to use the new LeagueTable</h2>
+<p>Update <code>components/tabs/StandingsTab.tsx</code>:</p>
+<pre class="tsx"><code>import { TEAMS } from &#39;@/lib/teams&#39;;
+import { calculateTeamScores } from &#39;@/lib/scoring&#39;;
+import type { TeamWithScores } from &#39;@/lib/types&#39;;
+import LeagueTable from &#39;../standings/LeagueTable&#39;;
+
+interface StandingsTabProps {
+  onTeamClick?: (team: TeamWithScores) =&gt; void;
+}
+
+export default function StandingsTab({ onTeamClick }: StandingsTabProps) {
+  const teamsWithScores: TeamWithScores[] = TEAMS.map(t =&gt; ({
+    ...t,
+    scores: calculateTeamScores(t),
+  })).sort((a, b) =&gt; b.scores.total - a.scores.total);
+
+  return (
+    &lt;div&gt;
+      &lt;LeagueTable teams={teamsWithScores} onTeamClick={onTeamClick} /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Now <code>StandingsTab</code> does only data prep and delegates
+rendering. Save and check the browser — should look the same as before,
+just better-organized internally.</p>
+</section>
+<section id="v4-medal-color-the-rank-circle" class="slide level2">
+<h2>v4: medal-color the rank circle</h2>
+<p>The first visual feature we’ll add. Change the rank cell in
+<code>LeagueTable.tsx</code>:</p>
+<pre class="tsx"><code>&lt;td style={{ ...td, textAlign: &#39;center&#39;, fontWeight: 700 }}&gt;
+  {(() =&gt; {
+    const rank = i + 1;
+    const rankColor =
+      rank === 1 ? &#39;#FBBF24&#39; :   // gold
+      rank === 2 ? &#39;#9CA3AF&#39; :   // silver
+      rank === 3 ? &#39;#B45309&#39; :   // bronze
+      &#39;#E5E7EB&#39;;                  // gray
+    return (
+      &lt;div style={{
+        width: 32, height: 32,
+        borderRadius: &#39;50%&#39;,
+        background: rankColor,
+        color: rank &lt;= 3 ? &#39;#FFFFFF&#39; : &#39;#374151&#39;,
+        display: &#39;inline-flex&#39;,
+        alignItems: &#39;center&#39;,
+        justifyContent: &#39;center&#39;,
+        fontWeight: 900,
+      }}&gt;
+        {rank === 1 ? &#39;👑&#39; : rank}
+      &lt;/div&gt;
+    );
+  })()}
+&lt;/td&gt;</code></pre>
+<p>Whoa — what’s that <code>(() =&gt; { ... })()</code> thing?</p>
+<h3 id="iife-inside-jsx-immediately-invoked-function-expression">IIFE
+inside JSX (immediately-invoked function expression)</h3>
+<p>JSX <code>{}</code> expects an <strong>expression</strong>, not a
+sequence of statements. We have several statements
+(<code>const rank = ...</code>, <code>const rankColor = ...</code>, then
+a return). To embed those in JSX, we wrap them in an arrow function and
+immediately invoke it:</p>
+<pre class="tsx"><code>{(() =&gt; {
+  // statements here
+  return &lt;jsx /&gt;;
+})()}</code></pre>
+<p>That’s an IIFE — Immediately-Invoked Function Expression. It
+evaluates to whatever the inner function returns.</p>
+<p>It’s ugly. It works. It’s a common React pattern when you have
+multiple let/const statements you want close to where they’re used. The
+cleaner alternative is to <strong>extract this into its own
+component</strong> — which we’ll do in Lesson 5 when it’s time to
+refactor.</p>
+<p>For now, the IIFE makes the rank logic local to this cell. <strong>A
+small ugliness in service of a small feature is fine. Don’t
+pre-refactor.</strong></p>
+<h3 id="a-nested-ternary-for-the-colors">A nested ternary for the
+colors</h3>
+<pre class="tsx"><code>const rankColor =
+  rank === 1 ? &#39;#FBBF24&#39; :
+  rank === 2 ? &#39;#9CA3AF&#39; :
+  rank === 3 ? &#39;#B45309&#39; :
+  &#39;#E5E7EB&#39;;</code></pre>
+<p>Three checks, four outcomes. Reads top-to-bottom: gold for 1st,
+silver for 2nd, bronze for 3rd, gray default. <strong>Nested ternaries
+are fine if formatted vertically and have a clear reading
+order.</strong> If you find yourself wrapping ternaries on a single line
+or your editor wraps them weirdly, refactor to a
+<code>function getRankColor(rank: number)</code>.</p>
+<h3
+id="display-inline-flex-for-centering"><code>display: 'inline-flex'</code>
+for centering</h3>
+<pre class="tsx"><code>display: &#39;inline-flex&#39;,
+alignItems: &#39;center&#39;,
+justifyContent: &#39;center&#39;,</code></pre>
+<p>This is the canonical CSS recipe for <strong>centering text inside a
+fixed-size circular badge</strong>. <code>inline-flex</code> lays out
+the children with flexbox; <code>alignItems: center</code> is vertical
+centering; <code>justifyContent: center</code> is horizontal. Works for
+any container with a defined size.</p>
+<p>Save. Refresh. The leader has a 👑 in a gold circle, 2nd has silver,
+3rd has bronze. It’s starting to look real.</p>
+</section>
+<section id="v5-per-round-columns" class="slide level2">
+<h2>v5: per-round columns</h2>
+<p>Add columns for R1, R2, QF, SF, Final. Update the header and body of
+<code>LeagueTable.tsx</code>:</p>
+<pre class="tsx"><code>&lt;thead&gt;
+  &lt;tr style={{ background: &#39;#0F5132&#39;, color: &#39;#FBBF24&#39; }}&gt;
+    &lt;th style={{ ...th, textAlign: &#39;center&#39; }}&gt;#&lt;/th&gt;
+    &lt;th style={th}&gt;Team&lt;/th&gt;
+    &lt;th style={{ ...th, textAlign: &#39;center&#39; }}&gt;R1&lt;/th&gt;
+    &lt;th style={{ ...th, textAlign: &#39;center&#39; }}&gt;R2&lt;/th&gt;
+    &lt;th style={{ ...th, textAlign: &#39;center&#39; }}&gt;QF&lt;/th&gt;
+    &lt;th style={{ ...th, textAlign: &#39;center&#39; }}&gt;SF&lt;/th&gt;
+    &lt;th style={{ ...th, textAlign: &#39;center&#39; }}&gt;Final&lt;/th&gt;
+    &lt;th style={{ ...th, textAlign: &#39;center&#39; }}&gt;Total&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;</code></pre>
+<p>And in the body, after the team-name cell:</p>
+<pre class="tsx"><code>&lt;td style={{ ...td, textAlign: &#39;center&#39; }}&gt;
+  &lt;div style={{ fontWeight: 700, fontSize: 17, color: &#39;#0F5132&#39; }}&gt;
+    {team.scores.r1}
+  &lt;/div&gt;
+  &lt;div style={{ fontSize: 11, color: &#39;#6B7280&#39; }}&gt;/ 48&lt;/div&gt;
+&lt;/td&gt;
+&lt;td style={{ ...td, textAlign: &#39;center&#39; }}&gt;
+  &lt;div style={{ fontWeight: 700, fontSize: 17, color: &#39;#0F5132&#39; }}&gt;
+    {team.scores.r2}
+  &lt;/div&gt;
+  &lt;div style={{ fontSize: 11, color: &#39;#6B7280&#39; }}&gt;/ 24&lt;/div&gt;
+&lt;/td&gt;
+{/* ...QF (/12), SF (/6), Final (/3)... */}</code></pre>
+<p>The “/ 48” “/ 24” lines show the <strong>maximum possible score for
+the round</strong>, computed at design time:</p>
+<ul>
+<li>R1: 16 matches × 3 points = 48</li>
+<li>R2: 8 × 3 = 24</li>
+<li>QF: 4 × 3 = 12</li>
+<li>SF: 2 × 3 = 6</li>
+<li>Final: 1 × 3 = 3</li>
+</ul>
+<p>Hard-coded because they’re constants of the tournament structure. If
+we ever changed the bracket size, we’d want to compute these from
+<code>ROUND1_MATCHES.length * 3</code> etc.</p>
+<p>Save. Refresh. The table now has 8 columns and feels like a real
+fantasy leaderboard.</p>
+</section>
+<section id="v6-the-final-pick-chip" class="slide level2">
+<h2>v6: the Final Pick chip</h2>
+<p>Add another column showing each team’s Final Pick:</p>
+<pre class="tsx"><code>&lt;th style={th}&gt;Final Pick&lt;/th&gt;</code></pre>
+<pre class="tsx"><code>&lt;td style={{ ...td, textAlign: &#39;center&#39; }}&gt;
+  &lt;div style={{
+    display: &#39;inline-block&#39;,
+    padding: &#39;4px 10px&#39;,
+    borderRadius: 12,
+    background: team.final === &#39;Wu Yize&#39; ? &#39;#DCFCE7&#39; : &#39;#FEE2E2&#39;,
+    color: team.final === &#39;Wu Yize&#39; ? &#39;#166534&#39; : &#39;#991B1B&#39;,
+    fontWeight: 700,
+    fontSize: 12,
+  }}&gt;
+    🏆 {team.final}
+  &lt;/div&gt;
+&lt;/td&gt;</code></pre>
+<p>A pill-shaped badge with a 🏆 and the team’s pick.</p>
+<h3 id="the-conditional-coloring">The conditional coloring</h3>
+<pre class="tsx"><code>background: team.final === &#39;Wu Yize&#39; ? &#39;#DCFCE7&#39; : &#39;#FEE2E2&#39;,
+color:      team.final === &#39;Wu Yize&#39; ? &#39;#166534&#39; : &#39;#991B1B&#39;,</code></pre>
+<p>If the team picked the actual champion (Wu Yize), the chip is
+<strong>green</strong>. Otherwise it’s <strong>red</strong>. This is the
+post-tournament color rule we discussed in the original course’s Lesson
+7 — hard-coding the champion’s name into the styling logic.</p>
+<p>A more general version would compare against
+<code>FINAL_MATCH[0]?.winner</code>. The hard-coded version is faster to
+write but ties this code to the 2026 tournament. <strong>For a
+single-tournament app, fine. For a reusable framework, not
+fine.</strong> Most real codebases have a mix.</p>
+</section>
+<section id="v7-the-formbadge" class="slide level2">
+<h2>v7: the FormBadge</h2>
+<p>Last column: a “Form” indicator showing whether the team is improving
+or slipping between rounds.</p>
+<p>Create <code>components/standings/FormBadge.tsx</code>:</p>
+<pre class="tsx"><code>import { TrendingUp, TrendingDown, Minus } from &#39;lucide-react&#39;;
+
+interface FormBadgeProps {
+  r1Pct: number;
+  r2Pct: number;
+}
+
+export default function FormBadge({ r1Pct, r2Pct }: FormBadgeProps) {
+  const trending = r2Pct &gt; r1Pct ? &#39;up&#39; : r2Pct &lt; r1Pct ? &#39;down&#39; : &#39;flat&#39;;
+  const Icon = trending === &#39;up&#39; ? TrendingUp : trending === &#39;down&#39; ? TrendingDown : Minus;
+  const color = trending === &#39;up&#39; ? &#39;#16A34A&#39; : trending === &#39;down&#39; ? &#39;#DC2626&#39; : &#39;#6B7280&#39;;
+  const label = trending === &#39;up&#39; ? &#39;Rising&#39; : trending === &#39;down&#39; ? &#39;Falling&#39; : &#39;Steady&#39;;
+
+  return (
+    &lt;div style={{
+      display: &#39;inline-flex&#39;,
+      alignItems: &#39;center&#39;,
+      gap: 4,
+      color,
+      fontSize: 13,
+      fontWeight: 700,
+    }}&gt;
+      &lt;Icon size={16} strokeWidth={3} /&gt;
+      {label}
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Then in <code>LeagueTable.tsx</code>:</p>
+<pre class="tsx"><code>import FormBadge from &#39;./FormBadge&#39;;
+
+// ...in the row:
+&lt;td style={{ ...td, textAlign: &#39;center&#39; }}&gt;
+  &lt;FormBadge
+    r1Pct={(team.scores.r1 / 48) * 100}
+    r2Pct={(team.scores.r2 / 24) * 100}
+  /&gt;
+&lt;/td&gt;</code></pre>
+<p>Three new ideas:</p>
+<h3 id="lucide-icons-as-components">Lucide icons as components</h3>
+<pre class="tsx"><code>import { TrendingUp, TrendingDown, Minus } from &#39;lucide-react&#39;;</code></pre>
+<p>Lucide is a tree-shakeable icon library. We import three icon
+components and treat them like any other React component
+(<code>&lt;TrendingUp size={16} /&gt;</code>).</p>
+<p>The <strong>tree-shakeable</strong> part matters: the production
+bundle only includes the icons you actually import. If we import 3
+icons, we ship 3, not all ~1,000 in the library.</p>
+<h3 id="picking-a-component-dynamically">Picking a component
+dynamically</h3>
+<pre class="tsx"><code>const Icon = trending === &#39;up&#39; ? TrendingUp : trending === &#39;down&#39; ? TrendingDown : Minus;
+// ...
+&lt;Icon size={16} strokeWidth={3} /&gt;</code></pre>
+<p><code>Icon</code> is a variable holding <strong>a component</strong>.
+We then use it as a JSX tag. This works because JSX is just a function
+call; <code>&lt;Icon /&gt;</code> compiles to
+<code>React.createElement(Icon, ...)</code> and the <code>Icon</code>
+reference can come from anywhere — a prop, a variable, a
+<code>useState</code> value, anything.</p>
+<p>Recall the earlier rule: <strong>JSX tag names must be capitalized to
+be treated as components.</strong> We renamed our local variable
+<code>Icon</code> (capital I) so JSX recognizes it. If we’d used
+<code>icon</code>, JSX would have looked for an HTML
+<code>&lt;icon&gt;</code> tag.</p>
+<h3 id="calculating-percentages-inline">Calculating percentages
+inline</h3>
+<pre class="tsx"><code>r1Pct={(team.scores.r1 / 48) * 100}</code></pre>
+<p>We pass percentages, not raw scores. Why? Because R1 has a max of 48
+and R2 has a max of 24 — direct comparison would be misleading.
+Comparing <strong>percentages</strong> of perfect normalizes across
+rounds.</p>
+<p>Save. Refresh. Each row now has a Form indicator showing whether they
+got better or worse from R1 to R2. Most teams will probably show
+“Rising” or “Falling” since percentages rarely tie exactly.</p>
+</section>
+<section id="v8-stat-cards-above-the-table" class="slide level2">
+<h2>v8: stat cards above the table</h2>
+<p>The top of the standings tab in the finished app shows three stat
+tiles: <strong>Leader</strong>, <strong>Total Matches</strong>,
+<strong>Avg Score</strong>. Create
+<code>components/standings/StatCard.tsx</code> (this is the file we
+walked through in Lesson 1):</p>
+<pre class="tsx"><code>import type { LucideIcon } from &#39;lucide-react&#39;;
+
+interface StatCardProps {
+  icon: LucideIcon;
+  label: string;
+  value: string | number;
+  color: string;
+  bgColor: string;
+}
+
+export default function StatCard({ icon: Icon, label, value, color, bgColor }: StatCardProps) {
+  return (
+    &lt;div style={{
+      background: `linear-gradient(135deg, ${bgColor} 0%, ${bgColor}DD 100%)`,
+      color: &#39;#FFFFFF&#39;,
+      padding: 24,
+      borderRadius: 16,
+      boxShadow: `0 8px 24px ${bgColor}40`,
+    }}&gt;
+      &lt;Icon size={28} strokeWidth={2.5} /&gt;
+      &lt;div style={{ fontSize: 13, letterSpacing: &#39;1.5px&#39;, fontWeight: 600, opacity: 0.9 }}&gt;
+        {label}
+      &lt;/div&gt;
+      &lt;div style={{ fontSize: 32, fontWeight: 900, fontFamily: &quot;&#39;Roboto Slab&#39;, serif&quot; }}&gt;
+        {value}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Then update <code>StandingsTab.tsx</code> to render three cards above
+the table:</p>
+<pre class="tsx"><code>import { Trophy, Calendar, Target } from &#39;lucide-react&#39;;
+import StatCard from &#39;../standings/StatCard&#39;;
+import { ROUND1_MATCHES, ROUND2_MATCHES, QF_MATCHES, SF_MATCHES, FINAL_MATCH } from &#39;@/lib/matches&#39;;
+
+export default function StandingsTab({ onTeamClick }: StandingsTabProps) {
+  const teamsWithScores: TeamWithScores[] = TEAMS.map(t =&gt; ({
+    ...t,
+    scores: calculateTeamScores(t),
+  })).sort((a, b) =&gt; b.scores.total - a.scores.total);
+
+  const totalMatches =
+    ROUND1_MATCHES.length + ROUND2_MATCHES.length +
+    QF_MATCHES.length + SF_MATCHES.length + FINAL_MATCH.length;
+
+  const leader = teamsWithScores[0];
+  const avgScore = Math.round(
+    teamsWithScores.reduce((sum, t) =&gt; sum + t.scores.total, 0) / teamsWithScores.length
+  );
+
+  return (
+    &lt;div&gt;
+      &lt;div style={{
+        display: &#39;grid&#39;,
+        gridTemplateColumns: &#39;repeat(auto-fit, minmax(220px, 1fr))&#39;,
+        gap: 16,
+        marginBottom: 24,
+      }}&gt;
+        &lt;StatCard icon={Trophy}   label=&quot;LEADER&quot;   value={leader.name}   color=&quot;#FBBF24&quot; bgColor=&quot;#0F5132&quot; /&gt;
+        &lt;StatCard icon={Calendar} label=&quot;MATCHES&quot;  value={totalMatches}  color=&quot;#FBBF24&quot; bgColor=&quot;#DC2626&quot; /&gt;
+        &lt;StatCard icon={Target}   label=&quot;AVG SCORE&quot; value={avgScore}     color=&quot;#FBBF24&quot; bgColor=&quot;#7C3AED&quot; /&gt;
+      &lt;/div&gt;
+
+      &lt;LeagueTable teams={teamsWithScores} onTeamClick={onTeamClick} /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+<p>Three new things to call out:</p>
+<h3 id="css-grid-with-auto-fit-and-minmax">CSS Grid with
+<code>auto-fit</code> and <code>minmax</code></h3>
+<pre class="tsx"><code>gridTemplateColumns: &#39;repeat(auto-fit, minmax(220px, 1fr))&#39;,</code></pre>
+<p>This is the <strong>modern way to do responsive card grids</strong>.
+It says:</p>
+<ul>
+<li>Repeat as many columns as fit.</li>
+<li>Each column is <strong>at least 220px</strong> and <strong>at most 1
+fraction</strong> of available space.</li>
+</ul>
+<p>So if the screen is 660px wide, you get 3 columns of ~220px. If it’s
+480px, you get 2 columns. If it’s 220px, you get 1. <strong>Without
+media queries.</strong> This single CSS line replaces what used to take
+a dozen breakpoints.</p>
+<p>Memorize this pattern. It’s interview gold.</p>
+<h3 id="computed-values-inside-the-component">Computed values inside the
+component</h3>
+<pre class="tsx"><code>const totalMatches = ROUND1_MATCHES.length + ROUND2_MATCHES.length + ...;
+const leader = teamsWithScores[0];
+const avgScore = Math.round(teamsWithScores.reduce((sum, t) =&gt; sum + t.scores.total, 0) / 8);</code></pre>
+<p>We derive three values from the data and pass them as props to the
+StatCards. <strong>Derived state stays close to where it’s used</strong>
+— no need to compute these elsewhere.</p>
+<p>The <code>.reduce((sum, t) =&gt; sum + t.scores.total, 0)</code> is
+JavaScript’s “sum an array” idiom. <code>0</code> is the initial value
+of <code>sum</code>. For each team <code>t</code>, we add
+<code>t.scores.total</code> to <code>sum</code>. End result: total
+points across all teams. Divide by 8 to get the average.
+<code>Math.round</code> for clean integer display.</p>
+<h3 id="importing-icons-by-name">Importing icons by name</h3>
+<pre class="tsx"><code>import { Trophy, Calendar, Target } from &#39;lucide-react&#39;;</code></pre>
+<p>Three named imports. Each is a React component. We pass them as props
+to <code>&lt;StatCard&gt;</code>, which renders them.</p>
+<p>Notice we <strong>don’t</strong> instantiate them — we pass the
+component itself, not <code>&lt;Trophy /&gt;</code>. The
+<code>StatCard</code> component receives the component-class and renders
+it inside its own JSX. This is how you build flexible, “give me an icon
+to render here” APIs.</p>
+</section>
+<section id="what-v8-looks-like" class="slide level2">
+<h2>What v8 looks like</h2>
+<p>Save everything and refresh. You should now see:</p>
+<ul>
+<li>Three colored stat cards at the top: green “LEADER” card with the
+leader’s name, red “MATCHES” card showing 31, purple “AVG SCORE”
+card.</li>
+<li>Below them, the full standings table with medal-color rank badges,
+per-round columns, Final Pick chips, Form badges.</li>
+</ul>
+<p>It looks like a real fantasy app now.</p>
+</section>
+<section id="what-we-did-not-do-yet" class="slide level2">
+<h2>What we did NOT do (yet)</h2>
+<p>Notice we still don’t have:</p>
+<ul>
+<li>The hero header (gradient banner).</li>
+<li>The tab nav bar.</li>
+<li>Multiple tabs (Matches, Predictions, Players, Analytics).</li>
+</ul>
+<p>Those are Chapter 4. Right now we have <strong>one tab, fully built,
+with no tab bar.</strong> That’s intentional — building one screen
+completely before adding navigation lets you focus on each problem in
+turn.</p>
+</section>
+<section id="the-discipline-you-just-practiced" class="slide level2">
+<h2>The discipline you just practiced</h2>
+<p>Read back through this lesson. We added <strong>eight
+versions</strong> of the same component, each one a small addition:</p>
+<ul>
+<li>v1: plain table (Lesson 2)</li>
+<li>v2: extract LeagueTable</li>
+<li>v3: wire it up</li>
+<li>v4: medal-color rank</li>
+<li>v5: per-round columns</li>
+<li>v6: Final Pick chip</li>
+<li>v7: FormBadge</li>
+<li>v8: stat cards</li>
+</ul>
+<p>Each version was 5–30 lines of new code. Each one was independently
+verifiable in the browser. <strong>No version did three things at
+once.</strong></p>
+<p>This is <strong>the way professional React engineers build
+features</strong>. Not all in one go — incrementally. The git history of
+any well-managed React project looks exactly like this: dozens of small
+commits, each adding one tiny thing. The big-bang “I built it all in one
+PR” approach is what produces unreviewable code and untraceable
+bugs.</p>
+<blockquote>
+<p><strong>Interview tip.</strong> When asked <em>“how do you approach
+building a new feature?”</em>, your answer should sound like <em>“I
+start with the smallest version that proves the data path works, then I
+add visual polish one piece at a time, running the dev server and
+looking at the screen between every change. Small commits, easy to
+review, easy to roll back.”</em> That answer signals you’ve shipped real
+software.</p>
+</blockquote>
+</section>
+<section id="vibe-prompt-you-would-have-used-per-feature"
+class="slide level2">
+<h2>Vibe prompt you would have used (per feature)</h2>
+<p>Feature by feature, the prompts would have been:</p>
+<blockquote>
+<p>v4: <em>“In the rank cell of <code>&lt;LeagueTable&gt;</code>,
+replace the plain number with a 32x32 circle. Background: gold for rank
+1, silver for 2, bronze for 3, gray otherwise. Replace the number with a
+👑 emoji for rank 1.”</em></p>
+<p>v5: <em>“Add R1, R2, QF, SF, Final columns to
+<code>&lt;LeagueTable&gt;</code>, between Team and Total. Show the round
+score as a big number with <code>/{maxScore}</code> underneath in small
+gray text. Maxes: 48, 24, 12, 6, 3.”</em></p>
+<p>v6: <em>“Add a Final Pick column to <code>&lt;LeagueTable&gt;</code>.
+Show <code>team.final</code> inside a rounded chip with a 🏆 emoji.
+Background green if <code>team.final === 'Wu Yize'</code>, red
+otherwise.”</em></p>
+<p>v7: <em>“Create <code>&lt;FormBadge&gt;</code> taking
+<code>r1Pct</code> and <code>r2Pct</code> numbers. Show TrendingUp icon
++ ‘Rising’ (green) if r2 &gt; r1, TrendingDown + ‘Falling’ (red) if r2
+&lt; r1, Minus + ‘Steady’ (gray) otherwise. Use Lucide icons. Then add a
+Form column to <code>&lt;LeagueTable&gt;</code> using it.”</em></p>
+</blockquote>
+<p>Each prompt is <strong>one feature, one component, one
+paragraph</strong>. That’s the right grain. Compare to a bad prompt:
+<em>“make the standings table nicer”</em> — that produces an
+unmaintainable wall of CSS that you can’t reason about.</p>
+</section>
+<section id="check-yourself-2" class="slide level2">
+<h2>CHECK YOURSELF</h2>
+<ol type="1">
+<li><strong>The IIFE inside the rank cell
+<code>(() =&gt; { ... })()</code> works but is ugly. What’s the cleaner
+refactor?</strong> What’s the cost of doing it now vs leaving it?</li>
+<li><strong><code>onTeamClick?: (team) =&gt; void</code> is optional.
+What does the <code>?.</code> in <code>onTeamClick?.(team)</code>
+do?</strong> What would happen without the <code>?</code> if a parent
+didn’t pass <code>onTeamClick</code>?</li>
+<li><strong><code>gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))'</code>
+— explain in plain English what this does.</strong> What replaces this
+in old-style CSS?</li>
+<li><strong><code>&lt;StatCard icon={Trophy} /&gt;</code> passes the
+<code>Trophy</code> <em>component itself</em>, not
+<code>&lt;Trophy /&gt;</code>. Why?</strong> What would go wrong if you
+wrote <code>icon={&lt;Trophy /&gt;}</code>?</li>
+<li><strong>The Final Pick chip hard-codes <code>'Wu Yize'</code> for
+its color choice.</strong> Write the one-line edit that makes it
+tournament-agnostic by reading from <code>FINAL_MATCH[0]?.winner</code>
+instead.</li>
+</ol>
+<p>Once you’ve answered (and ideally typed #5), you’ve completed Chapter
+3. The standings tab is fully built. <strong>Onward to <a
+href="../chapter-04-state-and-hooks/README.md">Chapter 4 — State &amp;
+Hooks</a></strong>, where we add the tab bar and finally meet
+<code>useState</code>.</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^5/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

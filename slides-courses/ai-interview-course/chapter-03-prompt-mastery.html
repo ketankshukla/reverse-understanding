@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Chapter 03 Prompt Mastery</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/theme/white.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Chapter 03 Prompt Mastery</h1>
+</section>
+
+<section>
+<section id="chapter-3-vibe-coding-and-prompt-mastery"
+class="title-slide slide level1">
+<h1>Chapter 3 — Vibe-Coding and Prompt Mastery</h1>
+<blockquote>
+<p><strong>The interviewer can tell within five lines of a prompt
+whether you respect the craft of prompting or treat it as a magic
+spell.</strong> This chapter teaches you to demonstrate the craft.</p>
+</blockquote>
+</section>
+<section id="what-you-will-learn" class="slide level2">
+<h2>What you will learn</h2>
+<ul>
+<li>The <strong>anatomy of a production-grade prompt</strong> — six
+components that turn vague asks into shippable diffs.</li>
+<li><strong>Twelve reusable prompt patterns</strong> that produced this
+entire portfolio project. Steal them.</li>
+<li>The art of <strong>rejecting AI output</strong> — when to push back,
+when to rewrite, and when to throw the diff out and start over.</li>
+</ul>
+<p>By the end you will be able to:</p>
+<ol type="1">
+<li>Walk an interviewer through a real prompt of yours and explain why
+each piece is there.</li>
+<li>Drop into a live coding interview that requires AI use and look like
+you have done it 1,000 times.</li>
+<li>Defend your code review of AI output with a vocabulary the panel
+will recognize.</li>
+</ol>
+</section>
+<section id="lessons" class="slide level2">
+<h2>Lessons</h2>
+<ol type="1">
+<li><strong><a
+href="./01-anatomy-of-a-prompt.md">01-anatomy-of-a-prompt.md</a></strong>
+— The six-part structure. Verb, deliverable, constraints, context,
+failure modes, format. Examples drawn from real prompts.</li>
+<li><strong><a
+href="./02-the-twelve-patterns.md">02-the-twelve-patterns.md</a></strong>
+— A library of 12 templates: project-shaping, data-modeling, pure-logic,
+first-component, progressive enhancement, refactor, debug, test, design,
+doc-writer, prompt-improver, post-mortem.</li>
+<li><strong><a
+href="./03-rejecting-ai-output.md">03-rejecting-ai-output.md</a></strong>
+— The five reasons to reject a diff, the four signals that a prompt is
+wrong (not the model), and how to talk about rejection in interviews
+without sounding negative.</li>
+</ol>
+</section>
+<section id="how-long-it-should-take" class="slide level2">
+<h2>How long it should take</h2>
+<ul>
+<li>30–45 min reading per lesson.</li>
+<li>1–2 hours practicing the patterns on your own codebase.</li>
+<li>~5 hours total.</li>
+</ul>
+</section>
+<section id="why-prompt-mastery-matters-in-interviews"
+class="slide level2">
+<h2>Why prompt mastery matters in interviews</h2>
+<p>Interviewers in 2026 increasingly ask: <em>“Show me a prompt you used
+recently.”</em> They are checking three things:</p>
+<ol type="1">
+<li><strong>Specificity</strong> — does the prompt state what you want,
+or does it pray?</li>
+<li><strong>Constraints</strong> — does it tell the model what
+<em>not</em> to do?</li>
+<li><strong>Context</strong> — does it reference your codebase, or does
+it ask in a vacuum?</li>
+</ol>
+<p>A bad prompt looks like <em>“can you make a button component?”</em> A
+good prompt looks like <em>“Generate a
+<code>&lt;PrimaryButton&gt;</code> React component in
+<code>components/ui/</code>. Props: <code>children</code>,
+<code>onClick</code>, <code>disabled</code>. Use the existing
+<code>cn()</code> utility from <code>lib/utils.ts</code> to merge
+Tailwind classes. Match the styling of
+<code>&lt;SecondaryButton&gt;</code> in the same folder. Do not
+introduce new dependencies.”</em></p>
+<p>After this chapter, your prompts will all look like the second
+one.</p>
+</section>
+<section id="before-you-start" class="slide level2">
+<h2>Before you start</h2>
+<p>You should have:</p>
+<ul>
+<li>Chapter 1 and 2 completed (the vocabulary and framework).</li>
+<li>An IDE open with your portfolio project.</li>
+<li>A real AI tool you can prompt while reading.</li>
+</ul>
+<p>The lessons are interactive — you will be writing prompts as you
+read.</p>
+<p>Open <strong><a
+href="./01-anatomy-of-a-prompt.md">01-anatomy-of-a-prompt.md</a></strong>.</p>
+</section></section>
+<section>
+<section id="lesson-3.1-anatomy-of-a-prompt"
+class="title-slide slide level1">
+<h1>Lesson 3.1 — Anatomy of a Prompt</h1>
+<blockquote>
+<p><strong>A production-grade prompt has six parts. Most engineers write
+prompts with two.</strong> This lesson is about the four parts you are
+skipping.</p>
+</blockquote>
+<p>By the end of this lesson:</p>
+<ul>
+<li>You will know the six components of a great prompt.</li>
+<li>You will be able to look at any prompt of yours and identify which
+components are missing.</li>
+<li>You will be able to walk an interviewer through a real prompt and
+explain every choice.</li>
+<li>You will have a one-line opening that signals seniority on
+prompts.</li>
+</ul>
+</section>
+<section id="the-interviewer-test" class="slide level2">
+<h2>1. The interviewer test</h2>
+<p>Imagine your interviewer says: <em>“Show me the last prompt you
+wrote, and walk me through the choices in it.”</em></p>
+<p>The bad version of this answer:</p>
+<blockquote>
+<p><em>“Uh, I think I asked it to add a loading state to a
+component.”</em></p>
+</blockquote>
+<p>The good version:</p>
+<blockquote>
+<p><em>“Here is the prompt. The verb is ‘add’ — narrow scope. The
+deliverable is named — <code>&lt;LoadingState&gt;</code> in
+<code>components/ui/</code>. I named two constraints: do not change
+existing styling, and use the existing <code>&lt;Spinner&gt;</code>
+component. I gave context: the file path of the parent and a paste of
+the existing JSX. I named one failure mode: the loading state must be
+announced to screen readers via <code>aria-live</code>. And I asked for
+the diff in unified format. Six components, deliberately.”</em></p>
+</blockquote>
+<p>That is the kind of answer that ends interviews early in your favor.
+<strong>The six components</strong> are the secret sauce.</p>
+</section>
+<section id="the-six-components" class="slide level2">
+<h2>2. The six components</h2>
+<pre><code>┌────────────────────────────────────────┐
+│ 1. VERB                                 │  add / refactor / extract / explain
+├────────────────────────────────────────┤
+│ 2. DELIVERABLE                          │  what gets produced (specific file/component)
+├────────────────────────────────────────┤
+│ 3. CONSTRAINTS                          │  what NOT to do
+├────────────────────────────────────────┤
+│ 4. CONTEXT                              │  files, paths, existing patterns referenced
+├────────────────────────────────────────┤
+│ 5. FAILURE MODES                        │  edge cases the model would otherwise miss
+├────────────────────────────────────────┤
+│ 6. OUTPUT FORMAT                        │  diff / single file / explanation / shell commands
+└────────────────────────────────────────┘</code></pre>
+<p>Most engineers write prompts that are basically just rows 1 and 2.
+The other four are where the leverage is.</p>
+</section>
+<section id="component-1-the-verb" class="slide level2">
+<h2>3. Component 1 — The verb</h2>
+<p>Every prompt should start with a single, narrow verb.</p>
+<table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 26%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr>
+<th>Bad verb</th>
+<th>Why bad</th>
+<th>Better verb</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“Make”</td>
+<td>Too broad. Implies “design and implement”.</td>
+<td>“Add” / “Create” / “Generate”</td>
+</tr>
+<tr>
+<td>“Fix”</td>
+<td>Tells the AI to find a bug, instead of you telling it which
+one.</td>
+<td>“Replace X with Y because Z”</td>
+</tr>
+<tr>
+<td>“Improve”</td>
+<td>No target metric. Becomes a stylistic rewrite.</td>
+<td>“Reduce render count by…”</td>
+</tr>
+<tr>
+<td>“Help me with”</td>
+<td>The model has to guess your goal.</td>
+<td>“Show three approaches to…”</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-verb-library">The verb library</h3>
+<table>
+<colgroup>
+<col style="width: 51%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr>
+<th>If you want…</th>
+<th>Use this verb</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Code that does not exist yet</td>
+<td><strong>Create</strong> / <strong>Generate</strong> /
+<strong>Add</strong></td>
+</tr>
+<tr>
+<td>Code that exists but should change</td>
+<td><strong>Refactor</strong> / <strong>Replace</strong> /
+<strong>Rewrite</strong></td>
+</tr>
+<tr>
+<td>Code split into smaller code</td>
+<td><strong>Extract</strong></td>
+</tr>
+<tr>
+<td>Understanding</td>
+<td><strong>Explain</strong> / <strong>Walk through</strong></td>
+</tr>
+<tr>
+<td>Choices laid out</td>
+<td><strong>Compare</strong> / <strong>List approaches to</strong></td>
+</tr>
+<tr>
+<td>A bug found</td>
+<td><strong>Diagnose</strong> / <strong>Trace</strong></td>
+</tr>
+<tr>
+<td>A bug fixed</td>
+<td><strong>Patch</strong> (with the bug specified)</td>
+</tr>
+<tr>
+<td>Tests added</td>
+<td><strong>Cover</strong> / <strong>Test</strong></td>
+</tr>
+<tr>
+<td>Names changed</td>
+<td><strong>Rename</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The verb sets the scope. <strong>A wrong verb is the most common
+reason a prompt produces too-large or too-vague output.</strong></p>
+</section>
+<section id="component-2-the-deliverable" class="slide level2">
+<h2>4. Component 2 — The deliverable</h2>
+<p>Be specific about what is produced. The model is not allowed to
+surprise you.</p>
+<h3 id="bad">Bad</h3>
+<blockquote>
+<p><em>“Add a loading state.”</em></p>
+</blockquote>
+<p>That could be a hook, a component, a CSS class, a wrapper. The model
+picks one and you accept whatever pops out.</p>
+<h3 id="good">Good</h3>
+<blockquote>
+<p><em>“Add a <code>&lt;LoadingState&gt;</code> component to
+<code>components/ui/loading-state.tsx</code>. Default export. Props:
+<code>label</code> (optional, defaults to ‘Loading…’), <code>size</code>
+(‘sm’ | ‘md’ | ‘lg’, defaults to ‘md’). Render a centered spinner with
+the label below it.”</em></p>
+</blockquote>
+<p>Now there is no ambiguity.</p>
+<h3 id="what-to-specify">What to specify</h3>
+<ul>
+<li><strong>Where it lives.</strong> File path or directory.</li>
+<li><strong>What it is.</strong> Component / function / hook / type /
+config / test.</li>
+<li><strong>Its name.</strong> Pin the name to avoid the model inventing
+a verbose one.</li>
+<li><strong>Its API surface.</strong> Props, parameters, return
+type.</li>
+<li><strong>Its rendering or behavior.</strong> One sentence is
+enough.</li>
+</ul>
+<p>The deliverable section is where most prompts collapse. Spend extra
+time on it. <strong>The clearer the deliverable, the smaller the diff
+and the easier the review.</strong></p>
+</section>
+<section id="component-3-constraints-the-do-not-list"
+class="slide level2">
+<h2>5. Component 3 — Constraints (the “do not” list)</h2>
+<p>This is the component most engineers skip. It is the one with the
+highest payoff.</p>
+<h3 id="examples-that-work">Examples that work</h3>
+<ul>
+<li><em>“Do not introduce new dependencies.”</em></li>
+<li><em>“Do not change the existing styling.”</em></li>
+<li><em>“Do not modify any file outside
+<code>components/ui/</code>.”</em></li>
+<li><em>“Do not introduce a Context — pass props.”</em></li>
+<li><em>“Do not generate tests in this turn — I will ask
+separately.”</em></li>
+<li><em>“Do not refactor unrelated code.”</em></li>
+<li><em>“Do not change the public API of
+<code>useSnookerScores</code>.”</em></li>
+<li><em>“Do not add comments unless I ask.”</em></li>
+</ul>
+<h3 id="why-this-matters-in-interviews">Why this matters in
+interviews</h3>
+<p>Interviewers reading your prompts can tell who has been burned by AI
+sprawl. <strong>Constraint clauses are the scar tissue of experienced AI
+users.</strong> Show your scars.</p>
+<p>If they ask why you write so many “do not” clauses, you say:</p>
+<blockquote>
+<p><em>“Each one of those clauses is a real failure mode I have hit. The
+model is helpful by default — sometimes too helpful. If I do not pin
+down what stays the same, it will rewrite things I did not ask about.
+Constraints make diffs reviewable.”</em></p>
+</blockquote>
+</section>
+<section id="component-4-context" class="slide level2">
+<h2>6. Component 4 — Context</h2>
+<p>The model needs to know what is already there. Be explicit.</p>
+<h3 id="three-kinds-of-context">Three kinds of context</h3>
+<h4 id="path-context">6.1. Path context</h4>
+<blockquote>
+<p><em>“The parent component is at
+<code>components/predictions/PredictionMatrix.tsx</code>. Use the
+existing styles from <code>lib/constants.ts</code> (<code>th</code>,
+<code>td</code>, <code>tabStyle</code>).”</em></p>
+</blockquote>
+<p>This tells the model where to look for patterns to match. Modern
+agentic tools (G4 generation from Lesson 1.1) can read those files
+automatically — but stating them in the prompt removes ambiguity.</p>
+<h4 id="pattern-context">6.2. Pattern context</h4>
+<blockquote>
+<p><em>“Match the structure of <code>PlayerCard.tsx</code> — same prop
+shape, same Tailwind classes, same conditional logic for
+badges.”</em></p>
+</blockquote>
+<p>You are pointing to a sibling that should be the template. The model
+imitates rather than invents.</p>
+<h4 id="snippet-context">6.3. Snippet context</h4>
+<blockquote>
+<p><em>“Here is the existing JSX I want you to wrap…”</em></p>
+</blockquote>
+<p>For chat-style prompts, paste the actual snippet. For agentic
+prompts, point to the file and line range.</p>
+<h3 id="what-not-to-include">What NOT to include</h3>
+<ul>
+<li><strong>Your whole codebase.</strong> The model gets confused by
+noise.</li>
+<li><strong>Irrelevant history.</strong> “Previously we tried X…” → only
+mention if the failed attempt is informative.</li>
+<li><strong>Personal context.</strong> “My PM is annoying about this…” →
+the model does not need this.</li>
+</ul>
+<p><strong>The right context is the smallest set of files / patterns /
+snippets that pin down what good output looks like.</strong></p>
+</section>
+<section id="component-5-failure-modes" class="slide level2">
+<h2>7. Component 5 — Failure modes</h2>
+<p>Tell the model what it would otherwise get wrong.</p>
+<h3 id="examples">Examples</h3>
+<ul>
+<li><em>“The empty array case must render an explicit empty state — not
+just nothing.”</em></li>
+<li><em>“Negative numbers should not be possible — clamp to zero in the
+helper.”</em></li>
+<li><em>“This API call may return 404 if the league has not started —
+handle that explicitly.”</em></li>
+<li><em>“The user might have unfinished picks. Treat unfinished as a
+third state, not as wrong.”</em></li>
+<li><em>“Avoid Date.now() — use the <code>clock</code> parameter that is
+passed in for testability.”</em></li>
+</ul>
+<p>These are statements about the <strong>shape of the world</strong>
+the model would otherwise default-to-not-knowing. They prevent 80% of
+“the AI was wrong” frustrations.</p>
+<h3 id="where-do-failure-modes-come-from">Where do failure modes come
+from?</h3>
+<p>Three sources:</p>
+<ol type="1">
+<li><strong>Bugs you have hit before</strong> in this codebase. Add a
+clause to prevent the AI from re-introducing them.</li>
+<li><strong>Data shape edge cases</strong> — empty, null, very large,
+locale-specific.</li>
+<li><strong>Domain knowledge the AI cannot infer</strong>. “In our
+domain, X means Y, not the standard meaning.”</li>
+</ol>
+</section>
+<section id="component-6-output-format" class="slide level2">
+<h2>8. Component 6 — Output format</h2>
+<p>Tell the model how to present its output.</p>
+<h3 id="common-formats-and-when-to-use-each">Common formats and when to
+use each</h3>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unified diff</td>
+<td>Refactor / patch / change to existing file</td>
+</tr>
+<tr>
+<td>Single complete file</td>
+<td>Brand-new file</td>
+</tr>
+<tr>
+<td>List of file paths + contents</td>
+<td>Multi-file scaffold</td>
+</tr>
+<tr>
+<td>Explanation prose, no code</td>
+<td>“Compare three approaches”</td>
+</tr>
+<tr>
+<td>Step-by-step plan</td>
+<td>Before any code is written, for big features</td>
+</tr>
+<tr>
+<td>Shell commands</td>
+<td>Setup, install, scaffold tasks</td>
+</tr>
+<tr>
+<td>JSON block</td>
+<td>Structured data extraction</td>
+</tr>
+</tbody>
+</table>
+<h3 id="why-this-matters">Why this matters</h3>
+<p>Without a format, the model picks one. Half the time it is wrong for
+your workflow. Specifying the format makes the output
+<strong>immediately usable</strong> — paste-friendly, diff-applicable,
+or grep-able.</p>
+<p>A senior tell: <em>“Return as a unified diff with no surrounding
+prose.”</em> That tells the model: I am a professional reviewer; do not
+pad your answer.</p>
+</section>
+<section id="a-worked-example-bad-to-good" class="slide level2">
+<h2>9. A worked example — bad to good</h2>
+<h3 id="v0-the-naive-prompt">v0 — The naive prompt</h3>
+<blockquote>
+<p><em>“add a loading state to my button”</em></p>
+</blockquote>
+<p>What is wrong: missing 4 of 6 components.</p>
+<h3 id="v1-add-the-deliverable">v1 — Add the deliverable</h3>
+<blockquote>
+<p><em>“Add a loading state to <code>&lt;PrimaryButton&gt;</code> in
+<code>components/ui/PrimaryButton.tsx</code>. When
+<code>isLoading</code> is true, show a spinner inside the button and
+disable it.”</em></p>
+</blockquote>
+<p>Better. Has verb, deliverable, some context.</p>
+<h3 id="v2-add-constraints">v2 — Add constraints</h3>
+<blockquote>
+<p><em>“Add a loading state to <code>&lt;PrimaryButton&gt;</code> in
+<code>components/ui/PrimaryButton.tsx</code>. When
+<code>isLoading</code> is true, show a spinner inside the button and
+disable it. Do not change the existing prop API. Do not add a new
+dependency for the spinner — use <code>&lt;Spinner&gt;</code> from the
+same folder.”</em></p>
+</blockquote>
+<p>Now diff size is bounded.</p>
+<h3 id="v3-add-failure-modes">v3 — Add failure modes</h3>
+<blockquote>
+<p><em>“Add a loading state to <code>&lt;PrimaryButton&gt;</code> in
+<code>components/ui/PrimaryButton.tsx</code>. When
+<code>isLoading</code> is true, show a spinner inside the button and
+disable it. Do not change the existing prop API. Do not add a new
+dependency for the spinner — use <code>&lt;Spinner&gt;</code> from the
+same folder. The button must remain keyboard-focusable while loading
+(focus ring visible) but click handlers should be no-ops. Announce the
+state change with <code>aria-busy</code>.”</em></p>
+</blockquote>
+<p>Now accessibility is locked in.</p>
+<h3 id="v4-add-output-format">v4 — Add output format</h3>
+<blockquote>
+<p><em>“Add a loading state to <code>&lt;PrimaryButton&gt;</code> in
+<code>components/ui/PrimaryButton.tsx</code>. When
+<code>isLoading</code> is true, show a spinner inside the button and
+disable it. Do not change the existing prop API. Do not add a new
+dependency for the spinner — use <code>&lt;Spinner&gt;</code> from the
+same folder. The button must remain keyboard-focusable while loading
+(focus ring visible) but click handlers should be no-ops. Announce the
+state change with <code>aria-busy</code>. Return a unified diff. No
+prose.”</em></p>
+</blockquote>
+<p>That is a senior-grade prompt. <strong>Walk an interviewer through
+this and they will know you are a craftsman.</strong></p>
+</section>
+<section id="the-opening-line-that-signals-seniority"
+class="slide level2">
+<h2>10. The opening line that signals seniority</h2>
+<p>In any conversation about how you prompt, drop this:</p>
+<blockquote>
+<p><em>“I think of a prompt the way I think of a function signature.
+Verb, deliverable, constraints, context. If a prompt is missing any of
+those, my output will be.”</em></p>
+</blockquote>
+<p>That sentence does three things:</p>
+<ol type="1">
+<li>Compares prompting to a familiar engineering primitive.</li>
+<li>Lists the components.</li>
+<li>Implies that you treat prompt quality as a measurable craft.</li>
+</ol>
+<p>Use it once per interview. Just once. Save it for when the topic of
+“how do you prompt?” comes up naturally.</p>
+</section>
+<section id="the-system-prompt-question" class="slide level2">
+<h2>11. The “system prompt” question</h2>
+<p>Some interviewers ask: <em>“Do you use system prompts? Custom
+instructions?”</em> Have an answer.</p>
+<blockquote>
+<p><em>“Yes. I keep a project-level system prompt that pins my codebase
+conventions — TypeScript strict, no default exports for components
+except for routes, prefer hooks over HOCs, our internal
+<code>cn()</code> utility for classnames. That replaces about a third of
+what I would otherwise type into every individual prompt. Treat the
+system prompt like a <code>.eslintrc</code> for the AI: it sets defaults
+so the per-prompt content can focus on the unique deliverable.”</em></p>
+</blockquote>
+<p>That answer signals you have actually configured your tools, not just
+used them with defaults. That is a senior signal.</p>
+</section>
+<section id="practice-exercise" class="slide level2">
+<h2>12. Practice exercise</h2>
+<p>Take three prompts you wrote in the last week. For each, score it on
+the six components:</p>
+<pre><code>PROMPT 1
+  Verb:           [present / missing] _______________________________
+  Deliverable:    [precise / vague]   _______________________________
+  Constraints:    [N stated]          _______________________________
+  Context:        [referenced files]  _______________________________
+  Failure modes:  [N stated]          _______________________________
+  Output format:  [stated / not]      _______________________________
+
+PROMPT 2 ...
+PROMPT 3 ...</code></pre>
+<p>Then <strong>rewrite</strong> each one to hit all six components.
+Compare the original output to what the rewritten prompt would produce.
+The difference is the lesson. Notice the diff size shrink and the
+correctness rise.</p>
+</section>
+<section id="common-pitfalls" class="slide level2">
+<h2>13. Common pitfalls</h2>
+<h3 id="over-specifying">13.1. Over-specifying</h3>
+<p>A prompt with twelve constraints, three pages of context, and seven
+failure modes is overkill. The model gets confused. <strong>Stop at six
+components, with two or three items per component.</strong></p>
+<h3 id="hidden-assumptions">13.2. Hidden assumptions</h3>
+<blockquote>
+<p><em>“Add a button using our standard pattern.”</em></p>
+</blockquote>
+<p>What is “our standard pattern”? The model has no idea. Either
+reference the file that defines the pattern or paste a snippet.</p>
+<h3 id="mixing-modes">13.3. Mixing modes</h3>
+<blockquote>
+<p><em>“Refactor this and also add tests and explain how it works and
+update the docs.”</em></p>
+</blockquote>
+<p>Four deliverables in one prompt. The model will do a mediocre job of
+all four. Split into four prompts.</p>
+<h3 id="prompting-before-thinking">13.4. Prompting before thinking</h3>
+<p>The fastest way to write a slow prompt is to skip the thinking step.
+Spend 30 seconds composing a hypothesis (“I think this should be X”)
+before writing the prompt. The hypothesis improves the prompt.</p>
+</section>
+<section id="check-yourself" class="slide level2">
+<h2>14. CHECK YOURSELF</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Can you list the six components of a
+prompt from memory?</label></li>
+<li><label><input type="checkbox" />For each component, can you give one
+good and one bad example?</label></li>
+<li><label><input type="checkbox" />Can you rewrite a vague prompt into
+a six-component version on the fly?</label></li>
+<li><label><input type="checkbox" />Can you deliver the section-10
+senior-signaling line without notes?</label></li>
+<li><label><input type="checkbox" />Have you scored three of your own
+real prompts using the rubric?</label></li>
+</ul>
+</section>
+<section id="where-you-are-now" class="slide level2">
+<h2>15. Where you are now</h2>
+<p>You have a structural model of what makes a prompt good and a
+vocabulary for explaining it to interviewers. Move on to <strong><a
+href="./02-the-twelve-patterns.md">02-the-twelve-patterns.md</a></strong>
+— twelve reusable prompt templates you can deploy verbatim.</p>
+</section></section>
+<section>
+<section id="lesson-3.2-the-twelve-patterns"
+class="title-slide slide level1">
+<h1>Lesson 3.2 — The Twelve Patterns</h1>
+<blockquote>
+<p><strong>Twelve prompts cover ninety percent of real engineering work
+with AI.</strong> This lesson is the library. Memorize the shapes. Adapt
+the words.</p>
+</blockquote>
+<p>By the end of this lesson:</p>
+<ul>
+<li>You will have twelve copy-pasteable prompt templates organized by
+intent.</li>
+<li>Each pattern names the verb, the situation it fits, and the
+senior-grade variant.</li>
+<li>You will have an interview demo prompt for each pattern — the one to
+walk through if asked.</li>
+</ul>
+<p>Treat this lesson as a reference. Read once. Bookmark. Return
+often.</p>
+</section>
+<section id="how-to-use-the-library" class="slide level2">
+<h2>1. How to use the library</h2>
+<p>Each pattern has the same shape:</p>
+<ul>
+<li>Name — what to call it in your head.</li>
+<li>When you reach for it — the situation.</li>
+<li>Template — fill-in-the-blanks structure.</li>
+<li>Real example — adapted to a real codebase decision.</li>
+<li>Interview soundbite — what you say when asked about this
+pattern.</li>
+</ul>
+<p>Memorize the names. The names alone make you sound deliberate.</p>
+</section>
+<section id="pattern-1-the-project-shaping-prompt" class="slide level2">
+<h2>2. Pattern 1 — The Project-Shaping Prompt</h2>
+<h3 id="when-you-reach-for-it">When you reach for it</h3>
+<p>You are about to start a new project. Before any code, you want to
+confirm the model understands the problem.</p>
+<h3 id="template">Template</h3>
+<blockquote>
+<p>“I want to build a [DOMAIN] app. The data is [DATA SHAPE IN ONE
+PARAGRAPH]. The user can [3 TO 5 USER ACTIONS]. Do not write code yet.
+Confirm you understand the data and the actions, propose a tab UI, and
+call out anything ambiguous.”</p>
+</blockquote>
+<h3 id="real-example">Real example</h3>
+<blockquote>
+<p>“I want to build a fantasy snooker league app. The data is eight
+teams, each picking match winners across five rounds; matches have
+winners or are unplayed; scoring is 3 for a correct pick, 1 for wrong,
+null for unplayed. The user can see standings, drill into one team’s
+picks, see analytics charts, and switch rounds. Do not write code yet.
+Confirm understanding, propose a five-tab UI, and ask any clarifying
+questions.”</p>
+</blockquote>
+<h3 id="interview-soundbite">Interview soundbite</h3>
+<blockquote>
+<p>“My first prompt on a new project is always a no-code prompt. I tell
+the model what I think the problem is and ask it to push back. Forces
+ambiguities to surface in 30 seconds instead of after I have shipped the
+wrong thing.”</p>
+</blockquote>
+</section>
+<section id="pattern-2-the-data-modeling-prompt" class="slide level2">
+<h2>3. Pattern 2 — The Data-Modeling Prompt</h2>
+<h3 id="when-you-reach-for-it-1">When you reach for it</h3>
+<p>You know the entities. You want strict types before any UI
+exists.</p>
+<h3 id="template-1">Template</h3>
+<blockquote>
+<p>“Define TypeScript interfaces for [ENTITIES]. Strict mode — no any,
+no implicit optional fields. For each interface, comment any non-obvious
+invariant. Use composition rather than inheritance when interfaces share
+fields.”</p>
+</blockquote>
+<h3 id="real-example-1">Real example</h3>
+<blockquote>
+<p>“Define TypeScript interfaces for Match, Team, PlayerInfo,
+ScoreDetail, TeamScores. Strict — no any. Match.winner is optional only
+when the match has not been played. Team.r1, r2, qf, sf are arrays where
+index i corresponds to round-N match index i — comment that invariant
+explicitly.”</p>
+</blockquote>
+<h3 id="interview-soundbite-1">Interview soundbite</h3>
+<blockquote>
+<p>“Strict types up front are the cheapest tax I can pay. They make
+every subsequent prompt easier because the model has shapes to refer
+to.”</p>
+</blockquote>
+</section>
+<section id="pattern-3-the-pure-logic-prompt" class="slide level2">
+<h2>4. Pattern 3 — The Pure-Logic Prompt</h2>
+<h3 id="when-you-reach-for-it-2">When you reach for it</h3>
+<p>You want testable, side-effect-free functions before any React.</p>
+<h3 id="template-2">Template</h3>
+<blockquote>
+<p>“Write [N] pure functions that take [INPUTS] and return [OUTPUTS]. No
+side effects. No I/O. No framework imports. Add JSDoc comments
+explaining each. Output as a single .ts file.”</p>
+</blockquote>
+<h3 id="real-example-2">Real example</h3>
+<blockquote>
+<p>“Write two pure functions: scorePick(pick: string, match: Match):
+number | null and calculateTeamScores(team: Team): TeamScores. scorePick
+returns 3 if pick equals match.winner, 1 if pick is wrong, null if match
+has no winner. calculateTeamScores aggregates across all five rounds. No
+I/O. No React. Output as lib/scoring.ts.”</p>
+</blockquote>
+<h3 id="interview-soundbite-2">Interview soundbite</h3>
+<blockquote>
+<p>“I write the pure logic before any UI. It is the part of the codebase
+that survives every refactor, and it is trivially testable. I will not
+start UI work until the logic is solid.”</p>
+</blockquote>
+</section>
+<section id="pattern-4-the-first-component-prompt" class="slide level2">
+<h2>5. Pattern 4 — The First-Component Prompt</h2>
+<h3 id="when-you-reach-for-it-3">When you reach for it</h3>
+<p>You have data and types. You want the smallest possible thing on
+screen to prove the data is real.</p>
+<h3 id="template-3">Template</h3>
+<blockquote>
+<p>“Render the simplest possible visualization of [DATA]. Use a
+functional React component with explicit props typed from [TYPE FILE].
+No useState. No useMemo. Inline styles. Do not extract sub-components
+yet.”</p>
+</blockquote>
+<h3 id="real-example-3">Real example</h3>
+<blockquote>
+<p>“Render a basic StandingsTab from an array of TeamWithScores. Use a
+plain HTML table. No useState, no useMemo, no extracted sub-components.
+Show team name and total. Inline styles only — match the green/yellow
+palette in lib/constants.ts.”</p>
+</blockquote>
+<h3 id="interview-soundbite-3">Interview soundbite</h3>
+<blockquote>
+<p>“I always start with the smallest thing that proves the data is real.
+Inline styles. No abstractions. Then I let abstractions earn their way
+in.”</p>
+</blockquote>
+</section>
+<section id="pattern-5-the-progressive-enhancement-prompt"
+class="slide level2">
+<h2>6. Pattern 5 — The Progressive-Enhancement Prompt</h2>
+<h3 id="when-you-reach-for-it-4">When you reach for it</h3>
+<p>You have a working component. You want to add one feature without
+redesigning anything.</p>
+<h3 id="template-4">Template</h3>
+<blockquote>
+<p>“Add [ONE FEATURE] to [EXISTING COMPONENT at FILEPATH]. Do not
+redesign anything. Do not refactor unrelated code. If the change touches
+more than three files, stop and tell me which files first. Return a
+unified diff.”</p>
+</blockquote>
+<h3 id="real-example-4">Real example</h3>
+<blockquote>
+<p>“Add a per-round column to the standings table in
+components/tabs/StandingsTab.tsx. Show R1 / R2 / QF / SF / Final scores.
+Do not redesign the table. Do not extract sub-components. If this
+touches more than three files, stop and tell me. Diff format.”</p>
+</blockquote>
+<h3 id="interview-soundbite-4">Interview soundbite</h3>
+<blockquote>
+<p>“This is the most useful prompt in my library. The ‘do not redesign’
+clause and the ‘stop if more than three files’ clause are scar tissue
+from the times the AI helpfully rewrote my whole module.”</p>
+</blockquote>
+</section>
+<section id="pattern-6-the-refactor-prompt" class="slide level2">
+<h2>7. Pattern 6 — The Refactor Prompt</h2>
+<h3 id="when-you-reach-for-it-5">When you reach for it</h3>
+<p>You want a structural change with no behavior change.</p>
+<h3 id="template-5">Template</h3>
+<blockquote>
+<p>“Refactor [CURRENT FILE] into an [TARGET PATTERN]. Move only [WHAT
+MOVES]. Do not change behavior. Do not change the public API of [PUBLIC
+SURFACE]. Keep all styling identical. Add no new dependencies.”</p>
+</blockquote>
+<h3 id="real-example-5">Real example</h3>
+<blockquote>
+<p>“Refactor components/SnookerFantasyLeague.tsx into an orchestrator
+pattern. The orchestrator owns activeTab and selectedTeam with useState.
+Tab components receive props. Do not change behavior. Do not change
+styling. Tests must continue to pass.”</p>
+</blockquote>
+<h3 id="interview-soundbite-5">Interview soundbite</h3>
+<blockquote>
+<p>“Refactors are the prompts where I am strictest about constraints.
+Behavior must not change. Styling must not change. Public API must not
+change. Without those clauses, the AI helpfully ‘improves’ things and
+the diff becomes unreviewable.”</p>
+</blockquote>
+</section>
+<section id="pattern-7-the-debug-prompt" class="slide level2">
+<h2>8. Pattern 7 — The Debug Prompt</h2>
+<h3 id="when-you-reach-for-it-6">When you reach for it</h3>
+<p>A test is failing or a behavior is wrong. You want a
+hypothesis-driven fix.</p>
+<h3 id="template-6">Template</h3>
+<blockquote>
+<p>“Bug: [SPECIFIC OBSERVED BEHAVIOR]. Expected: [SPECIFIC EXPECTED
+BEHAVIOR]. Reproducer: [STEPS]. Hypothesis: [YOUR GUESS]. Confirm or
+refute the hypothesis. Then patch the smallest part of the code that
+fixes it. Do not change tests.”</p>
+</blockquote>
+<h3 id="real-example-6">Real example</h3>
+<blockquote>
+<p>“Bug: scorePick returns 1 for unplayed matches. Expected: it should
+return null. Reproducer: scorePick(‘Williams’, { p1: ‘Williams’, p2:
+‘Wakelin’ }). Hypothesis: the function checks ‘pick === winner’ before
+checking ‘has winner’, and falls through to the 1-return. Confirm or
+refute. Patch only lib/scoring.ts. Do not modify tests.”</p>
+</blockquote>
+<h3 id="interview-soundbite-6">Interview soundbite</h3>
+<blockquote>
+<p>“I always include my own hypothesis when debugging with AI. Even a
+wrong hypothesis is useful — it gives the model something to confirm or
+refute. Without it, the model guesses, and guessing is what got me into
+the bug.”</p>
+</blockquote>
+</section>
+<section id="pattern-8-the-test-prompt" class="slide level2">
+<h2>9. Pattern 8 — The Test Prompt</h2>
+<h3 id="when-you-reach-for-it-7">When you reach for it</h3>
+<p>You have working code that needs coverage.</p>
+<h3 id="template-7">Template</h3>
+<blockquote>
+<p>“Write [N] [unit / integration / E2E] tests for [TARGET]. Cover these
+specific cases: [LIST]. Use [TEST FRAMEWORK]. Mirror the style of
+[EXISTING TEST FILE if any]. One assertion per test.”</p>
+</blockquote>
+<h3 id="real-example-7">Real example</h3>
+<blockquote>
+<p>“Write three Vitest unit tests for scorePick in lib/scoring.ts.
+Cases: correct pick returns 3; wrong pick returns 1; unplayed match
+returns null. Mirror the style of lib/utils.test.ts. One assertion per
+test. Use describe/it. Do not test calculateTeamScores in this
+turn.”</p>
+</blockquote>
+<h3 id="interview-soundbite-7">Interview soundbite</h3>
+<blockquote>
+<p>“Tests are where I am most explicit about cases. The model will
+happily generate twenty tests of weak quality. I prefer three tests that
+hit the boundary cases I named.”</p>
+</blockquote>
+</section>
+<section id="pattern-9-the-design-architecture-prompt"
+class="slide level2">
+<h2>10. Pattern 9 — The Design / Architecture Prompt</h2>
+<h3 id="when-you-reach-for-it-8">When you reach for it</h3>
+<p>A decision needs to be made. You want options and trade-offs without
+a default pick.</p>
+<h3 id="template-8">Template</h3>
+<blockquote>
+<p>“I need to decide [DECISION]. Constraints: [LIST]. Constraints I am
+not willing to negotiate: [LIST]. List three approaches with their
+trade-offs. Do not pick one. Surface any constraints I missed.”</p>
+</blockquote>
+<h3 id="real-example-8">Real example</h3>
+<blockquote>
+<p>“I need to decide where to cache: CDN, application server, or
+browser. Constraints: total monthly cost cap is $X, app servers have
+spare CPU and tight memory, 30% of users are on flaky networks.
+Constraints I am not willing to negotiate: no third-party CDN beyond our
+existing Cloudfront. List three approaches with trade-offs. Do not pick
+one. Surface anything I missed.”</p>
+</blockquote>
+<h3 id="interview-soundbite-8">Interview soundbite</h3>
+<blockquote>
+<p>“When I am genuinely undecided, I tell the model not to pick. The
+‘list three approaches’ framing forces it to surface options I would
+have missed. The choice still belongs to me.”</p>
+</blockquote>
+</section>
+<section id="pattern-10-the-documentation-prompt" class="slide level2">
+<h2>11. Pattern 10 — The Documentation Prompt</h2>
+<h3 id="when-you-reach-for-it-9">When you reach for it</h3>
+<p>You have working code that needs explanation for humans.</p>
+<h3 id="template-9">Template</h3>
+<blockquote>
+<p>“Generate [DOC TYPE] for [TARGET]. Audience: [WHO]. Tone: [STYLE].
+Length: [LIMIT]. Cover [SECTIONS]. Do not invent features. If anything
+is unclear from the code, list questions instead of guessing.”</p>
+</blockquote>
+<h3 id="real-example-9">Real example</h3>
+<blockquote>
+<p>“Generate a README for the lib/scoring.ts module. Audience: a junior
+engineer joining next month. Tone: technical but friendly. Length: under
+300 words. Cover the two functions, the invariant about array index
+correspondence, and one example call each. Do not invent features. List
+anything unclear instead of guessing.”</p>
+</blockquote>
+<h3 id="interview-soundbite-9">Interview soundbite</h3>
+<blockquote>
+<p>“The ‘do not invent features’ clause is critical. AI will happily
+document behavior the code does not have. The ‘list questions instead’
+clause turns documentation into a sanity check on the code itself.”</p>
+</blockquote>
+</section>
+<section id="pattern-11-the-prompt-improver-prompt"
+class="slide level2">
+<h2>12. Pattern 11 — The Prompt-Improver Prompt</h2>
+<h3 id="when-you-reach-for-it-10">When you reach for it</h3>
+<p>A prompt of yours produced bad output. You want a better prompt.</p>
+<h3 id="template-10">Template</h3>
+<blockquote>
+<p>“Here is the prompt I wrote: [PROMPT]. Here is the output it
+produced: [OUTPUT]. Here is what I actually wanted: [DESIRED]. Suggest a
+stronger prompt that closes the gap. Explain which of the six prompt
+components it strengthens.”</p>
+</blockquote>
+<h3 id="real-example-10">Real example</h3>
+<blockquote>
+<p>“Prompt: ‘add a loading state to my button.’ Output: a new component
+called Loader at the wrong path with new dependencies. Wanted: a small
+change to PrimaryButton that adds isLoading prop. Suggest a stronger
+prompt and explain which components it strengthens.”</p>
+</blockquote>
+<h3 id="interview-soundbite-10">Interview soundbite</h3>
+<blockquote>
+<p>“When a prompt produces bad output, the prompt is the bug, not the
+model. I have a meta-prompt that asks the AI to critique my prompt and
+suggest a better one. It works almost every time.”</p>
+</blockquote>
+</section>
+<section id="pattern-12-the-post-mortem-prompt" class="slide level2">
+<h2>13. Pattern 12 — The Post-Mortem Prompt</h2>
+<h3 id="when-you-reach-for-it-11">When you reach for it</h3>
+<p>A bug shipped. You want a structured retro.</p>
+<h3 id="template-11">Template</h3>
+<blockquote>
+<p>“We shipped a bug: [DESCRIBE]. Customer impact: [DESCRIBE]. Root
+cause: [WHAT YOU FOUND]. Detection: [HOW WE FOUND IT]. Remediation:
+[WHAT WE DID]. Generate a postmortem document with Summary, Timeline,
+Root Cause, Contributing Factors, What Went Well, What Could Improve,
+Action Items. Be honest about what we missed. No blame language.”</p>
+</blockquote>
+<h3 id="real-example-11">Real example</h3>
+<blockquote>
+<p>“We shipped a payments bug: partial-charge edge case mishandled.
+Impact: 4 hours, ~50 affected accounts. Root cause: missing null check
+after gateway response. Detection: customer support ticket, then
+alerting fired. Remediation: hotfix + refund script. Generate a full
+postmortem doc. Honest about what we missed. No blame.”</p>
+</blockquote>
+<h3 id="interview-soundbite-11">Interview soundbite</h3>
+<blockquote>
+<p>“Postmortems are one of the highest-value places to use AI. The
+structure is well-known, the tone is hard to nail, and the model is
+great at both. I always edit the draft, but the draft saves me an
+hour.”</p>
+</blockquote>
+</section>
+<section id="the-pattern-lookup-table" class="slide level2">
+<h2>14. The pattern lookup table</h2>
+<p>When the interviewer presents a hypothetical, you reach for the right
+pattern in seconds.</p>
+<table>
+<thead>
+<tr>
+<th>If the situation is…</th>
+<th>Reach for pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Brand new project</td>
+<td>1 (Project-Shaping)</td>
+</tr>
+<tr>
+<td>Need types</td>
+<td>2 (Data-Modeling)</td>
+</tr>
+<tr>
+<td>Need pure functions</td>
+<td>3 (Pure-Logic)</td>
+</tr>
+<tr>
+<td>Smallest UI</td>
+<td>4 (First-Component)</td>
+</tr>
+<tr>
+<td>Add one feature</td>
+<td>5 (Progressive Enhancement)</td>
+</tr>
+<tr>
+<td>Restructure without behavior change</td>
+<td>6 (Refactor)</td>
+</tr>
+<tr>
+<td>Bug</td>
+<td>7 (Debug)</td>
+</tr>
+<tr>
+<td>Coverage</td>
+<td>8 (Test)</td>
+</tr>
+<tr>
+<td>Decision</td>
+<td>9 (Design / Architecture)</td>
+</tr>
+<tr>
+<td>Doc</td>
+<td>10 (Documentation)</td>
+</tr>
+<tr>
+<td>AI gave bad output</td>
+<td>11 (Prompt Improver)</td>
+</tr>
+<tr>
+<td>Incident retro</td>
+<td>12 (Post-Mortem)</td>
+</tr>
+</tbody>
+</table>
+<p>Memorize the table. In an interview, when asked “how would you tackle
+X?”, lead with: “I would start with a [PATTERN NAME] prompt…”</p>
+</section>
+<section id="the-senior-soundbite-naming-patterns-out-loud"
+class="slide level2">
+<h2>15. The senior soundbite — naming patterns out loud</h2>
+<blockquote>
+<p>“I keep about a dozen prompt patterns in my head — project-shaping,
+data-modeling, pure-logic, refactor, debug, test, design, doc,
+post-mortem. Naming them is how I avoid one-off ad-hoc prompts. The
+pattern dictates the verb, the constraints, and the output format. The
+unique part of any prompt is the deliverable and the context.”</p>
+</blockquote>
+<p>That paragraph signals you have done this for long enough to abstract
+over it. <strong>Drop it once per interview.</strong></p>
+</section>
+<section id="common-pitfalls-1" class="slide level2">
+<h2>16. Common pitfalls</h2>
+<h3 id="wrong-pattern-for-the-job">16.1. Wrong pattern for the job</h3>
+<p>Using the Refactor template when you really need a Design template —
+you got code when you wanted options.</p>
+<h3 id="stuffing-two-patterns-into-one-prompt">16.2. Stuffing two
+patterns into one prompt</h3>
+<p>“Refactor X and add tests and update the docs” — three patterns
+crammed into one. Output is mediocre across all three. Run them as three
+prompts.</p>
+<h3 id="skipping-the-pattern-step">16.3. Skipping the pattern step</h3>
+<p>Prompting from a blank cursor instead of starting from a template.
+Slower, weaker output. <strong>Even five seconds of “which pattern is
+this?” improves the prompt.</strong></p>
+</section>
+<section id="practice" class="slide level2">
+<h2>17. Practice</h2>
+<p>Pick three real tasks from your last week. For each, identify the
+pattern that fits, fill in the template, and run the prompt. Compare to
+whatever you would have written off the cuff.</p>
+<p>By the end of the week, the templates will feel automatic.
+<strong>Patterns become invisible once internalized.</strong></p>
+</section>
+<section id="check-yourself-1" class="slide level2">
+<h2>18. CHECK YOURSELF</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Can you list the 12 patterns by name
+without looking?</label></li>
+<li><label><input type="checkbox" />Can you fill in any one template
+from memory?</label></li>
+<li><label><input type="checkbox" />Do you know which pattern fits these
+situations: bug, new project, refactor, doc, decision?</label></li>
+<li><label><input type="checkbox" />Have you delivered the section-15
+senior soundbite out loud at least once?</label></li>
+</ul>
+</section>
+<section id="where-you-are-now-1" class="slide level2">
+<h2>19. Where you are now</h2>
+<p>You have a library of twelve patterns plus the discipline to deploy
+them. Move on to <strong><a
+href="./03-rejecting-ai-output.md">03-rejecting-ai-output.md</a></strong>
+— the part most engineers do worst, and the part interviewers most want
+to see.</p>
+</section></section>
+<section>
+<section id="lesson-3.3-rejecting-ai-output"
+class="title-slide slide level1">
+<h1>Lesson 3.3 — Rejecting AI Output</h1>
+<blockquote>
+<p><strong>Engineers who can reject AI output cleanly are worth more
+than engineers who only know how to accept it.</strong> This lesson
+teaches you both the discipline and how to talk about it.</p>
+</blockquote>
+<p>By the end of this lesson:</p>
+<ul>
+<li>You will know the five legitimate reasons to reject a diff.</li>
+<li>You will know the four signals that the prompt — not the model — is
+the problem.</li>
+<li>You will have language for talking about rejection that does not
+sound negative.</li>
+<li>You will have a 60-second answer to “How do you review AI-generated
+code?”</li>
+</ul>
+</section>
+<section id="why-this-is-the-hardest-part" class="slide level2">
+<h2>1. Why this is the hardest part</h2>
+<p>Rejecting AI output goes against the dopamine loop. You wrote a
+prompt. The AI produced something. The output looks plausible. The path
+of least resistance is <strong>accept</strong>. Senior engineers fight
+that path every day.</p>
+<p>The skill is not “be a perfectionist.” The skill is
+<strong>calibrated suspicion</strong> — the experienced sense that this
+part of an AI diff is fine and that part is wrong, even when both parts
+compile.</p>
+<p>Interviewers know this. The question — direct or implied — is always
+present:</p>
+<blockquote>
+<p><em>“Show me you can tell the difference between AI output you should
+accept and AI output you should reject.”</em></p>
+</blockquote>
+<p>This lesson is the answer.</p>
+</section>
+<section id="the-five-legitimate-reasons-to-reject-a-diff"
+class="slide level2">
+<h2>2. The five legitimate reasons to reject a diff</h2>
+<h3 id="the-diff-does-the-wrong-thing">2.1. The diff does the wrong
+thing</h3>
+<p>The most basic reason. The output works, but it is not what you asked
+for. The model interpreted your prompt differently than you
+intended.</p>
+<blockquote>
+<p><em>“I asked for a debounced search. The diff implemented a throttled
+search. They look similar; they are not the same. Reject.”</em></p>
+</blockquote>
+<h3 id="the-diff-does-the-right-thing-wrongly">2.2. The diff does the
+right thing wrongly</h3>
+<p>The output is functionally correct but uses an approach inappropriate
+for your codebase: deprecated APIs, the wrong abstraction, fighting your
+existing patterns.</p>
+<blockquote>
+<p><em>“The diff used <code>getServerSideProps</code> in a Next.js 14
+App Router project. The right behavior, the wrong era. Reject.”</em></p>
+</blockquote>
+<h3 id="the-diff-is-too-big">2.3. The diff is too big</h3>
+<p>The output sprawls into files you did not ask about. Even if every
+line is correct, the change is unreviewable. <strong>Force a smaller
+diff.</strong></p>
+<blockquote>
+<p><em>“I asked to add a prop. The diff touched eleven files including a
+‘while we are here’ refactor of the parent. Reject and re-prompt with
+constraints.”</em></p>
+</blockquote>
+<h3 id="the-diff-hides-complexity">2.4. The diff hides complexity</h3>
+<p>The output works but introduces an abstraction (a wrapper, a context,
+a generic) you did not ask for and that adds more cognitive cost than it
+saves.</p>
+<blockquote>
+<p><em>“The diff wrapped my hook in a context provider ‘for future
+flexibility.’ We do not have a use case for that flexibility. Reject —
+over-engineering.”</em></p>
+</blockquote>
+<h3 id="you-cannot-explain-a-part-of-it">2.5. You cannot explain a part
+of it</h3>
+<p>The output works and looks reasonable, but there is at least one
+block you cannot walk through line by line. <strong>If you cannot
+explain it, you cannot ship it.</strong></p>
+<blockquote>
+<p><em>“The diff used a one-line ternary with array spread that I had to
+stare at for two minutes. Reject — even if the spread is correct, code I
+cannot read in three seconds is code I will misread under
+pressure.”</em></p>
+</blockquote>
+</section>
+<section id="the-four-signals-that-the-prompt-is-the-problem"
+class="slide level2">
+<h2>3. The four signals that the prompt is the problem</h2>
+<p>When the AI gives you bad output repeatedly, it is rarely the model’s
+fault. It is your prompt. Look for these signals:</p>
+<h3 id="you-keep-adding-but-also-in-follow-ups">3.1. You keep adding
+“but also…” in follow-ups</h3>
+<blockquote>
+<p><em>“Add a loading state… but also do not change the styling… but
+also use the existing Spinner… but also…”</em></p>
+</blockquote>
+<p>Each “but also” is a constraint that should have been in the original
+prompt. <strong>Stop and rewrite the prompt with those constraints up
+front.</strong></p>
+<h3 id="the-output-keeps-drifting-in-the-same-wrong-direction">3.2. The
+output keeps drifting in the same wrong direction</h3>
+<p>If three iterations all produce variants of the wrong thing, your
+prompt is anchoring the model toward that wrong thing. Often a single
+misleading word is the culprit. <em>“Make this more efficient”</em>
+often produces premature optimization. <em>“Make this cleaner”</em>
+often produces unnecessary abstractions. <strong>Audit your
+verbs.</strong></p>
+<h3 id="you-find-yourself-debugging-the-prompt-instead-of-the-code">3.3.
+You find yourself debugging the prompt instead of the code</h3>
+<p>If you have spent more than two minutes deciding whether to reject a
+diff, the prompt was probably under-specified. <strong>Reject the diff,
+rewrite the prompt, run again.</strong> Faster than wrestling with the
+output.</p>
+<h3 id="the-output-is-plausible-but-addresses-a-different-problem">3.4.
+The output is plausible but addresses a different problem</h3>
+<p>The most insidious failure. The diff compiles, runs, and looks good —
+but it solves a problem adjacent to yours. This means your prompt was
+ambiguous about the problem itself. Go back and write the problem
+statement more precisely.</p>
+</section>
+<section id="the-senior-way-to-reject" class="slide level2">
+<h2>4. The senior way to reject</h2>
+<p>How you communicate rejection — to yourself, to teammates, in
+interviews — matters as much as the rejection itself.</p>
+<h3 id="reject-the-output-not-the-tool">4.1. Reject the output, not the
+tool</h3>
+<p>Bad: <em>“The AI is useless for this kind of work.”</em></p>
+<p>Better: <em>“The output did not fit our codebase. The next prompt
+will pin the codebase patterns more explicitly.”</em></p>
+<p>The first version sounds like a bias. The second sounds like an
+engineer.</p>
+<h3 id="reject-in-writing-briefly">4.2. Reject in writing, briefly</h3>
+<p>When you reject a diff, write one line about why. To yourself. To the
+PR description if relevant. <em>“Rejected because it changed the public
+API of useScores; constraint added to next prompt.”</em> This builds
+your personal failure-mode catalog <strong>and</strong> signals the
+discipline to anyone reading your history.</p>
+<h3 id="reject-without-rage">4.3. Reject without rage</h3>
+<p>Frustration is contagious. If you find yourself reflexively
+dismissing AI output, your prompts will get worse and your suspicion
+will get less calibrated. Maintain a working assumption that the model
+is <strong>trying</strong> to be helpful and that bad output is fixable.
+That neutrality is what produces clean prompts.</p>
+</section>
+<section id="the-show-me-a-rejection-interview-question"
+class="slide level2">
+<h2>5. The “show me a rejection” interview question</h2>
+<p>Increasingly common in 2026 interviews:</p>
+<blockquote>
+<p><em>“Show me a recent diff from your AI tool that you rejected. Walk
+me through why.”</em></p>
+</blockquote>
+<p>Have an answer. Use this structure:</p>
+<blockquote>
+<p><em>“Recent example. I asked the AI to extract a sub-component from a
+large file. The diff did extract a component, but it also helpfully
+refactored the parent’s state into a useReducer. The state machine had
+three transitions and lived in one place — useReducer was
+over-engineered for it. I rejected the diff and re-prompted with:
+‘extract only the sub-component; do not change state shape or hooks in
+the parent.’ Second pass was clean and shipped.”</em></p>
+</blockquote>
+<p>That answer hits:</p>
+<ul>
+<li><strong>Specific situation</strong> (extract sub-component).</li>
+<li><strong>Specific over-reach</strong> (state refactor I did not ask
+for).</li>
+<li><strong>Specific rejection reason</strong> (over-engineering, scope
+creep).</li>
+<li><strong>Specific re-prompt</strong> (constraint added).</li>
+<li><strong>Resolution</strong> (shipped).</li>
+</ul>
+<p>Six sentences. ~30 seconds. <strong>Drill it.</strong></p>
+</section>
+<section id="the-60-second-ai-code-review-answer" class="slide level2">
+<h2>6. The 60-second AI code review answer</h2>
+<p>The flagship version of this skill in interview form:</p>
+<blockquote>
+<p><em>“My AI code review is different from my human code review. With
+human code, I assume good intent and read for design choices. With AI
+code, I read more skeptically because the failure modes are different —
+confident-looking calls to APIs that do not exist, plausible-looking
+patterns that conflict with our codebase, and ‘helpful’ refactors of
+code I did not ask about. My AI checklist has four items: does the diff
+do exactly what I asked, no more; does every API call point to a real,
+current API; does the change respect our codebase’s existing patterns;
+and can I explain every line in three seconds. If any answer is no, the
+diff goes back.”</em></p>
+</blockquote>
+<p>That is ~110 words, ~50 seconds. It is a complete, defensible answer
+to the most common AI-code-review question. <strong>Memorize it word for
+word.</strong></p>
+</section>
+<section id="the-fabrication-hallucination-question"
+class="slide level2">
+<h2>7. The “fabrication” / hallucination question</h2>
+<p>Interviewers love to ask:</p>
+<blockquote>
+<p><em>“How do you handle AI hallucinations?”</em></p>
+</blockquote>
+<p>The wrong answer: <em>“I check things on Stack Overflow.”</em> That
+is junior.</p>
+<p>The right answer:</p>
+<blockquote>
+<p><em>“Three layers. First, type-checking and the compiler catch most
+fabricated APIs immediately — the pain of a broken type is your first
+line of defense. Second, my eye is calibrated for the most common
+fabrication patterns: invented method names, parameter orders that
+should be alphabetical, and ‘utility’ libraries that do not exist.
+Third, when I am genuinely uncertain, I pull the actual library docs in
+another window and confirm. The defense is layered — none of those alone
+is enough, but the combination catches almost everything.”</em></p>
+</blockquote>
+<p>That answer:</p>
+<ul>
+<li>Names three concrete defenses.</li>
+<li>Treats type-checking as the first defense (a senior signal).</li>
+<li>Mentions calibrated suspicion (Lesson 3.3 vocabulary).</li>
+<li>Closes with humility — pulling docs to verify.</li>
+</ul>
+<p>Drill this too.</p>
+</section>
+<section id="the-ai-sometimes-gives-wrong-code-trap"
+class="slide level2">
+<h2>8. The “AI sometimes gives wrong code” trap</h2>
+<p>Sometimes the interviewer leads with this:</p>
+<blockquote>
+<p><em>“AI sometimes gives wrong code. Doesn’t that worry you?”</em></p>
+</blockquote>
+<p>This sounds like an attack. It is not. It is an opening. <strong>Take
+it.</strong></p>
+<blockquote>
+<p><em>“Sometimes is the right word. The work is the calibration —
+knowing which sometimes. After a year of doing this daily, I have a feel
+for the patterns where AI is reliable and the patterns where it is
+dangerous. Reliable: type derivation, boilerplate, conversion between
+formats, scaffolding. Dangerous: cross-module reasoning, anything to do
+with money, anything where the test would not catch the failure mode.
+The skill is not avoiding ‘wrong code’; it is knowing where to expect
+it.”</em></p>
+</blockquote>
+<p>The trap was: ‘doesn’t that worry you’ invites you to defend the AI.
+<strong>Don’t defend the AI.</strong> Defend your calibration. The AI is
+a tool; tools have failure modes; engineers know their tools’ failure
+modes.</p>
+</section>
+<section id="practice-exercise-the-rejection-journal"
+class="slide level2">
+<h2>9. Practice exercise — the rejection journal</h2>
+<p>For two weeks, every time you reject an AI diff, log:</p>
+<pre><code>DATE:     ____________________
+PROMPT:   ____________________
+OUTPUT:   ____________________
+REJECTED BECAUSE:  (pick one or more)
+  [ ] wrong thing
+  [ ] right thing wrongly
+  [ ] too big
+  [ ] hides complexity
+  [ ] cannot explain
+RE-PROMPT (if you wrote one):
+  ____________________
+LESSON:
+  ____________________</code></pre>
+<p>After two weeks you will have:</p>
+<ul>
+<li>A pattern library of your most common rejection reasons.</li>
+<li>A list of words/phrases in your prompts that consistently produce
+bad output.</li>
+<li>A vocabulary you can use in interviews (“I have a journal of
+rejected diffs and the most common reason is…” — which is
+<strong>astonishingly senior signaling</strong>).</li>
+</ul>
+</section>
+<section id="the-i-do-not-reject-red-flag" class="slide level2">
+<h2>10. The “I do not reject” red flag</h2>
+<p>If reading this lesson made you realize you almost never reject AI
+output, that is the lesson. <strong>Engineers who do not reject are not
+reviewing.</strong> Try this for one week:</p>
+<ul>
+<li>Force yourself to reject one out of every five AI diffs you would
+have accepted.</li>
+<li>Reject because of any of the five reasons in section 2 — even if you
+would normally let it slide.</li>
+<li>Re-prompt and compare.</li>
+</ul>
+<p>You will find: the second pass is usually noticeably better. The
+standard you held for the first pass was lower than the standard the
+model could meet with a slightly better prompt.</p>
+<p>This exercise alone, repeated, separates juniors who use AI from
+seniors who use AI.</p>
+</section>
+<section id="common-pitfalls-2" class="slide level2">
+<h2>11. Common pitfalls</h2>
+<h3 id="rejecting-performatively-in-interviews">11.1. Rejecting
+performatively in interviews</h3>
+<p>Saying <em>“I reject AI code all the time”</em> without specifics.
+The interviewer asks for an example, you do not have one, and you sound
+rehearsed. <strong>Always have a real example.</strong></p>
+<h3 id="rejecting-reactively-not-deliberately">11.2. Rejecting
+reactively, not deliberately</h3>
+<p>Rejecting because the diff “feels off” without articulating why. That
+feeling is data, but it has to translate to a sentence. Otherwise you
+cannot prompt better next time.</p>
+<h3 id="confusing-rejection-with-failure">11.3. Confusing rejection with
+failure</h3>
+<p>A rejected diff is not a failure. It is the <strong>review step
+working as intended</strong>. If your tool produces a wrong diff and you
+catch it, the system worked. The failure case is the wrong diff that
+ships.</p>
+<h3 id="rejecting-because-of-taste-alone">11.4. Rejecting because of
+taste alone</h3>
+<p>Sometimes you reject because the diff is “ugly.” That is allowed, but
+be honest about it. Style preferences are not architectural concerns.
+<strong>Distinguish them when explaining your rejection.</strong></p>
+</section>
+<section id="check-yourself-2" class="slide level2">
+<h2>12. CHECK YOURSELF</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Can you list the five legitimate
+reasons to reject a diff?</label></li>
+<li><label><input type="checkbox" />Can you list the four signals that
+your prompt — not the model — is wrong?</label></li>
+<li><label><input type="checkbox" />Do you have a real example of a
+recent rejection you can describe in 30 seconds?</label></li>
+<li><label><input type="checkbox" />Can you deliver the section-6 AI
+code review answer in under 60 seconds, no notes?</label></li>
+<li><label><input type="checkbox" />Can you handle the section-8 trap
+question without defending the tool?</label></li>
+</ul>
+</section>
+<section id="where-you-are-now-2" class="slide level2">
+<h2>13. Where you are now</h2>
+<p>You have:</p>
+<ul>
+<li>A vocabulary for AI-assisted coding work (Chapter 1).</li>
+<li>A defended answer to “why are humans still needed” (Chapter 2).</li>
+<li>A library of patterns plus the discipline to deploy them (Chapter
+3.1, 3.2).</li>
+<li>A rejection skill plus the language to communicate it (this
+lesson).</li>
+</ul>
+<p>That is the conceptual half of the course. Chapter 4 takes us into
+the <strong>practical</strong> interview formats: live coding, debugging
+AI-written bugs, and reviewing AI output in real time.</p>
+<p>Open <strong><a
+href="../chapter-04-live-scenarios/README.md">../chapter-04-live-scenarios/README.md</a></strong>.</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^5/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

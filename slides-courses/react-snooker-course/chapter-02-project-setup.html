@@ -1,0 +1,1831 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Chapter 02 Project Setup</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {  background-color: #f8f8f8; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ef2929; } /* Alert */
+    code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #204a87; } /* Attribute */
+    code span.bn { color: #0000cf; } /* BaseN */
+    code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4e9a06; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #8f5902; font-style: italic; } /* Comment */
+    code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+    code span.dt { color: #204a87; } /* DataType */
+    code span.dv { color: #0000cf; } /* DecVal */
+    code span.er { color: #a40000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #0000cf; } /* Float */
+    code span.fu { color: #204a87; font-weight: bold; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+    code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+    code span.ot { color: #8f5902; } /* Other */
+    code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+    code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+    code span.ss { color: #4e9a06; } /* SpecialString */
+    code span.st { color: #4e9a06; } /* String */
+    code span.va { color: #000000; } /* Variable */
+    code span.vs { color: #4e9a06; } /* VerbatimString */
+    code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/theme/white.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Chapter 02 Project Setup</h1>
+</section>
+
+<section>
+<section id="chapter-2-project-setup" class="title-slide slide level1">
+<h1>Chapter 2 — Project Setup</h1>
+<blockquote>
+<p><strong>From an empty folder to a running dev server.</strong> No
+React yet — but by the end you’ll have a Next.js + TypeScript + Tailwind
+app booting at <code>http://localhost:3000</code>, with your
+<code>lib/</code> folder full of typed data and pure scoring logic.</p>
+</blockquote>
+</section>
+<section id="what-youll-learn" class="slide level2">
+<h2>What you’ll learn</h2>
+<ul>
+<li><strong>Why Next.js</strong> is the right framework for this app
+(and when it would be the wrong one).</li>
+<li><strong>What every config file does</strong> —
+<code>package.json</code>, <code>tsconfig.json</code>,
+<code>tailwind.config.ts</code>, <code>next.config.mjs</code>,
+<code>.eslintrc.json</code>. No more “I just copy-paste these from
+someone.”</li>
+<li>The Next.js <strong>App Router</strong> mental model: file-based
+routing, <code>app/</code> directory layout, what
+<code>layout.tsx</code> is, what <code>page.tsx</code> is.</li>
+<li>How to <strong>transcribe data into TypeScript files</strong>
+without losing your mind to bracket-matching errors.</li>
+<li>The npm install / <code>npm run dev</code> workflow, and what to do
+when something breaks.</li>
+</ul>
+</section>
+<section id="lessons-in-this-chapter" class="slide level2">
+<h2>Lessons in this chapter</h2>
+<ol type="1">
+<li><strong><a
+href="./01-why-nextjs-typescript.md">01-why-nextjs-typescript.md</a></strong>
+— The framework decision tree. Next.js vs Vite vs Create-React-App vs
+plain HTML. Why we picked what we picked, and what would change if the
+requirements were different.</li>
+<li><strong><a
+href="./02-scaffolding-the-project.md">02-scaffolding-the-project.md</a></strong>
+— Run-by-run walkthrough of creating the project from scratch. Every
+file. Every line. Every config option, explained.</li>
+<li><strong><a
+href="./03-creating-data-files.md">03-creating-data-files.md</a></strong>
+— Filling out <code>lib/matches.ts</code>, <code>lib/teams.ts</code>,
+<code>lib/players.ts</code> with real data. The boring lesson where
+you’ll spend the most keystrokes.</li>
+</ol>
+</section>
+<section id="files-youll-create-in-this-chapter" class="slide level2">
+<h2>Files you’ll create in this chapter</h2>
+<pre><code>package.json                  ← dependencies
+package-lock.json             ← (generated by npm)
+tsconfig.json                 ← TypeScript compiler config
+next.config.mjs               ← Next.js config
+tailwind.config.ts            ← Tailwind theme config
+postcss.config.mjs            ← PostCSS pipeline (used by Tailwind)
+.eslintrc.json                ← ESLint rules
+.prettierrc                   ← Prettier formatting rules
+.gitignore                    ← what git ignores
+README.md                     ← top-level project README
+app/
+  layout.tsx                  ← root HTML wrapper (server component)
+  page.tsx                    ← the home route
+  globals.css                 ← Tailwind directives + global styles
+lib/
+  types.ts                    ← (Chapter 1 Lesson 2)
+  scoring.ts                  ← (Chapter 1 Lesson 3)
+  matches.ts                  ← all 31 match objects
+  teams.ts                    ← all 8 team objects with picks
+  players.ts                  ← PLAYER_INFO dictionary
+  constants.ts                ← shared style helpers + ball colors</code></pre>
+</section>
+<section id="new-reactnext.js-concepts-introduced" class="slide level2">
+<h2>New React/Next.js concepts introduced</h2>
+<ul>
+<li><strong>App Router</strong> — Next.js 13+ file-based routing
+system.</li>
+<li><strong>Server components</strong> (the default) — components that
+render on the server, no JavaScript shipped to the browser.</li>
+<li><strong><code>'use client'</code> directive</strong> — opt a single
+file into client-side rendering. Foreshadowed here, used in earnest in
+Chapter 4.</li>
+<li><strong>TypeScript path aliases</strong>
+(<code>@/components/...</code>) — clean imports without
+<code>../../../</code>.</li>
+<li><strong>Tailwind CSS</strong> — utility-first styling. We won’t use
+it heavily (the codebase uses inline styles), but we set it up.</li>
+</ul>
+</section>
+<section id="how-long-it-should-take" class="slide level2">
+<h2>How long it should take</h2>
+<ul>
+<li>30 min reading per lesson</li>
+<li>1.5–2 hours typing the data into Lesson 3 (the data is real, the
+file is long)</li>
+<li>~3.5 hours total</li>
+</ul>
+</section>
+<section id="before-you-start" class="slide level2">
+<h2>Before you start</h2>
+<p>You need:</p>
+<ul>
+<li>Node.js 20+ installed (<code>node --version</code>)</li>
+<li>A terminal (Windows users: PowerShell is fine, the lessons assume
+PowerShell commands)</li>
+<li>~30 minutes for <code>npm install</code> to finish on a fresh
+project (it’s about 400 packages)</li>
+</ul>
+<p>If you’re following along with this repo as the reference, you can
+<code>cd</code> into a <em>new</em> empty folder and rebuild the project
+there, then <code>diff</code> against this repo’s state. Or just read
+along and sanity-check against the live files in
+<code>package.json</code>, <code>app/</code>, <code>lib/</code>.</p>
+<p>Open <strong><a
+href="./01-why-nextjs-typescript.md">01-why-nextjs-typescript.md</a></strong>
+when ready.</p>
+</section></section>
+<section>
+<section id="chapter-2-lesson-1-why-next.js-typescript"
+class="title-slide slide level1">
+<h1>Chapter 2 · Lesson 1 — Why Next.js + TypeScript</h1>
+<blockquote>
+<p><em>Goal: understand the framework decision tree well enough to
+defend “we used Next.js” in an interview without looking nervous.
+Beginners pick frameworks by vibe; seniors pick by
+requirements.</em></p>
+</blockquote>
+</section>
+<section id="the-interview-question" class="slide level2">
+<h2>The interview question</h2>
+<p>“So why did you pick Next.js for this project?”</p>
+<p>Bad answer: <em>“Because everyone uses it.”</em> Or: <em>“Because the
+AI suggested it.”</em></p>
+<p>Good answer: <em>“The app is a static, single-page experience with
+file-based data. I needed TypeScript out of the box, zero-config
+deployment, and a way to optionally pre-render at build time. Next.js
+gave me all three with one command, plus image optimization and routing
+if I ever extended it. Vite would have worked too — Vite is leaner and
+faster in dev — but Next gave me Vercel deployment as a free side
+effect, which mattered.”</em></p>
+<p>That’s the answer this lesson is preparing you to give. We’re going
+to walk through the decision space.</p>
+</section>
+<section id="the-react-framework-landscape-as-of-2026"
+class="slide level2">
+<h2>The React framework landscape (as of 2026)</h2>
+<p>When you decide to use React, you’re not done. You still have to pick
+a <strong>build tool</strong> or <strong>meta-framework</strong>. The
+major options:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it is</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Next.js</strong></td>
+<td>A meta-framework on top of React. File-based routing, server-side
+rendering (SSR), static site generation (SSG), API routes, image/font
+optimization, deployment to Vercel.</td>
+<td>Apps that need any combination of: SSR, SEO, multi-page routing,
+server-side data, deployment ease.</td>
+</tr>
+<tr>
+<td><strong>Vite + React</strong></td>
+<td>A bare-bones build tool. Just bundles and serves React. No router,
+no SSR, no nothing extra.</td>
+<td>Single-page apps where you want minimal magic. Library or
+component-collection projects.</td>
+</tr>
+<tr>
+<td><strong>Create React App (CRA)</strong></td>
+<td>The legacy starter. Officially deprecated by the React team in
+2025.</td>
+<td>Don’t pick this. Migration target only.</td>
+</tr>
+<tr>
+<td><strong>Remix</strong></td>
+<td>A meta-framework like Next.js, but more loyal to web standards
+(forms, fetch, etc.).</td>
+<td>Form-heavy apps, apps wanting to embrace progressive
+enhancement.</td>
+</tr>
+<tr>
+<td><strong>TanStack Start</strong></td>
+<td>A new entrant, “Vite + React + a router + SSR” assembled by
+hand.</td>
+<td>Apps that want Next.js features without Next.js opinions.</td>
+</tr>
+<tr>
+<td><strong>Plain HTML + script tag</strong></td>
+<td>Just a <code>&lt;script src="react.js"&gt;</code> and a CDN
+link.</td>
+<td>Demos, single-page widgets, learning.</td>
+</tr>
+</tbody>
+</table>
+<p>For our snooker app, we need to satisfy these requirements (from
+Chapter 1):</p>
+<ul>
+<li>Single-page interaction (one URL, all interaction client-side)</li>
+<li>Static deployment (no backend)</li>
+<li>Data lives in code (TypeScript constants)</li>
+<li>Tiny state (which tab, which selected item)</li>
+</ul>
+<p><strong>Vite would work. Next.js would also work.</strong> Plain HTML
++ a script tag would work for a smaller version. CRA is dead. Remix is
+overkill for a no-form app. TanStack Start is too new.</p>
+<p>So our real choice is <strong>Vite vs Next.js</strong>.</p>
+</section>
+<section id="the-vite-vs-next.js-decision-the-honest-one"
+class="slide level2">
+<h2>The Vite vs Next.js decision (the honest one)</h2>
+<p>For an app <strong>this size</strong>, here’s the honest
+tradeoff:</p>
+<h3 id="vite-wins-on">Vite wins on:</h3>
+<ul>
+<li><strong>Dev server startup speed.</strong> Vite boots in ~200ms;
+Next takes 2-3 seconds.</li>
+<li><strong>Less framework magic.</strong> What you see in your code is
+what runs.</li>
+<li><strong>Smaller bundle by default.</strong> No SSR overhead, no Next
+runtime.</li>
+<li><strong>Easier to migrate to a non-React framework later.</strong>
+Vite is generic.</li>
+</ul>
+<h3 id="next.js-wins-on">Next.js wins on:</h3>
+<ul>
+<li><strong>Vercel deployment with literally one click.</strong> Push to
+GitHub, import on Vercel, done. Vite needs a hosting target you
+configure (Netlify, Cloudflare Pages, etc.).</li>
+<li><strong>TypeScript + Tailwind + ESLint pre-wired.</strong>
+<code>npx create-next-app</code> gives you a working project with all of
+these. With Vite you assemble them yourself.</li>
+<li><strong>Image and font optimization</strong> out of the box
+(<code>next/font</code>, <code>next/image</code>).</li>
+<li><strong>Routing if you ever expand.</strong> If next year you add a
+<code>/leaderboard/[year]</code> route, Next has it free; Vite needs
+<code>react-router-dom</code>.</li>
+<li><strong>Server components for free.</strong> Even though we won’t
+use them heavily, the <em>option</em> is there.</li>
+</ul>
+<p>For this project, <strong>Next.js wins because of deployment
+ergonomics</strong>. We will probably push this to Vercel, and Next.js +
+Vercel is the smoothest pipeline available. The cost is a slightly
+heavier dev server. We’ll pay it.</p>
+<blockquote>
+<p><strong>Interview answer template:</strong> <em>“We used Next.js
+because [main reason] and [secondary reason]. Vite would also have
+worked — it’s lighter — but [main reason] was the tiebreaker.”</em>
+Replace <code>[main reason]</code> with whichever Next.js feature
+mattered most for your project. <strong>Always be ready to defend the
+alternative.</strong> Interviewers respect “I considered X but picked Y
+because Z” answers, and distrust “I just used what was popular.”</p>
+</blockquote>
+</section>
+<section id="why-typescript-not-plain-javascript" class="slide level2">
+<h2>Why TypeScript (not plain JavaScript)?</h2>
+<p>This is a quicker decision. Three reasons.</p>
+<h3 id="catches-errors-at-compile-time-not-at-runtime.">1. Catches
+errors at compile time, not at runtime.</h3>
+<p>The example we’ll never get tired of:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// JavaScript — silently broken</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> team <span class="op">=</span> teams[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(team<span class="op">.</span><span class="at">scors</span><span class="op">.</span><span class="at">r1</span>)<span class="op">;</span>   <span class="co">// typo, returns undefined, app shows &quot;undefined / 48&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">// TypeScript — error before you save</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> team <span class="op">=</span> teams[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(team<span class="op">.</span><span class="at">scors</span><span class="op">.</span><span class="at">r1</span>)<span class="op">;</span>   <span class="co">// ERROR: Property &#39;scors&#39; does not exist on type &#39;TeamWithScores&#39;</span></span></code></pre></div>
+<p>You’ll make typos. JavaScript will let them ship. TypeScript won’t.
+<strong>Compile-time safety is free; runtime debugging is
+expensive.</strong> That alone pays for TypeScript a hundred times
+over.</p>
+<h3 id="self-documenting-code.">2. Self-documenting code.</h3>
+<p>When you write
+<code>function calculateTeamScores(team: Team): TeamScores</code>,
+anyone reading the code knows the input shape, the output shape, and
+they can <code>Cmd+Click</code> to navigate to either. <strong>Types are
+documentation that the compiler keeps honest.</strong> Comments drift.
+Types don’t.</p>
+<h3 id="editor-superpowers.">3. Editor superpowers.</h3>
+<p>VS Code, Cursor, Windsurf — every modern editor turns into a god-tier
+autocomplete machine when you have types. You type <code>team.</code>
+and it shows you <code>r1, r2, qf, sf, final, ...</code>. You don’t have
+to memorize the shape; the editor reminds you.</p>
+<h3 id="when-not-to-use-typescript">When NOT to use TypeScript</h3>
+<p>There’s a reasonable counterargument for tiny scripts (under 50
+lines), prototypes you’ll throw away, and learning exercises where the
+type ceremony obscures the lesson. For <em>anything</em> shipped to
+production, multi-file, or maintained by more than one person —
+TypeScript wins.</p>
+<blockquote>
+<p><strong>Interview answer template:</strong> <em>“Compile-time errors,
+self-documenting types, and editor support. The cost is a small upfront
+learning curve and slightly more verbose code, but for any project
+bigger than a 50-line script the win is overwhelming.”</em></p>
+</blockquote>
+</section>
+<section id="why-tailwind-css-and-why-we-barely-use-it"
+class="slide level2">
+<h2>Why Tailwind CSS (and why we barely use it)</h2>
+<p>This is the one part of the stack that has a small surprise. The
+codebase uses <strong>inline styles</strong>
+(e.g. <code>style={{ background: '#0F5132' }}</code>) more than Tailwind
+classes. Then why is Tailwind installed at all?</p>
+<p>Three reasons:</p>
+<h3 id="to-set-up-globals.css-properly.">1. To set up
+<code>globals.css</code> properly.</h3>
+<p><code>app/globals.css</code> has these three Tailwind directives at
+the top:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">@tailwind</span> base<span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">@tailwind</span> components<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">@tailwind</span> utilities<span class="op">;</span></span></code></pre></div>
+<p><code>@tailwind base</code> is the part that matters most: it injects
+Tailwind’s CSS reset (Preflight). That’s a curated set of “make all
+browsers behave the same” rules —
+<code>* { box-sizing: border-box }</code>,
+<code>h1 { font-size: inherit }</code>, etc. <strong>Without a reset,
+every browser styles your app slightly differently.</strong> With
+Tailwind installed we get the reset for free, and we don’t even have to
+use any classes.</p>
+<h3 id="to-leave-the-door-open-for-future-tailwind-use.">2. To leave the
+door open for future Tailwind use.</h3>
+<p>If you later want to convert one component from inline styles to
+Tailwind classes, the toolchain’s already set up. No re-config
+needed.</p>
+<h3
+id="so-nextfont-and-other-next.js-features-that-integrate-with-tailwind-work-cleanly.">3.
+So <code>next/font</code> and other Next.js features that integrate with
+Tailwind work cleanly.</h3>
+<p>Some Next plugins assume Tailwind is present. Having it costs ~5KB of
+CSS and zero developer time.</p>
+<h3 id="why-inline-styles-instead-of-tailwind-classes">Why inline styles
+instead of Tailwind classes?</h3>
+<p>The codebase uses dynamic, computed styles based on team colors,
+gradients with multiple custom values, and conditional logic that would
+produce <em>very</em> long class strings if rendered with Tailwind:</p>
+<pre class="tsx"><code>// Inline (what the codebase uses)
+&lt;div style={{
+  background: `linear-gradient(135deg, ${team.color} 0%, ${team.accent} 100%)`,
+  boxShadow: `0 8px 32px ${team.color}50`,
+  borderRadius: 16,
+}}&gt;
+
+// Tailwind (what it&#39;d look like with arbitrary values)
+&lt;div className=&quot;rounded-2xl&quot;
+     style={{ background: `linear-gradient(135deg, ${team.color} 0%, ${team.accent} 100%)`,
+              boxShadow: `0 8px 32px ${team.color}50` }}&gt;</code></pre>
+<p>Tailwind’s strength is <strong>static styling repeated across many
+elements</strong> (buttons, headings, cards). When every visual is
+computed from runtime props (team colors), Tailwind doesn’t help — and
+inline styles read more cleanly. <strong>Right tool, right
+job.</strong></p>
+<p>In an interview: <em>“We use Tailwind for the reset and global setup;
+inline styles for component-level dynamic theming. If a piece of styling
+becomes static and repeated, we’d convert it to Tailwind classes.”</em>
+That’s a defensible answer.</p>
+</section>
+<section
+id="what-about-css-modules-styled-components-emotion-vanilla-extract"
+class="slide level2">
+<h2>What about CSS Modules, styled-components, emotion,
+vanilla-extract?</h2>
+<p>Quick tour of the alternatives:</p>
+<ul>
+<li><strong>CSS Modules</strong> (<code>.module.css</code>) — built into
+Next.js. Locally-scoped class names. Great for static styling. We could
+have used them; we chose inline because of the dynamic theming. Both are
+valid for production.</li>
+<li><strong>styled-components / emotion</strong> — CSS-in-JS libraries.
+Powerful but add bundle size and runtime overhead. Falling out of favor
+(2023+) because of bundle size and SSR pain. Don’t reach for them on new
+projects.</li>
+<li><strong>vanilla-extract</strong> — a typed, zero-runtime CSS-in-TS
+library. Newer, niche. Worth knowing about; not necessary here.</li>
+</ul>
+<p>For our app: <strong>inline styles + Tailwind reset</strong> is the
+simplest, lightest approach that satisfies our constraints.
+<strong>Senior engineers prefer the simplest thing that
+works.</strong></p>
+</section>
+<section
+id="why-we-dont-need-a-state-management-library-redux-zustand-jotai"
+class="slide level2">
+<h2>Why we don’t need a state management library (Redux, Zustand,
+Jotai)</h2>
+<p>We have <strong>two pieces of top-level state</strong>:
+<code>activeTab</code> and <code>selectedTeam</code>. That’s it.</p>
+<p>For two pieces of state, <code>useState</code> in the orchestrator
+component plus prop drilling is <strong>the right answer</strong>. Reach
+for Redux when:</p>
+<ul>
+<li>A dozen-plus components share the same data,</li>
+<li>The state is updated from many places,</li>
+<li>You need time-travel debugging or middleware (e.g. logging
+actions),</li>
+<li>You’re building a Figma-tier app with operational transforms.</li>
+</ul>
+<p>We’re building a snooker fantasy league. None of the above apply.
+<strong>Picking Redux for this app would be over-engineering — and
+interviewers can tell.</strong> A senior says <em>“the smallest thing
+that works.”</em> If the requirements grow, you migrate. You don’t
+pre-migrate.</p>
+<blockquote>
+<p><strong>Interview tip.</strong> When asked <em>“how do you manage
+state?”</em>, your answer should always start with the size of the app.
+<em>“For our small app, we use useState in the parent component and prop
+drilling. If state coordination grew complex, we’d reach for Zustand
+first because it’s the lightest option that scales beyond
+useState.”</em> That answer signals you’ve thought about it; it signals
+you don’t reach for libraries you don’t need; it signals you know the
+next step if needed.</p>
+</blockquote>
+</section>
+<section id="why-recharts-when-its-time-for-charts"
+class="slide level2">
+<h2>Why Recharts (when it’s time for charts)</h2>
+<p>Foreshadowing Chapter 6, but worth noting now.</p>
+<p>We use <strong>Recharts</strong> for the analytics tab.
+Alternatives:</p>
+<ul>
+<li><strong>Chart.js + react-chartjs-2</strong> — older, larger,
+imperative API. Works but feels last-decade.</li>
+<li><strong>Victory</strong> — declarative like Recharts, slightly more
+flexible, slightly bigger.</li>
+<li><strong>D3</strong> — the underlying library. Massively powerful but
+you write more code.</li>
+<li><strong>Visx</strong> — Airbnb’s collection of low-level D3-React
+components. Power-user choice.</li>
+<li><strong>Nivo</strong> — beautiful, declarative, larger bundle.</li>
+</ul>
+<p>Recharts is the <strong>default React charting library</strong>.
+It’s:</p>
+<ul>
+<li>Declarative (you describe what you want, not how to draw it).</li>
+<li>Built on D3 internally (so you get D3’s correctness without D3’s
+complexity).</li>
+<li>Tree-shakeable (only the chart types you import end up in the
+bundle).</li>
+<li>TypeScript-friendly out of the box.</li>
+</ul>
+<p>We’re not building Bloomberg Terminal. Recharts is enough.
+<strong>Don’t reach for D3 directly until Recharts can’t do what you
+need.</strong></p>
+</section>
+<section id="the-decision-tree-in-one-sketch" class="slide level2">
+<h2>The decision tree, in one sketch</h2>
+<p>If you were starting from scratch tomorrow and had to choose, here’s
+the flowchart in your head:</p>
+<pre><code>Do I need a backend / API?
+├── Yes ────────► Next.js (or full-stack: SvelteKit, Remix, Nuxt)
+└── No
+    │
+    ├── Will I deploy to Vercel? ───► Next.js (path of least resistance)
+    │
+    ├── Single page, no routing? ───► Vite + React
+    │
+    └── Many pages, static, no SSR? ─► Next.js (SSG mode) or Astro
+
+Do I need TypeScript? ───────────────► Yes. Always. (Unless &lt; 50 LOC throwaway)
+
+Do I need a state library? ──────────► Only if useState + prop drilling can&#39;t handle it
+                                      Try Zustand before Redux.
+
+Do I need a styling library? ────────► Tailwind. Or inline styles. Don&#39;t pick CSS-in-JS in 2026.
+
+Do I need charts? ───────────────────► Recharts. Don&#39;t reach for D3 until Recharts breaks.</code></pre>
+<p>Memorize that flowchart. It’s not infallible, but it’s the senior
+default. You’ll be wrong sometimes; that’s fine. Defending the wrong
+default is easier than defending no default.</p>
+</section>
+<section id="what-this-lesson-did-not-cover" class="slide level2">
+<h2>What this lesson did NOT cover</h2>
+<ul>
+<li><strong>Server vs client components in detail</strong> (Chapter
+7).</li>
+<li><strong>The exact <code>package.json</code> contents</strong> (next
+lesson).</li>
+<li><strong>How Next.js bundles your code under the hood</strong>
+(advanced — out of scope).</li>
+<li><strong>Why Server Actions exist</strong> (Next.js 14+ feature; we
+don’t use them).</li>
+</ul>
+<p>These are all worth a Google later if you’re curious. For now, the
+framework decisions are made. Next lesson: we type the commands and
+create the project.</p>
+</section>
+<section
+id="vibe-prompt-you-would-have-used-to-make-the-framework-decision"
+class="slide level2">
+<h2>Vibe prompt you would have used (to make the framework
+decision)</h2>
+<blockquote>
+<p><em>“I’m building a single-page React app for a fantasy sports
+league. ~250 hand-typed data records, 5 tabs, no backend, no auth, no
+real-time, deployment to Vercel. Should I use Next.js or Vite + React?
+Lay out the tradeoffs honestly. Don’t just say ‘use the popular
+one.’”</em></p>
+</blockquote>
+<p>The “don’t just say use the popular one” line is what gets the LLM to
+actually weigh tradeoffs instead of giving you the most upvoted Stack
+Overflow answer.</p>
+</section>
+<section id="check-yourself" class="slide level2">
+<h2>CHECK YOURSELF</h2>
+<ol type="1">
+<li><strong>A friend says “but Next.js has SSR, isn’t that wasted on a
+static page?”</strong> Compose a one-paragraph defense of using Next.js
+for this project anyway.</li>
+<li><strong>Your interviewer says “Vite is faster in dev — why didn’t
+you use it?”</strong> Give the honest two-sentence answer.</li>
+<li><strong>Why does the project have Tailwind installed even though
+most styles are inline?</strong> State three concrete reasons.</li>
+<li><strong>Tomorrow you start a new project: a 200-product e-commerce
+site with checkout. Walk through the framework decision tree out
+loud.</strong></li>
+<li><strong>Tomorrow you start a different new project: a Figma-style
+collaborative whiteboard. Different answer? Why?</strong></li>
+</ol>
+<p>When you’re ready, head to <strong><a
+href="./02-scaffolding-the-project.md">02-scaffolding-the-project.md</a></strong>
+and we’ll start typing commands.</p>
+</section></section>
+<section>
+<section id="chapter-2-lesson-2-scaffolding-the-project"
+class="title-slide slide level1">
+<h1>Chapter 2 · Lesson 2 — Scaffolding the Project</h1>
+<blockquote>
+<p><em>Goal: from an empty folder to a running Next.js dev server, with
+every config file explained line by line. By the end of this lesson,
+<code>npm run dev</code> boots a placeholder page at
+<code>http://localhost:3000</code>.</em></p>
+</blockquote>
+</section>
+<section id="the-two-ways-to-start-a-next.js-project"
+class="slide level2">
+<h2>The two ways to start a Next.js project</h2>
+<p>There are two common starting points:</p>
+<ol type="1">
+<li><strong><code>npx create-next-app@latest</code></strong> —
+interactive scaffold. Asks you a dozen questions and generates a full
+project. Recommended for <strong>most</strong> real projects.</li>
+<li><strong>Build the files by hand.</strong> Manual scaffold. Slower
+but you understand every line. Recommended for
+<strong>learning</strong>.</li>
+</ol>
+<p>This lesson does Option 2. You’ll scaffold by hand. By the end you’ll
+know what <code>create-next-app</code> would have done for you, and
+why.</p>
+</section>
+<section id="step-0-create-the-folder" class="slide level2">
+<h2>Step 0: Create the folder</h2>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In PowerShell on Windows</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">New-Item</span> <span class="op">-</span>ItemType Directory <span class="op">-</span>Path <span class="st">&quot;snooker-fantasy&quot;</span> <span class="op">|</span> <span class="fu">Out-Null</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-Location</span> <span class="st">&quot;snooker-fantasy&quot;</span></span></code></pre></div>
+<p>(If you’re following along inside the existing repo, you can skip
+this — just imagine the rest of the lesson playing out in an empty
+folder.)</p>
+</section>
+<section id="step-1-package.json" class="slide level2">
+<h2>Step 1: <code>package.json</code></h2>
+<p>This is where every JavaScript project starts. Create a file called
+<code>package.json</code> in the project root with this content:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;snooker-fantasy&quot;</span><span class="fu">,</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;0.1.0&quot;</span><span class="fu">,</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;private&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;dev&quot;</span><span class="fu">:</span> <span class="st">&quot;next dev&quot;</span><span class="fu">,</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="st">&quot;next build&quot;</span><span class="fu">,</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;start&quot;</span><span class="fu">:</span> <span class="st">&quot;next start&quot;</span><span class="fu">,</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;lint&quot;</span><span class="fu">:</span> <span class="st">&quot;next lint&quot;</span><span class="fu">,</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;format&quot;</span><span class="fu">:</span> <span class="st">&quot;prettier --write </span><span class="ch">\&quot;</span><span class="st">**/*.{ts,tsx,md,json}</span><span class="ch">\&quot;</span><span class="st">&quot;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;dependencies&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;next&quot;</span><span class="fu">:</span> <span class="st">&quot;14.2.15&quot;</span><span class="fu">,</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;react&quot;</span><span class="fu">:</span> <span class="st">&quot;^18.3.1&quot;</span><span class="fu">,</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;react-dom&quot;</span><span class="fu">:</span> <span class="st">&quot;^18.3.1&quot;</span><span class="fu">,</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;lucide-react&quot;</span><span class="fu">:</span> <span class="st">&quot;^0.453.0&quot;</span><span class="fu">,</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;recharts&quot;</span><span class="fu">:</span> <span class="st">&quot;^2.13.0&quot;</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;devDependencies&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;typescript&quot;</span><span class="fu">:</span> <span class="st">&quot;^5.6.2&quot;</span><span class="fu">,</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@types/react&quot;</span><span class="fu">:</span> <span class="st">&quot;^18.3.11&quot;</span><span class="fu">,</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@types/react-dom&quot;</span><span class="fu">:</span> <span class="st">&quot;^18.3.0&quot;</span><span class="fu">,</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;@types/node&quot;</span><span class="fu">:</span> <span class="st">&quot;^20.16.10&quot;</span><span class="fu">,</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;autoprefixer&quot;</span><span class="fu">:</span> <span class="st">&quot;^10.4.20&quot;</span><span class="fu">,</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;postcss&quot;</span><span class="fu">:</span> <span class="st">&quot;^8.4.47&quot;</span><span class="fu">,</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;tailwindcss&quot;</span><span class="fu">:</span> <span class="st">&quot;^3.4.13&quot;</span><span class="fu">,</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;eslint&quot;</span><span class="fu">:</span> <span class="st">&quot;^8.57.1&quot;</span><span class="fu">,</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;eslint-config-next&quot;</span><span class="fu">:</span> <span class="st">&quot;14.2.15&quot;</span><span class="fu">,</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;prettier&quot;</span><span class="fu">:</span> <span class="st">&quot;^3.3.3&quot;</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>Walk through every key:</p>
+<h3 id="name-version-private"><code>"name"</code>,
+<code>"version"</code>, <code>"private"</code></h3>
+<ul>
+<li><strong><code>"name"</code></strong> is the project name. Used by
+tools, never by your code.</li>
+<li><strong><code>"version"</code></strong> follows semver (semantic
+versioning). Doesn’t matter for an unpublished app; matters a lot for
+npm packages.</li>
+<li><strong><code>"private": true"</code></strong> is a safety latch. It
+tells npm <em>“do not publish this to the public registry.”</em> Don’t
+omit it. Many beginners have accidentally published their unfinished
+apps because they didn’t have this.</li>
+</ul>
+<h3 id="scripts-the-npm-command-surface"><code>"scripts"</code> — the
+npm command surface</h3>
+<p>These are the commands you’ll type 100 times during development:</p>
+<ul>
+<li><strong><code>npm run dev</code></strong> → <code>next dev</code> —
+starts the development server with hot reloading at
+<code>http://localhost:3000</code>.</li>
+<li><strong><code>npm run build</code></strong> →
+<code>next build</code> — produces an optimized production build in
+<code>.next/</code>. This is what runs on every CI / Vercel deploy.</li>
+<li><strong><code>npm start</code></strong> → <code>next start</code> —
+runs the production build (after <code>build</code>).</li>
+<li><strong><code>npm run lint</code></strong> → <code>next lint</code>
+— runs ESLint with Next’s preset rules.</li>
+<li><strong><code>npm run format</code></strong> →
+<code>prettier --write "**/*.{ts,tsx,md,json}"</code> — auto-formats
+every file.</li>
+</ul>
+<p>You’ll mostly live in <code>dev</code> and occasionally
+<code>build</code>. The others are CI / deploy concerns.</p>
+<blockquote>
+<p><strong>Why does <code>npm run dev</code> need <code>run</code> but
+<code>npm start</code> doesn’t?</strong> Historical: a few script names
+(<code>start</code>, <code>test</code>, <code>install</code>,
+<code>restart</code>, <code>stop</code>) are built-in shortcuts; the
+rest need <code>run</code>. It’s a wart. Live with it.</p>
+</blockquote>
+<h3
+id="dependencies-what-ships-in-production"><code>"dependencies"</code> —
+what ships in production</h3>
+<p>Five packages:</p>
+<ul>
+<li><strong><code>next</code></strong> — the framework itself. Pinned to
+a specific version (<code>14.2.15</code>) intentionally; we want
+reproducible builds. The <code>^</code> in front of others means “any
+compatible minor version.”</li>
+<li><strong><code>react</code></strong> and
+<strong><code>react-dom</code></strong> — React itself plus the DOM
+renderer. They’re separate so React Native or other renderers can swap
+<code>react-dom</code> out.</li>
+<li><strong><code>lucide-react</code></strong> — a beautiful,
+tree-shakeable icon library. We use it for the tab icons (Trophy,
+Calendar, Target, Users, BarChart3) and a handful of other places.</li>
+<li><strong><code>recharts</code></strong> — declarative charts (covered
+in Chapter 6).</li>
+</ul>
+<p>That’s it. Notice what’s <strong>not</strong> here: no Redux, no
+axios, no moment, no lodash, no react-router-dom (Next.js has its own
+routing). <strong>Senior projects have small dependency lists.</strong>
+Every package you add is a maintenance debt.</p>
+<h3
+id="devdependencies-whats-needed-only-at-devbuild-time"><code>"devDependencies"</code>
+— what’s needed only at dev/build time</h3>
+<p>These are tooling: TypeScript itself, type definitions for
+React/Node, Tailwind/PostCSS, ESLint, Prettier. They don’t ship in the
+production bundle.</p>
+<p>The split between <code>dependencies</code> and
+<code>devDependencies</code> is <strong>discipline</strong>. If you
+accidentally put <code>prettier</code> in <code>dependencies</code>,
+your production bundle will include Prettier (10MB) for no reason.
+Always put dev-only tools in <code>devDependencies</code>.</p>
+</section>
+<section id="step-2-tsconfig.json-typescript-compiler-config"
+class="slide level2">
+<h2>Step 2: <code>tsconfig.json</code> (TypeScript compiler config)</h2>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="st">&quot;ES2022&quot;</span><span class="fu">,</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;lib&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;dom&quot;</span><span class="ot">,</span> <span class="st">&quot;dom.iterable&quot;</span><span class="ot">,</span> <span class="st">&quot;esnext&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;allowJs&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;skipLibCheck&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;strict&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;noEmit&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;esModuleInterop&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;module&quot;</span><span class="fu">:</span> <span class="st">&quot;esnext&quot;</span><span class="fu">,</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;moduleResolution&quot;</span><span class="fu">:</span> <span class="st">&quot;bundler&quot;</span><span class="fu">,</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;resolveJsonModule&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;isolatedModules&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;jsx&quot;</span><span class="fu">:</span> <span class="st">&quot;preserve&quot;</span><span class="fu">,</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;incremental&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;plugins&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span> <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;next&quot;</span> <span class="fu">}</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;paths&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;@/*&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;./*&quot;</span><span class="ot">]</span> <span class="fu">}</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;include&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;next-env.d.ts&quot;</span><span class="ot">,</span> <span class="st">&quot;**/*.ts&quot;</span><span class="ot">,</span> <span class="st">&quot;**/*.tsx&quot;</span><span class="ot">,</span> <span class="st">&quot;.next/types/**/*.ts&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;exclude&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;node_modules&quot;</span><span class="ot">,</span> <span class="st">&quot;_source&quot;</span><span class="ot">]</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>The most important keys, in plain English:</p>
+<ul>
+<li><strong><code>"target": "ES2022"</code></strong> — compile down to
+JavaScript syntax that’s at most “ES2022” (modern, well-supported). Used
+to be “ES5” for IE11 days; that’s history.</li>
+<li><strong><code>"strict": true"</code></strong> — turn on all strict
+checks: no implicit <code>any</code>, strict null checks, etc.
+<strong>Don’t disable this.</strong> It’s the whole point of
+TypeScript.</li>
+<li><strong><code>"noEmit": true</code></strong> — TypeScript only
+checks types; it doesn’t output <code>.js</code> files. Next.js handles
+compilation via SWC (a Rust-based compiler).</li>
+<li><strong><code>"jsx": "preserve"</code></strong> — leave JSX in
+place; let Next.js compile it. (Other values like <code>"react"</code>
+would compile JSX to <code>React.createElement</code> calls in
+TypeScript itself; Next.js prefers to do that step.)</li>
+<li><strong><code>"paths": { "@/*": ["./*"] }</code></strong> — the
+<strong>path alias</strong>. Lets you write
+<code>import X from '@/lib/types'</code> instead of
+<code>'../../../lib/types'</code>. The <code>@/</code> is a convention;
+you could pick any prefix (<code>~/</code>, <code>$/</code>, etc.). Most
+Next.js projects use <code>@/</code>.</li>
+<li><strong><code>"plugins": [{ "name": "next" }]</code></strong> —
+enables Next.js-specific TypeScript features (e.g. typed routes).</li>
+<li><strong><code>"include"</code></strong> lists which files TypeScript
+should check; <strong><code>"exclude"</code></strong> explicitly skips
+<code>_source/</code> (where the original .jsx file lives) and
+<code>node_modules</code>.</li>
+</ul>
+<p>If you don’t fully understand every flag, that’s fine. <strong>Most
+TS configs in the wild are copy-paste from a working project</strong>,
+including in senior repos. The key flags to actually understand are
+<code>strict</code>, <code>paths</code>, and <code>noEmit</code>. The
+rest is plumbing.</p>
+</section>
+<section id="step-3-next.config.mjs" class="slide level2">
+<h2>Step 3: <code>next.config.mjs</code></h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">/** </span><span class="an">@type</span><span class="co"> {import(&#39;next&#39;).NextConfig} */</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> nextConfig <span class="op">=</span> {</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">reactStrictMode</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> nextConfig<span class="op">;</span></span></code></pre></div>
+<p>That’s the entire config. Two notes:</p>
+<ul>
+<li>The <strong><code>/** @type ... */</code></strong> comment is JSDoc
+— it tells your editor (TypeScript or VS Code) what shape this object
+should have, even though the file is <code>.mjs</code> (no TS). You get
+autocomplete on <code>nextConfig</code> properties for free.</li>
+<li><strong><code>reactStrictMode: true</code></strong> double-invokes
+some React lifecycle calls during development to surface bugs (e.g. side
+effects in render, deprecated APIs). It’s free; leave it on.</li>
+</ul>
+<p><code>.mjs</code> vs <code>.js</code>? Next.js wants config files in
+ESM (<code>import</code>/<code>export</code>) format. The
+<code>.mjs</code> extension forces Node to treat the file as ESM
+regardless of <code>"type": "module"</code> in
+<code>package.json</code>. Belt and braces.</p>
+</section>
+<section id="step-4-tailwind.config.ts" class="slide level2">
+<h2>Step 4: <code>tailwind.config.ts</code></h2>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="im">type</span> { Config } <span class="im">from</span> <span class="st">&#39;tailwindcss&#39;</span><span class="op">;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> config<span class="op">:</span> Config <span class="op">=</span> {</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  content<span class="op">:</span> [</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;./app/**/*.{js,ts,jsx,tsx,mdx}&#39;</span><span class="op">,</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;./components/**/*.{js,ts,jsx,tsx,mdx}&#39;</span><span class="op">,</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  theme<span class="op">:</span> { extend<span class="op">:</span> {} }<span class="op">,</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  plugins<span class="op">:</span> []<span class="op">,</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> config<span class="op">;</span></span></code></pre></div>
+<p>The only key that matters here is
+<strong><code>content</code></strong>. It tells Tailwind where to scan
+for class names so it can generate only the CSS you actually use. If you
+have <code>className="bg-red-500"</code> in
+<code>components/Foo.tsx</code>, Tailwind sees it during the build and
+includes <code>bg-red-500</code> in the output CSS. If you don’t
+reference a class anywhere, it’s dropped.</p>
+<p>This is the <strong>purge / tree-shaking</strong> that makes
+Tailwind’s “thousands of utilities” not produce a 50MB CSS bundle. The
+output is usually under 30KB.</p>
+<p>Note that we <em>don’t</em> include <code>_source/**/*</code> in
+<code>content</code>. The <code>.jsx</code> reference file lives there,
+but we don’t want its classes (which we may have changed) leaking into
+the build.</p>
+</section>
+<section id="step-5-postcss.config.mjs" class="slide level2">
+<h2>Step 5: <code>postcss.config.mjs</code></h2>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode js"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> config <span class="op">=</span> {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">plugins</span><span class="op">:</span> { <span class="dt">tailwindcss</span><span class="op">:</span> {}<span class="op">,</span> <span class="dt">autoprefixer</span><span class="op">:</span> {} }<span class="op">,</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> config<span class="op">;</span></span></code></pre></div>
+<p>PostCSS is the CSS processor that runs Tailwind and adds vendor
+prefixes (e.g. <code>-webkit-</code> for older browsers). You’ll never
+touch this file again after creating it.</p>
+</section>
+<section id="step-6-.eslintrc.json" class="slide level2">
+<h2>Step 6: <code>.eslintrc.json</code></h2>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;extends&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;next/core-web-vitals&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;rules&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;react/no-unescaped-entities&quot;</span><span class="fu">:</span> <span class="st">&quot;off&quot;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>Two things:</p>
+<ul>
+<li><strong><code>"extends": ["next/core-web-vitals"]</code></strong> —
+pulls in Next.js’s recommended ESLint rules, which include “Core Web
+Vitals” performance hints (e.g. “use <code>next/image</code> instead of
+<code>&lt;img&gt;</code>”).</li>
+<li><strong><code>"react/no-unescaped-entities": "off"</code></strong> —
+disable the rule that complains about apostrophes (<code>don't</code>)
+and quotes inside JSX. This rule is more annoying than helpful in
+practice; we turn it off.</li>
+</ul>
+</section>
+<section id="step-7-.prettierrc" class="slide level2">
+<h2>Step 7: <code>.prettierrc</code></h2>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;semi&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;singleQuote&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;trailingComma&quot;</span><span class="fu">:</span> <span class="st">&quot;es5&quot;</span><span class="fu">,</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;printWidth&quot;</span><span class="fu">:</span> <span class="dv">100</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>Prettier’s job is to <strong>end every code-style argument</strong>
+in your team. With this config:</p>
+<ul>
+<li>Semicolons at the end of statements (<code>;</code>).</li>
+<li>Single quotes for strings (<code>'hello'</code> not
+<code>"hello"</code>).</li>
+<li>Trailing commas where ES5 allows (objects, arrays — not function
+args).</li>
+<li>Lines wrapped at 100 chars.</li>
+</ul>
+<p>Pick a config, commit it, never argue about it again.
+<strong>Prettier is a productivity multiplier specifically because it
+removes pointless decisions.</strong></p>
+</section>
+<section id="step-8-.gitignore" class="slide level2">
+<h2>Step 8: <code>.gitignore</code></h2>
+<pre><code>node_modules/
+.next/
+out/
+.DS_Store
+*.log
+.env*.local</code></pre>
+<p>What we <strong>don’t</strong> want in git:</p>
+<ul>
+<li><code>node_modules/</code> — these are installed via
+<code>npm install</code>. Massive. ~400MB.</li>
+<li><code>.next/</code> — Next.js’s build cache. Regenerated on every
+build.</li>
+<li><code>out/</code> — static export output, if you use
+<code>next export</code>.</li>
+<li><code>.DS_Store</code> — macOS folder metadata. (You might not need
+this on Windows, but it’s harmless.)</li>
+<li><code>*.log</code> — log files.</li>
+<li><code>.env*.local</code> — local secrets.</li>
+</ul>
+<p><strong>Never commit <code>node_modules</code>.</strong> It’s the
+most common rookie mistake — and it bloats the repo to gigabytes.</p>
+</section>
+<section id="step-9-the-app-directory-next.js-app-router"
+class="slide level2">
+<h2>Step 9: The <code>app/</code> directory (Next.js App Router)</h2>
+<p>Next.js 13+ uses <strong>file-based routing</strong>: every folder
+under <code>app/</code> becomes a URL route. The mapping is:</p>
+<pre><code>app/page.tsx       → /
+app/about/page.tsx → /about
+app/blog/[slug]/page.tsx → /blog/anything</code></pre>
+<p>We have only one route (<code>/</code>), so we need:</p>
+<pre><code>app/
+  layout.tsx     ← wraps every page with the HTML shell
+  page.tsx       ← the home page
+  globals.css    ← global styles</code></pre>
+<h3 id="applayout.tsx"><code>app/layout.tsx</code></h3>
+<pre class="tsx"><code>import type { Metadata } from &#39;next&#39;;
+import { Roboto, Roboto_Slab } from &#39;next/font/google&#39;;
+import &#39;./globals.css&#39;;
+
+const roboto = Roboto({
+  subsets: [&#39;latin&#39;],
+  weight: [&#39;300&#39;, &#39;400&#39;, &#39;500&#39;, &#39;700&#39;, &#39;900&#39;],
+  variable: &#39;--font-roboto&#39;,
+  display: &#39;swap&#39;,
+});
+
+const robotoSlab = Roboto_Slab({
+  subsets: [&#39;latin&#39;],
+  weight: [&#39;600&#39;, &#39;700&#39;, &#39;900&#39;],
+  variable: &#39;--font-roboto-slab&#39;,
+  display: &#39;swap&#39;,
+});
+
+export const metadata: Metadata = {
+  title: &#39;Snooker Fantasy League · Crucible 2026&#39;,
+  description: &#39;Fantasy league standings for the 2026 World Snooker Championship.&#39;,
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    &lt;html lang=&quot;en&quot; className={`${roboto.variable} ${robotoSlab.variable}`}&gt;
+      &lt;body&gt;{children}&lt;/body&gt;
+    &lt;/html&gt;
+  );
+}</code></pre>
+<p>Three big concepts here:</p>
+<h4 id="this-is-a-server-component-no-use-client-directive.">1. This is
+a <strong>server component</strong> (no <code>'use client'</code>
+directive).</h4>
+<p>Server components are the App Router’s default. They render to HTML
+on the server (or at build time for static routes), ship zero JavaScript
+to the browser, and can <code>await</code> server-side data
+directly.</p>
+<p>A server component <strong>cannot use</strong> <code>useState</code>,
+<code>useEffect</code>, event handlers like <code>onClick</code>, or any
+browser-only API. If you need any of those, you mark a file with
+<code>'use client'</code> at the top and React knows to ship it as
+JS.</p>
+<p>This <code>layout.tsx</code> doesn’t need any of those, so server
+component is correct.</p>
+<h4 id="nextfontgoogle-for-fonts">2. <code>next/font/google</code> for
+fonts</h4>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> roboto <span class="op">=</span> <span class="fu">Roboto</span>({ subsets<span class="op">:</span> [<span class="st">&#39;latin&#39;</span>]<span class="op">,</span> weight<span class="op">:</span> [<span class="op">...</span>]<span class="op">,</span> variable<span class="op">:</span> <span class="st">&#39;--font-roboto&#39;</span> })<span class="op">;</span></span></code></pre></div>
+<p>This downloads the Roboto and Roboto Slab fonts at build time, hosts
+them on your own server, and exposes them as a CSS variable.
+<strong>Your fonts never come from Google’s servers in
+production.</strong> That’s a privacy + performance win:</p>
+<ul>
+<li>No request to <code>fonts.googleapis.com</code> (which can leak user
+data).</li>
+<li>The font is served from the same domain as your HTML, so there’s one
+less DNS lookup.</li>
+<li>Next.js automatically applies <code>font-display: swap</code> and
+other best practices.</li>
+</ul>
+<p>The CSS variable is set on <code>&lt;html&gt;</code> via
+<code>className={roboto.variable}</code> and you can use it from CSS
+(<code>font-family: var(--font-roboto)</code>).</p>
+<h4 id="the-metadata-export">3. The <code>metadata</code> export</h4>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> metadata<span class="op">:</span> Metadata <span class="op">=</span> { title<span class="op">:</span> <span class="st">&#39;...&#39;</span><span class="op">,</span> description<span class="op">:</span> <span class="st">&#39;...&#39;</span> }<span class="op">;</span></span></code></pre></div>
+<p>Next.js reads this and produces the corresponding
+<code>&lt;title&gt;</code> and
+<code>&lt;meta name="description"&gt;</code> tags in the HTML head.
+<strong>No need to manage <code>&lt;head&gt;</code> manually</strong>,
+no need for <code>react-helmet</code>. Just export an object.</p>
+<p>This is the “Metadata API” introduced in Next 13, and it’s a quiet
+superpower of the App Router. SEO improvements get easier the more you
+lean on it.</p>
+<h3 id="apppage.tsx"><code>app/page.tsx</code></h3>
+<pre class="tsx"><code>import SnookerFantasyLeague from &#39;@/components/SnookerFantasyLeague&#39;;
+
+export default function Page() {
+  return &lt;SnookerFantasyLeague /&gt;;
+}</code></pre>
+<p>That’s the entire home page. It just renders the orchestrator
+component. Why?</p>
+<p>Because <code>app/page.tsx</code> is a <strong>route
+component</strong> — it’s where Next.js looks when someone visits
+<code>/</code>. We want our actual application logic to live in
+<code>components/</code>, not under <code>app/</code>. The
+<code>app/page.tsx</code> is just a thin wrapper.</p>
+<p>This is the <strong>routing layer is separate from the app
+layer</strong> pattern. Senior projects keep <code>app/</code> minimal
+and put logic in <code>components/</code>. Easier to test, easier to
+extract.</p>
+<p>The <code>@/components/SnookerFantasyLeague</code> import uses our
+path alias from <code>tsconfig.json</code>. Without the alias, this
+would be <code>./../components/SnookerFantasyLeague</code> or worse.</p>
+<h3 id="appglobals.css"><code>app/globals.css</code></h3>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">@tailwind</span> base<span class="op">;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">@tailwind</span> components<span class="op">;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="im">@tailwind</span> utilities<span class="op">;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="va">--background</span><span class="ch">:</span> <span class="cn">#fff8e7</span><span class="op">;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="va">--foreground</span><span class="ch">:</span> <span class="cn">#1f2937</span><span class="op">;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>html<span class="op">,</span> body {</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin</span><span class="ch">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--background</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--foreground</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-family</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--font-roboto</span><span class="fu">)</span><span class="op">,</span> <span class="dv">system-ui</span><span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="op">*</span> {</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">box-sizing</span><span class="ch">:</span> <span class="dv">border-box</span><span class="op">;</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>button {</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-family</span><span class="ch">:</span> <span class="bu">inherit</span><span class="op">;</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Three Tailwind directives plus some basic resets and a CSS variable
+theme. The most important line is
+<code>font-family: var(--font-roboto), ...</code> — that’s where the
+font we set up in <code>layout.tsx</code> actually gets applied.</p>
+<p><code>box-sizing: border-box</code> on every element means
+<strong>padding and border are included in width/height
+calculations</strong>. Otherwise
+<code>width: 100px; padding: 10px</code> produces a 120px-wide element,
+which is maddening. Always include this.</p>
+</section>
+<section id="step-10-install-dependencies" class="slide level2">
+<h2>Step 10: Install dependencies</h2>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>npm install</span></code></pre></div>
+<p>This reads <code>package.json</code>, downloads all dependencies, and
+writes a <code>package-lock.json</code> that pins exact versions. First
+install on a fresh project takes a few minutes.</p>
+<p>You’ll see warnings about deprecated transitive dependencies — those
+are mostly fine for an app project. (Library authors care more.) The
+build will work.</p>
+</section>
+<section id="step-11-run-the-dev-server" class="slide level2">
+<h2>Step 11: Run the dev server</h2>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>npm run dev</span></code></pre></div>
+<p>Open <code>http://localhost:3000</code>. You should see — at this
+point — an error, because <code>SnookerFantasyLeague.tsx</code> doesn’t
+exist yet. That’s fine. <strong>The error message is your
+friend</strong> — it confirms the routing is working, the build pipeline
+is running, and TypeScript is checking.</p>
+<p>If instead you see a “page not found” or the dev server failed to
+start, scroll back through this lesson and verify:</p>
+<ul>
+<li>Every config file is named correctly (<code>.mjs</code> vs
+<code>.js</code> matters).</li>
+<li><code>package.json</code> has all five dependencies.</li>
+<li><code>app/layout.tsx</code> has the right structure.</li>
+<li>You’re in the right folder.</li>
+</ul>
+</section>
+<section id="what-create-next-app-would-have-done-for-you"
+class="slide level2">
+<h2>What <code>create-next-app</code> would have done for you</h2>
+<p>You just hand-built what <code>create-next-app</code> does in 30
+seconds. Was it worth it?</p>
+<p>For learning, <strong>yes</strong>. You now know:</p>
+<ul>
+<li>What every config file is.</li>
+<li>Why <code>tsconfig.json</code> has <code>paths</code>, what
+<code>strict</code> does, what <code>noEmit</code> means.</li>
+<li>What <code>app/layout.tsx</code> is for.</li>
+<li>What server components are (the default!).</li>
+<li>Why the dev server starts where it does.</li>
+</ul>
+<p>For a real project, <strong>use <code>create-next-app</code></strong>
+and get back to building. But knowing what it did frees you to
+<em>modify</em> what it did. Most beginners are afraid to touch their
+<code>tsconfig.json</code> because they don’t know what it does. You now
+do.</p>
+</section>
+<section id="vibe-prompt-you-would-have-used" class="slide level2">
+<h2>Vibe prompt you would have used</h2>
+<p>If you skipped the manual scaffold:</p>
+<blockquote>
+<p><em>“Set up a new Next.js 14 project at the root of an empty folder.
+App Router, TypeScript strict mode, Tailwind CSS (set up but I’ll mostly
+use inline styles), Prettier with single quotes / trailing commas,
+ESLint with the next/core-web-vitals preset. Add
+<code>lucide-react</code> and <code>recharts</code> as dependencies. The
+app has one route (<code>/</code>) that renders
+<code>&lt;SnookerFantasyLeague /&gt;</code> from
+<code>@/components</code>. Configure <code>next/font/google</code> for
+Roboto and Roboto Slab and apply them via CSS variables. Don’t generate
+any actual app components yet — just the scaffold.”</em></p>
+</blockquote>
+<p>Specific, scoped, names every tool. Notice “Don’t generate any actual
+app components yet” — this is the same trick from Chapter 1 Lesson 1.
+Get the LLM to stop at scaffolding.</p>
+</section>
+<section id="check-yourself-1" class="slide level2">
+<h2>CHECK YOURSELF</h2>
+<ol type="1">
+<li><strong>Why is <code>next</code> pinned to a specific version while
+<code>react</code> uses <code>^18.3.1</code>?</strong> What’s the
+difference between pinned, caret (<code>^</code>), and tilde
+(<code>~</code>) version specifiers?</li>
+<li><strong>You add a <code>console.log</code> to
+<code>app/page.tsx</code> and reload — where does the log appear, in
+your browser console or your terminal?</strong> Why?</li>
+<li><strong>A teammate adds
+<code>import { useState } from 'react'</code> to
+<code>app/layout.tsx</code> and gets an error. Why? What’s the
+fix?</strong></li>
+<li><strong><code>tsconfig.json</code> has
+<code>"paths": { "@/*": ["./*"] }</code>. What do you change to add a
+second alias <code>~/lib/*</code> mapping to
+<code>./lib/*</code>?</strong></li>
+<li><strong><code>reactStrictMode: true</code> causes some effects to
+run twice in dev. Why does this help catch bugs?</strong> (Hint: it’s
+about side effects in render or in <code>useEffect</code> cleanup.)</li>
+</ol>
+<p>When you’re ready, head to <strong><a
+href="./03-creating-data-files.md">03-creating-data-files.md</a></strong>
+— the boring but essential lesson where we type out all the match
+data.</p>
+</section></section>
+<section>
+<section id="chapter-2-lesson-3-creating-the-data-files"
+class="title-slide slide level1">
+<h1>Chapter 2 · Lesson 3 — Creating the Data Files</h1>
+<blockquote>
+<p><em>Goal: fill out <code>lib/matches.ts</code>,
+<code>lib/teams.ts</code>, <code>lib/players.ts</code>, and
+<code>lib/constants.ts</code>. By the end of this lesson, the data layer
+is complete and <code>calculateTeamScores(team)</code> produces real
+numbers.</em></p>
+</blockquote>
+</section>
+<section id="why-this-lesson-is-boring-and-why-thats-a-feature"
+class="slide level2">
+<h2>Why this lesson is “boring” and why that’s a feature</h2>
+<p>You’re about to spend an hour typing match results, team picks, and
+player metadata. There’s no React in this lesson. No JSX. No clever
+logic. Just data.</p>
+<p>This is <strong>on purpose</strong>. Two reasons:</p>
+<h3 id="real-apps-spend-a-lot-of-time-on-data-plumbing.">1. Real apps
+spend a lot of time on data plumbing.</h3>
+<p>In an interview, you’ll be asked to build a feature in 45 minutes.
+<strong>A third of that time is going to be typing fixture data</strong>
+so you have something to render. Practicing it on a real,
+larger-than-toy dataset prepares you for that.</p>
+<h3 id="typing-the-data-forces-you-to-feel-the-invariants.">2. Typing
+the data forces you to feel the invariants.</h3>
+<p>When you write a <code>Team</code> object and have to lay out its 16
+R1 picks in the same order as the 16 matches in
+<code>ROUND1_MATCHES</code> — you internalize Lesson 1.2’s invariant in
+your fingers. That’s worth more than reading about it three times.</p>
+<p>If you really want to skip the typing, copy the files from the repo.
+<strong>But read every section even if you copy.</strong> The commentary
+explains <em>why</em> each piece looks the way it does.</p>
+</section>
+<section id="the-four-files-well-build" class="slide level2">
+<h2>The four files we’ll build</h2>
+<pre><code>lib/
+├── matches.ts      ← all 31 matches across 5 rounds
+├── teams.ts        ← all 8 fantasy teams with their picks
+├── players.ts      ← player metadata dictionary
+└── constants.ts    ← shared style helpers and ball colors</code></pre>
+<p>These are the <strong>inputs</strong> to the scoring function from
+Chapter 1 Lesson 3. Without them, <code>calculateTeamScores</code> has
+nothing to crunch.</p>
+</section>
+<section id="file-1-libmatches.ts" class="slide level2">
+<h2>File 1: <code>lib/matches.ts</code></h2>
+<p>Open <code>lib/matches.ts</code> in the repo. The file starts like
+this:</p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="im">type</span> { Match } <span class="im">from</span> <span class="st">&#39;./types&#39;</span><span class="op">;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> ROUND1_MATCHES<span class="op">:</span> Match[] <span class="op">=</span> [</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  { id<span class="op">:</span> <span class="dv">1</span><span class="op">,</span>  p1<span class="op">:</span> <span class="st">&#39;Zhao Xintong&#39;</span><span class="op">,</span>  p2<span class="op">:</span> <span class="st">&#39;Liam Highfield&#39;</span><span class="op">,</span>   winner<span class="op">:</span> <span class="st">&#39;Zhao Xintong&#39;</span><span class="op">,</span> score<span class="op">:</span> <span class="st">&#39;10-7&#39;</span><span class="op">,</span>  seed1<span class="op">:</span> <span class="dv">1</span> }<span class="op">,</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  { id<span class="op">:</span> <span class="dv">2</span><span class="op">,</span>  p1<span class="op">:</span> <span class="st">&#39;Judd Trump&#39;</span><span class="op">,</span>    p2<span class="op">:</span> <span class="st">&#39;Gary Wilson&#39;</span><span class="op">,</span>      winner<span class="op">:</span> <span class="st">&#39;Judd Trump&#39;</span><span class="op">,</span>   score<span class="op">:</span> <span class="st">&#39;10-5&#39;</span><span class="op">,</span>  seed1<span class="op">:</span> <span class="dv">2</span> }<span class="op">,</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ... 14 more</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>]<span class="op">;</span></span></code></pre></div>
+<p>Walk through the structure:</p>
+<h3 id="why-one-type-import-at-the-top">Why one type import at the
+top</h3>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="im">type</span> { Match } <span class="im">from</span> <span class="st">&#39;./types&#39;</span><span class="op">;</span></span></code></pre></div>
+<p>The <code>import type</code> keyword is a TypeScript-only thing. It
+says <em>“I’m only importing this for type-checking; erase this import
+in the compiled JS.”</em> The runtime never needs <code>Match</code>
+(it’s just a shape, not a value), so erasing it produces smaller
+bundles.</p>
+<p>If you wrote <code>import { Match }</code> instead, the compiler
+would <em>also</em> erase it because it’s an interface — but
+<code>import type</code> makes the intent explicit. Senior projects use
+<code>import type</code> consistently.</p>
+<h3
+id="export-const-round1_matches-match"><code>export const ROUND1_MATCHES: Match[]</code></h3>
+<ul>
+<li><strong><code>export</code></strong> so other files
+(<code>lib/scoring.ts</code>, components) can import it.</li>
+<li><strong><code>const</code></strong> because we never reassign the
+array. (We could mutate the array’s contents, but TypeScript’s
+<code>readonly</code> modifiers can prevent that too — we don’t bother
+for an internal data file.)</li>
+<li><strong><code>: Match[]</code></strong> is the type annotation: an
+array of <code>Match</code> objects. <strong>TypeScript will
+complain</strong> if you forget a required field on any item, or add a
+typo, or pass a number where a string is expected. That’s the whole
+point.</li>
+</ul>
+<h3 id="the-objects-themselves">The objects themselves</h3>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>{ id<span class="op">:</span> <span class="dv">1</span><span class="op">,</span>  p1<span class="op">:</span> <span class="st">&#39;Zhao Xintong&#39;</span><span class="op">,</span>  p2<span class="op">:</span> <span class="st">&#39;Liam Highfield&#39;</span><span class="op">,</span>   winner<span class="op">:</span> <span class="st">&#39;Zhao Xintong&#39;</span><span class="op">,</span> score<span class="op">:</span> <span class="st">&#39;10-7&#39;</span><span class="op">,</span>  seed1<span class="op">:</span> <span class="dv">1</span> }<span class="op">,</span></span></code></pre></div>
+<p>Six fields: <code>id</code>, <code>p1</code>, <code>p2</code>,
+<code>winner</code>, <code>score</code>, <code>seed1</code>. All
+required for finished R1 matches. Matches the <code>Match</code>
+interface exactly.</p>
+<p>The fields are aligned vertically with whitespace for readability —
+that’s a style choice, not a requirement. Prettier will collapse them on
+save unless your <code>printWidth</code> is wide enough; the codebase
+uses 100 chars and the alignment fits comfortably.</p>
+<h3 id="pending-matches-look-different">Pending matches look
+different</h3>
+<p>By the end of the tournament every match has a <code>winner</code>.
+But during the tournament, before any QF matches were finished, the
+<code>QF_MATCHES</code> array would have looked like this:</p>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>{ id<span class="op">:</span> <span class="dv">1</span><span class="op">,</span> p1<span class="op">:</span> <span class="st">&#39;Zhao Xintong&#39;</span><span class="op">,</span> p2<span class="op">:</span> <span class="st">&#39;Mark Allen&#39;</span> }<span class="op">,</span>   <span class="co">// no winner, no score yet</span></span></code></pre></div>
+<p>Two fields instead of five. <strong>Optional fields can simply be
+left out.</strong> This is the “absent vs zero” distinction from Lesson
+1, expressed in data.</p>
+<p>In the <em>current</em> state of the codebase, every match has been
+played and every winner is filled in. But you can imagine going back to
+a pre-Final state where <code>FINAL_MATCH[0]</code> was just
+<code>{ id: 1, p1: 'Shaun Murphy', p2: 'Wu Yize' }</code> — no winner,
+no score. The scoring function would correctly return <code>null</code>
+for everyone’s Final pick until the field is filled.</p>
+<h3 id="the-four-other-rounds">The four other rounds</h3>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> ROUND2_MATCHES<span class="op">:</span> Match[] <span class="op">=</span> [ <span class="co">/* 8 entries */</span> ]<span class="op">;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> QF_MATCHES<span class="op">:</span> Match[]     <span class="op">=</span> [ <span class="co">/* 4 entries */</span> ]<span class="op">;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> SF_MATCHES<span class="op">:</span> Match[]     <span class="op">=</span> [ <span class="co">/* 2 entries */</span> ]<span class="op">;</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> FINAL_MATCH<span class="op">:</span> Match[]    <span class="op">=</span> [ <span class="co">/* 1 entry */</span> ]<span class="op">;</span></span></code></pre></div>
+<p>Same shape, fewer entries. Note <code>FINAL_MATCH</code> is still an
+<strong>array</strong> even though it has just one element. Why?</p>
+<p>Because consistency with the other rounds is more valuable than the
+trivial savings of <code>export const FINAL_MATCH: Match</code>. Code
+that does <code>.map()</code> over rounds can treat them all
+uniformly:</p>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>[ROUND1_MATCHES<span class="op">,</span> ROUND2_MATCHES<span class="op">,</span> QF_MATCHES<span class="op">,</span> SF_MATCHES<span class="op">,</span> FINAL_MATCH]<span class="op">.</span><span class="fu">forEach</span>(round <span class="kw">=&gt;</span> {</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  round<span class="op">.</span><span class="fu">forEach</span>(m <span class="kw">=&gt;</span> { <span class="co">/* ... */</span> })<span class="op">;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<p>If <code>FINAL_MATCH</code> were a single <code>Match</code> object,
+the loop above would crash. <strong>Symmetric data shapes simplify the
+code that reads them.</strong></p>
+<h3 id="how-the-file-ends">How the file ends</h3>
+<p>The full file is about 90 lines. It exports five constants. The order
+is <strong>R1 first, Final last</strong> — chronological order from the
+user’s point of view, not bracket-evaluation order. The reader’s brain
+is happier in chronological order.</p>
+</section>
+<section id="file-2-libteams.ts" class="slide level2">
+<h2>File 2: <code>lib/teams.ts</code></h2>
+<p>This is the longest file in the project. Opening it in the repo:</p>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="im">type</span> { Team } <span class="im">from</span> <span class="st">&#39;./types&#39;</span><span class="op">;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> TEAMS<span class="op">:</span> Team[] <span class="op">=</span> [</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    name<span class="op">:</span> <span class="st">&#39;Invincibles&#39;</span><span class="op">,</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    color<span class="op">:</span> <span class="st">&#39;#0F5132&#39;</span><span class="op">,</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    accent<span class="op">:</span> <span class="st">&#39;#10B981&#39;</span><span class="op">,</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    icon<span class="op">:</span> <span class="st">&#39;⚡&#39;</span><span class="op">,</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    motto<span class="op">:</span> <span class="st">&#39;Unstoppable &amp; Unbeatable&#39;</span><span class="op">,</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    r1<span class="op">:</span> [<span class="st">&#39;Zhao Xintong&#39;</span><span class="op">,</span><span class="st">&#39;Judd Trump&#39;</span><span class="op">,</span><span class="st">&#39;John Higgins&#39;</span><span class="op">,</span><span class="st">&#39;Mark Williams&#39;</span><span class="op">,</span> <span class="co">/* ... 12 more ... */</span>]<span class="op">,</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    r2<span class="op">:</span> [<span class="st">&#39;Zhao Xintong&#39;</span><span class="op">,</span><span class="st">&#39;Mark Williams&#39;</span><span class="op">,</span> <span class="co">/* ... */</span>]<span class="op">,</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    qf<span class="op">:</span> [<span class="st">&#39;Zhao Xintong&#39;</span><span class="op">,</span><span class="st">&#39;Mark Allen&#39;</span><span class="op">,</span><span class="st">&#39;John Higgins&#39;</span><span class="op">,</span><span class="st">&#39;Wu Yize&#39;</span>]<span class="op">,</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    sf<span class="op">:</span> [<span class="st">&#39;Shaun Murphy&#39;</span><span class="op">,</span><span class="st">&#39;Wu Yize&#39;</span>]<span class="op">,</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    final<span class="op">:</span> <span class="st">&#39;Wu Yize&#39;</span><span class="op">,</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    name<span class="op">:</span> <span class="st">&#39;Uncredibles&#39;</span><span class="op">,</span></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>    color<span class="op">:</span> <span class="st">&#39;#DC2626&#39;</span><span class="op">,</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>    accent<span class="op">:</span> <span class="st">&#39;#F87171&#39;</span><span class="op">,</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ... 6 more teams</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>]<span class="op">;</span></span></code></pre></div>
+<h3 id="whats-in-each-team">What’s in each team</h3>
+<ul>
+<li><strong>Identity</strong>: <code>name</code>, <code>color</code>,
+<code>accent</code>, <code>icon</code>, <code>motto</code>. The
+<code>color</code> and <code>accent</code> are the team’s primary brand
+pair, used for gradients in headers and badges.</li>
+<li><strong>Picks</strong>: <code>r1</code> (16 strings),
+<code>r2</code> (8 strings), <code>qf</code> (4 strings),
+<code>sf</code> (2 strings), <code>final</code> (1 string).</li>
+</ul>
+<p>That’s it.</p>
+<h3 id="how-to-type-16-picks-without-going-insane">How to type 16 picks
+without going insane</h3>
+<p>Realistically you do this with a printout of the bracket on one side
+and your editor on the other. For each match in
+<code>ROUND1_MATCHES</code>, ask the team owner <em>“who do you
+pick?”</em> and write the name in the corresponding slot.</p>
+<p>The order is <strong>the same as
+<code>ROUND1_MATCHES</code></strong>. So <code>r1[0]</code> is the
+team’s pick for <code>ROUND1_MATCHES[0]</code> (which is the Zhao vs
+Highfield match — so the answer is either <code>'Zhao Xintong'</code> or
+<code>'Liam Highfield'</code>).</p>
+<p>When you’re typing the file, having both files open side-by-side in
+split view is essential. <strong>Visual alignment between two files is
+the real-world enforcement of the invariant.</strong></p>
+<h3 id="color-choices">Color choices</h3>
+<p>Each team has a primary <code>color</code> and an
+<code>accent</code>. The convention used in this codebase:</p>
+<ul>
+<li><strong><code>color</code></strong> is the darker / saturated
+shade.</li>
+<li><strong><code>accent</code></strong> is the lighter shade.</li>
+</ul>
+<p>They’re paired in CSS gradients like:</p>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>background<span class="op">:</span> <span class="vs">`linear-gradient(135deg, </span><span class="sc">${</span>team<span class="op">.</span><span class="at">color</span><span class="sc">}</span><span class="vs"> 0%, </span><span class="sc">${</span>team<span class="op">.</span><span class="at">accent</span><span class="sc">}</span><span class="vs"> 100%)`</span><span class="op">,</span></span></code></pre></div>
+<p>That produces a smooth gradient from dark to light along a 135°
+diagonal. The visual richness of the team headers comes entirely from
+this two-color recipe.</p>
+<p>When choosing colors:</p>
+<ul>
+<li>Don’t use HSL math to pick the accent. Use a tool like Tailwind’s
+color palette (<code>emerald-700</code> paired with
+<code>emerald-400</code>, etc.) or <a
+href="https://coolors.co">coolors.co</a>.</li>
+<li>Avoid pure red/green/blue — they look childish. Stick with curated
+palettes.</li>
+<li>Make sure the contrast is high enough that white text reads cleanly
+on top.</li>
+</ul>
+<h3 id="two-optional-fields-you-might-see">Two optional fields you might
+see</h3>
+<p>Recall from Lesson 1.2 that <code>Team</code> has two optional helper
+arrays: <code>r1Players?</code> and <code>r2Players?</code>. You’ll see
+them on a few teams. They’re only used in edge cases for scoring. Most
+of the eight teams will not have these arrays. Don’t worry about them
+yet; you’ll meet them again in Chapter 4 if at all.</p>
+</section>
+<section id="file-3-libplayers.ts" class="slide level2">
+<h2>File 3: <code>lib/players.ts</code></h2>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> <span class="im">type</span> { PlayerInfo } <span class="im">from</span> <span class="st">&#39;./types&#39;</span><span class="op">;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> PLAYER_INFO<span class="op">:</span> <span class="bu">Record</span><span class="op">&lt;</span><span class="dt">string</span><span class="op">,</span> PlayerInfo<span class="op">&gt;</span> <span class="op">=</span> {</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;Zhao Xintong&#39;</span><span class="op">:</span> { country<span class="op">:</span> <span class="st">&#39;🇨🇳&#39;</span><span class="op">,</span> seed<span class="op">:</span> <span class="dv">1</span><span class="op">,</span>  status<span class="op">:</span> <span class="st">&#39;Defending Champion&#39;</span><span class="op">,</span> flag<span class="op">:</span> <span class="st">&#39;CHN&#39;</span> }<span class="op">,</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;Judd Trump&#39;</span><span class="op">:</span>   { country<span class="op">:</span> <span class="st">&#39;🏴&#39;</span><span class="op">,</span> seed<span class="op">:</span> <span class="dv">2</span><span class="op">,</span>  status<span class="op">:</span> <span class="st">&#39;World No. 1&#39;</span><span class="op">,</span>          flag<span class="op">:</span> <span class="st">&#39;ENG&#39;</span> }<span class="op">,</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;Mark Allen&#39;</span><span class="op">:</span>   { country<span class="op">:</span> <span class="st">&#39;🏴&#39;</span><span class="op">,</span> seed<span class="op">:</span> <span class="dv">3</span><span class="op">,</span>  status<span class="op">:</span> <span class="st">&#39;Top Tier&#39;</span><span class="op">,</span>             flag<span class="op">:</span> <span class="st">&#39;NIR&#39;</span> }<span class="op">,</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ... 29 more</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code></pre></div>
+<p>This is the <strong>dictionary</strong> we discussed in Lesson 1.2 —
+keyed by player name, value is metadata.</p>
+<h3
+id="recordstring-playerinfo-explained"><code>Record&lt;string, PlayerInfo&gt;</code>
+explained</h3>
+<p><code>Record&lt;K, V&gt;</code> is TypeScript shorthand for “an
+object whose keys are of type K and values are of type V.”
+<code>Record&lt;string, PlayerInfo&gt;</code> means “any string key is
+allowed; every value must be a <code>PlayerInfo</code>.”</p>
+<p>It’s <strong>identical</strong> to
+<code>{ [key: string]: PlayerInfo }</code>. Both forms work.
+<code>Record</code> reads cleaner.</p>
+<h3 id="country-flag-emojis">Country flag emojis</h3>
+<p>Yes, you can put flag emojis directly in TypeScript strings. UTF-8
+encoding handles them natively. Just paste them in:</p>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;🇨🇳&#39;</span>   <span class="co">// China</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;🏴&#39;</span>    <span class="co">// Black flag — hopefully not for England</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;🏴󠁧󠁢󠁥󠁮󠁧󠁿&#39;</span> <span class="co">// Actual England flag (regional emoji, made of multiple code points)</span></span></code></pre></div>
+<p>Note: the codebase uses 🏴 (a generic black flag) for English players
+because the regional emoji <code>🏴󠁧󠁢󠁥󠁮󠁧󠁿</code> doesn’t render reliably
+across browsers/OSes. <strong>Pick what renders</strong> — don’t pick
+what’s “technically correct” if it looks broken on most devices.</p>
+<h3 id="seeds-top-16-only">Seeds: top-16 only</h3>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;Liam Highfield&#39;</span><span class="op">:</span> { country<span class="op">:</span> <span class="st">&#39;🏴&#39;</span><span class="op">,</span> status<span class="op">:</span> <span class="st">&#39;Qualifier&#39;</span><span class="op">,</span> flag<span class="op">:</span> <span class="st">&#39;ENG&#39;</span> }<span class="op">,</span>  <span class="co">// no seed</span></span></code></pre></div>
+<p>Of the 32 players, the top 16 are seeded (1 through 16). The other 16
+are qualifiers and have no <code>seed</code> field. The
+<code>Player Info</code> interface marks <code>seed?: number</code> as
+optional precisely for this case.</p>
+<h3 id="why-a-dictionary-not-an-array">Why a dictionary, not an
+array</h3>
+<p>Already covered in Lesson 1.2. The most common operation is
+<em>“given a player’s name, get their metadata”</em> — that’s an O(1)
+hash lookup with a dictionary, or an O(n) <code>.find()</code> with an
+array. The dictionary wins on both performance and readability.</p>
+</section>
+<section id="file-4-libconstants.ts" class="slide level2">
+<h2>File 4: <code>lib/constants.ts</code></h2>
+<p>This is the smallest file but pulls its weight. Open it:</p>
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">// lib/constants.ts</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> BALL_COLORS <span class="op">=</span> [</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;#FFFFFF&#39;</span><span class="op">,</span> <span class="co">// white</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;#FBBF24&#39;</span><span class="op">,</span> <span class="co">// yellow</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;#16A34A&#39;</span><span class="op">,</span> <span class="co">// green</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;#92400E&#39;</span><span class="op">,</span> <span class="co">// brown</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;#3B82F6&#39;</span><span class="op">,</span> <span class="co">// blue</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;#EC4899&#39;</span><span class="op">,</span> <span class="co">// pink</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;#000000&#39;</span><span class="op">,</span> <span class="co">// black</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>]<span class="op">;</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> th<span class="op">:</span> React<span class="op">.</span><span class="at">CSSProperties</span> <span class="op">=</span> {</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>  padding<span class="op">:</span> <span class="st">&#39;14px 16px&#39;</span><span class="op">,</span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>  textAlign<span class="op">:</span> <span class="st">&#39;left&#39;</span><span class="op">,</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>  fontSize<span class="op">:</span> <span class="dv">13</span><span class="op">,</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>  fontWeight<span class="op">:</span> <span class="dv">800</span><span class="op">,</span></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>  letterSpacing<span class="op">:</span> <span class="st">&#39;1px&#39;</span><span class="op">,</span></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> td<span class="op">:</span> React<span class="op">.</span><span class="at">CSSProperties</span> <span class="op">=</span> {</span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>  padding<span class="op">:</span> <span class="st">&#39;12px 8px&#39;</span><span class="op">,</span></span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>  borderBottom<span class="op">:</span> <span class="st">&#39;1px solid #F3F4F6&#39;</span><span class="op">,</span></span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>  fontSize<span class="op">:</span> <span class="dv">15</span><span class="op">,</span></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">tabStyle</span>(active<span class="op">:</span> <span class="dt">boolean</span>)<span class="op">:</span> React<span class="op">.</span><span class="at">CSSProperties</span> {</span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>    padding<span class="op">:</span> <span class="st">&#39;12px 22px&#39;</span><span class="op">,</span></span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>    border<span class="op">:</span> <span class="st">&#39;none&#39;</span><span class="op">,</span></span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a>    cursor<span class="op">:</span> <span class="st">&#39;pointer&#39;</span><span class="op">,</span></span>
+<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a>    borderRadius<span class="op">:</span> <span class="dv">10</span><span class="op">,</span></span>
+<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a>    fontFamily<span class="op">:</span> <span class="st">&#39;inherit&#39;</span><span class="op">,</span></span>
+<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a>    fontWeight<span class="op">:</span> <span class="dv">700</span><span class="op">,</span></span>
+<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a>    fontSize<span class="op">:</span> <span class="dv">15</span><span class="op">,</span></span>
+<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a>    background<span class="op">:</span> active <span class="op">?</span> <span class="st">&#39;#0F5132&#39;</span> <span class="op">:</span> <span class="st">&#39;#F3F4F6&#39;</span><span class="op">,</span></span>
+<span id="cb36-37"><a href="#cb36-37" aria-hidden="true" tabindex="-1"></a>    color<span class="op">:</span> active <span class="op">?</span> <span class="st">&#39;#FBBF24&#39;</span> <span class="op">:</span> <span class="st">&#39;#374151&#39;</span><span class="op">,</span></span>
+<span id="cb36-38"><a href="#cb36-38" aria-hidden="true" tabindex="-1"></a>    transition<span class="op">:</span> <span class="st">&#39;all 0.2s&#39;</span><span class="op">,</span></span>
+<span id="cb36-39"><a href="#cb36-39" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb36-40"><a href="#cb36-40" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Three exports:</p>
+<h3
+id="ball_colors-the-seven-snooker-ball-colors"><code>BALL_COLORS</code>
+— the seven snooker ball colors</h3>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> BALL_COLORS <span class="op">=</span> [<span class="st">&#39;#FFFFFF&#39;</span><span class="op">,</span> <span class="st">&#39;#FBBF24&#39;</span><span class="op">,</span> <span class="st">&#39;#16A34A&#39;</span><span class="op">,</span> <span class="st">&#39;#92400E&#39;</span><span class="op">,</span> <span class="st">&#39;#3B82F6&#39;</span><span class="op">,</span> <span class="st">&#39;#EC4899&#39;</span><span class="op">,</span> <span class="st">&#39;#000000&#39;</span>]<span class="op">;</span></span></code></pre></div>
+<p>Used in the hero header to render seven decorative dots in the
+top-right corner. Pure aesthetic. Lives in <code>constants.ts</code>
+because (1) the colors are a reusable palette and (2) extracting them
+out of the orchestrator keeps that file readable.</p>
+<h3 id="th-and-td-shared-table-cell-styles"><code>th</code> and
+<code>td</code> — shared table cell styles</h3>
+<div class="sourceCode" id="cb38"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> th<span class="op">:</span> React<span class="op">.</span><span class="at">CSSProperties</span> <span class="op">=</span> { padding<span class="op">:</span> <span class="st">&#39;14px 16px&#39;</span><span class="op">,</span> <span class="co">/* ... */</span> }<span class="op">;</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">const</span> td<span class="op">:</span> React<span class="op">.</span><span class="at">CSSProperties</span> <span class="op">=</span> { padding<span class="op">:</span> <span class="st">&#39;12px 8px&#39;</span><span class="op">,</span>  <span class="co">/* ... */</span> }<span class="op">;</span></span></code></pre></div>
+<p>These are used by the standings table. They’re typed as
+<code>React.CSSProperties</code> — the type that React expects for
+inline <code>style={...}</code> props. By centralizing them here, every
+place that renders a table cell can pull from the same source:</p>
+<pre class="tsx"><code>import { th, td } from &#39;@/lib/constants&#39;;
+
+&lt;th style={th}&gt;Name&lt;/th&gt;
+&lt;td style={td}&gt;Wu Yize&lt;/td&gt;</code></pre>
+<h3
+id="tabstyle-a-function-that-returns-a-style-object"><code>tabStyle</code>
+— a function that returns a style object</h3>
+<div class="sourceCode" id="cb40"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">tabStyle</span>(active<span class="op">:</span> <span class="dt">boolean</span>)<span class="op">:</span> React<span class="op">.</span><span class="at">CSSProperties</span> { <span class="op">...</span> }</span></code></pre></div>
+<p>This is a <strong>style helper</strong> — a function that takes a
+piece of state and returns a style object. The argument decides which
+colors come back. Useful when many places need the same “tab pill” look
+but with different active states.</p>
+<p>This is what experienced React engineers do <em>before</em> reaching
+for a CSS-in-JS library. <strong>A function returning a style object is
+the simplest possible style abstraction.</strong> It’s also
+TypeScript-friendly.</p>
+</section>
+<section id="sanity-checking-with-a-quick-console-smoke-test"
+class="slide level2">
+<h2>Sanity-checking with a quick console smoke test</h2>
+<p>Once all four files are in place, you can verify your data by adding
+a temporary <code>console.log</code> in <code>lib/scoring.ts</code>:</p>
+<div class="sourceCode" id="cb41"><pre
+class="sourceCode ts"><code class="sourceCode typescript"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> { TEAMS } <span class="im">from</span> <span class="st">&#39;./teams&#39;</span><span class="op">;</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> test <span class="op">=</span> TEAMS<span class="op">.</span><span class="fu">map</span>(t <span class="kw">=&gt;</span> ({ name<span class="op">:</span> t<span class="op">.</span><span class="at">name</span><span class="op">,</span> scores<span class="op">:</span> <span class="fu">calculateTeamScores</span>(t) }))<span class="op">;</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(test<span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> b<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">total</span> <span class="op">-</span> a<span class="op">.</span><span class="at">scores</span><span class="op">.</span><span class="at">total</span>))<span class="op">;</span></span></code></pre></div>
+<p>This won’t run in the browser yet (we don’t have a UI), but if you
+boot a Node REPL or write a quick <code>node test.ts</code> script with
+<code>tsx</code>, you should see the eight teams sorted by total score
+with sensible numbers — not all zeros, not all NaN, not all
+undefined.</p>
+<p>If the numbers look wrong:</p>
+<ul>
+<li><strong>All zeros?</strong> Probably the match arrays don’t have
+<code>winner</code> filled in, or the picks don’t match player names
+exactly (typo).</li>
+<li><strong>NaN total?</strong> Probably a <code>pts</code> value
+somewhere is undefined; check <code>scorePick</code> is reaching all
+branches.</li>
+<li><strong>Score is correct but unsorted?</strong> That’s fine —
+sorting happens in the orchestrator (Chapter 4).</li>
+</ul>
+<p>Remove the <code>console.log</code> after you’ve sanity-checked.
+Production code shouldn’t <code>console.log</code>.</p>
+</section>
+<section id="what-youve-built-so-far" class="slide level2">
+<h2>What you’ve built so far</h2>
+<p>Three lessons in. Your <code>lib/</code> folder is complete:</p>
+<pre><code>lib/
+├── types.ts        ← (Chapter 1.2)
+├── scoring.ts      ← (Chapter 1.3)
+├── matches.ts      ← (this lesson)
+├── teams.ts        ← (this lesson)
+├── players.ts      ← (this lesson)
+└── constants.ts    ← (this lesson)</code></pre>
+<p>That’s the <strong>entire data layer</strong> of the app.
+<strong>Zero React.</strong> Zero JSX. Zero DOM. If you handed this
+folder to someone using a different UI framework — Vue, Svelte, Solid —
+they could build the same app on top of it without changing a line.</p>
+<p>This is the property you want from your data layer.
+<strong>Framework-independent business logic.</strong> When the React
+replacement comes along in 2030, your <code>lib/</code> folder migrates
+unchanged.</p>
+</section>
+<section id="vibe-prompt-you-would-have-used-1" class="slide level2">
+<h2>Vibe prompt you would have used</h2>
+<blockquote>
+<p><em>“Create <code>lib/matches.ts</code>, <code>lib/teams.ts</code>,
+and <code>lib/players.ts</code> with TypeScript constants. The data is:
+[paste the bracket and team picks here]. Each match is
+<code>{ id, p1, p2, winner?, score?, seed1? }</code>. Each team has 5
+picks arrays in match-index order: r1[16], r2[8], qf[4], sf[2], final
+(single string). PLAYER_INFO is a
+<code>Record&lt;string, PlayerInfo&gt;</code> keyed by player name. Use
+<code>import type</code> for the Match/Team/PlayerInfo types from
+<code>./types</code>. Do not generate any UI.”</em></p>
+</blockquote>
+<p>Notice the constraint: “Do not generate any UI.” For data-only tasks,
+you say so explicitly. <strong>Without that constraint, the LLM will
+helpfully make you a <code>&lt;MatchTable&gt;</code> component you
+didn’t ask for.</strong></p>
+</section>
+<section id="check-yourself-2" class="slide level2">
+<h2>CHECK YOURSELF</h2>
+<ol type="1">
+<li><strong>Why is <code>import type</code> used instead of
+<code>import</code> for the type imports?</strong> What’s actually
+different in the compiled output?</li>
+<li><strong><code>FINAL_MATCH</code> is an array of one element instead
+of a single <code>Match</code> object. Justify the choice.</strong>
+Would symmetry alone be enough? Are there other reasons?</li>
+<li><strong>Of the eight teams, three have ONE typo in their
+<code>r1</code> picks (e.g. <code>'Zhao Xintong '</code> with a trailing
+space).</strong> Walk through what would happen at scoring time. Would
+the bug be visible immediately? When and how?</li>
+<li><strong>A new player joins the bracket as a 17th seed (replacing a
+withdrawal).</strong> What’s the minimum set of files you have to
+update? Walk through the change.</li>
+<li><strong><code>PLAYER_INFO</code> uses
+<code>Record&lt;string, PlayerInfo&gt;</code>. The other type form is
+<code>{ [key: string]: PlayerInfo }</code>. They’re equivalent. Pick one
+and explain to a junior dev why you’d prefer it.</strong></li>
+</ol>
+<p>When you’ve answered these, you’ve finished Chapter 2. Onward to
+<strong><a href="../chapter-03-first-component/README.md">Chapter 3 —
+Your First Component</a></strong>, where we <strong>finally</strong>
+import React.</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^5/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Chapter 05 System Design</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/theme/white.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Chapter 05 System Design</h1>
+</section>
+
+<section>
+<section id="chapter-5-system-design-and-architecture-with-ai"
+class="title-slide slide level1">
+<h1>Chapter 5 — System Design and Architecture with AI</h1>
+<blockquote>
+<p><strong>System design interviews are the most important hour of the
+loop, and AI changes them less than you think.</strong> This chapter
+teaches you to argue <em>with</em> the AI in the room, not <em>for</em>
+or <em>against</em> it.</p>
+</blockquote>
+</section>
+<section id="what-you-will-learn" class="slide level2">
+<h2>What you will learn</h2>
+<ul>
+<li>The <strong>architecture decisions AI cannot make for you</strong> —
+and why interviewers test for them.</li>
+<li>A <strong>fully worked walkthrough</strong> of the most common
+system-design prompt (“Design Twitter / Uber / a fantasy app”) with
+explicit AI integration.</li>
+<li>The <strong>trade-off conversation</strong> — how to discuss design
+choices in front of a panel using vocabulary that signals
+seniority.</li>
+</ul>
+<p>By the end you will be able to walk into a system-design interview,
+ask “may I think out loud and use an LLM as a sounding board?”, and
+either way handle the hour with confidence.</p>
+</section>
+<section id="lessons" class="slide level2">
+<h2>Lessons</h2>
+<ol type="1">
+<li><strong><a
+href="./01-what-humans-still-own.md">01-what-humans-still-own.md</a></strong>
+— Six categories of architecture decision where AI is a sounding board
+at best. Each category is a question your interviewer is checking you
+can answer.</li>
+<li><strong><a
+href="./02-design-with-ai-walkthrough.md">02-design-with-ai-walkthrough.md</a></strong>
+— A 60-minute system-design walkthrough (“Design a fantasy-sports app
+for 1M users”) with the AI integrated at every appropriate step.</li>
+<li><strong><a
+href="./03-trade-off-conversations.md">03-trade-off-conversations.md</a></strong>
+— The vocabulary, structure, and pitfalls of “we have three options;
+here are the trade-offs” conversations.</li>
+</ol>
+</section>
+<section id="how-long-it-should-take" class="slide level2">
+<h2>How long it should take</h2>
+<ul>
+<li>45–60 min reading per lesson.</li>
+<li>2–3 hours practicing one system-design problem with the AI
+integration.</li>
+<li>~6 hours total.</li>
+</ul>
+</section>
+<section id="why-this-chapter-is-different" class="slide level2">
+<h2>Why this chapter is different</h2>
+<p>Chapters 3 and 4 were about producing code. This chapter is about
+producing <em>decisions</em>. AI accelerates code dramatically; it
+accelerates decisions only modestly. <strong>Most of what an interviewer
+is looking for in a system-design hour is unchanged from 2020 — but the
+unchanged things are now more visible because the typing is no longer a
+distraction.</strong></p>
+<p>If you’re preparing for a senior or staff interview, this chapter is
+the one that tips the loop in your favor.</p>
+</section>
+<section id="before-you-start" class="slide level2">
+<h2>Before you start</h2>
+<p>You should have:</p>
+<ul>
+<li>Some familiarity with classical system-design topics (load
+balancing, caching, database sharding, queues, CDNs). If not, a 1-day
+primer like <em>System Design Interview</em> by Alex Xu or the
+educative.io system-design course will get you the vocabulary.</li>
+<li>Completed Chapter 2 (the seven pillars). The architecture chapter
+applies the pillars to design.</li>
+<li>A whiteboard or blank document for sketching diagrams as you
+read.</li>
+</ul>
+<p>Open <strong><a
+href="./01-what-humans-still-own.md">01-what-humans-still-own.md</a></strong>.</p>
+</section></section>
+<section>
+<section id="lesson-5.1-what-humans-still-own-at-the-architecture-layer"
+class="title-slide slide level1">
+<h1>Lesson 5.1 — What Humans Still Own at the Architecture Layer</h1>
+<blockquote>
+<p><strong>Six categories of decision define a senior engineer’s day. AI
+participates in all of them. AI does not own any of them.</strong> This
+lesson is the map.</p>
+</blockquote>
+<p>By the end of this lesson:</p>
+<ul>
+<li>You will know the six categories of architecture decision an
+interviewer is silently checking.</li>
+<li>For each, you will have an example, a senior soundbite, and a “where
+the AI helps” boundary.</li>
+<li>You will have a mental model for narrating architecture decisions in
+a system-design interview while the AI is in the room.</li>
+</ul>
+</section>
+<section id="why-this-lesson-matters-more-than-its-length-suggests"
+class="slide level2">
+<h2>1. Why this lesson matters more than its length suggests</h2>
+<p>Most system-design interviews look the same in 2026 as they did in
+2020. The whiteboard is still there. The “design X” prompt is still
+there. What is <em>new</em> is the unspoken question:</p>
+<blockquote>
+<p><em>“With AI doing so much, how do you spend your time? What do you
+actually decide?”</em></p>
+</blockquote>
+<p>If you cannot answer that question structurally, you sound like every
+junior who claims to be senior. The six categories below are the
+answer.</p>
+</section>
+<section id="the-six-categories" class="slide level2">
+<h2>2. The six categories</h2>
+<h3 id="domain-modeling">2.1. Domain modeling</h3>
+<p>The shape of the data, the entities, the relationships, and the
+invariants. The AI can propose a schema. <strong>Choosing the
+schema</strong> — knowing what to denormalize, what to make immutable,
+what to version — is yours.</p>
+<h3 id="boundary-placement">2.2. Boundary placement</h3>
+<p>Where do components, services, and modules end and begin? The AI can
+split a file at a sensible spot. <strong>Drawing the system’s
+seams</strong> — knowing which transformation belongs at the API, which
+at the service, which at the DB — is yours.</p>
+<h3 id="failure-mode-design">2.3. Failure-mode design</h3>
+<p>What happens when this fails? The AI can add a try/catch.
+<strong>Designing for graceful degradation</strong> — knowing what
+should retry, what should fail closed, what should fail open, what
+should circuit-break — is yours.</p>
+<h3 id="trade-off-ownership">2.4. Trade-off ownership</h3>
+<p>When two designs are equally valid, which ships? The AI can list
+trade-offs. <strong>Picking the trade-off</strong> — accepting that the
+choice will be questioned in 6 months when reality bites — is yours.</p>
+<h3 id="scale-and-cost">2.5. Scale and cost</h3>
+<p>Will this hold at 100x the current load? At 0.1x? <strong>Sizing the
+system, choosing the cost-vs-latency curve, knowing when premature
+optimization actually pays</strong> — is yours.</p>
+<h3 id="migration-and-rollout">2.6. Migration and rollout</h3>
+<p>How do you ship a change without breaking the world? The AI can
+produce a migration script. <strong>Designing the rollout — feature
+flags, dual-writes, dark launches, canary fleets</strong> — is
+yours.</p>
+<p>Six categories. <strong>Memorize the names.</strong></p>
+</section>
+<section id="category-1-domain-modeling" class="slide level2">
+<h2>3. Category 1 — Domain modeling</h2>
+<h3 id="what-the-ai-does">What the AI does</h3>
+<blockquote>
+<p><em>“Define a Postgres schema for users, orders, and order line
+items.”</em></p>
+</blockquote>
+<p>The AI gives you reasonable normalized tables. Often correct on the
+first try.</p>
+<h3 id="what-only-you-do">What only you do</h3>
+<ul>
+<li>Decide whether <code>orders.user_id</code> references a
+<em>current</em> user or a historical snapshot. (This decision affects
+retention rules, GDPR deletion behavior, and analytics joins for the
+next 10 years.)</li>
+<li>Decide whether <code>order_line_items.price</code> is the
+<em>current</em> product price or the <em>price at order time</em>. The
+AI will not ask. <strong>You ask.</strong> The wrong answer here is a
+year of customer-support fires.</li>
+<li>Decide whether to add a <code>version</code> column on mutable rows.
+The AI rarely volunteers this. You volunteer it once you’ve been in a
+race-condition postmortem.</li>
+<li>Decide what is enforced as a database constraint, what at the
+application layer, and what only by convention. Each tier has
+consequences for development speed and data integrity.</li>
+</ul>
+<h3 id="senior-soundbite">Senior soundbite</h3>
+<blockquote>
+<p><em>“The AI gives me schemas that work for the demo. The schemas that
+work for five years require knowing which fields are point-in-time
+snapshots, which are current values, and which are derived. Those are
+domain decisions, not database decisions, and they have to come out of
+conversations with the people who own the business rules.”</em></p>
+</blockquote>
+<h3 id="where-the-ai-helps">Where the AI helps</h3>
+<ul>
+<li>Generating the SQL once you’ve made the decisions.</li>
+<li>Listing trade-offs of normalize-vs-denormalize.</li>
+<li>Spotting missing indexes once you describe the access patterns.</li>
+</ul>
+</section>
+<section id="category-2-boundary-placement" class="slide level2">
+<h2>4. Category 2 — Boundary placement</h2>
+<h3 id="what-the-ai-does-1">What the AI does</h3>
+<blockquote>
+<p><em>“Split this file into four components.”</em></p>
+</blockquote>
+<p>It picks reasonable boundaries based on syntax (imports, exports,
+what calls what).</p>
+<h3 id="what-only-you-do-1">What only you do</h3>
+<ul>
+<li>Decide which boundaries become <strong>module boundaries</strong>
+(one team owns them) vs <strong>file boundaries</strong> (anyone can
+edit). The AI cannot see the team chart.</li>
+<li>Decide which boundaries become <strong>service boundaries</strong>
+(separate deployable). Service boundaries cost a lot — observability,
+deployment, on-call. The AI does not feel the cost.</li>
+<li>Decide which API contracts are <em>stable forever</em> (external
+partners) vs <em>internal-only</em> (your own services). The AI does not
+know which partners you have.</li>
+<li>Decide where <strong>caching</strong> should live. The AI can add a
+cache anywhere. <em>Choosing</em> the layer requires understanding
+read/write ratios, invalidation cost, and customer-visible staleness
+tolerance.</li>
+</ul>
+<h3 id="senior-soundbite-1">Senior soundbite</h3>
+<blockquote>
+<p><em>“Boundaries are the most expensive thing in any architecture —
+once a service boundary exists, it is almost impossible to undo. The AI
+moves files around for me. Choosing where the boundaries are, knowing
+which seams must never be crossed and which can flex — those decisions
+live with us for years and are probably 30 percent of what
+‘architecting’ actually means.”</em></p>
+</blockquote>
+<h3 id="where-the-ai-helps-1">Where the AI helps</h3>
+<ul>
+<li>Generating the boilerplate when a boundary is decided (interface,
+adapter, contract).</li>
+<li>Spotting violations of an existing boundary in a PR.</li>
+<li>Drafting a deprecation note when a boundary changes.</li>
+</ul>
+</section>
+<section id="category-3-failure-mode-design" class="slide level2">
+<h2>5. Category 3 — Failure-mode design</h2>
+<h3 id="what-the-ai-does-2">What the AI does</h3>
+<blockquote>
+<p><em>“Add error handling to this function.”</em></p>
+</blockquote>
+<p>It wraps the body in try/catch. Sometimes well, often as
+decoration.</p>
+<h3 id="what-only-you-do-2">What only you do</h3>
+<ul>
+<li>Categorize each call as <strong>must-succeed</strong> (charge a
+credit card), <strong>best-effort</strong> (write to analytics),
+<strong>idempotent</strong> (retry the webhook), or
+<strong>at-most-once</strong> (send the email). The AI cannot tell.</li>
+<li>Decide which failures are <strong>paged</strong> (page the on-call),
+<strong>alerted</strong> (Slack), <strong>logged</strong> (Datadog), or
+<strong>silent</strong> (acceptable drop). Each tier costs human
+attention.</li>
+<li>Decide which paths have <strong>circuit breakers</strong>,
+<strong>timeouts</strong>, <strong>bulkheads</strong>, and
+<strong>back-pressure</strong>. The AI knows the names; the placement is
+yours.</li>
+<li>Decide what the user sees when something fails. A blank page? A
+retry button? A graceful empty state with a tooltip? The AI does not
+know your brand voice.</li>
+</ul>
+<h3 id="senior-soundbite-2">Senior soundbite</h3>
+<blockquote>
+<p><em>“Most architectures’ failure modes are designed by accident —
+whatever the original code happened to do. Designing failure modes
+deliberately means knowing which calls must succeed, which can drop,
+which can retry. The AI helps me write the retry loop once I’ve decided
+this should be a retry loop. The decision is upstream of the
+code.”</em></p>
+</blockquote>
+<h3 id="where-the-ai-helps-2">Where the AI helps</h3>
+<ul>
+<li>Implementing retry logic once you’ve specified the retry
+policy.</li>
+<li>Drafting alert rules from a runbook.</li>
+<li>Listing the failure modes in a checklist that you then
+categorize.</li>
+</ul>
+</section>
+<section id="category-4-trade-off-ownership" class="slide level2">
+<h2>6. Category 4 — Trade-off ownership</h2>
+<h3 id="what-the-ai-does-3">What the AI does</h3>
+<blockquote>
+<p><em>“Compare three caching strategies.”</em></p>
+</blockquote>
+<p>It produces a clean table of trade-offs. Genuinely useful.</p>
+<h3 id="what-only-you-do-3">What only you do</h3>
+<ul>
+<li>Pick one. <strong>Accountably.</strong></li>
+<li>Document why you picked it, in a way that survives the next on-call
+rotation when someone wonders why we’re not doing the obvious other
+thing.</li>
+<li>Carry the explanation through stakeholder pushback (“can’t we
+just…?”) with confidence.</li>
+<li>Revisit when conditions change. The AI does not know that the cost
+of option A doubled this quarter.</li>
+</ul>
+<h3 id="senior-soundbite-3">Senior soundbite</h3>
+<blockquote>
+<p><em>“AI is a fantastic trade-off-listing machine. It is, by
+definition, not a trade-off-making machine. The trade-off only becomes a
+trade-off when someone owns the consequences. The AI doesn’t carry a
+pager. I do.”</em></p>
+</blockquote>
+<h3 id="where-the-ai-helps-3">Where the AI helps</h3>
+<ul>
+<li>Surfacing trade-offs you might miss.</li>
+<li>Estimating the cost / latency / complexity of each option.</li>
+<li>Drafting the ADR (architecture decision record) once you’ve
+chosen.</li>
+</ul>
+</section>
+<section id="category-5-scale-and-cost" class="slide level2">
+<h2>7. Category 5 — Scale and cost</h2>
+<h3 id="what-the-ai-does-4">What the AI does</h3>
+<blockquote>
+<p><em>“How would this design scale to 1M users?”</em></p>
+</blockquote>
+<p>It produces a plausible answer. Usually involving cache layers, read
+replicas, sharding, queues.</p>
+<h3 id="what-only-you-do-4">What only you do</h3>
+<ul>
+<li>Distinguish <strong>expected scale</strong> (1M users) from
+<strong>bursty scale</strong> (1M concurrent in 5 minutes during a
+marketing event) from <strong>degenerate scale</strong> (one bad actor).
+Each one demands a different design.</li>
+<li>Decide which scaling strategies are <em>worth it</em> given your
+<em>current</em> size. Premature scale work is one of the most common
+forms of waste.</li>
+<li>Trade off cost against latency at each layer. The AI doesn’t know
+your CFO’s tolerance.</li>
+<li>Decide what to <strong>shed</strong> when overloaded. The AI does
+not own the customer’s emotional response to a 503.</li>
+</ul>
+<h3 id="senior-soundbite-4">Senior soundbite</h3>
+<blockquote>
+<p><em>“The right scale design is rarely the maximum scale design. Most
+systems do not need horizontal sharding; most systems would benefit from
+a cache layer they don’t have; most systems will fall over in ways the
+load test missed. Choosing the right level of scale investment for a
+given moment in a company’s life — that’s a judgment about
+<em>people</em> and <em>budget</em>, not just throughput. AI doesn’t see
+those.”</em></p>
+</blockquote>
+<h3 id="where-the-ai-helps-4">Where the AI helps</h3>
+<ul>
+<li>Sizing calculations once you’ve stated the load.</li>
+<li>Comparing AWS vs GCP vs self-hosted costs at a stated load.</li>
+<li>Sketching the failure modes of each scaling strategy.</li>
+</ul>
+</section>
+<section id="category-6-migration-and-rollout" class="slide level2">
+<h2>8. Category 6 — Migration and rollout</h2>
+<h3 id="what-the-ai-does-5">What the AI does</h3>
+<blockquote>
+<p><em>“Generate a migration script that adds this column.”</em></p>
+</blockquote>
+<p>It produces a script. Usually safe, sometimes not.</p>
+<h3 id="what-only-you-do-5">What only you do</h3>
+<ul>
+<li>Decide whether to <strong>dual-write</strong> to old and new for a
+period.</li>
+<li>Decide whether to <strong>backfill</strong> the new column
+synchronously, asynchronously, or never.</li>
+<li>Decide whether to <strong>feature-flag</strong> the new path. The AI
+doesn’t know your flag system.</li>
+<li>Decide whether to <strong>canary</strong> to 1%, 10%, 100%. The AI
+doesn’t know your incident history.</li>
+<li>Decide what <strong>rollback</strong> looks like. The AI’s “if it
+fails just rollback” is naive — some changes are unrollable once any
+traffic has used them.</li>
+</ul>
+<h3 id="senior-soundbite-5">Senior soundbite</h3>
+<blockquote>
+<p><em>“Migrations are where engineering meets reality. Every elegant
+migration on paper has a rollback story that gets told once and never
+written down. Designing the rollback before the rollout is the
+discipline. AI helps me with the script. The decision tree above the
+script is mine — and it’s where most production incidents come
+from.”</em></p>
+</blockquote>
+<h3 id="where-the-ai-helps-5">Where the AI helps</h3>
+<ul>
+<li>Generating the migration SQL or code.</li>
+<li>Drafting the dual-write logic once you’ve chosen it.</li>
+<li>Reviewing your runbook for missing steps.</li>
+</ul>
+</section>
+<section id="the-interview-deployment" class="slide level2">
+<h2>9. The interview deployment</h2>
+<p>When you walk into a system-design interview, <em>especially</em> one
+that allows AI use, do this in the first two minutes:</p>
+<ol type="1">
+<li><strong>Read the problem twice.</strong> Out loud.</li>
+<li><strong>Ask 3-5 clarifying questions</strong> that map to the six
+categories above. Examples:
+<ul>
+<li><em>“What’s the scale we’re sizing for? Average and peak?”</em>
+(Category 5)</li>
+<li><em>“What’s the failure tolerance — can the user retry, or is this a
+one-shot transaction?”</em> (Category 3)</li>
+<li><em>“Are there existing services this needs to integrate with, or is
+this greenfield?”</em> (Category 2)</li>
+<li><em>“Who maintains this — one team, or a shared service?”</em>
+(Category 2)</li>
+</ul></li>
+<li><strong>Sketch the rough boxes</strong> and label which decisions go
+in each box.</li>
+</ol>
+<p>The interviewer immediately sees: this person thinks in categories.
+<strong>That alone is half the battle.</strong></p>
+</section>
+<section id="the-id-ask-the-ai-moment" class="slide level2">
+<h2>10. The “I’d ask the AI” moment</h2>
+<p>A common interviewer move:</p>
+<blockquote>
+<p><em>“You can use an LLM during this interview. When would
+you?”</em></p>
+</blockquote>
+<p>Have a structured answer:</p>
+<blockquote>
+<p><em>“Three places. One, listing trade-offs of options I haven’t fully
+thought through — pure exploration. Two, drafting boilerplate once a
+decision is made — the schema SQL after we’ve chosen the schema, for
+instance. Three, sanity-checking my back-of-envelope math — I’d never
+trust the AI’s numbers cold, but I’d use it to spot-check whether my
+throughput estimate is in the right order of magnitude. I would
+<em>not</em> use it for the architectural choices themselves. Those are
+why I’m in this interview.”</em></p>
+</blockquote>
+<p>That answer:</p>
+<ul>
+<li>Names <em>three</em> concrete uses.</li>
+<li>Distinguishes <em>AI-assisted</em> from <em>AI-driven</em>.</li>
+<li>Closes with a strong line about why <strong>you</strong> are the one
+in the room.</li>
+</ul>
+<p><strong>Drill it.</strong></p>
+</section>
+<section id="the-trap-question-wouldnt-an-ai-just-give-me-this-design"
+class="slide level2">
+<h2>11. The trap question — “wouldn’t an AI just give me this
+design?”</h2>
+<p>Sometimes the interviewer plays devil’s advocate:</p>
+<blockquote>
+<p><em>“If I asked GPT-5 to design Twitter for me, wouldn’t I get a
+reasonable answer?”</em></p>
+</blockquote>
+<p>The right response:</p>
+<blockquote>
+<p><em>“You’d get a reasonable-sounding answer, yes. Whether it’s
+<em>the right</em> answer for your specific situation — your traffic
+patterns, your budget, your team’s familiarity with the tech, your
+existing stack, your customer mix — that part is the human work. The
+AI’s design will look good on a whiteboard. Six months later, you
+discover the design assumed a write-heavy workload and yours is
+read-heavy by 100:1. Or it assumed cloud-native, and you’re on-prem. The
+bridge from a <em>plausible</em> design to <em>the right</em> design is
+contextual, and the context is what only humans on this team
+have.”</em></p>
+</blockquote>
+<p>That answer <strong>engages with the premise instead of dismissing
+it</strong>. It also previews the trade-off conversations of Lesson
+5.3.</p>
+</section>
+<section id="the-senior-soundbite-for-this-whole-lesson"
+class="slide level2">
+<h2>12. The senior soundbite for this whole lesson</h2>
+<p>If you only memorize one paragraph from this lesson:</p>
+<blockquote>
+<p><em>“At the architecture layer there are six categories of decision:
+domain modeling, boundary placement, failure-mode design, trade-off
+ownership, scale and cost, migration and rollout. AI helps me in all six
+— listing options, generating boilerplate, spot-checking math. AI
+doesn’t <em>own</em> any of the six, because owning means accepting
+consequences, and consequences live with humans. My job at the senior
+level is to make those six decisions well, document them, and live with
+them. That’s not work AI does.”</em></p>
+</blockquote>
+<p>That is the answer to <em>“What does a senior engineer actually do
+all day in 2026?”</em> and it lands every time.</p>
+</section>
+<section id="check-yourself" class="slide level2">
+<h2>13. CHECK YOURSELF</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Can you list the six categories of
+architecture decision from memory?</label></li>
+<li><label><input type="checkbox" />For each, can you give one concrete
+example and name the boundary between AI’s contribution and
+yours?</label></li>
+<li><label><input type="checkbox" />Can you deliver the section-10 “when
+would you ask the AI?” answer in under 60 seconds?</label></li>
+<li><label><input type="checkbox" />Can you handle the section-11 trap
+question without dismissing or over-conceding?</label></li>
+<li><label><input type="checkbox" />Can you deliver the section-12
+senior soundbite without notes?</label></li>
+</ul>
+</section>
+<section id="where-you-are-now" class="slide level2">
+<h2>14. Where you are now</h2>
+<p>You have a structural model of architecture work that survives any
+specific design problem. Move on to <strong><a
+href="./02-design-with-ai-walkthrough.md">02-design-with-ai-walkthrough.md</a></strong>
+— a fully worked 60-minute system-design walkthrough that puts these
+categories into practice.</p>
+</section></section>
+<section>
+<section id="lesson-5.2-a-worked-system-design-walkthrough-with-ai"
+class="title-slide slide level1">
+<h1>Lesson 5.2 — A Worked System-Design Walkthrough with AI</h1>
+<blockquote>
+<p><strong>A 60-minute system-design interview, narrated end-to-end,
+with AI integrated where it helps and excluded where it
+doesn’t.</strong> Use this as a reference for any “design X” interview
+prompt.</p>
+</blockquote>
+<p>By the end of this lesson:</p>
+<ul>
+<li>You will have a 60-minute system-design walkthrough you can mimic on
+any prompt.</li>
+<li>You will know exactly when to ask “may I sanity-check this with the
+AI?” and when not to bother.</li>
+<li>You will have memorable lines for each phase of the interview.</li>
+</ul>
+</section>
+<section id="the-problem" class="slide level2">
+<h2>1. The problem</h2>
+<p>Pretend the interviewer says:</p>
+<blockquote>
+<p><em>“Design a fantasy sports application for one million users. Live
+scoring, leaderboards, news feed, social features. You have 60 minutes.
+AI tools are permitted. Walk me through your thinking.”</em></p>
+</blockquote>
+<p>That is a deliberately broad prompt. Most candidates start drawing
+boxes. <strong>You start by narrowing.</strong></p>
+</section>
+<section id="the-60-minute-layout" class="slide level2">
+<h2>2. The 60-minute layout</h2>
+<p>Here is the breakdown we’ll narrate:</p>
+<table>
+<thead>
+<tr>
+<th>Minutes</th>
+<th>Phase</th>
+<th>Goal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–5</td>
+<td>Clarify</td>
+<td>Pin down scope, scale, constraints</td>
+</tr>
+<tr>
+<td>5–10</td>
+<td>Functional requirements</td>
+<td>What the system does</td>
+</tr>
+<tr>
+<td>10–15</td>
+<td>Non-functional requirements</td>
+<td>What the system promises</td>
+</tr>
+<tr>
+<td>15–25</td>
+<td>High-level design</td>
+<td>The boxes-and-arrows</td>
+</tr>
+<tr>
+<td>25–40</td>
+<td>Deep dives</td>
+<td>Two or three components in detail</td>
+</tr>
+<tr>
+<td>40–50</td>
+<td>Trade-offs and risk</td>
+<td>Where this design is fragile</td>
+</tr>
+<tr>
+<td>50–60</td>
+<td>Wrap and Q&amp;A</td>
+<td>Summary + interviewer questions</td>
+</tr>
+</tbody>
+</table>
+<p>Memorize the column 1 minute-buckets. Within each bucket, you have a
+script.</p>
+</section>
+<section id="phase-1-05-min-clarify" class="slide level2">
+<h2>3. Phase 1 (0–5 min) — Clarify</h2>
+<h3 id="what-you-say">What you say</h3>
+<blockquote>
+<p><em>“Before I draw anything, can I confirm the scope? When you say
+‘one million users,’ is that registered total, monthly actives, or daily
+peak? And by ‘fantasy sports’ — are we talking pick’em prediction games,
+or full-roster draft fantasy with trades and waivers? And one more: is
+there real money on the platform, or is this a free social
+product?”</em></p>
+</blockquote>
+<p>Three questions. Each one shifts the design materially:</p>
+<ul>
+<li><em>DAU vs total</em> changes the throughput sizing by 30x.</li>
+<li><em>Pick’em vs draft fantasy</em> changes the data model by an order
+of magnitude.</li>
+<li><em>Real money vs free</em> changes the entire compliance and
+reliability story.</li>
+</ul>
+<h3 id="the-interviewers-likely-answer">The interviewer’s likely
+answer</h3>
+<blockquote>
+<p><em>“DAU 200k, peak 500k. Pick’em-style, like the snooker app you may
+have seen. No real money — it’s a community product.”</em></p>
+</blockquote>
+<h3 id="what-you-do-next">What you do next</h3>
+<p>Write the constraints on the board:</p>
+<pre><code>SCOPE
+- 1M registered, 200k DAU, 500k peak concurrent
+- Pick&#39;em fantasy (pick winners, not roster management)
+- Free, social, community
+- Live scoring, leaderboards, news feed, social features</code></pre>
+<p>You just demoed: <strong>clarification before design</strong>. That
+alone is in the top quartile of candidates.</p>
+<h3 id="where-the-ai-does-not-help">Where the AI does NOT help</h3>
+<p>You <strong>don’t</strong> ask the AI clarifying questions. You ask
+the <em>interviewer</em>. The clarification phase is human-to-human.
+Reaching for the AI here would signal you don’t know who to talk to.</p>
+</section>
+<section id="phase-2-510-min-functional-requirements"
+class="slide level2">
+<h2>4. Phase 2 (5–10 min) — Functional requirements</h2>
+<h3 id="what-you-say-1">What you say</h3>
+<blockquote>
+<p><em>“OK, given that scope, let me list the functional requirements.
+I’ll bullet them and you can tell me if I miss anything.”</em></p>
+</blockquote>
+<p>Then list, out loud, while writing:</p>
+<pre><code>FUNCTIONAL
+1. Auth — sign up, log in, email or social
+2. Pick submission — user picks winners for upcoming matches
+3. Live scoring — when a match completes, scores update for affected users
+4. Leaderboards — global and friend-group, top N by total points
+5. Match feed — users see today&#39;s matches, results, schedule
+6. Social — friends, follow, comments on user picks
+7. Notifications — push or email when a match user picked completes</code></pre>
+<p>Pause, look up. <em>“Anything I missed?”</em></p>
+<p>The interviewer might add: <em>“Yes — admin tooling to enter
+results.”</em> Add it.</p>
+<h3 id="where-the-ai-helps-6">Where the AI helps</h3>
+<p>You do not ask the AI here either, <em>but</em> — if you are 50
+minutes in and forgot something, you could quickly prompt:</p>
+<blockquote>
+<p><em>“Quick sanity check — for a fantasy sports app like the one I
+described, what’s a common feature people forget? One-line
+answer.”</em></p>
+</blockquote>
+<p>That’s a legitimate use of an LLM during a design hour. <strong>Don’t
+lean on it; do reach for it once when you’re stuck.</strong></p>
+</section>
+<section id="phase-3-1015-min-non-functional-requirements"
+class="slide level2">
+<h2>5. Phase 3 (10–15 min) — Non-functional requirements</h2>
+<h3 id="what-you-say-2">What you say</h3>
+<blockquote>
+<p><em>“Now the non-functional side. These shape the architecture more
+than the features do.”</em></p>
+</blockquote>
+<pre><code>NON-FUNCTIONAL
+- Latency: leaderboard read &lt; 200ms p95
+- Latency: pick submission &lt; 500ms p95
+- Live scoring: visible within 5 seconds of result entry
+- Availability: 99.9% (so no database that takes 10 minutes to fail over)
+- Consistency: leaderboards can be slightly stale (eventual is fine);
+  picks must be strictly consistent (no double-submits, no lost picks)
+- Cost: hobby-tier first year, scale-tier when DAU &gt; 50k
+- Compliance: GDPR (EU users), age 13+ (children&#39;s privacy)</code></pre>
+<p>Look up. <em>“Are these reasonable, or do you want me to push any of
+them harder?”</em></p>
+<p>This sentence — <strong>“are these reasonable, or do you want me to
+push any harder?”</strong> — is one of the highest-leverage one-liners
+in any system-design interview. It invites the interviewer into the
+conversation as a peer rather than as a judge.</p>
+<h3 id="where-the-ai-helps-7">Where the AI helps</h3>
+<p>You <em>could</em> sanity-check your latency assumptions with the
+LLM:</p>
+<blockquote>
+<p><em>“For a leaderboard query over a million users with score sorting,
+what’s a realistic p95 latency on a single-node Postgres?”</em></p>
+</blockquote>
+<p>But honestly, by the time you’re in a senior interview you should
+have these numbers in your head. Ask only if you genuinely don’t
+know.</p>
+</section>
+<section id="phase-4-1525-min-high-level-design" class="slide level2">
+<h2>6. Phase 4 (15–25 min) — High-level design</h2>
+<h3 id="what-you-say-3">What you say</h3>
+<blockquote>
+<p><em>“OK, the boxes-and-arrows. I’ll start with the data flow for the
+most performance-critical path — live scoring — and work
+outward.”</em></p>
+</blockquote>
+<p>Sketch:</p>
+<pre><code>[Admin UI]
+   |
+   v
+[Match Service]  ← writes match result
+   |
+   v
+[Result Stream] (Kafka / SQS / Redis Stream)
+   |
+   v
+[Scoring Worker] ← reads result, joins picks, computes deltas
+   |       \
+   |        \
+   v         v
+[User Score Cache]  [Leaderboard Cache]
+   ^                     ^
+   |                     |
+[Public API] ←---------- [Public API]
+   ^
+[Mobile / Web]</code></pre>
+<p>Narrate while you draw:</p>
+<blockquote>
+<p><em>“Match result enters via the admin UI. We publish it to a stream.
+A scoring worker reads from the stream, joins picks for that match,
+computes deltas, and updates two caches: per-user score and the global
+leaderboard. The public API reads from the caches; it doesn’t hit the
+source-of-truth Postgres for hot reads.”</em></p>
+</blockquote>
+<h3 id="what-only-humans-do-in-this-phase">What only humans do in this
+phase</h3>
+<ul>
+<li><strong>Choose</strong> the stream technology. The AI can list Kafka
+vs SQS vs Redis Streams trade-offs. You pick — based on your team’s
+familiarity, your AWS spend, your latency budget.</li>
+<li><strong>Choose</strong> the cache topology. Redis cluster?
+In-process? Edge cache? Each one has consequences for failure modes and
+dev experience.</li>
+<li><strong>Decide</strong> which writes go to the stream vs which are
+synchronous. Pick submission must be synchronous (user expects
+confirmation). Score updates can be async.</li>
+</ul>
+<p>These three decisions are all yours. The AI did not make any of them.
+The AI could <em>help</em> you list trade-offs if you asked it to.</p>
+<h3 id="the-senior-move-narrate-the-alternatives">The senior move —
+narrate the alternatives</h3>
+<p>When you draw the stream, say out loud:</p>
+<blockquote>
+<p><em>“I picked a stream because the scoring fan-out is one match →
+many users. We could do this synchronously — write to the match table,
+fire a stored procedure that updates all affected user scores. That
+works at smaller scale. At 500k peak and live scoring under 5 seconds,
+the synchronous version starts queueing on database connections. Stream
+gives us back-pressure and lets the scoring worker scale independently.
+The cost is eventual consistency between match-result and leaderboard,
+which we said is acceptable in non-functional requirements.”</em></p>
+</blockquote>
+<p>That paragraph is gold. <strong>It shows: you considered an
+alternative, named the trade-off, and tied the choice back to a stated
+requirement.</strong> That is exactly the texture of a staff-level
+interview.</p>
+</section>
+<section id="phase-5-2540-min-deep-dives" class="slide level2">
+<h2>7. Phase 5 (25–40 min) — Deep dives</h2>
+<p>The interviewer will pick one or two components and say <em>“go
+deeper.”</em></p>
+<blockquote>
+<p><em>“Tell me more about the leaderboard.”</em></p>
+</blockquote>
+<h3 id="what-you-say-4">What you say</h3>
+<blockquote>
+<p><em>“OK. The leaderboard has two read patterns: global top-N and
+friend-group top-N. Both need to be fast and </em>most* of the time
+slightly stale is fine.*</p>
+<p><em>For the global leaderboard, I’d use a Redis sorted set. Score is
+the user’s total points; member is the user ID. ZRANGE for top-N. Fast,
+capped memory, easy to update incrementally. Updated by the scoring
+worker on every score change.</em></p>
+<p><em>For friend-group leaderboards — that one’s trickier. We have
+potentially thousands of overlapping groups. Two strategies:</em></p>
+<p><em>One, materialize each group’s leaderboard as its own sorted set.
+Updates fan out: a score change goes to global plus every group the user
+belongs to. Reads are O(N). Writes scale with how many groups a user is
+in.</em></p>
+<p><em>Two, compute on read. Read the user IDs from the group, ZSCORE
+each one, sort, return. Reads are O(N) at API time. Writes only touch
+global.</em></p>
+<p><em>I’d start with option two — compute on read — because friend
+groups are typically small (&lt; 20 users) and the read-time cost is
+bounded. If groups grow large or read latency suffers, we move to option
+one. The migration is local — only the leaderboard service
+changes.”</em></p>
+</blockquote>
+<h3 id="why-this-is-interview-grade">Why this is interview-grade</h3>
+<ul>
+<li>You named two strategies.</li>
+<li>You picked one with a reason rooted in expected scale.</li>
+<li>You stated the conditions under which you’d switch.</li>
+<li>You noted that the migration is local — meaning your boundary
+placement was good.</li>
+</ul>
+<p>That last point — <em>“the migration is local”</em> — is staff-level
+reasoning. It says: I designed a boundary, and if reality forces a
+redesign, the redesign respects the boundary.</p>
+<h3 id="where-the-ai-helps-in-deep-dives">Where the AI helps in deep
+dives</h3>
+<p>This is the phase where you might genuinely reach for the LLM:</p>
+<blockquote>
+<p><em>“Quick check — Redis ZRANGE on a sorted set of 1M members, what’s
+the latency for top-100?”</em></p>
+</blockquote>
+<p>That’s a real number you might want to verify. Ask the AI if you
+don’t know. <strong>Naming what you’re checking</strong> is a senior
+signal — verifying numbers you forgot is fine; pretending to know them
+is not.</p>
+</section>
+<section id="phase-6-4050-min-trade-offs-and-risk" class="slide level2">
+<h2>8. Phase 6 (40–50 min) — Trade-offs and risk</h2>
+<h3 id="what-you-say-5">What you say</h3>
+<blockquote>
+<p><em>“With time left, let me name the parts of this design I’d most
+worry about and how I’d mitigate each.”</em></p>
+</blockquote>
+<pre><code>RISKS
+1. Stream backlog during a Sunday-afternoon match storm
+2. Cold-cache problem on Redis restart
+3. Leaderboard-staleness vs user expectation
+4. Admin-UI single source of truth for match results
+5. GDPR right-to-be-forgotten with denormalized score data</code></pre>
+<p>For each, narrate the mitigation:</p>
+<blockquote>
+<p><em>“One — stream backlog. Risk: 50 matches finish in a 5-minute
+window, scoring worker can’t keep up, leaderboards lag by minutes.
+Mitigation: scoring worker is horizontally scalable, autoscale on queue
+depth. Bounded concurrency, idempotent processing on the worker. Backup
+plan: a kill switch that pauses live scoring and shows ‘updating soon’
+if the queue exceeds a threshold.</em></p>
+<p><em>Two — cold cache. If Redis restarts, the leaderboard is empty
+until rebuild. We’d need a cold-start procedure: pull all users’ totals
+from Postgres, ZADD into Redis. Takes minutes. During that window,
+leaderboards are stale. Could we tolerate that during a deploy window?
+Probably yes for a community product; absolutely not if there were money
+involved.</em></p>
+<p><em>Three — staleness. Already covered, but worth noting that the
+user perception of staleness is shaped by the UI. If we show ‘updated 2
+seconds ago’ on the leaderboard and it’s actually 8 seconds, users
+notice. Either be honest about staleness or hide the timestamp.</em></p>
+<p><em>Four — admin UI. If the result is entered wrong, we recompute
+everything from a wrong baseline. We’d want an undo / amend path with
+audit trail.</em></p>
+<p><em>Five — GDPR. When a user requests deletion, we strip them from
+Postgres but their score contributed to past leaderboards. We have to
+decide whether past leaderboards are recomputed or whether the user’s
+row becomes a tombstone. That’s a policy decision, not a tech one —
+needs legal.”</em></p>
+</blockquote>
+<h3 id="why-this-phase-is-the-most-senior-phase">Why this phase is the
+most senior phase</h3>
+<p>Most candidates run out of steam after the deep dive and just answer
+follow-up questions. <strong>You volunteer the risks.</strong> That
+signals: I think about my own designs critically.</p>
+<p>The five-risk list also subtly demonstrates all six categories of
+architecture decision (Lesson 5.1). <em>Stream backlog</em> is
+failure-mode design. <em>Cold cache</em> is migration thinking.
+<em>Staleness vs UI</em> is trade-off ownership. <em>Admin UI audit
+trail</em> is domain modeling. <em>GDPR</em> is a policy decision that
+crosses technical and legal layers.</p>
+</section>
+<section id="phase-7-5060-min-wrap-and-qa" class="slide level2">
+<h2>9. Phase 7 (50–60 min) — Wrap and Q&amp;A</h2>
+<h3 id="what-you-say-6">What you say</h3>
+<blockquote>
+<p><em>“OK, summary in 30 seconds: the architecture is event-driven
+scoring, Redis-cached read paths, two boundaries — match service and
+scoring worker. The known weak points are stream backlog under burst,
+cold cache on Redis restart, and GDPR deletion of historic-leaderboard
+data. Things I haven’t covered that I’d want to: notifications fan-out,
+social features, and the admin tooling itself. Want to dig into any of
+those, or any part of what I sketched?”</em></p>
+</blockquote>
+<p>Done. That summary:</p>
+<ul>
+<li>Recaps the design in three nouns.</li>
+<li>Names the weak points you already volunteered.</li>
+<li>Names what you didn’t cover (so the interviewer doesn’t think you
+forgot).</li>
+<li>Hands the floor back.</li>
+</ul>
+<p><strong>Memorize that close.</strong> The same structure works for
+any system-design problem.</p>
+</section>
+<section id="the-ai-integration-recap" class="slide level2">
+<h2>10. The AI integration recap</h2>
+<p>Through 60 minutes of design, you reached for the AI:</p>
+<ul>
+<li><strong>Once or twice</strong> for a sanity check on a number you
+didn’t have.</li>
+<li><strong>Possibly once</strong> to surface a feature you might have
+missed.</li>
+<li><strong>Zero times</strong> to make an architectural decision.</li>
+</ul>
+<p>That’s the right ratio. <strong>AI in system-design interviews is a
+sounding board, not a co-architect.</strong> Anyone who lets the AI
+drive will get an “average AI-generated design,” which interviewers see
+all day and can spot in 5 seconds.</p>
+</section>
+<section id="the-may-i-use-the-ai-opening" class="slide level2">
+<h2>11. The “may I use the AI?” opening</h2>
+<p>If the interviewer hasn’t already said you can,
+<strong>ask</strong>:</p>
+<blockquote>
+<p><em>“Before I start — am I allowed to use an LLM as a sounding board
+during this hour? I’d use it sparingly — for a sanity-check on a number,
+or to surface trade-offs — but not for the architectural decisions
+themselves.”</em></p>
+</blockquote>
+<p>Two outcomes:</p>
+<ol type="1">
+<li>They say yes — and your follow-through (asking sparingly, naming
+each use) impresses.</li>
+<li>They say no — and you’ve shown you respect their format. Not a loss
+either way.</li>
+</ol>
+<p>The phrasing matters. <em>“As a sounding board”</em>.
+<em>“Sparingly”</em>. <em>“Not for the architectural decisions”</em>.
+Each phrase signals the right mindset.</p>
+</section>
+<section id="common-pitfalls-in-this-format" class="slide level2">
+<h2>12. Common pitfalls in this format</h2>
+<h3 id="over-reliance-on-the-ai">12.1. Over-reliance on the AI</h3>
+<p>A candidate I watched once asked the AI eleven times in a 50-minute
+interview. Each ask was a small question. Cumulatively, the panel
+concluded the candidate couldn’t make decisions without the AI.
+<strong>Limit yourself to two or three deliberate uses.</strong></p>
+<h3 id="drawing-without-narrating">12.2. Drawing without narrating</h3>
+<p>Silent drawing is the worst possible mode. Even if your design is
+perfect, the panel can’t see your reasoning. <strong>Talk.</strong></p>
+<h3 id="skipping-the-clarification">12.3. Skipping the
+clarification</h3>
+<p>Jumping into design before clarification produces a design for the
+wrong problem. <strong>Five minutes of clarification saves twenty
+minutes of redesign.</strong></p>
+<h3 id="forgetting-to-name-the-pillars">12.4. Forgetting to name the
+pillars</h3>
+<p>Every system-design hour is a referendum on Lesson 5.1’s six
+categories. If you finish without having explicitly named at least three
+of them, the panel may not have heard you cover them. <strong>Name them
+as you cover them.</strong> <em>“This is a boundary-placement
+decision…”</em> makes it visible.</p>
+</section>
+<section id="check-yourself-1" class="slide level2">
+<h2>13. CHECK YOURSELF</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Can you list the seven phases (0-5,
+5-10, etc.) and what happens in each?</label></li>
+<li><label><input type="checkbox" />Can you deliver Phase 1’s clarifying
+questions for any “design X” prompt?</label></li>
+<li><label><input type="checkbox" />Can you deliver Phase 7’s wrap-up
+summary for any design?</label></li>
+<li><label><input type="checkbox" />Can you name where the AI
+legitimately helps in this hour and where it doesn’t?</label></li>
+<li><label><input type="checkbox" />Can you sketch the high-level design
+for the fantasy app from memory?</label></li>
+</ul>
+</section>
+<section id="where-you-are-now-1" class="slide level2">
+<h2>14. Where you are now</h2>
+<p>You have a worked system-design walkthrough that you can adapt to any
+“design X” prompt. Move on to <strong><a
+href="./03-trade-off-conversations.md">03-trade-off-conversations.md</a></strong>
+— the language and structure of trade-off discussions, which is the
+texture every design hour eventually demands.</p>
+</section></section>
+<section>
+<section id="lesson-5.3-trade-off-conversations"
+class="title-slide slide level1">
+<h1>Lesson 5.3 — Trade-off Conversations</h1>
+<blockquote>
+<p><strong>Every senior interview eventually becomes a trade-off
+conversation.</strong> Not “what would you build?” — but <em>“why this
+and not that?”</em> This lesson teaches you the language, structure, and
+pitfalls of those conversations.</p>
+</blockquote>
+<p>By the end of this lesson:</p>
+<ul>
+<li>You will have a five-step structure for any trade-off
+discussion.</li>
+<li>You will know the eight trade-off axes that show up in 95 percent of
+interviews.</li>
+<li>You will have memorable phrasing for the most common trade-off
+prompts.</li>
+<li>You will know the four traps that turn a good trade-off discussion
+into a bad one.</li>
+</ul>
+</section>
+<section id="why-interviewers-love-trade-off-questions"
+class="slide level2">
+<h2>1. Why interviewers love trade-off questions</h2>
+<p>Three reasons:</p>
+<ol type="1">
+<li><strong>They reveal real judgment.</strong> Anyone can recite
+“always normalize.” Only an experienced engineer can say “in this case
+I’d denormalize because…”</li>
+<li><strong>They’re hard to fake.</strong> AI can produce a design. AI
+cannot defend a design under cross-examination.</li>
+<li><strong>They scale across all levels.</strong> Junior, mid, senior,
+staff — every level should be able to discuss trade-offs at the
+appropriate depth.</li>
+</ol>
+<p>The right answer to almost every “should we A or B?” question is:
+<strong>“It depends — here’s what it depends on.”</strong> This lesson
+teaches you to fill in the rest of that sentence.</p>
+</section>
+<section id="the-five-step-trade-off-structure" class="slide level2">
+<h2>2. The five-step trade-off structure</h2>
+<p>Every trade-off conversation should follow this structure. Memorize
+it. Drop into it on demand.</p>
+<h3 id="step-1-restate-the-choice">Step 1 — Restate the choice</h3>
+<blockquote>
+<p><em>“OK — the question is whether to use A or B for [purpose]. Let me
+make sure I understand both.”</em></p>
+</blockquote>
+<p>This buys thinking time and confirms you understood the question.</p>
+<h3 id="step-2-name-the-axes-that-matter">Step 2 — Name the axes that
+matter</h3>
+<blockquote>
+<p><em>“There are roughly four axes I’d evaluate this on: [axis 1],
+[axis 2], [axis 3], [axis 4].”</em></p>
+</blockquote>
+<p>Naming axes is the single highest-leverage move in a trade-off
+discussion. It tells the interviewer: this person doesn’t just have
+opinions — they have a <em>framework</em>.</p>
+<h3 id="step-3-score-each-option-on-each-axis">Step 3 — Score each
+option on each axis</h3>
+<blockquote>
+<p><em>“On [axis 1], A wins because [reason]. On [axis 2], B wins
+because [reason]. On [axis 3], roughly equal. On [axis 4], it depends on
+[unknown].”</em></p>
+</blockquote>
+<p>This is where you demonstrate that you can hold both options in your
+head fairly. Showing the AI’s bias <em>for</em> one option is a junior
+tell. Showing balanced analysis is a senior tell.</p>
+<h3 id="step-4-identify-the-deciding-axis-for-this-situation">Step 4 —
+Identify the deciding axis for <em>this</em> situation</h3>
+<blockquote>
+<p><em>“Given the scenario you described — [specific constraint] — I’d
+weight [axis] highest, because [reason]. That tips the decision toward
+A.”</em></p>
+</blockquote>
+<p>This is the <em>judgment</em> moment. You name a constraint from the
+situation and use it to break the tie.</p>
+<h3 id="step-5-state-the-decision-and-the-reversibility">Step 5 — State
+the decision and the reversibility</h3>
+<blockquote>
+<p><em>“So I’d start with A. If [observable signal], I’d revisit and
+consider migrating to B. The migration would cost roughly [X], so the
+cost of being wrong is bounded.”</em></p>
+</blockquote>
+<p>You named the decision <em>and</em> what would change your mind
+<em>and</em> what reversal would cost. <strong>That last sentence is
+staff-level.</strong></p>
+</section>
+<section id="the-eight-axes-youll-keep-using" class="slide level2">
+<h2>3. The eight axes you’ll keep using</h2>
+<p>Across 95 percent of interview trade-offs, these eight axes show up.
+Memorize them. Use them by name.</p>
+<h3 id="latency">3.1. Latency</h3>
+<p>How fast does the user-facing response come back? p50, p95, p99.</p>
+<h3 id="throughput">3.2. Throughput</h3>
+<p>How many operations per second can the system handle?</p>
+<h3 id="cost">3.3. Cost</h3>
+<p>Cloud bill. Engineer-hours. Both.</p>
+<h3 id="complexity">3.4. Complexity</h3>
+<p>How hard is this for the team to build, debug, and operate?
+Junior-friendly vs senior-only.</p>
+<h3 id="reliability">3.5. Reliability</h3>
+<p>What’s the failure surface? How often does it fall over? How fast
+does it recover?</p>
+<h3 id="consistency">3.6. Consistency</h3>
+<p>Strong, eventual, causal, monotonic. What’s the user-visible behavior
+under concurrent updates?</p>
+<h3 id="flexibility-future-proofing">3.7. Flexibility /
+future-proofing</h3>
+<p>How well does this design hold up as requirements change?</p>
+<h3 id="time-to-ship">3.8. Time to ship</h3>
+<p>How fast can we get a working version in front of users?</p>
+<p>When asked any “A vs B” question, <strong>list which of these axes
+apply, then score on each</strong>. That structure alone elevates a
+vague debate into a senior conversation.</p>
+</section>
+<section id="worked-examples-five-common-trade-offs"
+class="slide level2">
+<h2>4. Worked examples — five common trade-offs</h2>
+<h3 id="sql-vs-nosql">4.1. SQL vs NoSQL</h3>
+<blockquote>
+<p><em>“Three axes matter. Consistency: SQL gives me ACID by default;
+NoSQL forces me to think about it harder. Flexibility: NoSQL handles
+schema evolution better; SQL fights you on every column add. Operational
+complexity: managed Postgres is dead simple; managed Mongo / DynamoDB
+has a steeper operational learning curve.</em></p>
+<p><em>For a fantasy sports app at our scale, I’d start with Postgres.
+The data is relational — users, picks, matches, scores — and the access
+patterns are well-known. The day we hit a hard ceiling on Postgres, we
+wouldn’t migrate to Mongo; we’d shard Postgres or move hot tables to a
+key-value store. Reversibility is high; lock-in to Postgres-isms can be
+controlled.”</em></p>
+</blockquote>
+<h3 id="microservices-vs-monolith">4.2. Microservices vs monolith</h3>
+<blockquote>
+<p><em>“The honest answer is that almost everyone over-builds
+microservices. Monolith wins on time-to-ship, debugging, and
+team-cohesion-cost. Microservices win on independent deployment,
+language flexibility, and bounded blast radius — but only if you have
+the operational chops for them.</em></p>
+<p><em>I’d default to monolith for a team under 30 engineers. Above
+that, I’d start carving out the parts where independent deploy or
+different runtime make a real difference — usually the parts at the edge
+of the system, like ingress or fan-out workers. That’s pragmatic
+microservices, not the full lift.”</em></p>
+</blockquote>
+<h3 id="server-side-rendering-vs-client-side-rendering">4.3. Server-side
+rendering vs client-side rendering</h3>
+<blockquote>
+<p><em>“Three considerations: time-to-first-content, SEO, and runtime
+cost. SSR wins on TTFC and SEO. CSR wins on per-request server cost —
+once the JS is loaded, the client does the work.</em></p>
+<p><em>For a fantasy app, the leaderboard pages benefit from SSR — fast
+first paint, SEO for shareable URLs. The interactive parts — pick
+submission, real-time scoring — are CSR-driven. Modern frameworks (Next,
+Remix, SvelteKit) let me mix the two per route. I’d lean SSR-by-default,
+hydrate-when-needed.”</em></p>
+</blockquote>
+<h3 id="build-vs-buy">4.4. Build vs buy</h3>
+<blockquote>
+<p><em>“The trap with ‘build vs buy’ is that engineers default to ‘build
+because we’ll customize it perfectly,’ and the customization never ends
+up mattering. The honest axis: how core is this to our
+differentiation?</em></p>
+<p><em>Auth: buy. Stripe / Clerk / Auth0 — never going to be our
+differentiator, the threat model is hard, every team that’s tried has
+regretted it.</em></p>
+<p><em>Scoring engine: build. It’s the heart of the product. We’ll
+iterate on it for years.</em></p>
+<p><em>Email delivery: buy. SendGrid / Postmark.</em></p>
+<p><em>General rule: buy commodity infrastructure, build domain
+logic.”</em></p>
+</blockquote>
+<h3 id="cache-invalidation-strategy">4.5. Cache invalidation
+strategy</h3>
+<blockquote>
+<p><em>“Three options: time-based (TTL), event-based (invalidate on
+write), or version-based (key includes a version number).</em></p>
+<p><em>TTL is simplest but produces stale data. Event-based is most
+consistent but couples the writer to the cache (failure of the
+invalidation = silent stale data). Versioned keys are elegant but
+require global agreement on the version, which is hard.</em></p>
+<p><em>For the leaderboard cache, I’d use event-based — the scoring
+worker writes to Postgres and to the Redis sorted set in the same step.
+If we miss an invalidation, we have a low-level bug, not silent data
+drift. For lookup tables that change rarely, TTL is fine. For anything
+where staleness is dangerous and consistency requirements are absolute,
+version keys.”</em></p>
+</blockquote>
+</section>
+<section id="memorable-phrases-drop-these-into-trade-off-discussions"
+class="slide level2">
+<h2>5. Memorable phrases — drop these into trade-off discussions</h2>
+<p>Each of these phrases signals seniority when used naturally. Use them
+sparingly — they sound rehearsed if overused.</p>
+<h3 id="the-cheapest-decision-is-the-one-you-can-reverse.">5.1. “The
+cheapest decision is the one you can reverse.”</h3>
+<p>Use when: someone asks about future-proofing or scale.</p>
+<h3 id="premature-x-is-the-root-of-all-evil.">5.2. “Premature [X] is the
+root of all evil.”</h3>
+<p>Use when: someone proposes a complexity that won’t pay off for a
+while. Substitute <em>optimization</em>, <em>abstraction</em>,
+<em>microservicing</em>, <em>generalization</em>.</p>
+<h3 id="engineering-is-choosing-what-to-be-wrong-about.">5.3.
+“Engineering is choosing what to be wrong about.”</h3>
+<p>Use when: a perfectionist on the panel keeps pushing for the
+most-correct option without weighing costs.</p>
+<h3 id="every-architecture-has-a-customer.">5.4. “Every architecture has
+a customer.”</h3>
+<p>Use when: discussing trade-offs that pit developer convenience
+against user experience.</p>
+<h3 id="id-write-the-adr-before-i-write-the-code.">5.5. “I’d write the
+ADR before I write the code.”</h3>
+<p>Use when: discussing how to document a decision. ADR = architecture
+decision record.</p>
+<h3 id="whats-the-cost-of-being-wrong-here">5.6. “What’s the cost of
+being wrong here?”</h3>
+<p>Use when: someone is over-thinking a low-stakes decision. Forces them
+to articulate why this one matters.</p>
+<h3
+id="if-we-had-to-deprecate-this-in-two-years-what-would-that-look-like">5.7.
+“If we had to deprecate this in two years, what would that look
+like?”</h3>
+<p>Use when: discussing extensibility / boundary placement. The answer
+reveals coupling.</p>
+<h3
+id="the-hard-part-isnt-choosing-its-communicating-the-choice-to-the-team.">5.8.
+“The hard part isn’t choosing — it’s communicating the choice to the
+team.”</h3>
+<p>Use when: the panel asks how you’d roll out a controversial decision.
+<strong>A favorite of staff interviewers.</strong></p>
+</section>
+<section id="the-four-traps-in-trade-off-discussions"
+class="slide level2">
+<h2>6. The four traps in trade-off discussions</h2>
+<h3 id="the-over-confident-trap">6.1. The over-confident trap</h3>
+<blockquote>
+<p><em>“Definitely A. B is always wrong.”</em></p>
+</blockquote>
+<p>Almost every “always wrong” claim has counter-examples. The
+interviewer will surface one and you’ll backpedal. <strong>Default to
+“depends” then narrow.</strong></p>
+<h3 id="the-chronic-fence-sitter-trap">6.2. The chronic-fence-sitter
+trap</h3>
+<blockquote>
+<p><em>“Both have pros and cons. It depends.”</em></p>
+</blockquote>
+<p>You said “depends” and didn’t follow up with what it depends on. The
+interviewer thinks: this person can’t decide. <strong>Always follow
+“depends” with what it depends on.</strong></p>
+<h3 id="the-ai-told-me-trap">6.3. The “AI told me” trap</h3>
+<blockquote>
+<p><em>“Well, when I asked the LLM, it said B is preferred for this kind
+of thing.”</em></p>
+</blockquote>
+<p>You just outsourced your judgment. The interviewer will lean in:
+<em>“What does <em>that</em> mean — preferred?”</em> and you’ll have
+nothing.</p>
+<h3 id="the-buzzword-trap">6.4. The buzzword trap</h3>
+<blockquote>
+<p><em>“We’d use a CQRS pattern with event sourcing and saga
+orchestration.”</em></p>
+</blockquote>
+<p>If those words solved the problem at hand, fine. If they’re
+decorative, you’ll get cross-examined and exposed. <strong>Reach for
+vocabulary in proportion to your understanding of it.</strong></p>
+</section>
+<section id="the-i-disagree-moment" class="slide level2">
+<h2>7. The “I disagree” moment</h2>
+<p>Sometimes the interviewer will push back on your trade-off:</p>
+<blockquote>
+<p><em>“I’d actually pick the other option for this.”</em></p>
+</blockquote>
+<p>Two ways this can go.</p>
+<h3 id="the-wrong-response-caving">7.1. The wrong response — caving</h3>
+<blockquote>
+<p><em>“Oh, yeah, you’re probably right…”</em></p>
+</blockquote>
+<p>You just signaled that your reasoning was performative. The
+interviewer notes: this person folds under pressure. <strong>You will
+not get the offer.</strong></p>
+<h3 id="the-right-response-engaging">7.2. The right response —
+engaging</h3>
+<blockquote>
+<p><em>“Interesting — I’d want to understand the case for the other
+option. What weight are you putting on which axis? My reasoning was
+[restate], but I might be missing something.”</em></p>
+</blockquote>
+<p>You held your position, asked for the interviewer’s reasoning, and
+offered to update if there’s information you missed. <strong>That is the
+senior move.</strong></p>
+<p>If their reasoning convinces you, <em>then</em> update — and explain
+why their argument changed your mind. Updating in the face of new
+information is fine. Folding because someone disagreed is not.</p>
+</section>
+<section id="the-too-many-trade-offs-to-list-panic"
+class="slide level2">
+<h2>8. The “too many trade-offs to list” panic</h2>
+<p>Sometimes a question is so broad you don’t know where to start.</p>
+<blockquote>
+<p><em>“How would you build a search system?”</em></p>
+</blockquote>
+<p>Take a breath. Use this template:</p>
+<blockquote>
+<p><em>“Search is one of those topics where the answer changes a lot
+based on a few key questions. Let me list them and you tell me which to
+focus on:</em></p>
+<p><em>- Scale: thousands of documents, or billions?</em> <em>- Update
+frequency: read-mostly, or constantly changing?</em> <em>- Latency
+budget: instant typeahead, or seconds-acceptable?</em> <em>- Quality
+budget: lexical match is enough, or do we need semantic / vector?</em>
+<em>- Operational budget: managed (Algolia / Elastic Cloud),
+self-hosted, or build?</em></p>
+<p><em>Which of those should I dig into first?“</em></p>
+</blockquote>
+<p>That move converts a vague question into a specific one. The
+interviewer either picks an axis (now you have a real conversation) or
+says <em>“good list, you pick”</em> (now you have permission to focus on
+any one axis you’re strong on).</p>
+<p><strong>Reframing breadth into depth is its own senior
+skill.</strong></p>
+</section>
+<section id="talking-trade-offs-to-non-technical-audiences"
+class="slide level2">
+<h2>9. Talking trade-offs to non-technical audiences</h2>
+<p>A surprise interview question:</p>
+<blockquote>
+<p><em>“How would you explain this trade-off to our CEO?”</em></p>
+</blockquote>
+<p>Have a structure:</p>
+<blockquote>
+<p><em>“I’d skip the engineering vocabulary and translate to outcomes.
+Instead of ‘eventual consistency,’ I’d say ‘the leaderboard might be a
+few seconds out of date.’ Instead of ‘horizontal sharding,’ I’d say
+‘we’ll spend two engineer-weeks setting up to scale beyond our current
+size — that buys us 10x runway, and we’d revisit at that point.’ I lead
+with the user-visible or business-visible consequence. I keep the
+engineering vocabulary in reserve for follow-up questions if they want
+depth.”</em></p>
+</blockquote>
+<p>That answer signals: I can be in the room with executives.
+<strong>Drill it.</strong></p>
+</section>
+<section id="the-60-second-trade-off-answer-template"
+class="slide level2">
+<h2>10. The 60-second trade-off answer template</h2>
+<p>When you have one minute to deliver a trade-off:</p>
+<blockquote>
+<p><em>“On the axes that matter for this — [3 axes] — A and B differ as
+follows: [one sentence each]. Given that we said [constraint from
+context], I’d weight [axis] highest, which tips it to [option]. The cost
+of being wrong is bounded by [reversibility note]. I’d start there and
+revisit if we see [signal].”</em></p>
+</blockquote>
+<p>That’s roughly 80 words, ~50 seconds. <strong>Memorize the
+shape.</strong> Plug in the specific axes for any question.</p>
+</section>
+<section id="practice-the-12-question-rapid-drill" class="slide level2">
+<h2>11. Practice — the 12-question rapid drill</h2>
+<p>Set a timer. For each, give a 60-second trade-off answer using the
+structure from section 10.</p>
+<ol type="1">
+<li>SQL vs NoSQL.</li>
+<li>Microservices vs monolith.</li>
+<li>SSR vs CSR.</li>
+<li>REST vs GraphQL.</li>
+<li>Server-state vs client-state for forms.</li>
+<li>Build vs buy for auth.</li>
+<li>Stream vs batch for analytics.</li>
+<li>Synchronous vs asynchronous for outgoing emails.</li>
+<li>Polling vs WebSocket vs Server-Sent Events.</li>
+<li>Centralized state vs colocated state.</li>
+<li>Optimistic locking vs pessimistic locking.</li>
+<li>Multi-tenant vs single-tenant.</li>
+</ol>
+<p>If you can’t deliver all 12 cleanly, you have practice to do. Pick
+the three weakest and rehearse them out loud daily until they feel
+automatic.</p>
+</section>
+<section id="common-pitfalls" class="slide level2">
+<h2>12. Common pitfalls</h2>
+<h3 id="naming-axes-you-cant-actually-score-on">12.1. Naming axes you
+can’t actually score on</h3>
+<p>If you say <em>“latency is one axis”</em> and then can’t tell the
+interviewer what the latencies <em>would be</em>, you’ve over-reached.
+<strong>Only name axes you can score.</strong></p>
+<h3 id="forgetting-reversibility">12.2. Forgetting reversibility</h3>
+<p>Every architectural decision has a reversibility cost. <strong>Name
+it.</strong> “If we’re wrong, here’s what migration looks like.” Senior
+signal.</p>
+<h3 id="treating-the-trade-off-as-binary">12.3. Treating the trade-off
+as binary</h3>
+<p>Often the answer is <em>neither</em>, or <em>both with a clear
+seam</em>. <em>“We use SQL for the transactional core and Redis for the
+hot read paths”</em> is a more sophisticated answer than <em>“SQL”</em>
+alone.</p>
+<h3 id="not-bringing-the-ai-into-the-conversation">12.4. Not bringing
+the AI into the conversation</h3>
+<p>If you’re in an AI-permitted interview and you never mentioned AI’s
+role in trade-offs, the panel may wonder if you actually use it.
+<strong>One mention is enough.</strong> <em>“In a real working context
+I’d ask the LLM to surface trade-offs I might have missed — but the
+decision still has to be mine.”</em></p>
+</section>
+<section id="check-yourself-2" class="slide level2">
+<h2>13. CHECK YOURSELF</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Can you list the five-step trade-off
+structure from memory?</label></li>
+<li><label><input type="checkbox" />Can you list the eight axes that
+show up in most trade-off questions?</label></li>
+<li><label><input type="checkbox" />Can you deliver a 60-second
+trade-off answer for any of the 12 rapid-drill questions?</label></li>
+<li><label><input type="checkbox" />Can you handle the “I disagree”
+moment without folding?</label></li>
+<li><label><input type="checkbox" />Can you reframe a too-broad question
+into specific sub-questions?</label></li>
+</ul>
+</section>
+<section id="where-you-are-now-2" class="slide level2">
+<h2>14. Where you are now</h2>
+<p>You can now hold trade-off conversations at the senior and staff
+level — with or without AI in the room. Move on to <strong><a
+href="../chapter-06-behavioral-and-closing/README.md">../chapter-06-behavioral-and-closing/README.md</a></strong>
+— the closing chapter, where we tie everything together with behavioral,
+ethical, and narrative-closing skills.</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^5/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

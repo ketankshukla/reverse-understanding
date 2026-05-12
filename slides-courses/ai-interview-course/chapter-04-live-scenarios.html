@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Chapter 04 Live Scenarios</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {  background-color: #f8f8f8; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ef2929; } /* Alert */
+    code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #204a87; } /* Attribute */
+    code span.bn { color: #0000cf; } /* BaseN */
+    code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4e9a06; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #8f5902; font-style: italic; } /* Comment */
+    code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+    code span.dt { color: #204a87; } /* DataType */
+    code span.dv { color: #0000cf; } /* DecVal */
+    code span.er { color: #a40000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #0000cf; } /* Float */
+    code span.fu { color: #204a87; font-weight: bold; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+    code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+    code span.ot { color: #8f5902; } /* Other */
+    code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+    code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+    code span.ss { color: #4e9a06; } /* SpecialString */
+    code span.st { color: #4e9a06; } /* String */
+    code span.va { color: #000000; } /* Variable */
+    code span.vs { color: #4e9a06; } /* VerbatimString */
+    code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^5/dist/theme/white.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Chapter 04 Live Scenarios</h1>
+</section>
+
+<section>
+<section id="chapter-4-live-coding-and-debug-scenarios"
+class="title-slide slide level1">
+<h1>Chapter 4 — Live Coding and Debug Scenarios</h1>
+<blockquote>
+<p><strong>The interview formats are changing.</strong> “Solve this on a
+whiteboard, no internet” is dying. “Build this with AI, share your
+screen” is the new normal. This chapter teaches you to dominate that
+format.</p>
+</blockquote>
+</section>
+<section id="what-you-will-learn" class="slide level2">
+<h2>What you will learn</h2>
+<ul>
+<li>How to handle the <strong>AI-permitted live coding</strong> format —
+the most common technical interview in 2026.</li>
+<li>How to <strong>debug an AI-generated bug</strong> during an
+interview without panicking.</li>
+<li>How to <strong>review AI output in front of a panel</strong> and
+sound like a senior reviewer.</li>
+</ul>
+<p>By the end of this chapter you will be able to share your screen with
+an interviewer, open Cascade or Cursor or whatever they have you use,
+and do real engineering work in front of them at a confident, deliberate
+pace.</p>
+</section>
+<section id="lessons" class="slide level2">
+<h2>Lessons</h2>
+<ol type="1">
+<li><strong><a
+href="./01-live-pair-programming.md">01-live-pair-programming.md</a></strong>
+— The “build this feature with your AI tool, narrate as you go”
+interview. Pacing, narration, prompt hygiene, and the moments to slow
+down.</li>
+<li><strong><a
+href="./02-debugging-ai-bugs.md">02-debugging-ai-bugs.md</a></strong> —
+A worked example of debugging a bug an LLM introduced. The diagnosis
+flowchart and the verbal script for narrating it.</li>
+<li><strong><a
+href="./03-code-review-of-ai.md">03-code-review-of-ai.md</a></strong> —
+Reviewing AI-generated PRs in front of a panel. The senior checklist
+that catches what juniors miss.</li>
+</ol>
+</section>
+<section id="how-long-it-should-take" class="slide level2">
+<h2>How long it should take</h2>
+<ul>
+<li>30–45 min reading per lesson.</li>
+<li>1–2 hours practice per lesson with a screen-sharing simulation.</li>
+<li>~6 hours total. The practice is the lesson — reading alone is not
+enough.</li>
+</ul>
+</section>
+<section id="why-this-chapter-is-the-most-practical"
+class="slide level2">
+<h2>Why this chapter is the most practical</h2>
+<p>Chapters 1–3 prepare your <em>answers</em>. This chapter prepares
+your <em>behavior under observation</em>. Two-thirds of senior engineers
+who have all the right answers still flub the live format because nobody
+taught them the <strong>micro-behaviors</strong> that signal seniority
+on a shared screen.</p>
+<p>This chapter is those micro-behaviors.</p>
+</section>
+<section id="before-you-start" class="slide level2">
+<h2>Before you start</h2>
+<p>Set up:</p>
+<ul>
+<li>A screen-recording tool (Loom, OBS, even Zoom recording
+yourself).</li>
+<li>An AI coding tool open in an IDE (the one you would actually
+use).</li>
+<li>A throwaway scratch repo to practice in.</li>
+<li>A friend who is willing to pretend-interview you for an hour, twice
+in the next two weeks.</li>
+</ul>
+<p>You will record yourself doing the exercises in each lesson. Watching
+the recording is uncomfortable and necessary.</p>
+<p>Open <strong><a
+href="./01-live-pair-programming.md">01-live-pair-programming.md</a></strong>.</p>
+</section></section>
+<section>
+<section id="lesson-4.1-live-pair-programming-with-ai"
+class="title-slide slide level1">
+<h1>Lesson 4.1 — Live Pair Programming with AI</h1>
+<blockquote>
+<p><strong>Picture it.</strong> You share your screen. The interviewer
+says: <em>“Implement a function that does X. Use whatever tools you
+normally use, including AI. Narrate as you go.”</em> You have 45
+minutes. The interviewer is silent. <strong>What do you do for the first
+60 seconds?</strong></p>
+</blockquote>
+<p>This lesson answers that question.</p>
+<p>By the end:</p>
+<ul>
+<li>You will have a step-by-step playbook for the first five minutes of
+any live AI-permitted coding interview.</li>
+<li>You will know the <strong>narration moves</strong> that signal
+seniority without sounding rehearsed.</li>
+<li>You will know the four <strong>slow-down moments</strong> when speed
+will hurt you.</li>
+<li>You will know how to handle the AI giving you bad output in front of
+a panel without losing composure.</li>
+</ul>
+</section>
+<section id="the-format-you-are-walking-into" class="slide level2">
+<h2>1. The format you are walking into</h2>
+<p>In 2026, technical interviews increasingly come in three new
+flavors:</p>
+<h3 id="ai-permitted-live-coding">1.1. AI-Permitted Live Coding</h3>
+<blockquote>
+<p><em>“Use any tool you want. Narrate.”</em></p>
+</blockquote>
+<p>The interviewer wants to see your <strong>process</strong>, not just
+the answer. They want to know:</p>
+<ul>
+<li>Do you read the problem before prompting?</li>
+<li>Do you write small prompts or large ones?</li>
+<li>Do you read the diff before accepting?</li>
+<li>Do you run the code?</li>
+<li>Can you explain what the AI gave you?</li>
+</ul>
+<p>This is the most common 2026 format. <strong>The rest of this lesson
+is mostly about it.</strong></p>
+<h3 id="ai-forbidden-live-coding">1.2. AI-Forbidden Live Coding</h3>
+<blockquote>
+<p><em>“No AI for this one — just you and the editor.”</em></p>
+</blockquote>
+<p>Less common but increasing again as a counter-trend. The interviewer
+wants a baseline of your unaided coding ability. <strong>Refusing this
+format because “I always use AI” is a red flag.</strong> Be ready for
+both.</p>
+<h3 id="ai-augmented-take-home">1.3. AI-Augmented Take-Home</h3>
+<blockquote>
+<p><em>“Build this small project. AI is fine. Submit a PR within 48
+hours plus a 5-minute Loom walking through your decisions.”</em></p>
+</blockquote>
+<p>The Loom is the interview. Spend twice as much time on the Loom as
+you spend on the code.</p>
+</section>
+<section id="the-first-60-seconds-the-playbook" class="slide level2">
+<h2>2. The first 60 seconds — the playbook</h2>
+<p>When the interviewer goes silent, you do this. Out loud.</p>
+<h3 id="step-1-510-seconds-re-state-the-problem">Step 1 (5–10 seconds):
+Re-state the problem</h3>
+<blockquote>
+<p><em>“OK, so you want a function that takes [input] and returns
+[output], and the constraints are [constraint 1] and [constraint 2]. Did
+I understand correctly?”</em></p>
+</blockquote>
+<p>This buys you thinking time and <strong>forces a clarification before
+you write code.</strong> Half the time the interviewer says “actually,
+also…” and you just dodged a wasted 10 minutes.</p>
+<h3 id="step-2-1020-seconds-ask-one-or-two-clarifying-questions">Step 2
+(10–20 seconds): Ask one or two clarifying questions</h3>
+<p>Pick ones that change the design.</p>
+<blockquote>
+<p><em>“Should this handle the empty input case as zero or as an
+error?”</em></p>
+<p><em>“Should I prioritize readability or performance for this
+scale?”</em></p>
+<p><em>“Are there existing patterns in the codebase I should follow, or
+is this a greenfield decision?”</em></p>
+</blockquote>
+<p>The questions matter less than the <strong>fact</strong> that you
+asked. Junior candidates start typing in 5 seconds. Seniors talk for 30
+seconds before any code happens.</p>
+<h3 id="step-3-2040-seconds-state-your-approach-in-plain-english">Step 3
+(20–40 seconds): State your approach in plain English</h3>
+<blockquote>
+<p><em>“My plan is: define the type first, then write a pure function
+that handles the happy path, then add the edge cases I just asked about,
+then write three unit tests covering those cases.”</em></p>
+</blockquote>
+<p>You are essentially <strong>writing the prompt structure out
+loud</strong> before opening the AI panel. The interviewer immediately
+sees: this person thinks in structure.</p>
+<h3
+id="step-4-4060-seconds-open-the-ai-tool-write-the-first-prompt-deliberately">Step
+4 (40–60 seconds): Open the AI tool, write the first prompt
+deliberately</h3>
+<p>Do not paste. Type. Out loud, narrate the components from Lesson
+3.1:</p>
+<blockquote>
+<p><em>“OK, my prompt: ‘Define a TypeScript interface for [thing].
+Strict — no any. Add a comment explaining the invariant about
+[whatever]. Single file. No tests yet.’”</em></p>
+</blockquote>
+<p>The interviewer sees you naming components like <em>strict</em>,
+<em>invariant</em>, <em>single file</em>, <em>no tests yet</em>. Each
+phrase is a senior signal.</p>
+<p><strong>Press Enter at the 60-second mark.</strong> Now you are
+coding.</p>
+</section>
+<section id="the-narration-framework-three-rhythms"
+class="slide level2">
+<h2>3. The narration framework — three rhythms</h2>
+<p>You will narrate for the entire interview. Three rhythms work;
+everything else sounds like a podcast or a panic.</p>
+<h3 id="the-pre-prompt-narration">3.1. The pre-prompt narration</h3>
+<p>Before each prompt, narrate what you are about to ask and why.</p>
+<blockquote>
+<p><em>“Now I want to add a render function. I’ll prompt for it
+explicitly — I’ll keep it small and tell it not to add tests yet, I’ll
+write those myself.”</em></p>
+</blockquote>
+<p>Time: ~5 seconds. Frequency: every prompt.</p>
+<h3 id="the-diff-review-narration">3.2. The diff-review narration</h3>
+<p>When the AI returns output, narrate as you read.</p>
+<blockquote>
+<p><em>“OK, it added the function. The signature looks right. The body…
+iterates the array, accumulates… yep, that handles the happy path. But
+it does not handle the empty input case I asked about. I will reject
+this and re-prompt.”</em></p>
+</blockquote>
+<p>Time: 10–30 seconds. Frequency: every diff.</p>
+<p>This is the most senior-coded behavior in the entire interview.
+<strong>You read AI output out loud, criticize it, and decide.</strong>
+That is engineering judgment on display.</p>
+<h3 id="the-decision-narration">3.3. The decision narration</h3>
+<p>When you make a design choice, narrate it.</p>
+<blockquote>
+<p><em>“I have two options here: keep the helper inline or extract it.
+It’s only used once. I’ll keep it inline for now — I will extract if a
+second use case appears.”</em></p>
+</blockquote>
+<p>Time: 5–15 seconds. Frequency: ~once every five minutes.</p>
+<p>These are the moments interviewers note for the hiring committee.
+Decisions, narrated, with reasons.</p>
+</section>
+<section id="pacing-the-four-slow-down-moments" class="slide level2">
+<h2>4. Pacing — the four slow-down moments</h2>
+<p>Most candidates rush. The four moments where slowing down will help
+you, not hurt you:</p>
+<h3 id="after-the-prompt-produces-output">4.1. After the prompt produces
+output</h3>
+<p>Read it line by line. Out loud. Two of three candidates skim and
+accept; you read and verify. <strong>The interviewer’s notes will
+reflect that.</strong></p>
+<h3 id="before-accepting-a-refactor">4.2. Before accepting a
+refactor</h3>
+<p>If the AI is changing existing code, <em>always</em> slow down.
+<em>“Let me read the diff before I accept.”</em> The interviewer hears:
+this person catches accidental changes. Senior signal.</p>
+<h3 id="right-before-you-say-i-think-we-are-done">4.3. Right before you
+say “I think we are done”</h3>
+<p>Take 30 seconds. Re-read the requirement. Walk through one input
+mentally. <strong>Catch one off-by-one or null-handling miss before the
+interviewer does.</strong> Often the difference between an offer and a
+“not quite this round.”</p>
+<h3 id="when-the-interviewer-says-hmm">4.4. When the interviewer says
+“Hmm…”</h3>
+<p>If the interviewer makes a hesitant noise, <strong>stop
+typing</strong>. Look up. Say: <em>“You sound like you might be seeing
+something. Want to share?”</em> This converts a potential pothole into a
+teaching moment for them and survives many close calls.</p>
+</section>
+<section id="prompt-hygiene-under-observation" class="slide level2">
+<h2>5. Prompt hygiene under observation</h2>
+<p>In the calm of your home you write good prompts. Under observation,
+you regress. Two specific failure modes:</p>
+<h3 id="the-do-everything-panic-prompt">5.1. The “do everything” panic
+prompt</h3>
+<p>Under stress, candidates write:</p>
+<blockquote>
+<p><em>“Build me a function that handles all the cases including edge
+cases and add tests and documentation and make it efficient.”</em></p>
+</blockquote>
+<p>That is four prompts mashed into one. The model gives mediocre output
+across all four. <strong>Force yourself to keep prompts small even —
+especially — under stress.</strong></p>
+<h3 id="the-skip-the-constraint-speed-prompt">5.2. The “skip the
+constraint” speed-prompt</h3>
+<p>You skip the constraints because you want to move fast. The output
+sprawls. You spend 10 minutes cleaning up. <strong>Net
+negative.</strong></p>
+<h3 id="the-fix">5.3. The fix</h3>
+<p>Before each prompt under observation, count to three in your head.
+<em>“Three. Two. One.”</em> Three seconds of breathing space between
+thinking and typing. <strong>It feels long. It is fast.</strong></p>
+</section>
+<section id="handling-bad-ai-output-in-front-of-a-panel"
+class="slide level2">
+<h2>6. Handling bad AI output in front of a panel</h2>
+<p>The AI will, occasionally, give you bad output during the interview.
+The interviewer is watching how you handle it. <strong>This is a feature
+of the interview, not a bug.</strong></p>
+<h3 id="what-not-to-do">What NOT to do</h3>
+<ul>
+<li>Apologize for the AI. <em>“Sorry, the AI is being weird.”</em>
+Sounds like deflection.</li>
+<li>Argue with the AI. <em>“No, I told you not to…”</em> — pointless on
+screen.</li>
+<li>Panic-accept. The diff is wrong but you accept it because you do not
+know what to do.</li>
+<li>Switch to typing it yourself silently. The narration died; the
+interviewer is now staring at your hands.</li>
+</ul>
+<h3 id="what-to-do">What to do</h3>
+<ol type="1">
+<li>Pause. <em>“OK, this is not what I asked for.”</em></li>
+<li>Diagnose out loud. <em>“It overshot — refactored the parent. I will
+reject this and re-prompt with explicit scope.”</em></li>
+<li>Re-prompt. Narrate the new prompt’s added constraint.</li>
+<li>Move on.</li>
+</ol>
+<p><strong>The recovery is the demonstration.</strong> A panel watching
+a candidate handle bad AI output cleanly is more impressed than a panel
+watching a candidate get clean AI output on the first try. Mastery is
+recoverability.</p>
+</section>
+<section
+id="the-you-have-45-minutes-build-a-small-feature-worked-example"
+class="slide level2">
+<h2>7. The “you have 45 minutes, build a small feature” worked
+example</h2>
+<p>Pretend the interviewer says:</p>
+<blockquote>
+<p><em>“Build a function that takes a list of users and returns the top
+3 by signup recency, only including users who have verified emails. Plus
+three tests. You have 45 minutes.”</em></p>
+</blockquote>
+<p>A senior approach, narrated:</p>
+<h3 id="minute-000100-re-state-and-clarify">Minute 0:00–1:00 — Re-state
+and clarify</h3>
+<blockquote>
+<p><em>“So I need a function: input is a list of users, output is the
+top 3 by signup recency, filtering out unverified. Two questions: how is
+signup recency stored — timestamp, ISO string, Date? And if there are
+fewer than 3 verified users, do I return what I have or throw?”</em></p>
+</blockquote>
+<p>Interviewer: <em>“ISO string. Return what you have.”</em></p>
+<h3 id="minute-100300-plan-and-type-definition">Minute 1:00–3:00 — Plan
+and type definition</h3>
+<p>Open AI. Type:</p>
+<blockquote>
+<p><em>“Generate a TypeScript interface for User with id (string), email
+(string), signupAt (ISO string), emailVerified (boolean). Strict mode.
+Single file. No tests.”</em></p>
+</blockquote>
+<p>Read the diff. Accept. Narrate that you accepted because the shape is
+exactly what you specified.</p>
+<h3 id="minute-3001000-pure-function">Minute 3:00–10:00 — Pure
+function</h3>
+<p>Prompt:</p>
+<blockquote>
+<p><em>“Write a pure function getTopRecentVerifiedUsers(users: User[],
+limit: number): User[]. Filters to emailVerified === true, sorts by
+signupAt descending (parse ISO string with Date.parse), returns the
+first <code>limit</code>. If fewer than <code>limit</code> qualify,
+return what we have. Single file. No tests yet.”</em></p>
+</blockquote>
+<p>Read the diff. Spot something — say, the AI used
+<code>new Date()</code> and could have used <code>Date.parse()</code>.
+Decide: not worth the round-trip; both are correct. Accept and narrate
+the decision.</p>
+<h3 id="minute-10001700-tests">Minute 10:00–17:00 — Tests</h3>
+<p>Prompt:</p>
+<blockquote>
+<p><em>“Write three Vitest tests for getTopRecentVerifiedUsers. Cases:
+(1) returns 3 users sorted newest-first when 5 verified candidates
+exist; (2) returns only 2 when only 2 verified candidates exist; (3)
+returns empty array when input is empty. Use describe/it. One assertion
+each.”</em></p>
+</blockquote>
+<p>Run the tests. Two pass, one fails. Look at the failure.</p>
+<h3 id="minute-17002500-debug">Minute 17:00–25:00 — Debug</h3>
+<p>The failing test: returns 3 users newest-first. Debug. The output is
+correct in count but the order is <em>oldest-first</em>. Look at the
+function. The sort is wrong direction.</p>
+<p>Narrate:</p>
+<blockquote>
+<p><em>“OK, the AI sorted ascending instead of descending. I’ll patch
+the comparator. One-line fix.”</em></p>
+</blockquote>
+<p>Edit yourself. Re-run. All green.</p>
+<h3 id="minute-25003500-hardening">Minute 25:00–35:00 — Hardening</h3>
+<p>Run a tooth-comb pass:</p>
+<ul>
+<li><em>“What if signupAt is malformed?”</em> — add a guard.</li>
+<li><em>“What if limit is 0 or negative?”</em> — add a guard, or
+document that it returns empty.</li>
+<li><em>“What if users have duplicate signupAt timestamps?”</em> — note
+that JS sort is stable, so existing order wins. Mention it; do not
+change.</li>
+</ul>
+<p>Each guard is a 30-second narration. The interviewer is watching you
+raise the bar yourself.</p>
+<h3 id="minute-35004500-trade-offs">Minute 35:00–45:00 — Trade-offs</h3>
+<p>Stop typing. Narrate:</p>
+<blockquote>
+<p><em>“With time left, here are three things I would want to discuss
+before shipping this. One, performance — if <code>users</code> is large,
+the .filter().sort().slice() is O(n log n); for large n we could use a
+partial sort, but I would benchmark first. Two, testability — the
+function uses Date.parse, which depends on locale; for production I
+would inject a clock or a parser. Three, naming —
+<code>getTopRecentVerifiedUsers</code> is descriptive but long; in a
+real codebase I might check naming conventions.”</em></p>
+</blockquote>
+<p>That ten minutes is <strong>the part that gets you the
+offer.</strong> Most candidates ship the function and stop. You ship the
+function and <em>then talk about what you would do next</em>.</p>
+</section>
+<section id="the-i-have-not-heard-them-speak-in-10-minutes-awkwardness"
+class="slide level2">
+<h2>8. The “I have not heard them speak in 10 minutes” awkwardness</h2>
+<p>Common in remote interviews. The interviewer goes silent. You wonder
+if they’re judging you. Resist the urge to fill the silence with random
+chatter.</p>
+<h3 id="two-tools">Two tools</h3>
+<p><strong>Checkpoint questions, every 5 minutes.</strong></p>
+<blockquote>
+<p><em>“OK, before I move on — does this approach feel right to you, or
+would you want to see something different?”</em></p>
+</blockquote>
+<p><strong>Verbal labels for your steps.</strong></p>
+<blockquote>
+<p><em>“Now moving on to tests. I’ll write three.”</em></p>
+</blockquote>
+<p>Both keep them oriented and signal that you are aware of pacing.</p>
+</section>
+<section id="the-closing-60-seconds" class="slide level2">
+<h2>9. The closing 60 seconds</h2>
+<p>When time is up — or when you think you’re done — say something
+like:</p>
+<blockquote>
+<p><em>“OK, I think this is a good stopping point. Quick summary: I
+built [function], tested it for [cases], and identified [N] things I’d
+want to address before shipping. The biggest of those is [one]. Want me
+to dig into any part of this?”</em></p>
+</blockquote>
+<p>That summary:</p>
+<ul>
+<li>Confirms what you finished.</li>
+<li>Shows you know what was <em>not</em> finished and what should be
+next.</li>
+<li>Hands the floor back to them with a specific question.</li>
+</ul>
+<p><strong>It is the closing senior move of any technical
+interview.</strong></p>
+</section>
+<section id="the-ten-item-live-coding-checklist" class="slide level2">
+<h2>10. The ten-item live-coding checklist</h2>
+<p>Print this. Stick it next to your monitor for practice sessions.</p>
+<ul class="task-list">
+<li><label><input type="checkbox" />Re-state the problem before
+typing.</label></li>
+<li><label><input type="checkbox" />Ask 1–2 clarifying
+questions.</label></li>
+<li><label><input type="checkbox" />State your approach in plain
+English.</label></li>
+<li><label><input type="checkbox" />Write a strict, scoped first
+prompt.</label></li>
+<li><label><input type="checkbox" />Read every diff out loud before
+accepting.</label></li>
+<li><label><input type="checkbox" />Reject any output that overshoots
+scope.</label></li>
+<li><label><input type="checkbox" />Run the code; do not trust the AI’s
+claim that it works.</label></li>
+<li><label><input type="checkbox" />Test the actual edge cases the spec
+named.</label></li>
+<li><label><input type="checkbox" />Spend the last 10 minutes on
+hardening and trade-offs.</label></li>
+<li><label><input type="checkbox" />Close with a 30-second
+summary.</label></li>
+</ul>
+<p><strong>Practice with this checklist visible until each item is
+automatic.</strong></p>
+</section>
+<section id="practice-exercise-record-three-interviews"
+class="slide level2">
+<h2>11. Practice exercise — record three interviews</h2>
+<p>The single highest-ROI thing in this chapter is recording
+yourself.</p>
+<ol type="1">
+<li>Pick three small problems (find any LeetCode “easy” problem set, or
+use the snooker-app refactors from Chapter 7 of the React course).</li>
+<li>Solve each one under timed conditions, screen-recording,
+narrating.</li>
+<li>Watch the recording back at 1.5x.</li>
+</ol>
+<p>You will spot:</p>
+<ul>
+<li>Filler words you did not know you used.</li>
+<li>Long silences that felt fine in the moment.</li>
+<li>Prompts that were vaguer than you remembered.</li>
+<li>Diffs you accepted without reading carefully.</li>
+</ul>
+<p><strong>One week of this beats six weeks of reading.</strong></p>
+</section>
+<section id="common-pitfalls" class="slide level2">
+<h2>12. Common pitfalls</h2>
+<h3 id="over-narration">12.1. Over-narration</h3>
+<p>Talking nonstop. The interviewer cannot think. <strong>Pause every
+30–60 seconds</strong>. Silence is allowed.</p>
+<h3 id="under-narration">12.2. Under-narration</h3>
+<p>Typing silently. The interviewer cannot read your process.
+<strong>Default to narrating each prompt and each diff
+review.</strong></p>
+<h3 id="selling-the-ai-instead-of-yourself">12.3. Selling the AI instead
+of yourself</h3>
+<p>Saying things like <em>“watch how fast this is with AI”</em>. The
+interview is about you, not the tool. <strong>Talk about your decisions;
+the AI is in the background.</strong></p>
+<h3 id="hiding-the-ai">12.4. Hiding the AI</h3>
+<p>Some candidates open the AI panel offscreen and quietly use it.
+<strong>The interviewer notices.</strong> Be visible. The AI is part of
+your toolset; do not be secretive.</p>
+</section>
+<section id="check-yourself" class="slide level2">
+<h2>13. CHECK YOURSELF</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Can you list the four steps of the
+first 60 seconds from memory?</label></li>
+<li><label><input type="checkbox" />Can you list the three narration
+rhythms?</label></li>
+<li><label><input type="checkbox" />Can you list the four slow-down
+moments?</label></li>
+<li><label><input type="checkbox" />Have you recorded yourself solving
+at least one timed problem?</label></li>
+<li><label><input type="checkbox" />Can you handle a deliberately bad AI
+diff cleanly without panic?</label></li>
+</ul>
+</section>
+<section id="where-you-are-now" class="slide level2">
+<h2>14. Where you are now</h2>
+<p>You have the playbook for the most common technical interview format
+of 2026. Move on to <strong><a
+href="./02-debugging-ai-bugs.md">02-debugging-ai-bugs.md</a></strong> —
+the second-most-common format, where the interviewer hands you broken
+AI-generated code and watches how you fix it.</p>
+</section></section>
+<section>
+<section id="lesson-4.2-debugging-ai-generated-bugs"
+class="title-slide slide level1">
+<h1>Lesson 4.2 — Debugging AI-Generated Bugs</h1>
+<blockquote>
+<p><strong>A new interview format: the panel hands you broken code that
+“the AI generated” and asks you to fix it.</strong> What they are
+testing is not your debugging skill in isolation. They are testing
+whether you can <strong>recognize the failure modes specific to AI
+output</strong> — the patterns that human-written code rarely produces
+but AI-written code produces constantly.</p>
+</blockquote>
+<p>By the end of this lesson:</p>
+<ul>
+<li>You will have a four-step diagnosis flowchart for AI-generated
+bugs.</li>
+<li>You will know the seven failure-mode signatures most common in AI
+output.</li>
+<li>You will have a verbal script for narrating debugging without
+sounding lost.</li>
+<li>You will have a worked example you can reference when you blank
+under pressure.</li>
+</ul>
+</section>
+<section id="why-this-format-exists" class="slide level2">
+<h2>1. Why this format exists</h2>
+<p>Interviewers got tired of the “AI assists candidates too much during
+live coding” complaint and pivoted. The new format flips it:</p>
+<blockquote>
+<p><em>“Here is some code an LLM produced. There is a bug. Fix it. You
+can use AI tools — or not. Walk me through your process.”</em></p>
+</blockquote>
+<p>What they want to see:</p>
+<ul>
+<li>Do you read the code before guessing?</li>
+<li>Do you have a hypothesis before running anything?</li>
+<li>Do you spot AI-specific failure patterns faster than human-bug
+patterns?</li>
+<li>Can you tell when re-prompting will help vs when you need to fix it
+yourself?</li>
+</ul>
+<p>This format will show up in roughly one out of three senior technical
+interviews in 2026. <strong>Treat it as a separate format with its own
+playbook.</strong></p>
+</section>
+<section id="the-four-step-diagnosis-flowchart" class="slide level2">
+<h2>2. The four-step diagnosis flowchart</h2>
+<p>Every time. Out loud. In this order.</p>
+<pre><code>┌───────────────────────────────────────────┐
+│ 1. READ — what does the code say it does? │
+└────────────────┬──────────────────────────┘
+                 │
+┌────────────────▼──────────────────────────┐
+│ 2. RUN — what does it actually do?        │
+└────────────────┬──────────────────────────┘
+                 │
+┌────────────────▼──────────────────────────┐
+│ 3. DIFF — where do (1) and (2) diverge?   │
+└────────────────┬──────────────────────────┘
+                 │
+┌────────────────▼──────────────────────────┐
+│ 4. CLASSIFY — is this a human-style or    │
+│    an AI-style failure?                   │
+└───────────────────────────────────────────┘</code></pre>
+<p>The first three steps work on any bug. The fourth step is what makes
+you fast on AI-generated bugs specifically.</p>
+</section>
+<section id="the-seven-ai-specific-failure-mode-signatures"
+class="slide level2">
+<h2>3. The seven AI-specific failure-mode signatures</h2>
+<p>Memorize these. When you see one, name it out loud. The interviewer
+will note that you recognized it.</p>
+<h3 id="the-plausible-but-fabricated-api">3.1. The
+plausible-but-fabricated API</h3>
+<p>The code calls a method that does not exist. Or it calls a method
+with the wrong parameter order. Or it imports a function from a module
+that exports something almost-but-not-quite the same name.</p>
+<p><strong>Signature:</strong> the call looks reasonable; the IDE
+underlines it red; the import is from a real module but to a wrong
+export.</p>
+<blockquote>
+<p><em>Spotting move:</em> “Let me check that this import actually
+exists in the package…”</p>
+</blockquote>
+<h3 id="the-off-by-one-in-array-logic">3.2. The off-by-one in array
+logic</h3>
+<p>AI is uneven on array boundary conditions. It will write
+<code>for (let i = 0; i &lt;= arr.length; i++)</code> or
+<code>arr.slice(0, n - 1)</code> when you wanted
+<code>slice(0, n)</code>. Often the test for the happy path passes, and
+the boundary fails.</p>
+<p><strong>Signature:</strong> loops or slices that work for length 5
+and fail for length 1 or empty.</p>
+<blockquote>
+<p><em>Spotting move:</em> “Let me trace this with an empty input…”</p>
+</blockquote>
+<h3 id="the-fixed-test">3.3. The “fixed” test</h3>
+<p>The test was failing. The AI made it pass — by changing the
+assertion, not the implementation. Tests are now green; behavior is
+still wrong.</p>
+<p><strong>Signature:</strong> the test’s expected value matches the
+implementation’s actual buggy output, often via a recent diff.</p>
+<blockquote>
+<p><em>Spotting move:</em> “Wait — let me look at what the test was
+originally asserting…”</p>
+</blockquote>
+<h3 id="the-almost-correct-regex-sql-glob">3.4. The “almost-correct”
+regex / SQL / glob</h3>
+<p>AI is excellent at producing regexes and SQL that look right and
+silently mismatch. Common: a regex that allows or rejects one extra
+character; an SQL JOIN that should be LEFT JOIN; a glob that matches
+<code>*.tsx</code> when the codebase has <code>.ts</code> and
+<code>.tsx</code> mixed.</p>
+<p><strong>Signature:</strong> test data passes, real data fails on one
+specific case.</p>
+<blockquote>
+<p><em>Spotting move:</em> “Let me run this regex against five concrete
+examples…”</p>
+</blockquote>
+<h3 id="the-deprecated-pattern">3.5. The deprecated pattern</h3>
+<p>The code uses an API that was correct in 2022 and incorrect now.
+Common in fast-moving frameworks: Next.js <code>pages/</code> patterns
+in an App Router project, React <code>componentWillMount</code>,
+deprecated Node APIs.</p>
+<p><strong>Signature:</strong> the code works but the linter or
+framework warns; or it works in dev but fails in production.</p>
+<blockquote>
+<p><em>Spotting move:</em> “Is this still the recommended pattern in
+current [framework]?”</p>
+</blockquote>
+<h3 id="the-silently-swallowed-error">3.6. The silently-swallowed
+error</h3>
+<p>AI loves <code>try { ... } catch (e) {}</code> for any operation that
+could throw. The error gets swallowed. The bug surfaces three layers
+downstream as a confused null.</p>
+<p><strong>Signature:</strong> something fails upstream silently; you
+find a bare catch block far from the failure.</p>
+<blockquote>
+<p><em>Spotting move:</em> “Let me grep for empty catch blocks in this
+file…”</p>
+</blockquote>
+<h3 id="the-unintended-state-mutation">3.7. The unintended state
+mutation</h3>
+<p>AI sometimes mutates objects passed in as arguments instead of
+returning new ones. Real-world bug: a Redux reducer that mutates state,
+breaking React’s diff detection.</p>
+<p><strong>Signature:</strong> state appears not to update in the UI, or
+undo/redo behaves strangely.</p>
+<blockquote>
+<p><em>Spotting move:</em> “Is this function mutating its input or
+returning new state?”</p>
+</blockquote>
+</section>
+<section id="the-verbal-script" class="slide level2">
+<h2>4. The verbal script</h2>
+<p>When debugging out loud, follow this structure:</p>
+<h3 id="the-first-sentence-declare-what-you-are-doing">4.1. The first
+sentence — declare what you are doing</h3>
+<blockquote>
+<p><em>“OK, before I run anything, let me read what the code says it
+does.”</em></p>
+</blockquote>
+<p>This is a planted flag. The interviewer notes: this person reads
+first.</p>
+<h3 id="the-hypothesis-out-loud">4.2. The hypothesis — out loud</h3>
+<p>After reading, before running:</p>
+<blockquote>
+<p><em>“My first hypothesis is that the issue is in [specific line]. I
+think it is [specific failure mode]. Let me confirm.”</em></p>
+</blockquote>
+<p>Even a wrong hypothesis is valuable. <strong>A wrong hypothesis
+tested in 30 seconds is faster than five minutes of
+staring.</strong></p>
+<h3 id="the-confirmation-run-a-tiny-experiment">4.3. The confirmation —
+run a tiny experiment</h3>
+<blockquote>
+<p><em>“Quickest way to test that — call the function with [specific
+input], observe [specific output].”</em></p>
+</blockquote>
+<p>Run. Read result. Either:</p>
+<blockquote>
+<p><em>“Confirmed. Now I can fix it.”</em></p>
+</blockquote>
+<p>Or:</p>
+<blockquote>
+<p><em>“Refuted. Hypothesis updated — let me check [next
+thing].”</em></p>
+</blockquote>
+<h3 id="the-fix-narrate-the-choice">4.4. The fix — narrate the
+choice</h3>
+<p>When you find the bug, do not jump to the fix. Pause.</p>
+<blockquote>
+<p><em>“Two ways to fix this: [A] or [B]. A is the smaller change but it
+does not handle [edge case]. B is bigger but more correct. I’ll go with
+B and explain the trade-off.”</em></p>
+</blockquote>
+<p>That moment is worth 10 minutes of clean coding. <strong>Fix
+narration is where seniority shows.</strong></p>
+</section>
+<section id="the-fully-worked-example" class="slide level2">
+<h2>5. The fully worked example</h2>
+<p>Pretend the interviewer hands you this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// lib/scoring.ts</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">calculateTeamScore</span>(picks<span class="op">:</span> <span class="dt">string</span>[]<span class="op">,</span> winners<span class="op">:</span> <span class="dt">string</span>[])<span class="op">:</span> <span class="dt">number</span> {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> score <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> picks<span class="op">.</span><span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) {</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (picks[i] <span class="op">===</span> winners[i]) {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      score <span class="op">+=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      score <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> score<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>And the failing test:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">test</span>(<span class="st">&#39;returns 6 when 2 of 3 picks are correct&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect</span>(<span class="fu">calculateTeamScore</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    [<span class="st">&#39;A&#39;</span><span class="op">,</span> <span class="st">&#39;B&#39;</span><span class="op">,</span> <span class="st">&#39;C&#39;</span>]<span class="op">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    [<span class="st">&#39;A&#39;</span><span class="op">,</span> <span class="st">&#39;X&#39;</span><span class="op">,</span> <span class="st">&#39;C&#39;</span>]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  ))<span class="op">.</span><span class="fu">toBe</span>(<span class="dv">7</span>)<span class="op">;</span> <span class="co">// got 8</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<p>Walk this step-by-step.</p>
+<h3 id="step-1-read">Step 1 — Read</h3>
+<blockquote>
+<p><em>“OK, the function takes picks and winners arrays, iterates with
+<code>i = 0; i &lt;= picks.length</code>, and adds 3 for matches, 1
+otherwise. Returns total.”</em></p>
+</blockquote>
+<p>Already, your reading should make you twitch. The <code>&lt;=</code>
+is suspicious.</p>
+<h3 id="step-2-hypothesis-plant-the-flag">Step 2 — Hypothesis (plant the
+flag)</h3>
+<blockquote>
+<p><em>“My first hypothesis: the loop condition is <code>&lt;=</code>
+instead of <code>&lt;</code>. That’s an off-by-one. It runs one extra
+iteration where both <code>picks[i]</code> and <code>winners[i]</code>
+are undefined, undefined === undefined is true, so it adds 3. Test
+expects 7, got 8. The 8 = 2 correct + 1 wrong + 1 phantom ‘correct’ from
+the off-by-one. Hypothesis matches.”</em></p>
+</blockquote>
+<h3 id="step-3-confirm">Step 3 — Confirm</h3>
+<blockquote>
+<p><em>“Let me confirm — running the test mentally: i=0, A===A, +3. i=1,
+B===X, +1. i=2, C===C, +3. i=3, undefined===undefined, +3. Total: 10.
+But the test says 8. So my hypothesis is wrong about the
+magnitude.”</em></p>
+</blockquote>
+<p>You realize the math doesn’t add up. Drop the hypothesis.
+Re-read.</p>
+<blockquote>
+<p><em>“Wait. The off-by-one would also break the ‘else’ branch. Looking
+again at the algorithm: 3 for correct, 1 for wrong. Test expects 7 =
+3+1+3. Got 8. Difference of 1. So either we’re double-counting one match
+or we’re under-counting one wrong. Off-by-one would add 3, making it 10,
+not 8.”</em></p>
+</blockquote>
+<p>Now you actually have to think.</p>
+<h3 id="step-4-re-read-more-carefully">Step 4 — Re-read more
+carefully</h3>
+<blockquote>
+<p><em>“OK — the loop condition runs i = 0, 1, 2, 3. At i=3, picks[3]
+and winners[3] are both undefined. The condition
+<code>picks[i] === winners[i]</code> is undefined === undefined ===
+true, so we add 3. That should give us 10, not 8. So either I’m
+misreading or the test framework cuts something off…”</em></p>
+</blockquote>
+<p>You actually run it. The answer: 10. The test message in the prompt
+was a typo from the interviewer or a deliberate misdirection.
+<strong>You catch it.</strong></p>
+<blockquote>
+<p><em>“Actually I think the test message has the wrong actual — running
+it gives 10. The test expects 7 and gets 10, not 8 as the message
+claims. The bug is real, just bigger than the message
+suggested.”</em></p>
+</blockquote>
+<p>That moment is <strong>gold</strong>. The interviewer just saw you
+trust the code over the prose. Senior signal.</p>
+<h3 id="step-5-fix-and-narrate">Step 5 — Fix and narrate</h3>
+<blockquote>
+<p><em>“Two options for the fix. [A] Change <code>&lt;=</code> to
+<code>&lt;</code>. [B] Add a length-equality precondition with a thrown
+error. A is the minimum fix. B is more defensive but assumes the caller
+might pass mismatched arrays. The function’s contract isn’t documented,
+so I’ll do A and add a comment that the caller is responsible for
+matched lengths.”</em></p>
+</blockquote>
+<p>Apply the fix. Re-run the test. Passes. Done.</p>
+<h3 id="what-just-happened">What just happened</h3>
+<p>You demonstrated:</p>
+<ul>
+<li>Reading first.</li>
+<li>Hypothesis-driven debugging.</li>
+<li>The discipline to drop a wrong hypothesis without ego.</li>
+<li>Distrust of the surrounding prose; trust of the running code.</li>
+<li>Trade-off narration on the fix.</li>
+</ul>
+<p><strong>One ten-minute exercise. All seven of those signals. Practice
+it.</strong></p>
+</section>
+<section id="re-prompting-vs-fixing-yourself" class="slide level2">
+<h2>6. Re-prompting vs fixing yourself</h2>
+<p>When the interviewer asks “would you re-prompt or fix this yourself?”
+the answer is structural.</p>
+<h3 id="re-prompt-when">Re-prompt when</h3>
+<ul>
+<li>The bug requires a structural change you do not want to make
+manually.</li>
+<li>The diff would be larger than what is reasonable to type by
+hand.</li>
+<li>The original prompt was missing a constraint and adding it would fix
+the issue cleanly.</li>
+<li>You are short on time and the AI’s pattern-matching beats your
+typing.</li>
+</ul>
+<h3 id="fix-yourself-when">Fix yourself when</h3>
+<ul>
+<li>The bug is a single character / single line.</li>
+<li>The bug is in code the AI keeps re-introducing despite your
+prompts.</li>
+<li>You need to ensure no surrounding code changes (high blast
+radius).</li>
+<li>You can explain the fix faster than you can write a precise prompt
+for it.</li>
+</ul>
+<h3 id="the-interview-soundbite">The interview soundbite</h3>
+<blockquote>
+<p><em>“My rule: re-prompt for structural changes I would otherwise have
+to think hard about. Fix manually for one-character bugs and for
+high-blast-radius code where I need precision. The rule is not ‘always
+one or the other’; it is ‘use the right tool for the change size and
+blast radius.’”</em></p>
+</blockquote>
+<p>That is the senior answer.</p>
+</section>
+<section id="the-the-ai-introduced-this-regression-interview-question"
+class="slide level2">
+<h2>7. The “the AI introduced this regression” interview question</h2>
+<p>Variant question:</p>
+<blockquote>
+<p><em>“Walk me through what you do when you discover the AI’s recent
+change broke something.”</em></p>
+</blockquote>
+<p>Have a structured answer:</p>
+<blockquote>
+<p><em>“Three steps. First, I confirm it was the AI’s change — git blame
+the broken line. If it lands on an AI-assisted commit, I have my prime
+suspect. Second, I read the diff that introduced it. Two-thirds of the
+time the diff did more than I asked it to and the regression is in the
+bonus work. Third, I either revert and re-prompt with stronger
+constraints, or I patch surgically and write a regression test so the
+same diff cannot reappear. I always end with the regression test — the
+test is what stops the cycle.”</em></p>
+</blockquote>
+<p>Memorize this. <strong>Drill it.</strong></p>
+</section>
+<section id="the-dangers-of-ai-debugging-an-ai-bug"
+class="slide level2">
+<h2>8. The dangers of AI-debugging an AI bug</h2>
+<p>You can ask the AI to fix a bug it introduced. <strong>Sometimes that
+works. Sometimes it makes things worse.</strong> The failure mode is the
+AI doubling down on a pattern it already got wrong.</p>
+<h3 id="when-ai-debugging-works">When AI-debugging works</h3>
+<ul>
+<li>You give the AI new information it did not have. (“Here is the
+failing test message: …”)</li>
+<li>You give it a tight scope. (“Patch only the loop condition in
+lib/scoring.ts.”)</li>
+<li>You explicitly tell it to revert its previous attempt and start
+over.</li>
+</ul>
+<h3 id="when-ai-debugging-fails">When AI-debugging fails</h3>
+<ul>
+<li>You vaguely ask “fix it” — the AI guesses, often the same way as
+before.</li>
+<li>You forgot to mention what’s wrong. The AI sees green tests and
+thinks you are confused.</li>
+<li>You let the AI keep iterating without verifying each iteration.</li>
+</ul>
+<h3 id="the-trick">The trick</h3>
+<p>When using AI to debug AI, <strong>inject doubt</strong>:</p>
+<blockquote>
+<p><em>“Your last response had a bug. The bug was [specific behavior].
+Acknowledge that the previous diff was wrong before producing a new one.
+Show me where you went wrong.”</em></p>
+</blockquote>
+<p>That phrasing prevents the model from confidently re-asserting its
+previous attempt.</p>
+</section>
+<section id="the-what-would-you-log-follow-up" class="slide level2">
+<h2>9. The “what would you log?” follow-up</h2>
+<p>After you fix a bug in a debugging interview, the interviewer will
+often ask:</p>
+<blockquote>
+<p><em>“What logging would you add to make sure this does not regress
+silently?”</em></p>
+</blockquote>
+<p>Have a tiered answer:</p>
+<blockquote>
+<p><em>“Three layers. First, a unit test that exercises the failing case
+— that is the regression guard. Second, a runtime invariant — assert
+that picks.length === winners.length, throw if not, with a useful error
+message. Third, a metric — count the number of times this function is
+called with mismatched arrays in production. If the metric is zero for a
+month, I can remove the assertion. If it is non-zero, I have a real
+signal that callers are doing something I assumed they were
+not.”</em></p>
+</blockquote>
+<p>That is <strong>observability thinking</strong>, layered, and
+pragmatic. Drill it.</p>
+</section>
+<section id="practice-exercises" class="slide level2">
+<h2>10. Practice exercises</h2>
+<h3 id="the-seven-signature-drill">10.1. The seven-signature drill</h3>
+<p>Take a working file from your codebase. Have a friend introduce one
+of the seven failure modes from section 3 (without telling you which).
+Time yourself debugging. Repeat with each of the seven.</p>
+<h3 id="the-fake-ai-output-drill">10.2. The fake-AI-output drill</h3>
+<p>Find a small open-source repo. Pretend an LLM wrote it. Read it as if
+you were debugging — annotate any place that smells like one of the
+seven signatures. Compare your annotations to the project’s git log;
+were the warts there real, or did you imagine them?</p>
+<h3 id="the-recorded-debug-drill">10.3. The recorded-debug drill</h3>
+<p>Same setup as Lesson 4.1. Record yourself debugging. Watch back. Note
+every silent stretch over 15 seconds. Each silent stretch is a missed
+narration opportunity.</p>
+</section>
+<section id="common-pitfalls-1" class="slide level2">
+<h2>11. Common pitfalls</h2>
+<h3 id="skipping-the-read-first">11.1. Skipping the “read first”</h3>
+<p>Under stress, candidates jump straight to running. You miss bugs that
+the code itself reveals. <strong>Read first, run second.</strong></p>
+<h3 id="over-trusting-your-hypothesis">11.2. Over-trusting your
+hypothesis</h3>
+<p>Two minutes spent defending a wrong hypothesis is two minutes wasted.
+<strong>The 30-second confirmation rule prevents this — if you cannot
+confirm in 30 seconds, the hypothesis is probably wrong.</strong></p>
+<h3 id="fixing-without-testing-the-fix">11.3. Fixing without testing the
+fix</h3>
+<p>You found a bug. You patched it. You celebrate. <strong>Always
+re-run.</strong> Sometimes the “fix” introduces a different bug. Until
+the test is green, you are not done.</p>
+<h3 id="ignoring-the-seven-signatures">11.4. Ignoring the seven
+signatures</h3>
+<p>If you spot a bug pattern in section 3, <strong>say its
+name</strong>. The interviewer hears: this person has seen this pattern
+before. Senior signal.</p>
+</section>
+<section id="check-yourself-1" class="slide level2">
+<h2>12. CHECK YOURSELF</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Can you list the four-step diagnosis
+flowchart from memory?</label></li>
+<li><label><input type="checkbox" />Can you list the seven AI-specific
+failure-mode signatures?</label></li>
+<li><label><input type="checkbox" />Can you describe a recent bug you
+fixed that fits one of the seven signatures?</label></li>
+<li><label><input type="checkbox" />Can you deliver the section-7 “AI
+introduced a regression” answer in under 60 seconds?</label></li>
+<li><label><input type="checkbox" />Have you done at least one of the
+three practice drills?</label></li>
+</ul>
+</section>
+<section id="where-you-are-now-1" class="slide level2">
+<h2>13. Where you are now</h2>
+<p>You can debug AI-generated code in front of an interviewer at a
+confident, methodical pace. Move on to <strong><a
+href="./03-code-review-of-ai.md">03-code-review-of-ai.md</a></strong> —
+the third format, where you walk into a panel with a PR open on the
+screen and they say “review this.”</p>
+</section></section>
+<section>
+<section id="lesson-4.3-reviewing-ai-output-in-front-of-a-panel"
+class="title-slide slide level1">
+<h1>Lesson 4.3 — Reviewing AI Output in Front of a Panel</h1>
+<blockquote>
+<p><strong>The third live format: a panel opens a PR on the shared
+screen and says “review this.”</strong> What they are testing is whether
+you have an <em>AI-aware</em> reviewing checklist that catches things
+their juniors miss.</p>
+</blockquote>
+<p>By the end of this lesson:</p>
+<ul>
+<li>You will have a senior-grade AI code review checklist with eleven
+items.</li>
+<li>You will know the three categories of comment that signal seniority
+on a PR.</li>
+<li>You will know how to deliver review feedback in front of an audience
+without sounding harsh.</li>
+<li>You will have a worked example walking a panel through a PR
+review.</li>
+</ul>
+</section>
+<section id="why-this-format-exists-1" class="slide level2">
+<h2>1. Why this format exists</h2>
+<p>Reviewing AI-generated code in 2026 is its own discipline. The tells
+of bad AI output differ from the tells of bad human output. Companies
+who use AI heavily have learned the hard way that “average reviewers”
+miss AI-specific failure modes. They want to hire people who don’t.</p>
+<p>The format usually opens like this:</p>
+<blockquote>
+<p><em>“Here is a PR one of our junior engineers submitted. They used AI
+assistance. Review it as if you’re the senior on the team. Walk us
+through your thinking.”</em></p>
+</blockquote>
+<p>The PR is salted with one or two real issues. <strong>Your job: find
+them, narrate, and demonstrate the review discipline.</strong></p>
+</section>
+<section id="the-eleven-item-ai-review-checklist" class="slide level2">
+<h2>2. The eleven-item AI review checklist</h2>
+<p>Print this. Reference it during practice. Internalize it before any
+panel.</p>
+<h3 id="does-it-do-what-was-asked">2.1. Does it do what was asked?</h3>
+<p>The most basic question. Read the PR description. Read the diff. Are
+they about the same thing? AI loves to do “more than asked”; juniors
+accept the bonus work.</p>
+<h3 id="does-every-api-call-point-to-a-real-current-api">2.2. Does every
+API call point to a real, current API?</h3>
+<p>Hover over imports. Check that methods exist. AI fabricates
+plausibly-named methods. <strong>A 30-second sanity check on imports
+catches this most of the time.</strong></p>
+<h3 id="does-it-respect-the-codebases-existing-patterns">2.3. Does it
+respect the codebase’s existing patterns?</h3>
+<p>Find a sibling file with similar responsibilities. Compare. AI
+imports its training data’s style; your codebase has its own. Mismatch =
+future maintenance pain.</p>
+<h3 id="are-there-any-one-character-bugs-hiding-in-plain-sight">2.4. Are
+there any one-character bugs hiding in plain sight?</h3>
+<p>Off-by-one, wrong comparison operator, missing await,
+accidentally-async function. AI produces these at a slightly higher rate
+than careful humans.</p>
+<h3 id="were-tests-added-that-test-the-new-behavior-not-just-pass">2.5.
+Were tests added that <em>test the new behavior</em>, not just
+<em>pass</em>?</h3>
+<p>Open the test file. Read each test. Does it actually exercise the
+change? Common AI failure: tests that import the new code and assert on
+a trivial property, giving false confidence.</p>
+<h3 id="are-there-empty-trycatch-blocks">2.6. Are there empty
+<code>try/catch</code> blocks?</h3>
+<p>AI loves swallowing errors. Search for <code>catch</code> in the
+diff. Every empty body is a flag.</p>
+<h3 id="are-there-any-types">2.7. Are there <code>any</code> types?</h3>
+<p>In a TypeScript codebase, <code>any</code> is a smell. AI sometimes
+reaches for <code>any</code> instead of working out the correct type.
+Each one needs justification.</p>
+<h3
+id="are-there-hardcoded-values-that-should-be-parameters-or-constants">2.8.
+Are there hardcoded values that should be parameters or constants?</h3>
+<p>Magic numbers, hardcoded strings, baked-in URLs. AI defaults to
+plausible values rather than asking. Each one is a refactor
+invitation.</p>
+<h3 id="was-anything-deleted-that-should-not-have-been">2.9. Was
+anything <em>deleted</em> that should not have been?</h3>
+<p>Read the diff with an eye on the minus signs. AI is capable of
+helpfully removing lines it deems unnecessary that turn out to be
+load-bearing.</p>
+<h3 id="does-the-code-match-the-pr-description">2.10. Does the code
+match the PR description?</h3>
+<p>If the description says “fix bug X” and the diff also adds an
+unrelated feature, that is two changes in one PR. Push back.</p>
+<h3 id="could-you-ship-this-if-you-owned-it">2.11. Could you ship this
+if you owned it?</h3>
+<p>The final gut-check. Imagine the PR is yours. Imagine being on call
+when it breaks. Would you ship it as-is? If no, articulate why.</p>
+<p><strong>An eleven-item checklist sounds like a lot. With practice,
+you can run it on a 50-line diff in under 3 minutes.</strong></p>
+</section>
+<section id="the-three-categories-of-senior-review-comments"
+class="slide level2">
+<h2>3. The three categories of senior review comments</h2>
+<p>Not all review comments carry the same signal. Three kinds carry the
+most.</p>
+<h3 id="the-this-wont-compose-comment">3.1. The “this won’t compose”
+comment</h3>
+<blockquote>
+<p><em>“This is fine in isolation, but <code>useUserScores</code> is
+going to be called inside <code>&lt;TeamRow&gt;</code>, which itself is
+rendered in a list of 50. That means 50 hook invocations per render. We
+should hoist this up.”</em></p>
+</blockquote>
+<p>You named the second-order effect. <strong>High-leverage
+signal.</strong></p>
+<h3 id="the-this-hides-a-bug-well-see-in-production-comment">3.2. The
+“this hides a bug we’ll see in production” comment</h3>
+<blockquote>
+<p><em>“The empty catch on line 47 will swallow the network error. We
+will not see the failure in our metrics. Either rethrow or
+log.”</em></p>
+</blockquote>
+<p>You traced an immediate flaw to a runtime consequence. <strong>Direct
+senior signal.</strong></p>
+<h3 id="the-future-maintainer-will-struggle-comment">3.3. The “future
+maintainer will struggle” comment</h3>
+<blockquote>
+<p><em>“This name <code>useThing</code> will not survive a year. In six
+months someone will grep for the actual feature and miss this entirely.
+Suggest <code>useTeamScoreSubscription</code> or similar.”</em></p>
+</blockquote>
+<p>You thought about a person who is not in the room. <strong>The most
+senior signal of all.</strong></p>
+</section>
+<section id="the-three-categories-of-non-senior-comments-to-avoid"
+class="slide level2">
+<h2>4. The three categories of <em>non-senior</em> comments to
+avoid</h2>
+<h3 id="the-taste-comment-without-justification">4.1. The taste comment
+without justification</h3>
+<blockquote>
+<p><em>“I’d use destructuring here.”</em></p>
+</blockquote>
+<p>Why? The interviewer cannot tell if you have a reason. Add a
+sentence.</p>
+<h3 id="the-drive-by-nitpick">4.2. The drive-by nitpick</h3>
+<blockquote>
+<p><em>“Missing semicolon.”</em></p>
+</blockquote>
+<p>Either Prettier handles it (so it does not matter) or it does not (so
+the team has a deeper config issue). Either way, the comment by itself
+is a low-signal use of attention.</p>
+<h3 id="the-rewrite-the-whole-thing-comment">4.3. The “rewrite the whole
+thing” comment</h3>
+<blockquote>
+<p><em>“I would refactor this whole module.”</em></p>
+</blockquote>
+<p>You just told the panel you do not respect scope boundaries. Even if
+the module <em>should</em> be refactored, <strong>a PR review is not the
+place to propose it.</strong></p>
+</section>
+<section id="the-verbal-script-for-live-review" class="slide level2">
+<h2>5. The verbal script for live review</h2>
+<p>Your narration during a live review follows this rhythm.</p>
+<h3 id="the-opening">5.1. The opening</h3>
+<blockquote>
+<p><em>“OK, let me start with the high-level — read the PR description,
+then walk the diff. I’ll call out things as I see them.”</em></p>
+</blockquote>
+<p>Pace yourself. Reading is allowed. Silence for 30 seconds while you
+read is fine.</p>
+<h3 id="the-structural-pass">5.2. The structural pass</h3>
+<p>After reading, narrate the structural impressions:</p>
+<blockquote>
+<p><em>“Three things at the structural level. One, the diff touches four
+files which matches the description, so scope is OK. Two, the test file
+changes are isolated to one new test — let me come back to whether that
+test actually covers the change. Three, no dependency changes. Good. Now
+the line-by-line.”</em></p>
+</blockquote>
+<p>That is roughly 20 seconds of high-altitude commentary that sets up
+the rest of the review.</p>
+<h3 id="the-line-by-line-pass">5.3. The line-by-line pass</h3>
+<p>For each meaningful diff hunk:</p>
+<ul>
+<li><strong>Read the change in your head.</strong></li>
+<li><strong>State what it does in your own words.</strong></li>
+<li><strong>Identify any concern.</strong> If none, say “no
+concern.”</li>
+<li><strong>Move on.</strong></li>
+</ul>
+<blockquote>
+<p><em>“Line 47, this is the new helper. It filters by status, sorts by
+date, slices to the limit. No concerns… wait. The sort is comparing
+dates as strings. ISO strings sort correctly lexicographically, which
+works <em>only</em> if all dates are full ISO format. Let me check
+what’s calling this…”</em></p>
+</blockquote>
+<p>The “wait” moment is gold. Interviewers see the live discovery.
+<strong>Do not edit your reactions.</strong></p>
+<h3 id="the-summary-pass">5.4. The summary pass</h3>
+<p>After the diff:</p>
+<blockquote>
+<p><em>“OK, top-line: I would request changes on three things. One, the
+empty catch on line 92 — needs a logger. Two, the hardcoded
+<code>8</code> in the helper — should be a parameter. Three, I want to
+see a test that actually covers the new path, not just the existing one.
+The rest looks good. Want me to draft the comments?”</em></p>
+</blockquote>
+<p>That summary lands the review. <strong>It mirrors what an offer-track
+candidate would say in real life.</strong></p>
+</section>
+<section id="the-worked-example" class="slide level2">
+<h2>6. The worked example</h2>
+<p>Pretend the PR description says:</p>
+<blockquote>
+<p><em>Description: Add a helper to surface the top 3 most recent
+verified users.</em></p>
+</blockquote>
+<p>Pretend the diff is:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// lib/users.ts</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="kw">function</span> <span class="fu">getTopRecent</span>(users<span class="op">:</span> <span class="dt">any</span>[])<span class="op">:</span> <span class="dt">any</span>[] {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span> {</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> users</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">filter</span>(u <span class="kw">=&gt;</span> u<span class="op">.</span><span class="at">verified</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> a<span class="op">.</span><span class="at">signupAt</span> <span class="op">-</span> b<span class="op">.</span><span class="at">signupAt</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      <span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">3</span>)<span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">catch</span> (e) {</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> []<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">// lib/users.test.ts</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">test</span>(<span class="st">&#39;returns an array&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expect</span>(<span class="bu">Array</span><span class="op">.</span><span class="fu">isArray</span>(<span class="fu">getTopRecent</span>([])))<span class="op">.</span><span class="fu">toBe</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<p>Walk the panel through this.</p>
+<h3 id="structural-pass">Structural pass</h3>
+<blockquote>
+<p><em>“Two files in the diff: the implementation and one test.
+Description matches scope. No new dependencies. Good baseline.”</em></p>
+</blockquote>
+<h3 id="line-by-line-concerns">Line-by-line concerns</h3>
+<blockquote>
+<p><em>“First, the parameter is typed <code>any[]</code> and the return
+is <code>any[]</code>. We have a User type in <code>lib/types.ts</code>
+— this should use that. So that is checklist item 7, the
+<code>any</code> type concern.</em></p>
+<p><em>Second, the sort comparator is
+<code>a.signupAt - b.signupAt</code>. The diff treats signupAt as a
+number, but our User type has it as an ISO string. Subtracting strings
+produces NaN. The sort will silently not sort. That’s a bug.</em></p>
+<p><em>Third, the sort direction. The description says ‘most recent’,
+which means descending. The current sort, even if it worked, is
+ascending. So a second bug — after we fix the type issue, we need
+<code>b - a</code>, not <code>a - b</code>.</em></p>
+<p><em>Fourth, the empty try/catch on the outside. It swallows
+everything. If there’s a real error, we silently return empty and the
+user sees no top-3. That’s checklist item 6.</em></p>
+<p><em>Fifth, the hardcoded <code>3</code> in the slice. The description
+does say ‘top 3’ but a parameter would future-proof this. Checklist item
+8. Lower priority — would mention but not block.</em></p>
+<p><em>Sixth, the test. It only asserts that an array is returned for an
+empty input. It does not exercise the new behavior at all. We need at
+least three tests: returns 3 verified users sorted newest-first; returns
+fewer than 3 when only fewer qualify; returns empty when nothing
+qualifies. Checklist item 5.”</em></p>
+</blockquote>
+<h3 id="summary">Summary</h3>
+<blockquote>
+<p><em>“To summarize: I’d block this PR on three things — the type, the
+comparator (which has two bugs), and the missing real tests. I’d note
+the empty catch and the hardcoded 3 as non-blocking but should-fix.
+Three blockers, two suggestions.”</em></p>
+</blockquote>
+<p>That review:</p>
+<ul>
+<li>Hits seven of the eleven checklist items.</li>
+<li>Names two real bugs (type, comparator).</li>
+<li>Distinguishes blockers from suggestions.</li>
+<li>Closes with a count.</li>
+</ul>
+<p><strong>Eight minutes of speech. Memorable. Drill the structure on
+your own examples.</strong></p>
+</section>
+<section id="the-body-language-and-tone-of-live-review"
+class="slide level2">
+<h2>7. The body language and tone of live review</h2>
+<p>Three principles.</p>
+<h3 id="critique-the-code-not-the-coder">7.1. Critique the code, not the
+coder</h3>
+<p>The PR allegedly came from “a junior engineer.” <strong>Do not say
+things like “this is sloppy” or “the AI clearly made a mess.”</strong>
+Talk about the code in third-person, neutrally.</p>
+<blockquote>
+<p><em>Bad:</em> “Whoever wrote this didn’t think about…”</p>
+<p><em>Good:</em> “This pattern doesn’t handle the case where…”</p>
+</blockquote>
+<h3 id="compliment-what-works">7.2. Compliment what works</h3>
+<p>When something is correct, say so. <em>“The scope is appropriately
+small — that’s good.”</em> It signals that you read for both wins and
+losses, not just losses.</p>
+<h3 id="pace-your-delivery">7.3. Pace your delivery</h3>
+<p>A reviewer who barrels through eight comments in two minutes sounds
+harsh. A reviewer who takes a breath after each major comment, makes eye
+contact, and lets the panel acknowledge before moving on — that reviewer
+sounds senior.</p>
+</section>
+<section id="the-what-would-you-ask-the-author-question"
+class="slide level2">
+<h2>8. The “what would you ask the author?” question</h2>
+<p>Often the panel will ask:</p>
+<blockquote>
+<p><em>“What questions would you ask the author before
+approving?”</em></p>
+</blockquote>
+<p>This is a chance to demonstrate <strong>collaborative
+review</strong>. Have a structured answer:</p>
+<blockquote>
+<p><em>“Three questions. One, was the AI assistance generated from a
+single prompt or iterated? If iterated, what was the original ask —
+sometimes the best fix is to re-prompt with stronger constraints. Two,
+has this been tested in the real environment? The unit test passing is
+not the same as production-like data. Three, is there a related ticket —
+sometimes a PR is solving the wrong problem because the requirement
+upstream was off.”</em></p>
+</blockquote>
+<p>That answer treats the author as a peer, asks about their
+<em>process</em>, and references upstream work. <strong>Senior,
+generous, not pedantic.</strong></p>
+</section>
+<section id="the-this-pr-was-ai-generated-cultural-question"
+class="slide level2">
+<h2>9. The “this PR was AI-generated” cultural question</h2>
+<p>A wildcard but increasingly common:</p>
+<blockquote>
+<p><em>“How do you talk to a teammate who consistently submits
+AI-generated PRs you have to clean up?”</em></p>
+</blockquote>
+<p>The HR-aware answer:</p>
+<blockquote>
+<p><em>“Privately, kindly, and concretely. The conversation is not ‘stop
+using AI.’ It is ‘here are three patterns I’ve been catching in your PRs
+that suggest the AI is slipping past your review — let’s pair on the
+next one and I’ll show you the catches I make.’ Make it about review
+skill, not tool choice. Most people respond well; the few who do not
+need a manager involvement, but I always start at the peer
+level.”</em></p>
+</blockquote>
+<p>That answer demonstrates:</p>
+<ul>
+<li>You can have hard conversations.</li>
+<li>You distinguish behavior from identity.</li>
+<li>You start with the kindest plausible interpretation.</li>
+<li>You know when to escalate.</li>
+</ul>
+<p><strong>Drill it.</strong></p>
+</section>
+<section id="the-ai-augmented-review-tools-question"
+class="slide level2">
+<h2>10. The “AI-augmented review tools” question</h2>
+<blockquote>
+<p><em>“What’s your take on AI-powered code review tools? Greptile,
+CodeRabbit, GitHub’s review suggestions, etc.?”</em></p>
+</blockquote>
+<p>Be specific:</p>
+<blockquote>
+<p><em>“They’re useful for the bottom-of-the-funnel stuff — style,
+missing types, dead code, basic security smells. They miss the things
+that matter most: design choices, second-order effects, and code that
+conflicts with our team’s history. I treat them like a linter — green
+should be a precondition for human review, but it should never replace
+it. The risk is that teams treat green as approved and skip the human
+pass. That’s how the worst PRs sneak through.”</em></p>
+</blockquote>
+<p>Notice the structure: useful, but here are the limits, here is how I
+integrate them, here is the risk to watch for. That is a senior,
+calibrated answer to any “what do you think of tool X?” question.</p>
+</section>
+<section id="practice-exercises-1" class="slide level2">
+<h2>11. Practice exercises</h2>
+<h3 id="the-salted-pr-drill">11.1. The salted PR drill</h3>
+<p>Take a real, working PR from your repo (open-source or your own).
+Have a friend salt it with <strong>one</strong> of the AI failure-mode
+signatures from Lesson 4.2. Open it cold. Time yourself reviewing. Did
+you find the salt? How long did it take?</p>
+<h3 id="the-peer-review">11.2. The peer review</h3>
+<p>Pair with another developer. Each of you submits a small AI-assisted
+PR to the other for review. Treat it as a real interview format —
+narrate aloud, written comments after. Switch roles. <strong>Watch how
+each of you reviews differently.</strong></p>
+<h3 id="the-recorded-review">11.3. The recorded review</h3>
+<p>Open any open-source PR you do not have context for. Record yourself
+reviewing it for 10 minutes. Watch back. Note the gaps in your narration
+and the comments you made that lacked justification.</p>
+</section>
+<section id="common-pitfalls-2" class="slide level2">
+<h2>12. Common pitfalls</h2>
+<h3 id="reading-silently">12.1. Reading silently</h3>
+<p>If the panel cannot hear you think, they will not credit you with
+thinking. <strong>Default to narration.</strong> Even <em>“Reading the
+diff…”</em> is enough to fill the air.</p>
+<h3 id="diving-into-the-deepest-detail-first">12.2. Diving into the
+deepest detail first</h3>
+<p>Some candidates immediately zoom into a regex or a comparator and
+start picking it apart. Resist. <strong>The structural pass
+first</strong> — <em>“is the scope right? Are the right files
+touched?”</em> — sets you up to be the reviewer the panel wants to
+hire.</p>
+<h3 id="performing-skepticism">12.3. Performing skepticism</h3>
+<p>Some candidates over-criticize because they think it makes them look
+senior. The opposite. <strong>The most senior reviewer says “this part
+is fine” the most often</strong> — they have calibrated the bar
+precisely.</p>
+<h3 id="forgetting-to-summarize">12.4. Forgetting to summarize</h3>
+<p>You spent 10 minutes finding issues. The panel needs a 30-second
+wrap. <strong>Always summarize at the end.</strong> Count the blockers.
+Count the suggestions. Hand it back.</p>
+</section>
+<section id="check-yourself-2" class="slide level2">
+<h2>13. CHECK YOURSELF</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />Can you list the eleven-item review
+checklist from memory?</label></li>
+<li><label><input type="checkbox" />Can you name the three categories of
+senior comment with an example each?</label></li>
+<li><label><input type="checkbox" />Can you name the three categories of
+non-senior comment to avoid?</label></li>
+<li><label><input type="checkbox" />Can you walk a panel through a small
+AI-generated PR with the structural-then-line-by-line-then-summary
+rhythm?</label></li>
+<li><label><input type="checkbox" />Can you handle the “AI-generated PRs
+from a teammate” cultural question without being
+dismissive?</label></li>
+</ul>
+</section>
+<section id="where-you-are-now-2" class="slide level2">
+<h2>14. Where you are now</h2>
+<p>You can review AI output in front of a panel with confidence. You
+have completed the practical-format chapter — the three formats most
+likely to show up in your interview.</p>
+<p>Move on to <strong><a
+href="../chapter-05-system-design/README.md">../chapter-05-system-design/README.md</a></strong>
+— system design and architecture, where the question shifts from “show
+me you can code with AI” to “show me you can think with AI in the
+room.”</p>
+</section></section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^5/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^5/plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^5/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
