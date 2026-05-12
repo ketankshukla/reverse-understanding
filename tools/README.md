@@ -1,8 +1,35 @@
-# Tools — Markdown → Word converter
+# Tools — Course generation pipeline
 
-Small toolchain that converts every `.md` file in both courses
-(`course/` and `ai-interview-course/`) into a beautifully formatted
-Microsoft Word document under `word-documents-courses/`.
+Python scripts that turn every `.md` file in both courses
+(`course/` and `ai-interview-course/`) into Word docs, PDFs, EPUBs,
+Reveal.js slide decks, flashcards, glossary indexes, and MP3 narrations.
+
+## Script index
+
+| Script                     | Output                                                           |
+| -------------------------- | ---------------------------------------------------------------- |
+| `build_reference_docx.py`  | `tools/reference.docx` (Pandoc style template)                   |
+| `convert_courses.py`       | `word-documents-courses/**` (Word docs)                          |
+| `convert_extra_formats.py` | `pdf-courses/**`, `epub-courses/**`, `slides-courses/**`         |
+| `build_flashcards.py`      | `flashcards/*.csv` + `flashcards/flashcards.json` (1,000+ cards) |
+| `build_glossary.py`        | `glossary/GLOSSARY*.md` (cross-course concept index)             |
+| `build_audio.py`           | `audio-courses/**/*.mp3` (TTS narration via edge-tts)            |
+
+## One-shot regenerate everything
+
+```pwsh
+pip install -r tools\requirements.txt
+python tools\build_reference_docx.py
+python tools\convert_courses.py --clean
+python tools\convert_extra_formats.py --clean
+python tools\build_flashcards.py
+python tools\build_glossary.py
+python tools\build_audio.py
+```
+
+The remaining sections cover the Word pipeline in detail.
+
+---
 
 ## What this gives you
 

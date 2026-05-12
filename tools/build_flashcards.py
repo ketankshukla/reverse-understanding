@@ -21,6 +21,7 @@ Cards are extracted from:
 from __future__ import annotations
 
 import csv
+import json
 import re
 from pathlib import Path
 
@@ -167,7 +168,7 @@ def source_id_for(course_key: str, md_path: Path) -> str:
     return f"{course_key}/{rel.as_posix()}"
 
 
-def build_course_deck(course_key: str) -> tuple[int, Path]:
+def build_course_deck(course_key: str) -> tuple[int, Path, list[dict]]:
     src_root = COURSES[course_key]
     out_path = OUTPUT_DIR / f"{course_key}.csv"
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -185,7 +186,31 @@ def build_course_deck(course_key: str) -> tuple[int, Path]:
         writer.writeheader()
         for card in all_cards:
             writer.writerow(card)
-    return len(all_cards), out_path
+    return len(all_cards), out_path, all_cards
+
+
+def write_json_sidecar(decks: dict[str, list[dict]]) -> Path:
+    """Emit a single JSON file consumable by the Next.js /interview-drill page."""
+    out_path = OUTPUT_DIR / "flashcards.json"
+    payload = {
+        "generatedAt": __import__("datetime").datetime.utcnow().isoformat() + "Z",
+        "decks": {
+            key: [
+                {
+                    "id": f"{key}-{idx:04d}",
+                    "front": c["front"],
+                    "back": c["back"],
+                    "tags": c["tags"].split(),
+                    "source": c["source"],
+                    "deck": key,
+                }
+                for idx, c in enumerate(cards)
+            ]
+            for key, cards in decks.items()
+        },
+    }
+    out_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
+    return out_path
 
 
 def write_readme(counts: dict[str, int]) -> None:
@@ -223,10 +248,14 @@ def write_readme(counts: dict[str, int]) -> None:
 def main() -> int:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     counts: dict[str, int] = {}
+    decks: dict[str, list[dict]] = {}
     for key in COURSES:
-        count, path = build_course_deck(key)
+        count, path, cards = build_course_deck(key)
         counts[key] = count
+        decks[key] = cards
         print(f"  {path.relative_to(REPO_ROOT)}  ({count} cards)")
+    json_path = write_json_sidecar(decks)
+    print(f"  {json_path.relative_to(REPO_ROOT)}  (JSON sidecar)")
     write_readme(counts)
     print(f"  flashcards/README.md  ({sum(counts.values())} cards total)")
     return 0

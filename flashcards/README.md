@@ -4,8 +4,8 @@ Anki-importable CSV decks auto-generated from both courses.
 
 ## Files
 
-- `react-snooker.csv` -- 333 cards
-- `ai-interview.csv` -- 711 cards
+- `react-snooker.csv` -- 358 cards
+- `ai-interview.csv` -- 736 cards
 
 ## CSV columns
 
