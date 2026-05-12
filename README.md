@@ -4,6 +4,8 @@ A single-page Next.js 14 + TypeScript app that scores eight fantasy teams agains
 
 This is a refactor of an original 1,654-line single-file React component (`_source/SnookerFantasyLeague.jsx`) into a clean App Router project with separate `lib/` (data + scoring) and `components/` (UI) layers.
 
+> 📚 **Looking for the educational assets?** This repo also contains two full courses, 1,094 flashcards, 6 Mermaid diagrams, 3 coding exercises, MP3 narrations, PDFs, EPUBs, Reveal.js slides, Word docs, study plans, cheat sheets, and a glossary. **See [LEARNING_INDEX.md](LEARNING_INDEX.md) for the master catalog.**
+
 ## What it does
 
 - Each of 8 fantasy teams has picks for every round (R1: 16 picks, R2: 8, QF: 4, SF: 2, Final: 1).
